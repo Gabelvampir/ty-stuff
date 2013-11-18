@@ -180,60 +180,65 @@ status open
 
 \begin_layout Plain Layout
 
-
+%
 \backslash
 AtBeginSubsection[]{
 \end_layout
 
 \begin_layout Plain Layout
 
+%
 \end_layout
 
 \begin_layout Plain Layout
 
-  
+%  
 \backslash
 frame<beamer>{ 
 \end_layout
 
 \begin_layout Plain Layout
 
+%
 \end_layout
 
 \begin_layout Plain Layout
 
-    
+%    
 \backslash
 frametitle{Outline}   
 \end_layout
 
 \begin_layout Plain Layout
 
+%
 \end_layout
 
 \begin_layout Plain Layout
 
-    
+%    
 \backslash
 tableofcontents[currentsection,currentsubsection] 
 \end_layout
 
 \begin_layout Plain Layout
 
+%
 \end_layout
 
 \begin_layout Plain Layout
 
-  }
+%  }
 \end_layout
 
 \begin_layout Plain Layout
 
+%
 \end_layout
 
 \begin_layout Plain Layout
 
-}
+%}
 \end_layout
 
 \end_inset
@@ -261,7 +266,7 @@ status open
 
 \begin_layout Plain Layout
 
-%
+
 \backslash
 beamerdefaultoverlayspecification{<+->}
 \end_layout
