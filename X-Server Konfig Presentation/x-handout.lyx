@@ -1,0 +1,100 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass scrartcl
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+Linux Text-Mode Survival Guide
+\end_layout
+
+\begin_layout Standard
+nützliche Programme:
+\end_layout
+
+\begin_layout Standard
+Text-Editoren:
+\end_layout
+
+\begin_layout Description
+nano - gut geeignet für Anfänger, aber nicht so mächtig wie andere Text-Editoren
+\end_layout
+
+\begin_layout Description
+mcedit - Editor des Midnight Commanders, orientiert sich am Norton Commander
+ Editor
+\end_layout
+
+\begin_layout Description
+vim - für Anfänger ungewohnt zu bedienen, besitzt mächtige Features wie
+ z.B.
+ Block Ersetzungen und einige Erweiterungen
+\end_layout
+
+\begin_layout Standard
+Datei-Browser:
+\end_layout
+
+\begin_layout Description
+mc - Midnight Commander: orientiert sich an Norton Commander für DOS, hat
+ über die Jahre aber einige Zusatzfunktionen erhalten
+\end_layout
+
+\end_body
+\end_document
