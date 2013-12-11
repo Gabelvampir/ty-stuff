@@ -64,59 +64,123 @@
 Linux Text-Mode Survival Guide
 \end_layout
 
-\begin_layout Section
+\begin_layout Section*
 Basisbefehle:
 \end_layout
 
-\begin_layout Description
-ls - zeigt den Inhalt von Ordnern an.
+\begin_layout Subsection*
+
+\emph on
+ls
+\emph default
+ - zeigt den Inhalt von Ordnern an.
  Optionen: -a zeigt auch versteckte Dateien an, -l gibt auch Attribute wie
  Größe und Leserechte aus
 \end_layout
 
-\begin_layout Description
-cd - wechselt Verzeichnisse, cd ..
+\begin_layout Subsection*
+
+\emph on
+cd
+\emph default
+ - wechselt Verzeichnisse, cd ..
  wechselt eine Ebene nach oben
 \end_layout
 
-\begin_layout Description
-cat - gibt den Inhalt einer Datei aus
+\begin_layout Subsection*
+
+\emph on
+cat
+\emph default
+ - gibt den Inhalt einer Datei aus
 \end_layout
 
-\begin_layout Description
-less - zeigt den Inhalt einer Datei scrollbar an
+\begin_layout Subsection*
+
+\emph on
+less
+\emph default
+ - zeigt den Inhalt einer Datei scrollbar an
 \end_layout
 
-\begin_layout Section
+\begin_layout Section*
 nützliche Programme:
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsection*
 Text-Editoren:
 \end_layout
 
-\begin_layout Description
-nano - gut geeignet für Anfänger, aber nicht so mächtig wie andere Text-Editoren
+\begin_layout Subsection*
+
+\emph on
+nano
+\emph default
+ - gut geeignet für Anfänger, aber nicht so mächtig wie andere Text-Editoren
 \end_layout
 
-\begin_layout Description
-mcedit - Editor des Midnight Commanders, orientiert sich am Norton Commander
- Editor
+\begin_layout Subsection*
+
+\emph on
+mcedit
+\emph default
+ - Editor des Midnight Commanders, orientiert sich am Norton Commander Editor
 \end_layout
 
-\begin_layout Description
-vim - für Anfänger ungewohnt zu bedienen, besitzt mächtige Features wie
- z.B.
+\begin_layout Subsection*
+
+\emph on
+vim
+\emph default
+ - für Anfänger ungewohnt zu bedienen, besitzt mächtige Features wie z.B.
  Block Ersetzungen und einige Erweiterungen
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsection*
 Datei-Browser:
 \end_layout
 
-\begin_layout Description
-mc - Midnight Commander: orientiert sich an Norton Commander für DOS, hat
- über die Jahre aber einige Zusatzfunktionen erhalten
+\begin_layout Subsection*
+
+\emph on
+mc
+\emph default
+ - Midnight Commander: orientiert sich an Norton Commander für DOS, hat
+ über die Jahre aber einige Zusatzfunktionen erhalten wie z.B.
+ browsen von FTP und SSH Zugängen und öffnen von Archiven
+\end_layout
+
+\begin_layout Section*
+Spielereien:
+\end_layout
+
+\begin_layout Subsection*
+Videos in Textmode und Framebuffer:
+\end_layout
+
+\begin_layout Subsection*
+
+\emph on
+mplayer -vo aa VIDEO 
+\emph default
+- spielt das Video über die Ascii-Art Bibliothek ab (schwarz-weiss)
+\end_layout
+
+\begin_layout Subsection*
+
+\emph on
+mplayer -vo caca VIDEO
+\emph default
+ - spielt das Video über die Colour Ascii-Art Bibliothek ab
+\end_layout
+
+\begin_layout Subsection*
+
+\emph on
+mplayer -vo fbdev2 VIDEO
+\emph default
+ - spielt das Video über das Framebuffer-Device ab (benötigt aktivierten
+ Framebuffer, nicht im reinen Text-Modus)
 \end_layout
 
 \end_body
