@@ -196,7 +196,7 @@ frotz - bekanntester und verbreitester Infocom/Z-Machine Interpreter für
 nethack - eines der ältesten rogue-likes
 \end_layout
 
-\begin_layout Part*
+\begin_layout Section*
 Was tun wenn der X-Server ohne Konfiguration nicht startet?
 \end_layout
 
@@ -214,7 +214,7 @@ NVidia Treiber:
 \emph on
 nouvaeu
 \emph default
- (Open Source Treiber) oder 
+ (Open Source Treiber, Paket xserver-xorg-video-nouveau) oder 
 \emph on
 nvidia
 \emph default
@@ -222,8 +222,278 @@ nvidia
 \end_layout
 
 \begin_layout Itemize
-Ati/AMD Treiber: radeon (Open Source Treiber) oder fglrx (Binärtreiber vom
- Hersteller)
+Ati/AMD Treiber: 
+\emph on
+radeon
+\emph default
+ (Open Source Treiber, Paket xserver-xorg-video-radeon) oder 
+\emph on
+fglrx
+\emph default
+ (Binärtreiber vom Hersteller)
+\end_layout
+
+\begin_layout Itemize
+Intel: 
+\emph on
+intel
+\emph default
+ (Open Source Treiber vom Hersteller im Kernel integriert, X-Server Teil
+ des Treibers in Paket xserver-xorg-video-intel)
+\end_layout
+
+\begin_layout Enumerate
+Mit Text-Editor die Datei 
+\emph on
+/etc/X11/xorg.conf 
+\emph default
+editieren.
+ Falls Datei nicht vorhanden folgendes eintragen (minimale Konfig):
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+Section "ServerLayout"
+\end_layout
+
+\begin_layout Plain Layout
+
+	Identifier     "Layout0"
+\end_layout
+
+\begin_layout Plain Layout
+
+	Screen      0  "Screen0"
+\end_layout
+
+\begin_layout Plain Layout
+
+	InputDevice    "Keyboard0" "CoreKeyboard"
+\end_layout
+
+\begin_layout Plain Layout
+
+	InputDevice    "Mouse0" "CorePointer"
+\end_layout
+
+\begin_layout Plain Layout
+
+EndSection
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Section "Files"
+\end_layout
+
+\begin_layout Plain Layout
+
+EndSection
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Section "InputDevice"
+\end_layout
+
+\begin_layout Plain Layout
+
+	Identifier     "Mouse0"
+\end_layout
+
+\begin_layout Plain Layout
+
+	Driver         "mouse"
+\end_layout
+
+\begin_layout Plain Layout
+
+	Option         "Protocol" "auto"
+\end_layout
+
+\begin_layout Plain Layout
+
+	Option         "Device" "/dev/psaux"
+\end_layout
+
+\begin_layout Plain Layout
+
+	Option         "Emulate3Buttons" "no"
+\end_layout
+
+\begin_layout Plain Layout
+\align left
+
+	Option         "ZAxisMapping" "4 5"
+\end_layout
+
+\begin_layout Plain Layout
+
+EndSection
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Section "InputDevice"
+\end_layout
+
+\begin_layout Plain Layout
+
+	Identifier     "Keyboard0"
+\end_layout
+
+\begin_layout Plain Layout
+
+	Driver         "kbd"
+\end_layout
+
+\begin_layout Plain Layout
+
+EndSection
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Section "Monitor"
+\end_layout
+
+\begin_layout Plain Layout
+
+	Identifier     "Monitor0"
+\end_layout
+
+\begin_layout Plain Layout
+
+	VendorName     "Unknown"
+\end_layout
+
+\begin_layout Plain Layout
+
+	ModelName      "Unknown"
+\end_layout
+
+\begin_layout Plain Layout
+
+	HorizSync       28.0 - 33.0
+\end_layout
+
+\begin_layout Plain Layout
+
+	VertRefresh     43.0 - 72.0
+\end_layout
+
+\begin_layout Plain Layout
+
+	Option         "DPMS"
+\end_layout
+
+\begin_layout Plain Layout
+
+EndSection
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Section "Device"     
+\end_layout
+
+\begin_layout Plain Layout
+
+	Identifier     "Device0"
+\end_layout
+
+\begin_layout Plain Layout
+
+	Driver         "nvidia" # hier passenden Treibernamen eintragen
+\end_layout
+
+\begin_layout Plain Layout
+
+	VendorName     "NVIDIA Corporation"
+\end_layout
+
+\begin_layout Plain Layout
+
+EndSection
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Section "Screen"
+\end_layout
+
+\begin_layout Plain Layout
+
+	Identifier     "Screen0"
+\end_layout
+
+\begin_layout Plain Layout
+
+	Device         "Device0"
+\end_layout
+
+\begin_layout Plain Layout
+
+	Monitor        "Monitor0"
+\end_layout
+
+\begin_layout Plain Layout
+
+	DefaultDepth    24
+\end_layout
+
+\begin_layout Plain Layout
+
+	SubSection     "Display"
+\end_layout
+
+\begin_layout Plain Layout
+
+		Depth       24
+\end_layout
+
+\begin_layout Plain Layout
+
+	EndSubSection
+\end_layout
+
+\begin_layout Plain Layout
+
+EndSection
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body
