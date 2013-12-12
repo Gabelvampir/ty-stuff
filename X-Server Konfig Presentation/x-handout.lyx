@@ -74,8 +74,15 @@ Basisbefehle:
 ls
 \emph default
  - zeigt den Inhalt von Ordnern an.
- Optionen: -a zeigt auch versteckte Dateien an, -l gibt auch Attribute wie
- Größe und Leserechte aus
+ Optionen: 
+\emph on
+-a
+\emph default
+ zeigt auch versteckte Dateien an, 
+\emph on
+-l
+\emph default
+ gibt auch Attribute wie Größe und Leserechte aus
 \end_layout
 
 \begin_layout Itemize
@@ -83,16 +90,37 @@ ls
 \emph on
 cd
 \emph default
- - wechselt Verzeichnisse, cd ..
+ - wechselt Verzeichnisse, 
+\emph on
+cd ..
+
+\emph default
  wechselt eine Ebene nach oben
 \end_layout
 
 \begin_layout Itemize
 
 \emph on
-cat
+rm 
 \emph default
- - gibt den Inhalt einer Datei aus
+- löscht Dateien
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+cp
+\emph default
+ - kopiert Dateien und Verzeichnisse (dafür benötigt man meistens die Option
+ -r)
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+mv 
+\emph default
+- verschiebt Dateien und Verzeichnisse
 \end_layout
 
 \begin_layout Itemize
@@ -101,6 +129,19 @@ cat
 less
 \emph default
  - zeigt den Inhalt einer Datei scrollbar an
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+man
+\emph default
+ 
+\emph on
+BEFEHL 
+\emph default
+- zeigt die manual-Page des Befehls an die alle wichtigen Optionen auflisten
+ sollte
 \end_layout
 
 \begin_layout Section*
@@ -150,6 +191,21 @@ mc
  browsen von FTP und SSH Zugängen und öffnen von Archiven
 \end_layout
 
+\begin_layout Subsection*
+Web-Browser:
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+lynx, w3m, elinks
+\emph default
+ - Text-Mode Web-Browser.
+ Grafiken werden nicht angezeigt, aber die meisten Webseiten (wie zB Google
+ und die meisten Foren die bei Fragen zu Linuxproblemen gefunden werden)
+ die kein Flash oder ähnliches benötigen sind benutzbar
+\end_layout
+
 \begin_layout Section*
 Spielereien:
 \end_layout
@@ -188,12 +244,46 @@ Spiele:
 \end_layout
 
 \begin_layout Itemize
-frotz - bekanntester und verbreitester Infocom/Z-Machine Interpreter für
- Interactive Fiction
+
+\emph on
+frotz
+\emph default
+ - bekanntester und verbreitester Infocom/Z-Machine Interpreter für Interactive
+ Fiction
 \end_layout
 
 \begin_layout Itemize
-nethack - eines der ältesten rogue-likes
+
+\emph on
+tetris-bsd
+\emph default
+ - ein Text-Mode Tetris aus dem bsdgames Paket
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+greed - 
+\emph default
+Ziel des Spiels ist es möglichst viel der Zahlen zu 
+\begin_inset Quotes eld
+\end_inset
+
+essen
+\begin_inset Quotes erd
+\end_inset
+
+ ohne sich in eine Sackgasse zu manövrieren.
+ Man bewegt sich immer so viele Felder weit wie die gerade gegessene Zahl
+ angibt
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+ninvaders - 
+\emph default
+ein Space Invaders Klon für die Textkonsole
 \end_layout
 
 \begin_layout Section*
@@ -201,8 +291,27 @@ Was tun wenn der X-Server ohne Konfiguration nicht startet?
 \end_layout
 
 \begin_layout Enumerate
-Herrausfinden was für eine Grafikkarte der Rechner der Rechner hat: lspci
- | grep VGA
+Falls es bereits eine Konfig gibt diese löschen (
+\emph on
+/etc/X11/xorg.conf
+\emph default
+ und Inhalt des Verzeichnisses 
+\emph on
+/etc/X11/xorg.conf.d
+\emph default
+).
+ Mit 
+\emph on
+startx
+\emph default
+ testen ob der X-Server jetzt läuft.
+\end_layout
+
+\begin_layout Enumerate
+Falls nicht: herausfinden was für eine Grafikkarte der Rechner der Rechner
+ hat: 
+\emph on
+lspci | grep VGA
 \end_layout
 
 \begin_layout Enumerate
@@ -257,7 +366,7 @@ editieren.
 \begin_layout Standard
 \begin_inset listings
 inline false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -388,26 +497,6 @@ Section "Monitor"
 
 \begin_layout Plain Layout
 
-	VendorName     "Unknown"
-\end_layout
-
-\begin_layout Plain Layout
-
-	ModelName      "Unknown"
-\end_layout
-
-\begin_layout Plain Layout
-
-	HorizSync       28.0 - 33.0
-\end_layout
-
-\begin_layout Plain Layout
-
-	VertRefresh     43.0 - 72.0
-\end_layout
-
-\begin_layout Plain Layout
-
 	Option         "DPMS"
 \end_layout
 
@@ -433,11 +522,6 @@ Section "Device"
 \begin_layout Plain Layout
 
 	Driver         "nvidia" # hier passenden Treibernamen eintragen
-\end_layout
-
-\begin_layout Plain Layout
-
-	VendorName     "NVIDIA Corporation"
 \end_layout
 
 \begin_layout Plain Layout
@@ -513,6 +597,8 @@ startx
  betrachten.
  Dabei primär nach Errors (gekennzeichnet mit (EE)) und Warnings (gekennzeichnet
  mit (WW)) schauen.
+ Falls die Meldungen nichtssagend sind Google oder einen Linux-Guru um Hilfe
+ fragen.
 \end_layout
 
 \end_body

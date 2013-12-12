@@ -1,6 +1,6 @@
 %% LyX 2.0.6 created this file.  For more info, see http://www.lyx.org/.
 %% Do not edit unless you really know what you are doing.
-\documentclass[english]{tufte-handout}
+\documentclass[english]{scrartcl}
 \usepackage[T1]{fontenc}
 \usepackage[latin9]{inputenc}
 \usepackage{listings}
@@ -14,18 +14,25 @@
 \makeatother
 
 \usepackage{babel}
+\lstset{basicstyle=\ttfamily}
+%%\lstset{frame=simple}
 \begin{document}
 \maketitle
 
 \section*{Basisbefehle:}
 \begin{itemize}
-\item \emph{ls} - zeigt den Inhalt von Ordnern an. Optionen: -a zeigt auch
-versteckte Dateien an, -l gibt auch Attribute wie Größe und Leserechte
-aus
-\item \emph{cd} - wechselt Verzeichnisse, cd .. wechselt eine Ebene nach
-oben
-\item \emph{cat} - gibt den Inhalt einer Datei aus
+\item \emph{ls} - zeigt den Inhalt von Ordnern an. Optionen: \emph{-a} zeigt
+auch versteckte Dateien an, \emph{-l} gibt auch Attribute wie Größe
+und Leserechte aus
+\item \emph{cd} - wechselt Verzeichnisse, \emph{cd ..} wechselt eine Ebene
+nach oben
+\item \emph{rm} - löscht Dateien
+\item \emph{cp} - kopiert Dateien und Verzeichnisse (dafür benötigt man
+meistens die Option -r)
+\item \emph{mv} - verschiebt Dateien und Verzeichnisse
 \item \emph{less} - zeigt den Inhalt einer Datei scrollbar an
+\item \emph{man} \emph{BEFEHL }- zeigt die manual-Page des Befehls an die
+alle wichtigen Optionen auflisten sollte
 \end{itemize}
 
 \section*{nützliche Programme:}
@@ -48,6 +55,14 @@ für DOS, hat über die Jahre aber einige Zusatzfunktionen erhalten
 wie z.B. browsen von FTP und SSH Zugängen und öffnen von Archiven
 \end{itemize}
 
+\subsection*{Web-Browser:}
+\begin{itemize}
+\item \emph{lynx, w3m, elinks} - Text-Mode Web-Browser. Grafiken werden
+nicht angezeigt, aber die meisten Webseiten (wie zB Google und die
+meisten Foren die bei Fragen zu Linuxproblemen gefunden werden) die
+kein Flash oder ähnliches benötigen sind benutzbar
+\end{itemize}
+
 \section*{Spielereien:}
 
 
@@ -63,28 +78,38 @@ ab (benötigt aktivierten Framebuffer, nicht im reinen Text-Modus)
 
 \subsection*{Spiele:}
 \begin{itemize}
-\item frotz - bekanntester und verbreitester Infocom/Z-Machine Interpreter
+\item \emph{frotz} - bekanntester und verbreitester Infocom/Z-Machine Interpreter
 für Interactive Fiction
-\item nethack - eines der ältesten rogue-likes
+\item \emph{tetris-bsd} - ein Text-Mode Tetris aus dem bsdgames Paket
+\item \emph{greed - }Ziel des Spiels ist es möglichst viel der Zahlen zu
+``essen'' ohne sich in eine Sackgasse zu manövrieren. Man bewegt
+sich immer so viele Felder weit wie die gerade gegessene Zahl angibt
+\item \emph{ninvaders - }ein Space Invaders Klon für die Textkonsole
 \end{itemize}
 
+\newpage
 \section*{Was tun wenn der X-Server ohne Konfiguration nicht startet?}
 \begin{enumerate}
-\item Herrausfinden was für eine Grafikkarte der Rechner der Rechner hat:
-lspci | grep VGA
+\item Falls es bereits eine Konfig gibt diese löschen (\emph{/etc/X11/xorg.conf}
+und Inhalt des Verzeichnisses \emph{/etc/X11/xorg.conf.d}). Mit \emph{startx}
+testen ob der X-Server jetzt läuft.
+\item Falls nicht: herausfinden was für eine Grafikkarte der Rechner der
+Rechner hat: \emph{lspci | grep VGA}
 \item Anhand dessen Treiber bestimmen und installieren:
 
 \begin{itemize}
-\item NVidia Treiber: \emph{nouvaeu} (Open Source Treiber, Paket xserver-xorg-video-nouveau)
+\item NVidia Treiber: \emph{nouvaeu} (Open Source Treiber, Paket \emph{xserver-xorg-video-nouveau})
 oder \emph{nvidia} (Binärtreiber vom Hersteller, Paketname normal
 nvidia-driver)
-\item Ati/AMD Treiber: \emph{radeon} (Open Source Treiber, Paket xserver-xorg-video-radeon)
+\item Ati/AMD Treiber: \emph{radeon} (Open Source Treiber, Paket \emph{xserver-xorg-video-radeon})
 oder \emph{fglrx} (Binärtreiber vom Hersteller)
 \item Intel: \emph{intel} (Open Source Treiber vom Hersteller im Kernel
-integriert, X-Server Teil des Treibers in Paket xserver-xorg-video-intel)
+integriert, X-Server Teil des Treibers in Paket \emph{xserver-xorg-video-intel})
 \end{itemize}
+Anmerkung: Wenn gute 3D Beschleunigung nicht dringend benötigt wird sollten bei NVidia und Ati Karten erst der Open Source Treiber ausprobiert werden da die Unterstützung für "ältere" Grafikchips regelmäßig auf den Binärtribern entfernt wird.
 \item Mit Text-Editor die Datei \emph{/etc/X11/xorg.conf }editieren. Falls
 Datei nicht vorhanden folgendes eintragen (minimale Konfig):
+
 
 
 \begin{lstlisting}
@@ -114,17 +139,12 @@ EndSection
 
 Section "Monitor"
 	Identifier     "Monitor0"
-	VendorName     "Unknown"
-	ModelName      "Unknown"
-	HorizSync       28.0 - 33.0
-	VertRefresh     43.0 - 72.0
 	Option         "DPMS"
 EndSection
 
 Section "Device"     
 	Identifier     "Device0"
 	Driver         "nvidia" # hier passenden Treibernamen eintragen
-	VendorName     "NVIDIA Corporation"
 EndSection
 
 Section "Screen"
@@ -142,6 +162,7 @@ EndSection
 \item Mit \emph{startx} den X-Server starten. Falls dies nicht geht zur
 Fehlersuche die Datei \emph{/var/log/Xorg.0.log} betrachten. Dabei
 primär nach Errors (gekennzeichnet mit (EE)) und Warnings (gekennzeichnet
-mit (WW)) schauen.\end{enumerate}
+mit (WW)) schauen. Falls die Meldungen nichtssagend sind Google oder
+einen Linux-Guru um Hilfe fragen.\end{enumerate}
 
 \end{document}
