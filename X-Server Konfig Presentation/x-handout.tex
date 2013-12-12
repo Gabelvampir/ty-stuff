@@ -10,6 +10,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
 
 \title{Linux Text-Mode Survival Guide}
+\date{13. Dezember 2013}
 
 \makeatother
 
@@ -19,7 +20,7 @@
 \begin{document}
 \maketitle
 
-\section*{Basisbefehle:}
+\section{Basisbefehle:}
 \begin{itemize}
 \item \emph{ls} - zeigt den Inhalt von Ordnern an. Optionen: \emph{-a} zeigt
 auch versteckte Dateien an, \emph{-l} gibt auch Attribute wie Größe
@@ -35,27 +36,27 @@ meistens die Option -r)
 alle wichtigen Optionen auflisten sollte
 \end{itemize}
 
-\section*{nützliche Programme:}
+\section{nützliche Programme:}
 
 
-\subsection*{Text-Editoren:}
+\subsection{Text-Editoren:}
 \begin{itemize}
 \item \emph{nano} - gut geeignet für Anfänger, aber nicht so mächtig wie
 andere Text-Editoren
 \item \emph{mcedit} - Editor des Midnight Commanders, orientiert sich am
-Norton Commander Editor
+Norton Commander Editor, einfach zu bedienen aber geringer Funktionsumfang
 \item \emph{vim} - für Anfänger ungewohnt zu bedienen, besitzt mächtige
 Features wie z.B. Block Ersetzungen und einige Erweiterungen
 \end{itemize}
 
-\subsection*{Datei-Browser:}
+\subsection{Datei-Browser:}
 \begin{itemize}
-\item \emph{mc} - Midnight Commander: orientiert sich an Norton Commander
+\item \emph{mc} - Midnight Commander, orientiert sich an Norton Commander
 für DOS, hat über die Jahre aber einige Zusatzfunktionen erhalten
 wie z.B. browsen von FTP und SSH Zugängen und öffnen von Archiven
 \end{itemize}
 
-\subsection*{Web-Browser:}
+\subsection{Web-Browser:}
 \begin{itemize}
 \item \emph{lynx, w3m, elinks} - Text-Mode Web-Browser. Grafiken werden
 nicht angezeigt, aber die meisten Webseiten (wie zB Google und die
@@ -63,12 +64,12 @@ meisten Foren die bei Fragen zu Linuxproblemen gefunden werden) die
 kein Flash oder ähnliches benötigen sind benutzbar
 \end{itemize}
 
-\section*{Spielereien:}
+\section{Spielereien:}
 
 
-\subsection*{Videos in Textmode und Framebuffer:}
+\subsection{Videos in Textmode und Framebuffer:}
 \begin{itemize}
-\item \emph{mplayer -vo aa VIDEO }- spielt das Video über die Ascii-Art
+\item \emph{mplayer -vo aa VIDEO} - spielt das Video über die Ascii-Art
 Bibliothek ab (schwarz-weiss)
 \item \emph{mplayer -vo caca VIDEO} - spielt das Video über die Colour Ascii-Art
 Bibliothek ab
@@ -76,15 +77,16 @@ Bibliothek ab
 ab (benötigt aktivierten Framebuffer, nicht im reinen Text-Modus)
 \end{itemize}
 
-\subsection*{Spiele:}
+\subsection{Spiele:}
 \begin{itemize}
 \item \emph{frotz} - bekanntester und verbreitester Infocom/Z-Machine Interpreter
-für Interactive Fiction
+für Interactive Fiction, benötigt Z-Files (Interactive Fiction "ROMs")
+\item \emph{adventure} - Adaption des ersten Adventure Colossal Cave Adventure (ADVENT) aus dem bsdgames Paket
 \item \emph{tetris-bsd} - ein Text-Mode Tetris aus dem bsdgames Paket
-\item \emph{greed - }Ziel des Spiels ist es möglichst viel der Zahlen zu
+\item \emph{greed} - Ziel des Spiels ist es möglichst viel der Zahlen zu
 ``essen'' ohne sich in eine Sackgasse zu manövrieren. Man bewegt
 sich immer so viele Felder weit wie die gerade gegessene Zahl angibt
-\item \emph{ninvaders - }ein Space Invaders Klon für die Textkonsole
+\item \emph{ninvaders} - ein Space Invaders Klon für die Textkonsole
 \end{itemize}
 
 \newpage
@@ -94,7 +96,7 @@ sich immer so viele Felder weit wie die gerade gegessene Zahl angibt
 und Inhalt des Verzeichnisses \emph{/etc/X11/xorg.conf.d}). Mit \emph{startx}
 testen ob der X-Server jetzt läuft.
 \item Falls nicht: herausfinden was für eine Grafikkarte der Rechner der
-Rechner hat: \emph{lspci | grep VGA}
+Rechner hat: \emph{lspci} | \emph{grep VGA}
 \item Anhand dessen Treiber bestimmen und installieren:
 
 \begin{itemize}
@@ -107,7 +109,7 @@ oder \emph{fglrx} (Binärtreiber vom Hersteller)
 integriert, X-Server Teil des Treibers in Paket \emph{xserver-xorg-video-intel})
 \end{itemize}
 Anmerkung: Wenn gute 3D Beschleunigung nicht dringend benötigt wird sollten bei NVidia und Ati Karten erst der Open Source Treiber ausprobiert werden da die Unterstützung für "ältere" Grafikchips regelmäßig auf den Binärtribern entfernt wird.
-\item Mit Text-Editor die Datei \emph{/etc/X11/xorg.conf }editieren. Falls
+\item Mit Text-Editor die Datei \emph{/etc/X11/xorg.conf} editieren. Falls
 Datei nicht vorhanden folgendes eintragen (minimale Konfig):
 
 
@@ -162,7 +164,6 @@ EndSection
 \item Mit \emph{startx} den X-Server starten. Falls dies nicht geht zur
 Fehlersuche die Datei \emph{/var/log/Xorg.0.log} betrachten. Dabei
 primär nach Errors (gekennzeichnet mit (EE)) und Warnings (gekennzeichnet
-mit (WW)) schauen. Falls die Meldungen nichtssagend sind Google oder
-einen Linux-Guru um Hilfe fragen.\end{enumerate}
+mit (WW)) schauen. Falls die Meldungen nichtssagend sind Google (siehe Text-Mode Web-Browser) oder einen Linux-Guru um Hilfe fragen.\end{enumerate}
 
 \end{document}
