@@ -3,7 +3,7 @@
 \begin_document
 \begin_header
 \textclass tufte-handout
-\use_default_options true
+\use_default_options false
 \maintain_unincluded_children false
 \language english
 \language_package default
@@ -68,7 +68,7 @@ Linux Text-Mode Survival Guide
 Basisbefehle:
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Itemize
 
 \emph on
 ls
@@ -78,7 +78,7 @@ ls
  Größe und Leserechte aus
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Itemize
 
 \emph on
 cd
@@ -87,7 +87,7 @@ cd
  wechselt eine Ebene nach oben
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Itemize
 
 \emph on
 cat
@@ -95,7 +95,7 @@ cat
  - gibt den Inhalt einer Datei aus
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Itemize
 
 \emph on
 less
@@ -111,7 +111,7 @@ nützliche Programme:
 Text-Editoren:
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Itemize
 
 \emph on
 nano
@@ -119,7 +119,7 @@ nano
  - gut geeignet für Anfänger, aber nicht so mächtig wie andere Text-Editoren
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Itemize
 
 \emph on
 mcedit
@@ -127,7 +127,7 @@ mcedit
  - Editor des Midnight Commanders, orientiert sich am Norton Commander Editor
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Itemize
 
 \emph on
 vim
@@ -140,7 +140,7 @@ vim
 Datei-Browser:
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Itemize
 
 \emph on
 mc
@@ -158,7 +158,7 @@ Spielereien:
 Videos in Textmode und Framebuffer:
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Itemize
 
 \emph on
 mplayer -vo aa VIDEO 
@@ -166,7 +166,7 @@ mplayer -vo aa VIDEO
 - spielt das Video über die Ascii-Art Bibliothek ab (schwarz-weiss)
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Itemize
 
 \emph on
 mplayer -vo caca VIDEO
@@ -174,13 +174,39 @@ mplayer -vo caca VIDEO
  - spielt das Video über die Colour Ascii-Art Bibliothek ab
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Itemize
 
 \emph on
 mplayer -vo fbdev2 VIDEO
 \emph default
  - spielt das Video über das Framebuffer-Device ab (benötigt aktivierten
  Framebuffer, nicht im reinen Text-Modus)
+\end_layout
+
+\begin_layout Subsection*
+Spiele:
+\end_layout
+
+\begin_layout Itemize
+frotz - bekanntester und verbreitester Infocom/Z-Machine Interpreter für
+ Interactive Fiction
+\end_layout
+
+\begin_layout Itemize
+nethack - eines der ältesten rogue-likes
+\end_layout
+
+\begin_layout Part*
+Was tun wenn der X-Server ohne Konfiguration nicht startet?
+\end_layout
+
+\begin_layout Enumerate
+Herrausfinden was für eine Grafikkarte der Rechner der Rechner hat: lspci
+ | grep VGA
+\end_layout
+
+\begin_layout Enumerate
+Anhand dessen Treiber bestimmen und installieren:
 \end_layout
 
 \end_body

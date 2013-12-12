@@ -1,6 +1,6 @@
 %% LyX 2.0.6 created this file.  For more info, see http://www.lyx.org/.
 %% Do not edit unless you really know what you are doing.
-\documentclass[english,nohyper]{tufte-handout}
+\documentclass[english]{tufte-handout}
 \usepackage[T1]{fontenc}
 \usepackage[latin9]{inputenc}
 
@@ -17,63 +17,60 @@
 \maketitle
 
 \section*{Basisbefehle:}
-
-
-\subsection*{\emph{ls} - zeigt den Inhalt von Ordnern an. Optionen: -a zeigt auch
+\begin{itemize}
+\item \emph{ls} - zeigt den Inhalt von Ordnern an. Optionen: -a zeigt auch
 versteckte Dateien an, -l gibt auch Attribute wie Größe und Leserechte
-aus}
-
-
-\subsection*{\emph{cd} - wechselt Verzeichnisse, cd .. wechselt eine Ebene nach
-oben}
-
-
-\subsection*{\emph{cat} - gibt den Inhalt einer Datei aus}
-
-
-\subsection*{\emph{less} - zeigt den Inhalt einer Datei scrollbar an}
-
+aus
+\item \emph{cd} - wechselt Verzeichnisse, cd .. wechselt eine Ebene nach
+oben
+\item \emph{cat} - gibt den Inhalt einer Datei aus
+\item \emph{less} - zeigt den Inhalt einer Datei scrollbar an
+\end{itemize}
 
 \section*{nützliche Programme:}
 
 
 \subsection*{Text-Editoren:}
-
-
-\subsection*{\emph{nano} - gut geeignet für Anfänger, aber nicht so mächtig wie
-andere Text-Editoren}
-
-
-\subsection*{\emph{mcedit} - Editor des Midnight Commanders, orientiert sich am
-Norton Commander Editor}
-
-
-\subsection*{\emph{vim} - für Anfänger ungewohnt zu bedienen, besitzt mächtige
-Features wie z.B. Block Ersetzungen und einige Erweiterungen}
-
+\begin{itemize}
+\item \emph{nano} - gut geeignet für Anfänger, aber nicht so mächtig wie
+andere Text-Editoren
+\item \emph{mcedit} - Editor des Midnight Commanders, orientiert sich am
+Norton Commander Editor
+\item \emph{vim} - für Anfänger ungewohnt zu bedienen, besitzt mächtige
+Features wie z.B. Block Ersetzungen und einige Erweiterungen
+\end{itemize}
 
 \subsection*{Datei-Browser:}
-
-
-\subsection*{\emph{mc} - Midnight Commander: orientiert sich an Norton Commander
+\begin{itemize}
+\item \emph{mc} - Midnight Commander: orientiert sich an Norton Commander
 für DOS, hat über die Jahre aber einige Zusatzfunktionen erhalten
-wie z.B. browsen von FTP und SSH Zugängen und öffnen von Archiven}
-
+wie z.B. browsen von FTP und SSH Zugängen und öffnen von Archiven
+\end{itemize}
 
 \section*{Spielereien:}
 
 
 \subsection*{Videos in Textmode und Framebuffer:}
+\begin{itemize}
+\item \emph{mplayer -vo aa VIDEO }- spielt das Video über die Ascii-Art
+Bibliothek ab (schwarz-weiss)
+\item \emph{mplayer -vo caca VIDEO} - spielt das Video über die Colour Ascii-Art
+Bibliothek ab
+\item \emph{mplayer -vo fbdev2 VIDEO} - spielt das Video über das Framebuffer-Device
+ab (benötigt aktivierten Framebuffer, nicht im reinen Text-Modus)
+\end{itemize}
 
+\subsection*{Spiele:}
+\begin{itemize}
+\item frotz - bekanntester und verbreitester Infocom/Z-Machine Interpreter
+für Interactive Fiction
+\item nethack - eines der ältesten rogue-likes
+\end{itemize}
 
-\subsection*{\emph{mplayer -vo aa VIDEO }- spielt das Video über die Ascii-Art
-Bibliothek ab (schwarz-weiss)}
+\part*{Was tun wenn der X-Server ohne Konfiguration nicht startet?}
+\begin{enumerate}
+\item Herrausfinden was für eine Grafikkarte der Rechner der Rechner hat:
+lspci | grep VGA
+\item Anhand dessen Treiber bestimmen und installieren:\end{enumerate}
 
-
-\subsection*{\emph{mplayer -vo caca VIDEO} - spielt das Video über die Colour
-Ascii-Art Bibliothek ab}
-
-
-\subsection*{\emph{mplayer -vo fbdev2 VIDEO} - spielt das Video über das Framebuffer-Device
-ab (benötigt aktivierten Framebuffer, nicht im reinen Text-Modus)}
 \end{document}
