@@ -209,6 +209,7 @@ Herrausfinden was für eine Grafikkarte der Rechner der Rechner hat: lspci
 Anhand dessen Treiber bestimmen und installieren:
 \end_layout
 
+\begin_deeper
 \begin_layout Itemize
 NVidia Treiber: 
 \emph on
@@ -242,6 +243,7 @@ intel
  des Treibers in Paket xserver-xorg-video-intel)
 \end_layout
 
+\end_deeper
 \begin_layout Enumerate
 Mit Text-Editor die Datei 
 \emph on
@@ -251,10 +253,11 @@ editieren.
  Falls Datei nicht vorhanden folgendes eintragen (minimale Konfig):
 \end_layout
 
-\begin_layout Enumerate
+\begin_deeper
+\begin_layout Standard
 \begin_inset listings
 inline false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -494,6 +497,22 @@ EndSection
 \end_inset
 
 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Mit 
+\emph on
+startx
+\emph default
+ den X-Server starten.
+ Falls dies nicht geht zur Fehlersuche die Datei 
+\emph on
+/var/log/Xorg.0.log
+\emph default
+ betrachten.
+ Dabei primär nach Errors (gekennzeichnet mit (EE)) und Warnings (gekennzeichnet
+ mit (WW)) schauen.
 \end_layout
 
 \end_body

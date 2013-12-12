@@ -72,7 +72,8 @@ für Interactive Fiction
 \begin{enumerate}
 \item Herrausfinden was für eine Grafikkarte der Rechner der Rechner hat:
 lspci | grep VGA
-\item Anhand dessen Treiber bestimmen und installieren:\end{enumerate}
+\item Anhand dessen Treiber bestimmen und installieren:
+
 \begin{itemize}
 \item NVidia Treiber: \emph{nouvaeu} (Open Source Treiber, Paket xserver-xorg-video-nouveau)
 oder \emph{nvidia} (Binärtreiber vom Hersteller, Paketname normal
@@ -80,11 +81,12 @@ nvidia-driver)
 \item Ati/AMD Treiber: \emph{radeon} (Open Source Treiber, Paket xserver-xorg-video-radeon)
 oder \emph{fglrx} (Binärtreiber vom Hersteller)
 \item Intel: \emph{intel} (Open Source Treiber vom Hersteller im Kernel
-integriert, X-Server Teil des Treibers in Paket xserver-xorg-video-intel)\end{itemize}
-\begin{enumerate}
+integriert, X-Server Teil des Treibers in Paket xserver-xorg-video-intel)
+\end{itemize}
 \item Mit Text-Editor die Datei \emph{/etc/X11/xorg.conf }editieren. Falls
 Datei nicht vorhanden folgendes eintragen (minimale Konfig):
-\item 
+
+
 \begin{lstlisting}
 Section "ServerLayout"
 	Identifier     "Layout0"
@@ -135,6 +137,11 @@ Section "Screen"
 	EndSubSection
 EndSection
 \end{lstlisting}
-\end{enumerate}
+
+
+\item Mit \emph{startx} den X-Server starten. Falls dies nicht geht zur
+Fehlersuche die Datei \emph{/var/log/Xorg.0.log} betrachten. Dabei
+primär nach Errors (gekennzeichnet mit (EE)) und Warnings (gekennzeichnet
+mit (WW)) schauen.\end{enumerate}
 
 \end{document}
