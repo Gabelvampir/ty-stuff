@@ -209,5 +209,22 @@ Herrausfinden was für eine Grafikkarte der Rechner der Rechner hat: lspci
 Anhand dessen Treiber bestimmen und installieren:
 \end_layout
 
+\begin_layout Itemize
+NVidia Treiber: 
+\emph on
+nouvaeu
+\emph default
+ (Open Source Treiber) oder 
+\emph on
+nvidia
+\emph default
+ (Binärtreiber vom Hersteller, Paketname normal nvidia-driver)
+\end_layout
+
+\begin_layout Itemize
+Ati/AMD Treiber: radeon (Open Source Treiber) oder fglrx (Binärtreiber vom
+ Hersteller)
+\end_layout
+
 \end_body
 \end_document
