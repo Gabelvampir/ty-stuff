@@ -146,7 +146,7 @@ EndSection
 
 Section "Device"     
 	Identifier     "Device0"
-	Driver         "nvidia" # hier passenden Treibernamen eintragen
+	Driver         "nvidia" #hier passenden Treibernamen eintragen
 EndSection
 
 Section "Screen"
@@ -160,6 +160,7 @@ Section "Screen"
 EndSection
 \end{lstlisting}
 
+Anmerkung: Bei neueren X-Servern kann man auch erst versuchen nur die \emph{Section "Device"} in die xorg.conf einzutragen.
 
 \item Mit \emph{startx} den X-Server starten. Falls dies nicht geht zur
 Fehlersuche die Datei \emph{/var/log/Xorg.0.log} betrachten. Dabei
