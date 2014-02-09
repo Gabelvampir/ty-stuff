@@ -1,0 +1,578 @@
+\documentclass{beamer}  % For use with beamer v 2.20  
+%  options  [handout] 
+
+%  There is a VERY rich set of possible 
+%  styles of presentations and color themes.  See the 
+%  beamer documentation for a full list of possibilities. 
+\usetheme{Madrid}  % JuanLesPins  Rochester  
+		   %  Berkeley  Palo Alto    with sidebar and top 
+		   % Goettingen  Marburg     with sidebar 
+		   %  Copenhagen  Luebeck  Warsaw 
+\useinnertheme{rounded}
+\usecolortheme{crane}
+\usefonttheme{structuresmallcapsserif}
+
+
+\usepackage{pgfarrows}
+%  Don't need to load the pgf package, but it has 
+%  has itself some packages you might want, such as 
+%  pgfarrows,,pgfnodes,pgfautomata,pgfheaps  
+%  See the pgf documentation. 
+
+
+\usepackage{amsmath,amssymb}
+
+% \beamertemplatetransparentcovereddynamic
+ 		% overlays that are upcoming are transparent, in 
+		% a manner that depends upon how far ahead  they are. 
+
+
+\title{  Beamer Features}  
+
+\author{Michael Lacey} 
+\institute[Georgia Tech]{Georgia Institute of Technology}
+
+\date{\today} 
+
+
+
+\begin{document}
+
+\frame{\titlepage} 
+
+
+\section[Outline]{}  %  
+\frame{\tableofcontents}%[pausesections]}
+
+\section{What is Beamer?} 
+
+\frame{\frametitle{What is Beamer?} 
+\begin{itemize} 
+
+\item<+-| alert@+>  A Latex package to create structured powerpoint style presentations. 
+\item<+-| alert@+>  A `Beamer' is the thing that takes video input from say a computer. 
+\item<+-| alert@+> The package has  article, and handout modes as well. 
+\item<+-| alert@+> \alert{Works entirely inside of Latex ! }
+\item<+-| alert@+>  And is freely available. Google {\tt latex beamer}
+\item<+-| alert@+> \alert{Get the TeX file for this presentation to see how things work.} 
+
+\end{itemize} 
+
+}
+
+\frame{
+  \frametitle{Features of the Beamer Class}
+
+  \begin{itemize}%<+->%| alert@+>
+  \item<+-| alert@+> Easy overlays, creates slides and handouts as well. Read the {\tt beamer} manual. 
+  \item<+-| alert@+> Predefined styles and looks of a wide type. 
+  \item<+-| alert@+> Theorems, Alerts, Itemizations all handled in a structured way, with personalization possible. 
+  \item<+-| alert@+> No external programs needed, and compatiable with AMS math packages. 
+  \item<+-| alert@+> Fully supports hypertext features. 
+  \item<+-| alert@+>  And is actively being developed, by Till Tantau.
+  \end{itemize}
+}
+
+
+\frame{
+\frametitle{Where do I get it?} 
+
+\begin{itemize} 
+\item<+->  {\tt beamer} is not part of a standard LaTex installation.  Most will need to get the packages. 
+\item<+->  From any \href{http://www.ctan.org}{Comprehensive TeX Archive Network} mirror. 
+\item<+->  Or easier yet, from the \href{http://latex-beamer.sourceforge.net/}{Sourceforge} website.  
+\item<+->  To experiment with the files, put them in one of your local directories, and run pdflatex on 
+this or another example file that comes with the distribution. 
+\end{itemize} 
+
+
+}
+
+\section{Some Math} 
+
+
+\frame{\frametitle{Math Displays} 
+Single Line Displays operate in the Usual Way 
+$$ \text{} \sum _{i,j=1}^\infty \otimes _{k=1}^{a_{i,j}} M_{k,j}  $$ 
+
+\uncover<2->{
+Multiline displays {\em with no tags} can be revealed line by line. }
+\begin{align*} 
+\uncover<2->{A&=B }
+\\
+\uncover<3->{&=C}
+\\
+\uncover<4->{&\le{}D}
+\end{align*}
+}
+
+
+
+
+
+
+
+
+\frame{\frametitle{Theorem Like Envioronments} 
+
+
+
+\begin{theorem}<2->[Name of the Theorem Comes as Optional Argument] 
+$H_b $ is bounded iff there is a bounded function $\beta $ such that $ P_+ b=P_+ \beta $. 
+\uncover<3->{ \textcolor{red}{ And a second part of the Theorem }}
+\end{theorem}
+
+\uncover<3->{
+Notice how the second part of the Theorem was revealed on the next slide.}
+
+}
+
+
+
+\frame{\frametitle{ All  Theorem Like Enviornoments } 
+
+The "theorem like examples" include as predefined formats  {\tt theorem}, {\tt corollary}, {\tt proof}, {\tt example},
+{\tt examples}, {\tt definition}.  Usage is 
+
+
+%\verb+ \begin{example}<2->[ A Name for the example]   ...... \end{example}+
+}
+
+\frame{
+\begin{corollary}<+-> 
+ Theorems, Corollaries, and Definitions have the Presentations. 
+\end{corollary} 
+
+\begin{proof}<+-> 
+ Proofs put the little QED boxes at the end. 
+\end{proof} 
+
+
+\begin{examples}<+-> 
+$H_b $ is bounded iff there is a bounded function $\beta $ such that $\ldots$
+\end{examples} 
+
+\begin{block}<+->{Your Name Goes Here} 
+ Use the {\tt begin{block} } command.
+\end{block} 
+
+\begin{alertblock}<+-> { A Key Point }
+Use {\tt alertblock} for those key points and examples.
+\end{alertblock}
+
+}
+
+\section{Overlay Specifications} 
+
+
+\frame{\frametitle{Overlay Specification}
+
+Overlay specifications are given in side of {\tt <\ \ >}. Examples are: 
+
+
+\only<5> { And this only appears on the 5th slide. }
+
+\begin{itemize} 
+
+
+
+\item<+>     {\tt <+> } Means that this material should appear on the next slide.   {\tt <+->} means that 
+this appears on the next slide, and all subsequent slides. 
+
+\item<3,5>  This will appear on the 3rd and 5th slide, with the command {\tt <3,5>}
+
+\item<2-4>  
+\textbf<3>{
+gives us shown on 2, 3, 4 slides, and alerted on the 3rd slide. }
+
+
+%\item<2,4|  alert @3> % {\tt  <2,4|bf\at 3> }
+%gives us shown on 2, 3, 4 slides, and alerted on the 3rd slide. 
+
+\item<5>  And use {\tt <+-> } for incremental uncoverings.  Very handy, especially when you 
+move things around as you write the file. 
+
+\end{itemize} 
+}
+
+
+
+
+
+\frame{\frametitle{Other commands with action specifications}
+
+Some first words  for the slide 
+\only<+>{  {\tt only}: Only appearing on this slide . }
+\uncover<+->{ {\tt uncover}:  
+Some words  uncovered, and occupying the previous places.  } 
+\textbf<+>{ {\tt textbf, textcolor }: \textcolor{blue}{Some words randomly repeated. }}
+\uncover<+->{\alert{ {\tt alert}:  Heads up!} }
+
+% \only   \uncover   \textbf    \alert
+
+}
+
+
+
+
+\frame{\frametitle{{\tt enumerate} } 
+
+\begin{enumerate}[<+->] 
+
+\item  {\tt beamer} is not part of a standard LaTex installation.  Most will need to get the packages. 
+\item  From any \href{http://www.ctan.org}{Comprehensive TeX Archive Network} mirror. 
+\item  Or easier yet, from the \href{http://latex-beamer.sourceforge.net/}{Sourceforge} website.  
+\item  To experiment with the files, put them in one of your local directories, and run pdflatex on 
+this or another example file that comes with the distribution. 
+\end{enumerate}
+
+}
+
+
+\frame{\frametitle{{\tt description} } 
+
+\begin{description}[<+->] 
+
+\item[ant]  {\tt beamer} is not part of a standard LaTex installation.  Most will need to get the packages. 
+\item[bettle]  From any \href{http://www.ctan.org}{Comprehensive TeX Archive Network} mirror. 
+\item[circada]  Or easier yet, from the \href{http://latex-beamer.sourceforge.net/}{Sourceforge} website.  
+\item[termite]  To experiment with the files, put them in one of your local directories, and run pdflatex on 
+this or another example file that comes with the distribution. 
+\end{description}
+
+}
+
+\frame{\frametitle{{\tt itemize} } 
+
+\begin{itemize}[<+->] 
+
+\item[$\bullet$]  {\tt beamer} is not part of a standard LaTex installation.  Most will need to get the packages. 
+\item[$\bullet$]  From any \href{http://www.ctan.org}{Comprehensive TeX Archive Network} mirror. 
+\item[$\bullet$]  Or easier yet, from the \href{http://latex-beamer.sourceforge.net/}{Sourceforge} website.  
+\item[$\bullet$]  To experiment with the files, put them in one of your local directories, and run pdflatex on 
+this or another example file that comes with the distribution. 
+\end{itemize}
+
+}
+
+\frame{\frametitle{Boxed Text}
+There are three options for Boxed Text: (1) 
+You can use LaTeX's {\tt fbox} command,  (2) the commands created by {\tt fancybox}. 
+See the LaTeX Companion for more details.  (3) beamerboxes, see the beamer user guide.  These two examples 
+use  beamerboxes. 
+
+
+
+\begin{beamerboxesrounded}[shadow=true]{\tt beamerboxesrounded, with option shadow=true} 
+$$
+\int f(x-y)g(x+y)\,\frac{dy}y 
+$$
+\end{beamerboxesrounded}
+
+
+\setbeamercolor{postit}{fg=black,bg=yellow}
+\begin{center}
+\begin{beamercolorbox}[sep=2em,wd=6cm] {postit} 
+Some important point on a postit.
+\end{beamercolorbox}
+\end{center}
+} 
+
+
+
+\frame{\frametitle{Columns} 
+
+\begin{columns}
+
+		\begin{column}{7cm} 
+		
+		An important illustration goes here.
+		\end{column}
+
+		\begin{column}{8cm} 
+		Typically some text 
+		\\
+		should go on the right 
+		\end{column}
+
+\end{columns} 
+}
+
+% \begin{columns}[options]  
+%	\begin{column}[options]{width}
+%		,,,,
+%	\end{column}
+%     %  Can have two or more columns 
+%  \end{columns} 
+
+%  options   for columns 
+%		b= bottom of columns vertically aligned 
+%		c= columns will be centered vertically, default in most circumstances 
+%	 	t=  top line of columns vertically aligned
+%		totalwidth={width dimension}  
+
+%  options for column  govern vertical placement 
+%`		b=bottom
+%		t=top
+%		c=center
+
+
+\section{Graphics} 
+%  
+%   To use an image, you can use the command
+%  \pgfimage[height=]{image_dir/ImageNameWithOutAnExtension}
+%   Dont put the extension, as jpg, ps, and png are automatically searched for. 
+%
+
+
+
+\frame{\frametitle{Graphics} 
+
+
+\begin{itemize}%<+->%| alert@+>
+\item You'll probably want to include some graphics.  
+\item  If you are familiar with the {\tt graphics} package, it works in {\tt beamer}.  
+The basic command is {\tt includegraphics} 
+\item  The graphics/drawing package {\tt pgf} is loaded automatically, and it's basic command is 
+{\tt pgfuseimage} .
+\item  Both of these commands are overlay aware!  
+\end{itemize}
+}
+
+
+
+
+
+
+
+\def\zc#1 {\textcolor{#1}{#1}} 
+
+
+\def\softness{0.4}
+\definecolor{softred}{rgb}{1,\softness,\softness}
+\definecolor{softgreen}{rgb}{\softness,1,\softness}
+\definecolor{softblue}{rgb}{\softness,\softness,1}
+
+\definecolor{softrg}{rgb}{1,1,\softness}
+\definecolor{softrb}{rgb}{1,\softness,1}
+\definecolor{softgb}{rgb}{\softness,1,1}
+
+
+
+\frame{\frametitle{Colors} 
+
+The LaTeX package {\tt color} and {\tt xcolor} are automatically loaded.  
+Some colors are automatically defined: 
+\zc red , 
+\zc green ,
+\zc blue , 
+\zc cyan ,
+\zc magenta ,
+\zc yellow ,
+\zc gray , 
+\zc lightgray . 
+
+\uncover<2-> { To go beyond this, you'll need to define some additional colors, and get a little more 
+comfortable with the {\tt color} and {\tt xcolor } packages. 
+Some examples: 
+\zc softred ,
+\zc softblue ,
+\zc softgreen , 
+\zc softrg , \zc softrb , \zc softgb .
+}
+}
+
+
+\def\diags{ 
+	\begin{pgfscope} \pgfsetlinewidth{1.2pt}
+	\definecolorseries{diag}{hsb}{step}[hsb]{.575,1,1}{.11,-.05,0}
+	\resetcolorseries{diag}
+	  \color{diag!!+}
+	 \pgfmoveto{\pgfxy(-3,-2)} \pgflineto{\pgfxy(-2,-3)} \pgfstroke
+	 \color{diag!!+} 
+	\pgfmoveto{\pgfxy(-3,-1)} \pgflineto{\pgfxy(-1,-3)} \pgfstroke
+	 \color{diag!!+} 
+	\pgfmoveto{\pgfxy(-3,0)} \pgflineto{\pgfxy(0,-3)} \pgfstroke
+	  \color{diag!!+} 
+	\pgfmoveto{\pgfxy(-3,1)} \pgflineto{\pgfxy(1,-3)} \pgfstroke
+	\color{diag!!+} 
+	\pgfmoveto{\pgfxy(-3,2)} \pgflineto{\pgfxy(2,-3)} \pgfstroke
+	\color{diag!!+} 
+	\pgfmoveto{\pgfxy(-3,3)} \pgflineto{\pgfxy(3,-3)} \pgfstroke
+	\color{diag!!+}
+	 \pgfmoveto{\pgfxy(-2,3)} \pgflineto{\pgfxy(3,-2)} \pgfstroke
+	 \color{diag!!+} 
+	\pgfmoveto{\pgfxy(-1,3)} \pgflineto{\pgfxy(3,-1)} \pgfstroke
+	 \color{diag!!+} 
+	\pgfmoveto{\pgfxy(0,3)} \pgflineto{\pgfxy(3,0)} \pgfstroke
+	  \color{diag!!+} 
+	\pgfmoveto{\pgfxy(1,3)} \pgflineto{\pgfxy(3,1)} \pgfstroke
+	\color{diag!!+} 
+	\pgfmoveto{\pgfxy(2,3)} \pgflineto{\pgfxy(3,2)} \pgfstroke
+	\end{pgfscope}
+	}
+
+
+
+
+
+
+\frame{
+\frametitle{ The {\tt pgf} package} 
+
+\begin{columns}
+  \begin{column}{2in} 
+ The {\tt pgf } package has some nice features for drawing illustrations, all compatible with the {\tt uncover} and {\tt only} 
+features of {\tt beamer}. 
+
+  
+  \end{column}
+  
+  \begin{column}{3in} 
+  
+  \begin{center}
+  	\begin{pgfpicture}{0cm}{0cm}{6cm}{6cm}
+
+	\begin{pgftranslate}{\pgfxy(3,3)} 	 
+		 \pgfsetendarrow{\pgfarrowsingle} \pgfsetstartarrow{\pgfarrowsingle} 
+		 %  coordinate axes
+	
+
+	\only<2>{ \color{lightgray}
+	 \pgfmoveto{\pgfxy(-3,0)}\pgflineto{\pgfxy(3,0)}\pgfstroke
+	 \pgfmoveto{\pgfxy(0,-3)}\pgflineto{\pgfxy(0,3)}\pgfstroke
+	 
+	 \diags   %  all the pretty diagonal 
+	 
+	 \color{black} 
+	 \pgfputat{\pgfxy(-3.25,3.25)}{\pgfbox[center,center]{$\widehat \varphi(0)$}}
+	 \pgfputat{\pgfxy(-2.0,3.25)}{\pgfbox[center,center]{$\widehat \varphi(1)$}}
+	 \pgfputat{\pgfxy(-1.0,3.25)}{\pgfbox[center,center]{$\widehat \varphi(2)$}}
+	 \pgfputat{\pgfxy(-3.35,2.0)}{\pgfbox[center,center]{$\widehat \varphi(-1)$}}
+	 \pgfputat{\pgfxy(-3.35,1.0)}{\pgfbox[center,center]{$\widehat \varphi(-2)$}}	 
+	 }
+	 
+	 \only<3>{	
+				\color{black} 
+				\pgfputat{\pgfxy(1.5,.3)}{\pgfbox[center,center]{$\hbox{Toeplitz}$}}
+				\pgfmoveto{\pgfxy(0,-3)}\pgflineto{\pgfxy(0,0)}
+					\pgflineto{\pgfxy(3,0)}\pgflineto{\pgfxy(3,-3)}
+					\pgflineto{\pgfxy(0,-3)} \pgfclip
+					\color{lightgray}
+					\pgfmoveto{\pgfxy(-3,0)}\pgflineto{\pgfxy(3,0)}\pgfstroke
+					\pgfmoveto{\pgfxy(0,-3)}\pgflineto{\pgfxy(0,3)}\pgfstroke
+					\diags   %  all the pretty diagonal 
+				}
+				
+		 \only<4>{
+				\color{black} 
+	\pgfputat{\pgfxy(-1.5,.3)}{\pgfbox[center,center]{$\hbox{Hankel}$}}
+	
+	\pgfsetendarrow{\pgfarrowsingle} \pgfsetstartarrow{\pgfarrowsingle} 
+	\pgfmoveto{\pgfxy(-3,0)}\pgflineto{\pgfxy(0,0)}
+					\pgflineto{\pgfxy(0,-3)}\pgflineto{\pgfxy(-3,-3)}
+					\pgflineto{\pgfxy(-3,0)} 
+		\pgfclip
+	 \color{lightgray}
+					\pgfmoveto{\pgfxy(-3,0)}\pgflineto{\pgfxy(3,0)}\pgfstroke
+					\pgfmoveto{\pgfxy(0,-3)}\pgflineto{\pgfxy(0,3)}\pgfstroke
+					\diags 
+				}
+	 
+	 
+	 
+	 \end{pgftranslate}
+	 \end{pgfpicture}
+	 \end{center}
+	 \end{column}
+	 \end{columns}
+
+	 }
+
+
+
+
+\colorlet{redshaded}{red!25!averagebackgroundcolor}
+\colorlet{shaded}{black!25!averagebackgroundcolor}
+\colorlet{shadedshaded}{black!10!averagebackgroundcolor}
+\colorlet{blackshaded}{black!40!averagebackgroundcolor}
+
+
+\def\radius{0.96cm}
+\def\innerradius{0.85cm}
+
+
+\frame{\frametitle{Another {\tt pgf} example} 
+
+
+See the code to see how this was done. 
+
+
+ \begin{pgfpicture}{-2cm}{-1.75cm}{2cm}{2.25cm}
+        \color{shaded}
+        \pgfrect[fill]{\pgfxy(-2,-1.75)}{\pgfxy(4,4)}
+                                %\pgfcircle[fill]{\pgforigin}{2cm}
+
+        \only<1>{%
+          \color{white}%
+          \pgfcircle[fill]{\pgfpolar{90}{1cm}}{\innerradius}
+          \pgfcircle[fill]{\pgfpolar{210}{1cm}}{\innerradius}
+          \pgfcircle[fill]{\pgfpolar{330}{1cm}}{\innerradius}}%
+        \only<2->{%      
+        \color{softred}
+        \pgfcircle[fill]{\pgfpolar{90}{1cm}}{\radius}
+        \color{softgreen}
+        \pgfcircle[fill]{\pgfpolar{210}{1cm}}{\radius}
+        \color{softblue}
+        \pgfcircle[fill]{\pgfpolar{330}{1cm}}{\radius}}%
+        %
+      \only<2->{%
+        \begin{pgftranslate}{\pgfpolar{90}{1cm}}
+          \pgfzerocircle{\radius}
+          \pgfclip
+          
+          \begin{pgftranslate}{\pgfpolar{-90}{1cm}}
+            \color{softrb}
+            \pgfcircle[fill]{\pgfpolar{330}{1cm}}{\radius}
+            \color{softrg}
+            \pgfcircle[fill]{\pgfpolar{210}{1cm}}{\radius}
+          \end{pgftranslate}
+        \end{pgftranslate}
+
+        \begin{pgftranslate}{\pgfpolar{210}{1cm}}
+          \pgfzerocircle{\radius}
+          \pgfclip
+          
+          \begin{pgftranslate}{\pgfpolar{30}{1cm}}
+            \color{softgb}
+            \pgfcircle[fill]{\pgfpolar{330}{1cm}}{\radius}
+          \end{pgftranslate}
+        \end{pgftranslate}}%
+        %
+        \color{black}
+        \pgfcircle[stroke]{\pgfpolar{90}{1cm}}{\innerradius}
+        \pgfcircle[stroke]{\pgfpolar{210}{1cm}}{\innerradius}
+        \pgfcircle[stroke]{\pgfpolar{330}{1cm}}{\innerradius}
+
+        \pgfputat{\pgfrelative{\pgfpolar{90}{1cm}}%
+          {\pgfpoint{0pt}{-.5ex}}}%
+        {\pgfbox[center,base]{$A\times B$}}
+        \pgfputat{\pgfrelative{\pgfpolar{210}{1cm}}%
+          {\pgfpoint{0pt}{-.5ex}}}%
+        {\pgfbox[center,base]{$A\times A$}}
+        \pgfputat{\pgfrelative{\pgfpolar{330}{1cm}}%
+          {\pgfpoint{0pt}{-.5ex}}}%
+        {\pgfbox[center,base]{$B\times B$}}
+
+      \end{pgfpicture}
+}
+
+
+
+
+
+
+
+
+
+\end{document}
