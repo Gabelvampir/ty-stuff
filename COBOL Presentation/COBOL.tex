@@ -215,6 +215,8 @@
 			entworfen um Programme auf verschiedener Hardware laufen zu lassen ohne große Ver\"anderung des Codes
 		\item
 			durch mehrstufiges Design der einzelnen Programmsprachen-Module lassen sich COBOL-Programme auf sehr eingeschr\"ankter Hardware mit geringen Anpassungen ausf\"uhren
+		\item
+			es gibt einen kostenlosen quelloffenen Compiler namens GNU COBOL für POSIX-kompatible Betriebssysteme
 	\end{itemize}
 \end{frame}
 
@@ -251,14 +253,20 @@
 		\item
 			COBOL wurde so entworfen das der Code relativ lesbarem Englisch entspricht (z.B. \texttt{ADD b TO c GIVING a} f\"ur a = b + c)
 		\item
-			jedes Programm besteht aus 4 Teilen um hardwareabh\"angigen Code von unabh\"angigem und Algorithmen Beschriebungen von Datenbeschreibungen zu trennen
+			jedes Programm besteht aus 4 Teilen um hardwareabh\"angigen Code von unabh\"angigem und Algorithmen Beschreibungen von Daten Beschreibungen zu trennen
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Aufteilung eines Programms}
 	\begin{itemize}
 		\item
-			\texttt{PROCEDURE}: 		
+			\texttt{IDENTIFICATION}: beginnt jedes Programm und dient dazu das Programm und den Autor zu benennen und um andere Kommentare als Dokumentation anzugeben
+		\item
+			\texttt{ENVIRONMENT}: beinhaltet die maschinenabhängigen Programmspezifikationen wie zB die Verbindungen zwischen dem Programm und externen Daten
+		\item
+			\texttt{PROCEDURE}: beinhaltet die Algorithmen
+		\item
+			\texttt{DATA}: beinhaltet die Daten Beschreibungen
 	\end{itemize}
 \end{frame}
 
