@@ -28,14 +28,15 @@
 
 \mode<presentation>
 {
-  \usetheme{Ilmenau}
-  %\usetheme{Goettingen}
-  %\usetheme{Frankfurt}
+  %\usetheme{Rochester}
+  %\usetheme{Marburg}
+  %\usetheme{Madrid}
+  %\usetheme{Luebeck}
+  \usetheme{Frankfurt}
   %\usetheme{Dresden}
   %\usetheme{Copenhagen}
-	%\usetheme{Berlin}
+  %\usetheme{Berlin}
   %\usetheme{Warsaw}
-  % or ...
 
   %\setbeamercovered{transparent}
   % or whatever (possibly just delete it)
@@ -60,7 +61,7 @@
 {COBOL}
 
 \subtitle
-{Die Mutter der modernen Programmiersprachen} % (optional)
+{Die erste Programmiersprache für Wirtschaftsanwendungen} % (optional)
 
 \author % (optional, use only with lots of authors)
 {Sebastian Deußer}
@@ -196,6 +197,13 @@
 \begin{frame}{heutiger Einsatz}
 	\begin{itemize}
 		\item
+			COBOL hatte auf die meisten sp\"ateren Programmiersprachen nicht viel Einfluss da der Fokus auf relativ simple Algorithmen und hohes I/O-Volumen akademisch uninteressant waren
+		\item
+			die meisten heute noch verwendeten COBOL Anwendungen sind Teil \"uber Jahrzehnte gewachsene Systeme, komplette Neuentwicklungen finden nur noch selten in COBOL statt
+		\item
+			aber immer noch verwendet in vielen großen Rechnungssystemen, z.B. das Gehaltsberechnungssystem der Stattsangestellten in Kalifornien
+		\item
+			SAPs Programmiersprache ABAP wurde sehr stark von COBOL beeinflusst
 	\end{itemize}
 \end{frame}
 
@@ -206,6 +214,9 @@
 \begin{frame}{Vorteile}
 	\begin{itemize}
 		\item
+			entworfen um Programme auf verschiedener Hardware laufen zu lassen ohne große Ver\"anderung des Codes
+		\item
+		    durch mehrstufiges Design der einzelnen Programmsprachen-Module lassen sich COBOL-Programme auf sehr eingeschr\"ankter Hardware mit geringen Anpassungen ausf\"uhren
 	\end{itemize}
 \end{frame}
 
@@ -214,6 +225,9 @@
 \begin{frame}{Nachteile}
 	\begin{itemize}
 		\item
+		    bis COBOL 74 gab es keine M\"oglichkeit Programme zu strukturieren, zB waren alle Variablen global
+		\item
+			COBOL-Programmierer sterben langsam aus
 	\end{itemize}
 \end{frame}
 
@@ -224,6 +238,9 @@
 \begin{frame}{Entwicklungumgebung}
 	\begin{itemize}
 		\item
+			da COBOL auf Firmen ausgerichtet ist und aus der Zeit stammt in der jeder Computerhersteller sein eigenes (meistens inkompatibles) Betriebssystem hatte gibt/gab es von jedem dieser Hersteller (zB IBM, Siemens, Unisys, HP) eigene Compiler, teilweise f\"ur verschiedene Standards
+		\item
+			es gibt verschiedene Codegeneratoren die COBOL-Programme oder Teile davon generieren um die Entwicklungsarbeit zu erleichtern
 	\end{itemize}
 \end{frame}
 
@@ -231,6 +248,8 @@
 
 \begin{frame}{Sprachspezifikation}
 	\begin{itemize}
+		\item
+			COBOL wurde so entworfen das der Code relativ lesbarem Englisch entspricht (z.B. \emph{ADD b TO c GIVING a} f\"ur a = b + c)
 		\item
 	\end{itemize}
 \end{frame}
