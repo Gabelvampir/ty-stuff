@@ -45,13 +45,14 @@
 }
 
 
-\usepackage[english]{babel}
+\usepackage[ngerman]{babel}
 % or whatever
 
-\usepackage[utf8]{inputenc}
+\usepackage[utf8x]{inputenc}
 % or whatever
 
-\usepackage{times}
+%\usepackage{times}
+\usepackage{lmodern}
 \usepackage[T1]{fontenc}
 % Or whatever. Note that the encoding and the font should match. If T1
 % does not look nice, try deleting the line with the fontenc.
@@ -135,48 +136,45 @@
 \subsection{Namensbedeutung}
 
 \begin{frame}{Namensbedeutung}
-  % - A title should summarize the slide in an understandable fashion
-  %   for anyone how does not follow everything on the slide itself.
-
-  \begin{itemize}
-  \item
-    COBOL steht für COmmon Business-Oriented Language.
-  \item
-    Entwickelt für betriebswirtschaftliche Programme (im Gegensatz zum Fokus auf technische-wissenschaftliche Anwendungen vorheriger Programmiersprachen).
-  \end{itemize}
+	\begin{itemize}
+		\item
+			COBOL steht für COmmon Business-Oriented Language.
+		\item
+			Entwickelt für betriebswirtschaftliche Programme (im Gegensatz zum Fokus auf technische-wissenschaftliche Anwendungen vorheriger Programmiersprachen).
+	\end{itemize}
 \end{frame}
 
 \subsection{Historische Entwicklung}
 
 \begin{frame}{Anfänge}
-  \begin{itemize}
-  \item
-    Entwickelt durch eine Arbeitsgruppe in der 2. H\"alfte von 1959.
-  \item
-    Federführend war Grace Hopper, die Erfinderin des ersten Compilers (A-0) und Mitentwicklerin einiger fr\"uher Computer (zB Harvard Mark I+II, UNIVAC I)
-  \item
-    Entwicklung basierte auf Hoppers FLOW-MATIC und IBMs COMTRAN (``Business-Version'' von FORTRAN)
-  \item
-    Offizielle Festlegung des Standards (bekannt als COBOL 60) am 03. Januar 1960, danach individuelle (inkompatibele) Erweiterungen durch verschiedene Firmen und Universit\"aten
-  \end{itemize}
+	\begin{itemize}
+		\item
+			Entwickelt durch eine Arbeitsgruppe in der 2. H\"alfte von 1959.
+		\item
+			Federführend war Grace Hopper, die Erfinderin des ersten Compilers (A-0) und Mitentwicklerin einiger fr\"uher Computer (zB Harvard Mark I+II, UNIVAC I)
+		\item
+			Entwicklung basierte auf Hoppers FLOW-MATIC und IBMs COMTRAN (``Business-Version'' von FORTRAN)
+		\item
+		Offizielle Festlegung des Standards (bekannt als COBOL 60) am 03. Januar 1960, danach individuelle (inkompatibele) Erweiterungen durch verschiedene Firmen und Universit\"aten
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Versionen des Standards}
-  \begin{itemize}
-  \item
-    ANS COBOL 1968: ANSI Standard um die verschiedenen \"Anderungen nach 1959 wieder zu einer kompatiblen Basis zusammenzufassen.
-  \item
-    COBOL 1974: dieser zweite ANSI Standard f\"uhrte neue Features ein wie Datei-Organisation, das Report Modul und das Segmentierungsmodul, schaffte allerdings auch Features ab wie das \emph{NOTE} Statement. Inkompatibel zu vorherigen Standards
-  \item
-    COBOL 1985: dieser \"uberarbeitete ANSI Standard f\"uhrte G\"ultigkeitsbereich Terminatoren wie \emph{END-IF} ein. Ebenso Features wie geschachtelte Unterprogramme, die Statements \emph{CONTINUE}, \emph{EVALUATE} und \emph{INITIALIZE}, die Operatoren >= und <= sowie Referenz Modifikation
-  \end{itemize}
+	\begin{itemize}
+		\item
+			ANS COBOL 1968: ANSI Standard um die verschiedenen \"Anderungen nach 1959 wieder zu einer kompatiblen Basis zusammenzufassen.
+		\item
+			COBOL 1974: dieser zweite ANSI Standard f\"uhrte neue Features ein wie Datei-Organisation, das Report Modul und das Segmentierungsmodul, schaffte allerdings auch Features ab wie das \texttt{NOTE} Statement. Inkompatibel zu vorherigen Standards
+		\item
+			COBOL 1985: dieser \"uberarbeitete ANSI Standard f\"uhrte G\"ultigkeitsbereich Terminatoren wie \texttt{END-IF} ein. Ebenso Features wie geschachtelte Unterprogramme, die Statements \texttt{CONTINUE}, \texttt{EVALUATE} und \texttt{INITIALIZE}, die Operatoren >= und <= sowie Referenz Modifikation
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Versionen des Standards}
-  \begin{itemize}
-    \item
-      COBOL 2002 und objekorientiertes COBOL: Anfang der 90er wurde entschieden das dem n\"achste Standard von COBOL Objektorientierung hinzugef\"ugt werden sollte.
-  \end{itemize}
+		\begin{itemize}
+			\item
+				COBOL 2002 und objekorientiertes COBOL: Anfang der 90er wurde entschieden das dem n\"achste Standard von COBOL Objektorientierung hinzugef\"ugt werden sollte.
+		\end{itemize}
 \end{frame}
 
 \section{Einsatz}
@@ -184,9 +182,9 @@
 \subsection{Einsatzgebiete}
 
 \begin{frame}{Einsatzgebiete}
-  \begin{itemize}
+	\begin{itemize}
 		\item
-			Haupteinsatzgebiet ist betriebswirtschaftliche Datenverarbeitung.
+			Haupteinsatzgebiet ist betriebswirtschaftliche Datenverarbeitung
 		\item
 			Bei klassischer Aufteilung eines EDV-Programms nach Benutzerschnittstelle, Verabreitungsteil und Datenhaltungsteil stell COBOL \"ublicherweise den Verarbeitungsteil
 	\end{itemize}
@@ -216,7 +214,7 @@
 		\item
 			entworfen um Programme auf verschiedener Hardware laufen zu lassen ohne große Ver\"anderung des Codes
 		\item
-		    durch mehrstufiges Design der einzelnen Programmsprachen-Module lassen sich COBOL-Programme auf sehr eingeschr\"ankter Hardware mit geringen Anpassungen ausf\"uhren
+			durch mehrstufiges Design der einzelnen Programmsprachen-Module lassen sich COBOL-Programme auf sehr eingeschr\"ankter Hardware mit geringen Anpassungen ausf\"uhren
 	\end{itemize}
 \end{frame}
 
@@ -227,15 +225,17 @@
 		\item
 		    bis COBOL 74 gab es keine M\"oglichkeit Programme zu strukturieren, zB waren alle Variablen global
 		\item
+			aufgrund vieler Eigenentwicklungen von Firmen und anderen Gruppen gibt es viele verschiedene Standards von COBOL die teilweise inkompatibel zueinander sind
+		\item
 			COBOL-Programmierer sterben langsam aus
 	\end{itemize}
 \end{frame}
 
 \section{Praxis}
 
-\subsection{Entwicklungumgebung}
+\subsection{Entwicklungsumgebung}
 
-\begin{frame}{Entwicklungumgebung}
+\begin{frame}{Entwicklungsumgebung}
 	\begin{itemize}
 		\item
 			da COBOL auf Firmen ausgerichtet ist und aus der Zeit stammt in der jeder Computerhersteller sein eigenes (meistens inkompatibles) Betriebssystem hatte gibt/gab es von jedem dieser Hersteller (zB IBM, Siemens, Unisys, HP) eigene Compiler, teilweise f\"ur verschiedene Standards
@@ -249,8 +249,27 @@
 \begin{frame}{Sprachspezifikation}
 	\begin{itemize}
 		\item
-			COBOL wurde so entworfen das der Code relativ lesbarem Englisch entspricht (z.B. \emph{ADD b TO c GIVING a} f\"ur a = b + c)
+			COBOL wurde so entworfen das der Code relativ lesbarem Englisch entspricht (z.B. \texttt{ADD b TO c GIVING a} f\"ur a = b + c)
 		\item
+			jedes Programm besteht aus 4 Teilen um hardwareabh\"angigen Code von unabh\"angigem und Algorithmen Beschriebungen von Datenbeschreibungen zu trennen
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Aufteilung eines Programms}
+	\begin{itemize}
+		\item
+			\texttt{PROCEDURE}: 		
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Quellen}
+	\begin{itemize}
+		\item
+			\url{http://en.wikipedia.org/wiki/COBOL}
+		\item
+			\url{http://de.wikipedia.org/wiki/COBOL}
+		\item
+			Terrence W. Pratt - Programming Languages: Design and Implementation (Prentice Hill 1975)
 	\end{itemize}
 \end{frame}
 
