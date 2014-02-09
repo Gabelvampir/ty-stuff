@@ -1,0 +1,174 @@
+\documentclass[a4paper,presentation]{beamer}
+
+\usepackage{latexsym}
+\usepackage{exscale}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\usepackage{amsbsy}
+
+%\usepackage{amsopn}
+%\DeclareMathOperator{\supp}{supp}
+
+%\usepackage{pdfpages}
+
+%\usetheme{CambridgeUS} % 2.5d red/grey
+%\usetheme{Frankfurt} % 3d blue/black
+%\usetheme{Luebeck} % 2d blue/black
+%\usetheme{Madrid} % 2.5d blue
+%\usetheme{Rochester} % 2d blue
+%\usetheme{Singapore} % blue shade at top, plain
+\usetheme{Warsaw} % 3d blue/black
+
+% \AtBeginSubsection[]
+% {
+%   \begin{frame}<beamer>
+%     \frametitle{Structure}
+%     \tableofcontents[currentsection,currentsubsection]
+%   \end{frame}
+% }
+
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{Structure}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\title[Beamer quickstart]{An hands-on introduction to the beamer package}
+\author{Andreas N\'emeth}
+\institute[Name of the Talk]{University of Vienna\\Faculty of Mathematics}
+\date{January 2006}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Structure}
+  \tableofcontents
+  % Die Option [pausesections] könnte nützlich sein.
+\end{frame}
+
+\section{Introduction}
+
+\subsection[Structure of Talk]{The structure of the talk mapped to slides}
+
+\begin{frame}
+  \frametitle{How to give a talk using a beamer}
+  \large
+  \begin{itemize}
+    \item<2-> Use the \LaTeX {\tt beamer} package
+    \item<3-> Set the options {\tt handout} and {\tt presentation} accordingly
+    \item<4-> Don't squeeze too much into the slides
+    \item<5-> Stand right next to the projection but don't cover the content
+    \item<6-> The audience is distracted more easily by your slides -- SPEAK UP!
+  \end{itemize}
+\end{frame}
+
+\subsection[Structure of Slides]{The possible structure of slides using the beamer package}
+
+\begin{frame}
+  \frametitle{Layout of your talk}
+  \large
+  The following types of slides will be introduced:
+  \begin{itemize}
+    \item[a)]<2-> Slide with several blocks
+    \item[b)]<3-> Slide with block \& note
+    \item[c)]<4-> Slide without anything special on it
+    \item[d)]<5-> Slide with highlighted formula
+    \item[e)]<6-> Slide for bibliography
+  \end{itemize}
+\end{frame}
+
+\section{Slides}
+
+\subsection[Boxes]{Slides with boxes}
+
+\begin{frame}
+  \frametitle{Slide with several blocks}
+  \uncover<2->{
+    \begin{block}
+      {Title of first block}
+      This is a generic block with just text in it.
+    \end{block}
+  }
+  \uncover<3->{
+    \begin{block}
+      {A block with a list of items}
+      \begin{itemize}
+        \item<4-> Item 1
+        \item<5-> Item 2
+        \item<6-> Item 3
+        \item<7-> Item 4
+        \item<8-> Item 5
+      \end{itemize}
+    \end{block}
+  }
+  \uncover<9->{
+    \begin{block}
+      {Title of third block}
+      There is nothing special about this block, either.
+    \end{block}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Slide with block and annotation}
+  \begin{block}{The first block with an item list}
+    \begin{itemize}
+      \item[(i)]<2-> Item 1
+      \item[(ii)]<3-> Item 2
+      \item[(iii)]<4-> Item 3
+      \item[(iv)]<5-> Item 4
+      \item[(v)]<6-> Item 5
+    \end{itemize}
+  \end{block}
+  \uncover<7->{
+    {\bf Note:}
+    Such a note can be easily added and makes a easy to see divide between the important block and the annotation beneath. 
+  }
+\end{frame}
+
+\subsection{Empty slides}
+
+\begin{frame}
+  \frametitle{Empty slide}
+  This slide has nothing special on it, so the audience can grab the content more efficiently.
+  
+  Additionally, the author has more space to fill with his important content.
+\end{frame}
+
+\subsection[Formulas]{Important formulas}
+
+\begin{frame}
+  \frametitle{Slide with important formula}
+  In order to assure that your audience grabs the most important element of this slide, you can add a box around your centered key element:
+  \begin{center}
+    {\textcolor{blue}{\fbox{$E = mc^2$\vphantom{\Big)}}}}
+  \end{center}
+\end{frame}
+
+\subsection{Bibliography}
+
+\begin{frame}
+  \frametitle{Bibliography}
+  \begin{itemize}
+    \item<2-> Title of first cited book/paper/work
+      \newline \hspace*{\fill} {\tiny [Author, Publisher, Year]}
+    \item<3-> Title of second cited book/paper/work
+      \newline \hspace*{\fill} {\tiny [Author, Publisher, Year]}
+    \item<4-> Title of third cited book/paper/work
+      \newline \hspace*{\fill} {\tiny [Author, Publisher, Year]}
+    \item<5-> Title of fourth cited book/paper/work
+      \newline \hspace*{\fill} {\tiny [Author, Publisher, Year]}
+    \item<6-> Title of fifth cited book/paper/work
+      \newline \hspace*{\fill} {\tiny [Author, Publisher, Year]}
+  \end{itemize}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,173 @@
+\documentclass{beamer}
+
+\title{CambridgeUK}
+\subtitle{A \LaTeX~Beamer class in the new colors of an old university}
+\author{Philipp Hennig}
+\date{June 2008}
+
+\usetheme{CambridgeUK}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+
+\begin{abstract}
+The package cambridgeUK provides the color scheme of the University of Cambridge. It is currently experimental, and only optimised to work with Beamer's very lightweight default layout. See the end of this document for installation instructions.
+\end{abstract}
+
+\end{frame}
+
+\section{Introduction}
+
+\begin{frame}
+\frametitle{Frametitles have a strong background}
+\framesubtitle{and include subtitles in their bar}
+
+\begin{itemize}
+	\item The style file {\tt beamercolorthemecambridgeuk.sty} provides the official color scheme of the \alert{University of Cambridge, UK}. \cite{UCGuide}
+	\item The style file {\tt beamerthemeCambridgeUK.sty} provides a \alert{wrapper} for this color theme. It also includes a lightweight layout.
+	\item \alert{Installation} is quick and simple. See the end of this text for instructions.
+	\item Please note that this template is \alert{in no way officially endorsed} by Cambridge University. 
+\end{itemize}
+\end{frame}
+
+\subsection{Structured slides}
+
+\begin{frame}
+\frametitle{Some examples on a slide}
+\framesubtitle{to see what the structures do}
+
+\begin{itemize}
+	\item Note that you should keep most text in the simple standard format. Use of the following structural elements should be kept to a minimum
+	\item Bulleted lists are the best structural element
+\end{itemize}
+
+\begin{example}
+This is an example. 
+\begin{itemize}
+	\item This is an \alert{important} item in an example
+\end{itemize}
+\end{example}
+
+\begin{block}{This is a block}
+This is text in a block
+\begin{itemize}
+	\item This is an \alert{important} item in a block.\footnote{Footnotes are possible as well.}
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{More structural elements}
+\framesubtitle{Theorems, proofs}
+
+The following two slides are mostly to test the color scheme. I can not recommend using any of these structural elements. Stick with the beauty of an empty, white slide.
+
+\begin{theorem}{This is a theorem}
+\begin{itemize}
+	\item This is an \alert{important} item in a theorem.
+\end{itemize}
+\end{theorem}
+
+\begin{proof}[Proof titles have to be in square brackets]
+This is text in a proof. Note how beamer annoyingly adds a period to the end of the proof title.
+\begin{itemize}
+	\item This is an \alert{important} item in a proof.
+\end{itemize}
+Note how beamer adds a {\em Beweisabschlusszeichen} to the end of the proof, but forgets to change the color.
+\end{proof}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Even more structural elements}
+\framesubtitle{Verse, Quote and Quotation}
+
+\begin{verse}
+This is a text in verse style.
+\end{verse}
+
+\begin{quote}
+This is a quote.
+\end{quote}
+
+\begin{quotation}
+While this is a quotation. Note how it has a larger indentation in the first line.
+\end{quotation}
+
+\end{frame}
+
+
+\subsection{Maths}
+\begin{frame}
+\frametitle{Maths}
+\framesubtitle{Including mathematical formulae into Beamer presentations is easy}
+
+Beamer's biggest strength for scientific presentations is its ability to use the full power of \LaTeX's mathematical displays.
+
+\begin{equation}
+	\begin{aligned}
+	D_{\text{KL}}(P_0, P_\infty) &= \sum_{\gamma\delta} P_0 ^{\gamma\delta} \log P_0 ^{\gamma\delta} - \sum_{\gamma\delta} P_0 ^{\gamma\delta} \log P_\infty ^{\gamma\delta}\\
+					&= - H (P_0) - \langle \log P_\infty \rangle_0
+	\label{eq:5}
+	\end{aligned}
+\end{equation}
+
+\end{frame}
+
+\begin{frame}\frametitle{Structuring Texts}
+\framesubtitle{Lists}
+
+\begin{columns}
+\column{.5\textwidth}
+\begin{enumerate}
+	\item Of course Beamer can do enumerated lists
+	\item It also knows how to do columns. This is helpful if you want to put figures next to text.
+\end{enumerate}
+\column{.5\textwidth}
+\begin{itemize}
+	\item bulleted lists are not numbered
+	\item Beamer can do a lot more. For overlays, figures with captions, etc., have a look at \cite{Beamer}. But don't get carried away! Simple is nearly always better.
+\end{itemize}
+
+\end{columns}
+\end{frame}
+
+\begin{frame}{Installation Instructions}
+
+These instructions assume you are using a packaged \LaTeX~distribution, like MikTex or TeXLive. If you have a custom installation, chances are you are proficient enough to interpret these instructions accordingly.
+
+\begin{enumerate}
+  \item install beamer. If you are using a \LaTeX~distribution, it's most probably already installed. Otherwise, see \cite{Beamer}
+	\item find the beamer package directory. It's typically in [texroot]/tex/latex/beamer/. Change there.
+	\item copy the file {\tt beamercolorthemecambridgeuk.sty} to ./themes/color/.
+	\item copy the file {\tt beamerthemeCambridgeUK.sty} to ./themes/theme/.
+	\item run {\tt sudo texhash}, or the equivalent on your system\footnote{Under MikTex on Windows, open Start $\to$ MikTex $\to$ Settings and run ``refresh FNDB''}
+	
+\end{enumerate}
+
+\end{frame}
+
+\section*{Bibliography}
+\begin{frame}%[allowframebreaks] % add this if you have more papers to cite than fit on a slide.
+\frametitle{Bibliography}
+
+\begin{thebibliography}{Tantau, 2007}
+\bibitem[Tantau, 2007]{Beamer}
+Tantau, Till
+\newblock {\em The Beamer class}
+\newblock {\tt http://latex-beamer.sourceforge.net/}
+
+\bibitem[Cambridge 2008]{UCGuide}
+University of Cambridge
+\newblock {\em Identity Guidelines -- first edition, May 2008}
+\newblock {\tt http://www.admin.cam.ac.uk/offices/...\\ communications/services/identityguidelines/}
+
+\end{thebibliography}
+\end{frame}
+\end{document}

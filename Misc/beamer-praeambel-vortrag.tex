@@ -1,0 +1,302 @@
+\documentclass[12pt]{beamer}
+\usepackage[T1]{fontenc}
+%\usepackage[latin1,utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[babel,german=guillemets]{csquotes}
+%\usepackage[bgadd]{background}
+%\usepackage[strings]{underscore}
+\usepackage{lmodern,
+            url,
+            multicol,
+            moreverb,
+            verbatim,
+            lipsum,
+            multimedia,
+            textpos,
+%            pdfpages,
+            wrapfig,
+%            helvet,
+            eso-pic,
+            marvosym,
+            listings,
+            pifont,
+            calc,
+            graphicx,
+            tikz,
+            booktabs,
+	    xspace,
+            textcomp}
+            
+\useinnertheme{rectangles}
+\hypersetup{pdfpagemode=FullScreen} % Fullscreen beim Start mit Adobe Reader
+\lstset{backgroundcolor=\color{lightgray},
+        basicstyle=\ttfamily\color{uniblue},
+        frame=single,
+        framerule=0pt,
+        xrightmargin=\fboxsep,
+        xleftmargin=\fboxsep,
+        basewidth=.5em,
+        extendedchars=true} % Defaultwerte beim Einbinden von Quellcode
+
+%------------------------------
+%
+% Schrift\"anderungen
+%
+%------------------------------
+\def\UrlFont{\color{uniblue}\tt} % URL-Font auf Typewriter
+\usefonttheme[onlymath]{serif}   % Mathetext in Serifen
+\renewcommand{\sfdefault}{pr4}   % Rotis Sans Serif
+\renewcommand{\rmdefault}{pro}   % Rotis Serif
+
+%------------------------------
+%
+% L\"angen
+%
+%------------------------------
+\setlength{\parindent}{0pt}   % Kein Absatzeinzug
+\setlength{\parskip}%
+  {1.2ex plus .5ex minus.5ex} % Individueller Abstand zw. Abs\"atzen
+\setlength{\unitlength}{1mm}  % Default f\"ur Einheitsl\"angen: 1mm
+
+%------------------------------
+%
+% Neue/Alte Kommandos
+%
+%------------------------------
+% \tex             -> Abk\"urzung f\"ur \TeX
+% \latex           -> Abk\"urzung f\"ur \LaTeX
+% \ttalert[1]      -> #1 in Typewriter hervorheben
+% \B               -> Abk\"urzung f\"ur \textbullet
+% \T               -> Abk\"urzung f\"ur \textbackslash
+% \neueseite[2]    -> N\"achste Foliem mit #1 als Titel
+%                     und #2 als Inhalt
+% \lightitem[1]    -> Hellgraues \item der itemize-Umgebung.
+%                     #1 ist das Item.
+% \Email[1]        -> #1 ist die E-Mail-Adresse
+% \Zeitraum[1]     -> #1 ist der Zeitraum des Kurses
+% \beamertitlepage -> Erstellung der Titelseite an dieser
+%                     Stelle
+% \todo            -> Hilfskommando bei der Erstellung von
+%                     Vortr\"agen
+\newcommand{\tex}{\textrm{\TeX}}
+
+\newcommand{\latex}{\textrm{\LaTeX}}
+
+\newcommand{\ttalert}[1]{\alert{\texttt{#1}}}
+
+\newcommand{\B}{\textbullet}
+
+\newcommand{\T}{\textbackslash}
+
+\newcommand{\neueseite}[3][t]{%
+\begin{frame}[#1]{#2}
+#3
+\end{frame}
+}
+
+\newcommand{\tbf}[1]{\textbf{#1}}
+\newcommand{\ttt}[1]{\texttt{#1}}
+
+\newcommand{\lightitem}[1]{\item%
+[\color{gray}\Squaresteel]%
+\textcolor{gray}{#1}%
+}
+
+\renewcommand*{\Email}[1]{\def\myEmail{#1}}
+
+\newcommand*{\Zeitraum}[1]{\def\myZeitraum{#1}}
+
+\newcommand{\beamertitlepage}{%
+\begin{frame}
+\AddToShipoutPicture*{%
+  \unitlength 1mm
+  \begin{picture}(128,96)
+    \fboxsep 0pt
+    \put(0,5){\pgfuseimage{CPU}}
+  \end{picture}}
+  \centering
+  \bfseries
+  \textcolor{uniblue}{\Huge\inserttitle}
+  \color{gray}
+  \vskip 5mm
+  \insertauthor\par
+  \myEmail
+  \vskip 5mm
+  \myZeitraum\par
+\end{frame}}
+
+\newcommand{\todo}{\par\color{red}\Huge\textbf{ToDo!}\par}
+
+% Setze ein Zeichen echts unten in die Ecke:
+\newcommand{\corner}[1]{%
+\begin{textblock*}{3mm}(123mm,88mm)
+\resizebox{3mm}{!}{#1}%
+\end{textblock*}%
+}
+
+%------------------------------
+%
+% Farben
+%
+%------------------------------
+\definecolor{unigreen}{cmyk}{0.30,0,0.94,0}
+\definecolor{uniblue}{cmyk}{0.80,0.55,0,0}
+\definecolor{unigray}{cmyk}{0.40,0.31,0.29,0}
+\definecolor{mygray}{gray}{.9}
+%\definecolor{unigrey}{rgb}{0.667,0.667,0.667}
+%\definecolor{uniblue}{rgb}{0.227,0.427,0.686}
+%\definecolor{unigreen}{rgb}{0.784,0.827,0.09}
+%\definecolor{unigreen}{cmyk}{1,0,0,0} % Pantone 382
+%\definecolor{uniblue}{cmyk}{0,1,0,0}  % Pantone 285
+%\definecolor{unigray}{cmyk}{0,0,1,0}  % Pantone Cool Grey 6
+\definecolor{lightgreen}{rgb}{.467,.621,.176}
+\definecolor{yellow}{rgb}{1,1,0}
+\definecolor{darkyellow}{rgb}{.6,.6,0}
+\definecolor{lightgray}{rgb}{0.937,0.937,0.937}
+
+%------------------------------
+%
+% Eigene Boxen
+%
+%------------------------------
+% \cbox[2]           -> #1 Breite (default: Textbreite),
+%                       #2 Inhalt, hellgrau hinterlegte
+%                       Box mit blauer Schrift.
+% \ttbox[2]          -> wie \cbox nur mit Typewriter-Schrift
+% \CBOX[2]           -> wie \ttbox, allerdings mit Quellcode
+%                       (#2), #1 sind Optionen f\"ur das
+%                       listings-Paket
+% \topalignbox[1]    -> Box auf Headline statt Baseline
+% \centeralignbox[1] -> Box vertikal zentriert statt auf Baseline
+\newcommand{\cbox}[2][\linewidth]{%
+\colorbox{lightgray}{%
+\parbox{#1-2\fboxsep}{%
+\color{uniblue}%
+#2}}}
+
+\newcommand{\ttbox}[2][\linewidth]{%
+\colorbox{lightgray}{%
+\parbox[c]{#1-2\fboxsep}{%
+\color{uniblue}%
+\ttfamily{#2}}}}
+
+\newcommand{\CBOX}[2][basicstyle=\ttfamily]{%
+\mbox{\lstinputlisting[#1]{#2}}%
+}
+
+\newlength\topgraphics
+
+\newcommand{\topalignbox}[1]{%
+  \setbox0=\hbox{#1}%
+  \setlength{\topgraphics}{-\ht0}%
+  \setbox0=\hbox{Y}%
+  \addtolength{\topgraphics}{\ht0}%
+  \raisebox{\topgraphics}{#1}%
+}
+
+\newlength\centergraphics
+
+\newcommand{\centeralignbox}[1]{%
+  \setbox0=\hbox{#1}%
+  \setlength{\centergraphics}{-.5\ht0}%
+  \setbox0=\hbox{Y}%
+  \addtolength{\centergraphics}{\ht0}%
+  \raisebox{\centergraphics}{#1}%
+}
+
+%------------------------------
+%
+% Imagedefinitionen f\"ur PGF
+%
+%------------------------------
+\pgfdeclareimage[height=5mm]{RRZN}{./Abbildungen/rrzn_logo_tmp}
+\pgfdeclareimage[height=5mm]{UNI}{./Abbildungen/luh_logo_cmyk_neu} % 17.5mm breit
+\pgfdeclareimage[width=64mm]{CPU}{./Abbildungen/cpu}
+
+%------------------------------
+%
+% Beamertemplate-\"Anderungen
+%
+%------------------------------
+% Kopfzeile:
+\setbeamertemplate{headline}{%
+\vspace{3mm}\hspace{3mm}%
+\pgfuseimage{RRZN}\hfill\pgfuseimage{UNI}%
+\hspace{3mm}\mbox{}%
+}
+
+% Fu{\ss}zeile:
+\setbeamertemplate{footline}{%
+\begin{beamercolorbox}[ht=1mm]{colorbox}
+\color{unigreen}%
+\hspace{107.5mm}\rule{17.5mm}{1mm}
+\end{beamercolorbox}
+\begin{beamercolorbox}[leftskip=3mm,rightskip=3mm,ht=4mm]{colorbox}
+\textbf{\insertauthor}, \inserttitle{}, \insertdate\hfill{}Seite \insertframenumber/\inserttotalframenumber%
+\vspace{1.5mm}\vbox{}%
+\end{beamercolorbox}
+}
+% Folientitel:
+\setbeamertemplate{frametitle}{%
+  \begin{beamercolorbox}%
+        [wd=\paperwidth,leftskip=5mm,%
+         rightskip=5mm,vmode]{frametitle}%
+     \usebeamerfont*{frametitle}%
+     \textbf{\insertframetitle}%
+   \end{beamercolorbox}}
+% Kleinkram ...:
+\setbeamertemplate{navigation symbols}{}
+%\setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamertemplate{enumerate items}[square]
+\setbeamertemplate{itemize items}{%
+  \raisebox{1.5pt}{\scriptsize\vrule width1ex height1ex}}
+\setbeamertemplate{itemize subitem}{%
+  \raisebox{1.5pt}{\scriptsize\fboxsep0pt\fboxrule1pt\fbox{%
+  \color{white}\rule{1ex-2pt}{1ex-2pt}}}}
+
+%------------------------------
+%
+% Beamerfarben
+%
+%------------------------------
+\setbeamercolor{colorbox}{fg=uniblue,bg=lightgray}
+\setbeamercolor{frametitle}{fg=uniblue}
+\setbeamercolor{title}{fg=uniblue}
+\setbeamercolor{item}{fg=unigreen}
+\setbeamercolor{subitem}{fg=unigreen}
+\setbeamercolor{description item}{fg=uniblue}
+\setbeamercolor{background canvas}{bg=}
+\setbeamercolor{alerted text}{fg=uniblue}
+\setbeamercolor{block body}{bg=lightgray}
+\setbeamercolor{block title}{bg=unigray}
+
+%------------------------------
+%
+% Beamergr\"o{\ss}en
+%
+%------------------------------
+\setbeamersize{description width=5mm}
+\setbeamersize{text margin left=5mm}
+\setbeamersize{text margin right=5mm}
+
+\begin{document}
+\Zeitraum{}
+% Beispieldokument:
+%\input{beamer-praeambel-vortrag.tex}
+%
+%\author{Prof. Max Mustermann}
+%\title{\latex vs. Microsoft Word\textsuperscript{\texttrademark}}
+%\Email{mustermann@latex.org}
+%\date{\today}
+%\Zeitraum{1. -- 10. Januar 1970}
+%
+%\beamertitlepage
+%
+%\neueseite{Inhalt}{
+%\latex ist \enquote{What you see is what you mean.}
+%
+%Word ist \enquote{What you see is what you might get.}
+%}
+%
+%\end{document}

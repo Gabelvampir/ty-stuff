@@ -1,0 +1,1704 @@
+
+%\documentclass[dvips]{beamer}
+\documentclass[handout]{beamer}
+
+\usepackage{pgf,pgfarrows,pgfnodes,pgfautomata,pgfheaps}
+\mode<handout>
+{
+	\usepackage{pgfpages}	
+	\pgfpagesuselayout{4 on 1}[a4paper,landscape,border shrink=5mm]
+}
+
+
+
+\usepackage{pstricks}
+%\usepackage{beamerthemeiitb}
+%\usetheme{Frankfurt}
+\usetheme{iitb}
+\usepackage{multirow}
+\usepackage{etex}
+
+\usepackage{pst-node}
+\usepackage{pst-grad}
+\usepackage{pst-text}
+\usepackage{pst-rel-points}
+\usepackage{amssymb}
+\usepackage{epsfig}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage{mydefs}
+\usepackage{rotating}
+\usepackage{hyperref}
+\usepackage[normalem]{ulem}
+
+
+\setbeamercolor{normal text}{fg=black,bg=white}
+%
+%
+\setbeamersize{text margin left=15pt}
+\setbeamersize{text margin right=15pt}
+\setbeamersize{sidebar width right=0pt}
+\setbeamersize{sidebar width left=0pt}
+%\setbeamercolor{structure}{fg=black,bg=gray!40!white}
+\setbeamercolor{frametitle}{fg=red}
+\setbeamercolor{footline}{fg=brown}
+\setbeamercolor{headline}{fg=brown}
+\setbeamerfont{title}{shape=\itshape}
+\setbeamerfont{frametitle}{series=\bfseries}
+\setbeamercolor{title}{bg=white,fg=blue}
+\setbeamercolor{author}{fg=brown}
+\setbeamerfont{date}{size=\footnotesize}
+\setbeamerfont{shortdate}{size=\footnotesize}
+\setbeamerfont{part page}{size=\huge,shape=\itshape}
+
+\setbeamertemplate{title page}
+{
+\hfill
+\begin{beamercolorbox}[wd=4in,center]{beamer color}
+{
+\Large\itshape\red
+\inserttitle
+}
+
+\vskip25pt
+\black
+\insertauthor
+\vskip2pt
+{\footnotesize\black
+(www.cse.iitb.ac.in/$\tilde{\ }$uday)
+}
+\vskip20pt
+{\footnotesize\black
+\insertinstitute
+}
+\vskip30pt
+\inserttitlegraphic
+
+\vskip10pt
+{\tiny\black
+\insertdate
+}
+\end{beamercolorbox}
+\hfill
+\addtocounter{framenumber}{-1}
+}
+
+
+
+\title[LaTeX]{Preparing Slides Using \\ LaTeX, Pstricks, and Beamer}
+\author[Aug 2010]{Uday Khedker}
+\institute[Uday Khedker, IIT Bombay]{Department of Computer Science and Engineering, \\ 
+Indian Institute of Technology, Bombay}
+\titlegraphic{\scalebox{.4}{\includegraphics{IITBlogo.epsi}}}
+\date[Prabhat Workshop]{August 2010}
+
+
+\listfiles
+
+
+%%%%%%%%%%%%% Yellow
+\newrgbcolor{yel}{0.95 1 .8}
+\newcmykcolor{lightyellow}{0 0 .3 0}
+\newcmykcolor{llyellow}{0 0 .2 .1}
+%%%%%%%%%%%%% Green
+\newrgbcolor{darkgreen}{0 .5 0}
+%%%%%%%%%%%%% Gray
+\newgray{lightgray}{.85}
+\newgray{dgray}{.35}
+\newgray{ldgray}{.75}
+%%%%%%%%%%%%% Pink
+\newcmykcolor{lpink}{0 .2 0 0}
+\newrgbcolor{pink}{1 .5 .6}
+%%%%%%%%%%%%% Magenta
+\newcmykcolor{lmagenta}{0 .4 0 0}
+%%%%%%%%%%%%% Blue
+\newrgbcolor{oldlightblue}{.1 .85 1}
+\newrgbcolor{lightblue}{.75 0.85 1}
+\newrgbcolor{newlightblue}{.75 0.75 1}
+\newrgbcolor{myblueother}{.5 .5 1}
+\newrgbcolor{myblue}{.15 .15 .8}
+\newrgbcolor{darkblue}{0 0 .5}
+\newcmykcolor{llblue}{.2 .15 0 .1}
+\newcmykcolor{lblue}{.3 .2 0 .1}
+%%%%%%%%%%%%% Brown
+\newrgbcolor{brown}{.65 0.15 .0}
+%%%%%%%%%%%%% Cream
+\newrgbcolor{cream}{.95 0.95 .65}
+%%%%%%%%%%%%% Violet
+\newrgbcolor{violet}{.84 0 .96}
+\newrgbcolor{mygreen}{.24 .84 .72}
+\newcommand{\irulethree}{\rule{0cm}{.3cm}}
+\newcommand{\irulefour}{\rule{0cm}{.4cm}}
+\newcommand{\irulefive}{\rule{0cm}{.5cm}}
+\newcommand{\irulesix}{\rule{0cm}{.6cm}}
+
+
+\newcommand{\notesPage}{
+\psset{unit=1mm}
+\begin{pspicture}(0,0)(120,80)
+\rput{90}(0,40){\scalebox{1}{\Huge\bfseries\gray Notes}}
+\end{pspicture}
+}
+
+\psset{unit=1mm}
+
+\begin{document}
+
+\frame[plain]{\titlepage}
+
+\part{Outline}
+
+\frame{
+\frametitle{Outline}
+%\begin{itemize}
+%\setlength{\itemsep}{8pt}
+
+\begin{itemize}
+\setlength{\itemsep}{4pt}
+\item Using LaTeX for document preparation
+\item Using Pstricks for drawing pictures
+\item Using Beamer for making presentations
+\item Sample slides
+\end{itemize}
+
+
+}
+
+\newcommand{\smiley}%
+{\scalebox{.7}
+{\psset{unit=1mm}
+\begin{pspicture}(-2,2)(10,12.5)
+\pscircle[linewidth=.8](5,5){5}
+\pscircle[linewidth=.8](3,6){1}
+\pscircle[linewidth=.8](7,6){1}
+\psarc[linewidth=.8](5,5){3}{225}{315}
+\end{pspicture}
+}}
+
+\newcommand{\weepy}%
+{\scalebox{.7}
+{\psset{unit=1mm}
+\begin{pspicture}(-2,2)(10,12.5)
+\pscircle[linewidth=.8](5,5){5}
+\pscircle[linewidth=.8](3,6){1}
+\pscircle[linewidth=.8](7,6){1}
+\psarcn[linewidth=.8](5,.75){3}{135}{45}
+\end{pspicture}
+}}
+
+
+\part{\protect\parbox{3in}{\protect\centering Using LaTeX for Document Preparation}}
+\frame[plain]{\partpage}
+
+\addtocounter{part}{-1}
+
+\part{Using LaTeX for Document Preparation}
+
+\frame{
+\frametitle{Document Preparation}
+
+\begin{itemize} 
+
+\item Typesetting = Text (To Be Typeset) + Typesetting Commands
+
+\item Document Structure : Position, size, shape of entities etc.
+
+\begin{itemize} 
+
+\item Visual Structure : Governed by visual aesthetics
+
+\item Logical Structure : Governed by the meaning 
+     
+     (List, Table, Chapter, Section, etc.)
+
+\end{itemize}
+
+\end{itemize}
+}
+
+\frame{
+\frametitle{WYSIWYG Preparation}
+
+\begin{itemize}
+\item What You See Is What You Get ({\blue E.g. MS Word.})
+
+%\item Execution of formatting commands interleaved with keying in the text.
+
+
+%\item 
+%\begin{tabbing}
+%	while (not done)\\
+%	\{ \ \ \=Key in the text \\
+%		\> Execute the Typesetting Commands\\
+%	\}
+%	\end{tabbing}
+
+\item Interactive : Interleaved typing and typesetting.
+
+\begin{itemize} 
+
+\item As you type the text, the resulting formatting is shown 
+	immediately and automatically.
+
+\item Visual structure is more prominent.
+
+\end{itemize}
+
+\end{itemize}
+}
+
+\frame{
+\frametitle{Non-WYSIWYG Preparation}
+
+\vspace*{-.5in}
+\begin{itemize}
+\item Execution of formatting commands separate from keying in the text.
+
+{\blue E.g. \LaTeX.}
+
+
+\item Multi-step batch mode process
+
+\begin{itemize} 
+
+\item Type the text
+\item Execute the formatting commands
+\item View the resulting document
+\end{itemize}
+
+\item Visual structure de-emphasized : 
+
+Can't see immediately and automatically.
+
+\end{itemize}
+}
+
+\frame{
+\frametitle{Document Preparation with LaTeX}
+
+%\psset{arrowsize=1.75mm,arrowinset=0}
+\psset{arrowsize=1.75mm}
+
+\begin{pspicture}(0,0)(120,80)
+\onslide<1->{
+\putnode{in}{origin}{10}{60}{\psframebox*{\renewcommand{\arraystretch}{.7}%
+			\begin{tabular}{@{}c@{}}
+			Text and \\ formatting \\ commands 
+			\end{tabular}
+			}}
+\putnode{lt}{in}{22}{0}{\psframebox{\renewcommand{\arraystretch}{.7}%
+			\begin{tabular}{@{}c@{}}
+			\LaTeX  
+			\end{tabular}
+			}}
+\ncline{->}{in}{lt}
+%
+\putnode{dv}{lt}{25}{0}{\psframebox*{\renewcommand{\arraystretch}{.7}%
+			\begin{tabular}{@{}c@{}}
+			Device \\ independent \\ representation 
+			\end{tabular}
+			}}
+\ncline{->}{lt}{dv}
+}
+\onslide<2->{
+\putnode{xd}{dv}{24}{0}{\psframebox{\renewcommand{\arraystretch}{.7}%
+			\begin{tabular}{@{}c@{}}
+			xdvi
+			\end{tabular}
+			}}
+\ncline{->}{dv}{xd}
+\putnode{sc}{xd}{20}{0}{\psframebox*{\renewcommand{\arraystretch}{.7}%
+			\begin{tabular}{@{}c@{}}
+			Screen \\ rendering 
+			\end{tabular}
+			}}
+\ncline{->}{xd}{sc}
+}
+\onslide<3->{
+\putnode{dps}{dv}{0}{-17}{\psframebox{\renewcommand{\arraystretch}{.7}%
+			\begin{tabular}{@{}c@{}}
+			dvips
+			\end{tabular}
+			}}
+\ncline{->}{dv}{dps}
+\putnode{ps}{dps}{0}{-15}{\psframebox*{\renewcommand{\arraystretch}{.7}%
+			\begin{tabular}{@{}c@{}}
+			Postscript \\ representation 
+			\end{tabular}
+			}}
+\ncline{->}{dps}{ps}
+}
+\onslide<4->{
+\putnode{gv}{ps}{25}{13}{\psframebox{\renewcommand{\arraystretch}{.7}%
+			\begin{tabular}{@{}c@{}}
+			gv, \\evince
+			\end{tabular}
+			}}
+\ncline{->}{ps}{gv}
+\putnode{sc}{gv}{25}{0}{\psframebox*{\renewcommand{\arraystretch}{.7}%
+			\begin{tabular}{@{}c@{}}
+			screen \\ rendering 
+			\end{tabular}
+			}}
+\ncline{->}{gv}{sc}
+}
+\onslide<5->{
+\putnode{pr}{ps}{25}{0}{\psframebox{\renewcommand{\arraystretch}{.7}%
+			\begin{tabular}{@{}c@{}}
+			lpr
+			\end{tabular}
+			}}
+\ncline{->}{ps}{pr}
+\putnode{sc}{pr}{20}{0}{\psframebox*{\renewcommand{\arraystretch}{.7}%
+			\begin{tabular}{@{}c@{}}
+			printed \\ copy 
+			\end{tabular}
+			}}
+\ncline{->}{pr}{sc}
+}
+\onslide<6->{
+\putnode{pdf}{ps}{25}{-13}{\psframebox{\renewcommand{\arraystretch}{.7}%
+			\begin{tabular}{@{}c@{}}
+			ps2pdf
+			\end{tabular}
+			}}
+\ncline{->}{ps}{pdf}
+\putnode{sc}{pdf}{25}{0}{\psframebox*{\renewcommand{\arraystretch}{.7}%
+			\begin{tabular}{@{}c@{}}
+			pdf \\ document 
+			\end{tabular}
+			}}
+\ncline{->}{pdf}{sc}
+}
+\end{pspicture}
+}
+
+\frame{
+\frametitle{Using LaTeX}
+
+\begin{itemize} 
+
+\item Create {\tt\bfseries file.tex}
+\item ``{\tt\bfseries latex file.tex}'' produces {\tt\bfseries file.dvi}
+\item ``{\tt\bfseries dvips -o file.ps file}'' produces {\tt\bfseries file.ps}
+\item Can be viewed using ``{\tt\bfseries gv file.ps}'' 
+\item Practical tips for Linux users
+\begin{itemize} 
+
+\item Use of makefile, simultaneous editing and background viewing.
+\item Almost interactive
+\end{itemize}
+\end{itemize}
+}
+
+\frame{
+\frametitle{Types of Formatting Commands}
+
+\begin{itemize} 
+
+\item Environment : Contains text to be typeset with a specific logical
+                    structure.
+
+      Figures, tables, lists, equations, etc.
+
+\item Command : Produces some text in a specific way
+
+      Section headings, footnotes etc.
+
+\item Declaration : Customizes the formatting of the text in the scope
+\end{itemize}
+}
+
+\frame{
+\frametitle{Environments}
+
+\begin{itemize}
+
+\item Environments explicate a logical structure
+
+      Figures, tables, lists, equations, etc.
+
+	
+\begin{itemize} 
+
+\item Names : {\tt\bfseries document, itemize, tabular, table, figure,} \ldots
+\item Scope : {\tt \bfseries $\backslash$begin\{}env
+	      {\tt \bfseries \}} ... 
+	      {\tt \bfseries $\backslash$end\{}env
+	      {\tt \bfseries \}} 
+\end{itemize}
+
+Example {\tt \bfseries 
+$\backslash$begin\{document\} ... $\backslash$end\{document\}
+}
+\end{itemize}
+}
+
+\frame{
+\frametitle{Commands}
+
+\begin{itemize}
+
+\item Commands carry out a certain formatting
+
+(May have side effects)
+
+\begin{itemize} 
+
+\item {\tt\bfseries $\backslash$chapter\{Introduction\} }
+
+    	Begins a new page.
+	
+	Changes the numbering of sections, figures, equations etc. 
+
+\item {\tt\bfseries $\backslash$foilhead\{Commands\} }
+
+\item {\tt\bfseries $\backslash$textbf\{Text to be typeset in bold face\} }
+\item {\tt\bfseries $\backslash$texttt\{Text to be typeset in typewrite font\} }
+\item {\tt\bfseries $\backslash$footnote\{Text to be typeset as a footnote\} }
+\end{itemize}
+
+\end{itemize}
+}
+
+\frame{
+\frametitle{Types of Formatting Commands}
+
+\begin{itemize}
+\item Declarations
+\begin{itemize} 
+
+\item Customization of fonts, shape, thickness, numbering, etc.
+
+	\begin{itemize}
+      \item[] {\tt\bfseries $\backslash$tt} indicates {\tt\bfseries typewriter} font
+      	
+      {\tt\bfseries $\backslash$bf} indicates {\bfseries boldface} letter
+
+      {\tt\bfseries$\backslash$em} indicates {\em emphasized} letters
+	\end{itemize}
+
+\item Scope 
+
+      Delimited by ``{\tt\bfseries \{}'' and ``{\tt\bfseries \}}'', 
+      ``{\tt\bfseries$\backslash$begin}'' and ``{\tt\bfseries$\backslash$end}'' pairs, or \ldots
+
+	\end{itemize}
+
+	\end{itemize}
+
+}
+
+\frame{
+\frametitle{\LaTeX: Basic Concepts}
+
+\begin{itemize}
+\item Document Classes ({\tt\bfseries article, report, book} etc)
+\item Use of packages
+\item Fonts and Colors
+\item Sectioning: Chapters, sections, appendix etc
+\item Lists and enumerations
+\end{itemize}
+}
+
+\frame{
+\frametitle{\LaTeX: Basic Concepts}
+\begin{itemize}
+\item Paragraphs
+\item Formatting of Math formulae
+\item Tables and Figures
+\item Page formatting
+\item Footnotes 
+\end{itemize}
+}
+
+\frame{
+\frametitle{\LaTeX: Basic Concepts}
+\begin{itemize}
+\item Multiple input files
+\item Defining new commands
+\item Importing files
+\item Citations and references
+\end{itemize}
+}
+
+\frame{
+\frametitle{\LaTeX : Advanced Concepts}
+\begin{itemize}
+\item Formatting programs/algorithms
+\item Bibtex
+\item Pictures 
+\item Slides 
+\end{itemize}
+}
+
+\part{\protect\parbox{3in}{\protect\centering Using Pstricks for Drawing Pictures}}
+\frame[plain]{\partpage}
+
+\addtocounter{part}{-1}
+
+\part{Using Pstricks for Drawing Pictures}
+
+
+\frame{
+\frametitle{Preparing Pictures using {\tt\bfseries Pstricks}}
+
+\begin{itemize} 
+\item Environment {\tt\bfseries pspicture}
+\item Line and curve drawings
+\item Frames, circles, ovals,
+\item Nodes and Node connectors
+
+	Relative to the placement of nodes
+\item Labeling node connectors
+\end{itemize}
+}
+
+\frame{
+\frametitle{The Power of {\tt\bfseries Pstricks}}
+
+\begin{itemize}
+\item      Logical components of pictures and relationships between them.
+
+$\Rightarrow$ Easy refinements/updates/corrections
+\begin{itemize}
+
+\item {\tt\bfseries xfig} does not recognise node-connectors.
+
+{\small
+$\Rightarrow$ If you move a node, a node connector does not move with it.
+}
+
+\item {\tt\bfseries dia} recognises node-connectors but not the relationship between nodes.
+
+{\small
+$\Rightarrow$ \parbox[t]{3.5in}{A node connector moves with a node but positioning of two nodes remains
+ independent.}
+}
+
+\end{itemize}
+
+
+\item  Very good quality of pictures.
+
+\item Free mixing of graphics and text
+\end{itemize}
+
+}
+
+\begin{frame}[fragile]
+\frametitle{Adding to the Power of Pstricks}
+
+\begin{itemize}
+\item A limitation of {\tt\bfseries pstricks} 
+
+      Absolute coordinates have to be calculated by the user.
+
+\item Solution : package {\tt\bfseries pst-rel-points} available at
+
+\mbox{\tt\bfseries http://www.cse.iitb.ac.in/uday/latex}.
+
+\item Defines command
+
+\begin{verbatim}
+\putnode[l/r]{new}{old}{delta x}{delta y}{stuff}
+\end{verbatim}
+%%{\tt\bfseries$\backslash$psrelpoint\{}Point 1 name
+%%{\tt\bfseries\}\{}Point 2 name
+%%{\tt\bfseries\}\{}$\boldmath \Delta X$
+%%{\tt\bfseries\}\{}$\boldmath \Delta Y$
+%%{\tt\bfseries\}}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Drawing Pictures Using Pstricks}
+
+\begin{tabular}{@{}cc@{}}
+\begin{onlyenv}<1>
+\begin{minipage}{62mm}
+\begin{verbatim}
+\usepackage{pstricks}
+\usepackage{pst-node}
+\usepackage{pst-text}
+\usepackage{etex}
+\usepackage{pst-rel-points}
+%%
+\psset{unit=1mm}
+\begin{pspicture}(0,0)(50,70)
+\psframe(0,0)(50,70)
+\end{pspicture}
+\end{verbatim}
+\end{minipage}
+\end{onlyenv}%
+\begin{onlyenv}<2>
+\begin{minipage}{62mm}
+\begin{verbatim}
+\usepackage{pstricks}
+\usepackage{pst-node}
+\usepackage{pst-text}
+\usepackage{etex}
+\usepackage{pst-rel-points}
+%%
+\psset{unit=1mm}
+\begin{pspicture}(0,0)(50,70)
+\psframe(0,0)(50,70)
+\putnode{n1}{origin}{25}{50}{%
+     \pscirclebox{1}}
+\putnode{n2}{n1}{-10}{-10}{%
+     \psframebox{2}} 
+\ncline{->}{n1}{n2}
+\end{pspicture}
+\end{verbatim}
+\end{minipage}
+\end{onlyenv}%
+\begin{onlyenv}<3>
+\begin{minipage}{62mm}
+\begin{verbatim}
+\usepackage{pstricks}
+\usepackage{pst-node}
+\usepackage{pst-text}
+\usepackage{etex}
+\usepackage{pst-rel-points}
+%%
+\psset{unit=1mm}
+\begin{pspicture}(0,0)(50,70)
+\psframe(0,0)(50,70)
+\putnode{n1}{origin}{25}{50}{%
+     \pscirclebox{1}}
+\putnode{n2}{n1}{-10}{-10}{%
+     \psframebox{2}} 
+\ncline[nodesepA=-1]{->}{n1}{n2}
+\end{pspicture}
+\end{verbatim}
+\end{minipage}
+\end{onlyenv}%
+\begin{onlyenv}<4>
+\begin{minipage}{62mm}
+\begin{verbatim}
+\usepackage{pstricks}
+\usepackage{pst-node}
+\usepackage{pst-text}
+\usepackage{etex}
+\usepackage{pst-rel-points}
+%%
+\psset{unit=1mm}
+\begin{pspicture}(0,0)(50,70)
+\psframe(0,0)(50,70)
+\putnode{n1}{origin}{25}{50}{%
+     \pscirclebox{1}}
+\putnode{n2}{n1}{-10}{-10}{%
+     \psframebox{2}} 
+\ncline[nodesepA=-1]{->}{n1}{n2}
+\nccurve[angleA=270,angleB=90]%
+      {->}{n2}{n1}
+\end{pspicture}
+\end{verbatim}
+\end{minipage}
+\end{onlyenv}%
+\begin{onlyenv}<5>
+\begin{minipage}{62mm}
+\begin{verbatim}
+\usepackage{pstricks}
+\usepackage{pst-node}
+\usepackage{pst-text}
+\usepackage{etex}
+\usepackage{pst-rel-points}
+%%
+\psset{unit=1mm}
+\begin{pspicture}(0,0)(50,70)
+\psframe(0,0)(50,70)
+\putnode{n1}{origin}{25}{50}{%
+     \pscirclebox{1}}
+\putnode{n2}{n1}{-10}{-10}{%
+     \psframebox{2}} 
+\ncline[nodesepA=-1]{->}{n1}{n2}
+\nccurve[angleA=300,angleB=60]%
+      {->}{n2}{n1}
+\end{pspicture}
+\end{verbatim}
+\end{minipage}
+\end{onlyenv}%
+\begin{onlyenv}<6>
+\begin{minipage}{62mm}
+\begin{verbatim}
+\usepackage{pstricks}
+\usepackage{pst-node}
+\usepackage{pst-text}
+\usepackage{etex}
+\usepackage{pst-rel-points}
+%%
+\psset{unit=1mm}
+\begin{pspicture}(0,0)(50,70)
+\psframe(0,0)(50,70)
+\putnode{n1}{origin}{25}{50}{%
+     \pscirclebox{1}}
+\putnode{n2}{n1}{-10}{-10}{%
+     \psframebox{2}} 
+\ncline[nodesepA=-1]{->}{n1}{n2}
+\nccurve[angleA=300,angleB=60,%
+      ncurv=2]{->}{n2}{n1}
+\end{pspicture}
+\end{verbatim}
+\end{minipage}
+\end{onlyenv}%
+\begin{onlyenv}<7>
+\begin{minipage}{62mm}
+\begin{verbatim}
+\usepackage{pstricks}
+\usepackage{pst-node}
+\usepackage{pst-text}
+\usepackage{etex}
+\usepackage{pst-rel-points}
+%%
+\psset{unit=1mm}
+\begin{pspicture}(0,0)(50,70)
+\psframe(0,0)(50,70)
+\putnode{n1}{origin}{25}{50}{%
+     \pscirclebox{1}}
+\putnode{n2}{n1}{0}{-10}{%
+     \psframebox{2}} 
+\ncline[nodesepA=-1]{->}{n1}{n2}
+\nccurve[angleA=300,angleB=60,%
+     ncurv=2]{->}{n2}{n1}
+\end{pspicture}
+\end{verbatim}
+\end{minipage}
+\end{onlyenv}%
+&
+\begin{tabular}{@{}c@{}}
+\begin{pspicture}(0,0)(50,70)
+\psframe(0,0)(50,70)
+\onslide<2-6>{
+\putnode{n1}{origin}{25}{50}{%
+     \pscirclebox{1}}
+\putnode{n2}{n1}{-10}{-10}{%
+     \psframebox{2}}
+}
+\onslide<2>{
+\ncline{->}{n1}{n2}
+}
+\onslide<3-6>{
+\ncline[nodesepA=-1]{->}{n1}{n2}
+}
+\onslide<4>{
+\nccurve[angleA=270,angleB=90]%
+	{->}{n2}{n1}
+}
+\onslide<5>{
+\nccurve[angleA=300,angleB=60]%
+	{->}{n2}{n1}
+}
+\onslide<6>{
+\nccurve[angleA=300,angleB=60,%
+	ncurv=2]{->}{n2}{n1}
+}
+\onslide<7>{
+\putnode{n1}{origin}{25}{50}{%
+     \pscirclebox{1}}
+\putnode{n2}{n1}{0}{-10}{%
+     \psframebox{2}}
+\ncline{->}{n1}{n2}
+\nccurve[angleA=300,angleB=60,%
+	ncurv=2]{->}{n2}{n1}
+}
+\end{pspicture}
+\end{tabular}
+\end{tabular}
+\end{frame}
+
+\newcommand{\sphere}{%
+\psset{unit=1mm,arrowsize=6pt}
+\begin{pspicture}(0,5)(120,110)
+\rput(30,60){\pscirclebox*[fillcolor=blue]{\rule{5.7cm}{0cm}}}
+\rput{-15}(30,60){\psovalbox*[fillcolor=lightblue]{\rule{4cm}{0cm}\rule{0cm}{1cm}}}
+\psline{->}(30,60)(65,51)
+\psline{->}(30,60)(30,95)
+\psline{->}(30,60)(5,35)
+\end{pspicture}}
+
+
+\begin{frame}[fragile]
+\frametitle{More Pictures Using Pstricks}
+
+\begin{tabular}{@{}c|c@{}}
+\begin{minipage}{77mm}
+\begin{verbatim}
+\newcommand{\sphere}{%
+\psset{unit=1mm,arrowsize=6pt}
+\begin{pspicture}(0,5)(120,110)
+\rput(30,60){%
+    \pscirclebox*[fillcolor=blue]{%
+    \rule{5.7cm}{0cm}}}
+\rput{-15}(30,60){%
+    \psovalbox*[fillcolor=lightblue]{%
+    \rule{4cm}{0cm}\rule{0cm}{1cm}}}
+\psline{->}(30,60)(70,50)
+\psline{->}(30,60)(30,100)
+\psline{->}(30,60)(0,30)
+\end{pspicture}}
+%%
+
+\scalebox{.6}{\sphere}
+\end{verbatim}
+\end{minipage}
+&
+\begin{tabular}{@{}c@{}} 
+\scalebox{.6}{\sphere}
+\end{tabular}
+\end{tabular}
+\end{frame}
+
+\frame{
+\frametitle{A Demo of Using Pstricks}
+
+\begin{itemize}
+\item {\tt \textbackslash ncline}, {\tt \textbackslash nccurve} {\tt \textbackslash ncloop}
+\item Optional arguments
+\item Minipage and footnote
+\item {\tt\textbackslash rnode} and connectors between text and picture
+\end{itemize}
+}
+
+\part{Using Beamer for Preparing Slides}
+\frame[plain]{\partpage}
+
+\begin{frame}[fragile]
+\frametitle{An Overview of Beamer}
+
+\begin{itemize}
+\item Presentations based on frames consistings of slides
+\item In beamer terminology, ``slides'' refers to overlays appearing in a frame
+
+      Facilitate animations
+\item Convenient overlay mechanism
+\item Same source can be compiled to presentations, handouts, documents
+\item Multiple themes or templates
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Instantiating a Template}
+
+\begin{itemize}
+\item {\tt \textbackslash title[short title]\{long title\}}
+\item {\tt \textbackslash subtitle[short subtitle]\{long subtitle\}}
+\item {\tt \textbackslash author[short name]\{long name\}}
+\item {\tt \textbackslash date[short date]\{long date\}}
+\item {\tt \textbackslash institution[short name]\{long name\}}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Template Instantiation for this Presentation}
+
+\begin{verbatim}
+\usetheme{iitb}
+
+%%
+
+\title[LaTeX]{Preparing Slides Using \\ LaTeX, Pstricks, 
+              and Beamer}
+\author[Aug 2010]{Uday Khedker}
+\institute[Uday Khedker, IIT Bombay]{Department of 
+              Computer Science and Engineering, \\ 
+              Indian Institute of Technology, Bombay}
+\titlegraphic{\scalebox{.4}{\includegraphics{IITBlogo.epsi}}}
+\date[Prabhat Workshop]{August 2010}
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Frames}
+
+\begin{itemize}
+\item A separately numbered page in the presentation
+\item All overlays (i.e. slides) in a frame share the same page number
+\item Created by the following options
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+&
+\\
+\begin{minipage}{45mm}
+\tt
+%\begin{semiverbatim}
+\textbackslash begin\{frame\}[options]
+
+\textbackslash frametitle\{Title\}
+
+\bigskip
+
+\%\% LaTeX commands for 
+
+\%\% frame contents
+
+\bigskip
+
+\textbackslash end\{frame\}
+\end{minipage}
+&
+\begin{minipage}{45mm}
+\begin{verbatim}
+\frame{
+\frametitle{Title}
+
+%% LaTeX commands for
+%% frame contents
+
+}
+\end{verbatim}
+\end{minipage}
+\\
+&
+\\ \hline
+\end{tabular}
+\end{center}
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Useful Options for Frames}
+
+\begin{itemize}
+\item {\tt [plain]}. No header, title or footer
+\item {\tt [fragile]}. Required for using {\tt verbatim} environment
+\end{itemize}
+\end{frame}
+
+\frame{
+\frametitle{Using {\tt verbatim} Environment}
+
+\begin{itemize}
+\item Use option {\tt [fragile]} for a frame
+\item Use {\tt minipage}
+
+\bigskip
+
+\tt 
+\begin{tabular}{|l|}
+\hline 
+\textbackslash begin\{minipage\}\{width\} 
+\\
+\textbackslash begin\{verbatim\} 
+\\ \\
+\textbackslash end\{verbatim\}
+\\
+\textbackslash end\{minipage\}
+ \\ \hline
+\end{tabular}
+\end{itemize}
+
+}
+
+\frame{
+\frametitle{Using {\tt semiverbatim} Environment}
+
+\begin{itemize}
+\item LaTeX commands can be used but text is typeset like verbatim
+
+\item Example uses: changing color or size of text
+
+\end{itemize}
+}
+
+\frame{
+\frametitle{Creating Overlays}
+
+\begin{itemize}
+\item Common Commands: 
+{\tt\textbackslash only},
+{\tt\textbackslash onslide},
+{\tt\textbackslash pause}
+
+\item Common Environments:
+{\tt\textbackslash begin\{onlyenv\} \ldots \textbackslash end\{onlyenv\}}
+
+\item Common Range Specification: 
+	\begin{itemize}
+\item From n to m: {\tt <n-m>}
+\item From n onwards: {\tt <n->}
+\item After the previous one  and until m: {\tt <+-m>}
+\item From beginning until m: {\tt <-m>}
+\item On m, n, and i: {\tt <m,n,i>}
+	\end{itemize}
+\end{itemize}
+
+}
+
+
+\begin{frame}[fragile]
+\frametitle{Overlays in a List}
+
+\begin{itemize}
+\item<+-> Explicitly ordered
+\begin{verbatim}
+\begin{itemize}
+\item<1-> This is the first item
+\item<2-> This is the second item 
+\item<3-> And this is the third
+\end{itemize}
+\end{verbatim}
+
+\item<+-> Implicitly ordered
+
+\begin{verbatim}
+\begin{itemize}
+\item<+-> This is the first item
+\item<+-> This is the second item 
+\item<+-> And this is the third
+\end{itemize}
+\end{verbatim}
+
+\end{itemize}
+\end{frame}
+
+\frame{
+\frametitle{More on Overlays and Themes}
+
+\begin{itemize}
+\item Excellent examples at
+
+	%{\tt http://www.uncg.edu/cmp/reu/presentations/Charles Batts - Beamer Tutorial.pdf}
+
+	\htmladdnormallink{\begin{minipage}{100mm}http://www.uncg.edu/cmp/reu/presentations/Charles Batts - Beamer Tutorial.pdf\end{minipage}}%
+{http://www.uncg.edu/cmp/reu/presentations/Charles Batts - Beamer Tutorial.pdf}
+
+(include spaces in the file name and replace new line by a space)
+\end{itemize}
+}
+
+\begin{frame}[fragile]
+\frametitle{Converting Slides to Handouts}
+
+\begin{itemize}
+\item Step 1: Modify the range specifications
+
+\begin{itemize}
+\item If slides that appear between 1 to 5 should appear on handout slide 2 
+	
+{\tt <1-5|handout:2>}
+
+\item Slide 6 to 8 should appear only in the presentation but not in the handout
+
+
+{\tt <6-8|handout:0>}
+
+\item Slide 9 onwards should appear only in the handout but not in the presentation
+
+
+{\tt <0|handout:9->}
+\end{itemize}
+
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Converting Slides to Handouts}
+
+\begin{itemize}
+\item Step 2: Add handout declarations in the preamble
+
+{\small
+\begin{verbatim}
+\usepackage{pgf,pgfarrows,pgfnodes,pgfautomata,pgfheaps}
+\mode<handout>
+{
+  \usepackage{pgfpages}	
+  \pgfpagesuselayout{4 on 1}[a4paper,landscape,%
+         border shrink=5mm]
+}
+\end{verbatim}
+}
+
+\item Step 3: Change {\tt \textbackslash documentclass[dvips]{beamer}}
+	to
+{\tt \textbackslash documentclass[handout]{beamer}}
+\end{itemize}
+
+\end{frame}
+
+
+
+\part{Some Sample Slides}
+\frame[plain]{\partpage}
+
+\newcommand{\Small}[1]{\scalebox{.9}{#1}}
+\newcommand{\parseTree}{%
+\psset{unit=1mm}
+\begin{pspicture}(0,0)(38,31)
+{\psset{linestyle=none}
+\putnode{ptr}{origin}{18}{30}{\psframebox{\Small{AsgnStmnt}}}
+\putnode{lhs}{ptr}{-15}{-8}{\psframebox{\Small{Lhs}}}
+\putnode{asgn}{ptr}{-5}{-9}{\psframebox{=}}
+\putnode{expr}{ptr}{7}{-8}{\psframebox{\Small{E}}}
+\putnode{se}{ptr}{15}{-7}{\psframebox{;}}
+%
+\putnode{e1}{expr}{-12}{-7}{\psframebox{\Small{E}}}
+\putnode{qm}{expr}{-6}{-8}{\psframebox{?}}
+\putnode{e2}{expr}{0}{-7}{\psframebox{\Small{E}}}
+\putnode{co}{expr}{5}{-8}{\psframebox{:}}
+\putnode{e3}{expr}{10}{-7}{\psframebox{\Small{E}}}
+%
+\putnode{be1}{e1}{-9}{-7}{\psframebox{\Small{E}}}
+\putnode{relop}{e1}{-2}{-8}{\psframebox{$<$}}
+\putnode{be2}{e1}{5}{-7}{\psframebox{\Small{E}}}
+%
+\putnode{name1}{lhs}{0}{-8}{\psframebox{\Small{name}}}
+\putnode{name2}{e2}{0}{-8}{\psframebox{\Small{name}}}
+\putnode{name3}{e3}{0}{-8}{\psframebox{\Small{name}}}
+%
+\putnode{namebe1}{be1}{0}{-8}{\psframebox{\Small{name}}}
+\putnode{num}{be2}{0}{-8}{\psframebox{\Small{num}}}
+}
+%
+\psset{linewidth=.15}
+\ncline{ptr}{lhs}
+\ncline{ptr}{asgn}
+\ncline{ptr}{expr}
+\ncline{ptr}{se}
+%
+\ncline{lhs}{name1}
+\ncline{expr}{e1}
+\ncline{expr}{e2}
+\ncline{expr}{e3}
+\ncline{expr}{qm}
+\ncline{expr}{co}
+%
+\ncline{e1}{be1}
+\ncline{e1}{be2}
+\ncline{e1}{relop}
+%
+\ncline{e2}{name2}
+\ncline{e3}{name3}
+%
+\ncline{be1}{namebe1}
+\ncline{be2}{num}
+\end{pspicture}
+}
+
+\newcommand{\asTree}{%
+\psset{unit=1mm}
+\begin{pspicture}(0,0)(36,30)
+\renewcommand{\arraystretch}{.8}
+{
+\psset{framesep=0,linestyle=none}
+\putnode{asgn}{origin}{13}{29}{\psframebox{=}}
+\putnode{name1}{asgn}{-8}{-6}{\psframebox{\Small{\begin{tabular}{@{}c@{}}
+	name\\
+	(a,int)
+	\end{tabular}}}}
+\putnode{conditional}{asgn}{8}{-6}{\psframebox{\begin{tabular}{@{}c@{}}
+	?: \Small{(int)}
+	\end{tabular}}}
+%
+\putnode{relop}{conditional}{-11}{-10}{\psframebox{\begin{tabular}{@{}c@{}}
+	$<$ \\ \Small{(bool)}
+	\end{tabular}}}
+\putnode{name2}{conditional}{0}{-10}{\psframebox{\Small{\begin{tabular}{@{}c@{}}
+	name\\
+	(b,int)
+	\end{tabular}}}}
+\putnode{name3}{conditional}{11}{-10}{\psframebox{\Small{\begin{tabular}{@{}c@{}}
+	name\\
+	(c,int)
+	\end{tabular}}}}
+%
+\putnode{namebe1}{relop}{-6}{-11}{\psframebox{\Small{\begin{tabular}{@{}c@{}}
+	name\\
+	(b,int)
+	\end{tabular}}}}
+\putnode{num}{relop}{6}{-11}{\psframebox{\Small{\begin{tabular}{@{}c@{}}
+	num\\
+	(10,int)
+	\end{tabular}}}}
+}
+%%%
+\psset{linewidth=.15}
+\ncline{asgn}{name1}
+\ncline{asgn}{conditional}
+%%%
+\ncline{conditional}{name2}
+\ncline[nodesepB=-1]{conditional}{relop}
+\ncline{conditional}{name3}
+\ncline{relop}{namebe1}
+\ncline{relop}{num}
+\end{pspicture}
+}
+
+\newcommand{\treeA}{%
+\psset{unit=1mm,linewidth=.15}
+\begin{pspicture}(0,1)(23,14)
+%\psframe(0,0)(23,16)
+\renewcommand{\arraystretch}{.8}
+\putnode{asgn}{origin}{7}{12}{\psframebox[linestyle=none,framesep=.5]{=}}
+\putnode{lhs}{asgn}{-6}{-6}{\psframebox[linestyle=none,framesep=.5]{$T_0$}}
+\putnode{rhs}{asgn}{7}{-5}{\psframebox[linestyle=none,framesep=.5]{$<$}}
+\putnode{opd1}{rhs}{-6}{-5}{\psframebox[linestyle=none,framesep=.5]{b}}
+\putnode{opd2}{rhs}{6}{-5}{\psframebox[linestyle=none,framesep=.5]{10}}
+\ncline{asgn}{lhs}
+\ncline{asgn}{rhs}
+\ncline{rhs}{opd1}
+\ncline{rhs}{opd2}
+\end{pspicture}
+}
+
+\newcommand{\treeB}{%
+\psset{unit=1mm,linewidth=.15}
+\begin{pspicture}(0,1)(18,16)
+%\psframe(0,0)(18,16)
+\renewcommand{\arraystretch}{.8}
+\putnode{asgn}{origin}{15}{14}{\psframebox[linestyle=none,framesep=.5]{\Small{IfGoto}}}
+\putnode{lhs}{asgn}{-8}{-6}{\psframebox[linestyle=none,framesep=.5]{\Small{Not}}}
+\putnode{rhs}{asgn}{7}{-6}{\psframebox[linestyle=none,framesep=.5]{\Small{L0:}}}
+\putnode{opd1}{lhs}{-5}{-6}{\psframebox[linestyle=none,framesep=.5]{$T_0$}}
+\ncline{asgn}{lhs}
+\ncline{asgn}{rhs}
+\ncline{lhs}{opd1}
+\end{pspicture}
+}
+
+\newcommand{\treeC}{%
+\psset{unit=1mm,linewidth=.15}
+\begin{pspicture}(0,1)(18,9)
+%\psframe(0,0)(18,10)
+\renewcommand{\arraystretch}{.8}
+\putnode{asgn}{origin}{9}{7}{\psframebox[linestyle=none,framesep=.5]{=}}
+\putnode{lhs}{asgn}{-8}{-5}{\psframebox[linestyle=none,framesep=.5]{$T_1$}}
+\putnode{rhs}{asgn}{7}{-5}{\psframebox[linestyle=none,framesep=.5]{b}}
+\ncline{asgn}{lhs}
+\ncline{asgn}{rhs}
+\end{pspicture}
+}
+
+\newcommand{\treeD}{%
+\psset{unit=1mm,linewidth=.15}
+\begin{pspicture}(0,1)(18,10)
+%\psframe(0,0)(18,10)
+\renewcommand{\arraystretch}{.8}
+\putnode{asgn}{origin}{9}{8}{\psframebox[linestyle=none,framesep=.5]{\Small{Goto}}}
+\putnode{lhs}{asgn}{0}{-6}{\psframebox[linestyle=none,framesep=.5]{\Small{L1:}}}
+\ncline{asgn}{lhs}
+\end{pspicture}
+}
+
+\newcommand{\treeE}{\Small{L0:}}
+
+\newcommand{\treeF}{%
+\psset{unit=1mm,linewidth=.15}
+\begin{pspicture}(0,1)(18,9)
+%\psframe(0,0)(18,10)
+\renewcommand{\arraystretch}{.8}
+\putnode{asgn}{origin}{12}{7}{\psframebox[linestyle=none,framesep=.5]{=}}
+\putnode{lhs}{asgn}{-8}{-5}{\psframebox[linestyle=none,framesep=.5]{$T_1$}}
+\putnode{rhs}{asgn}{7}{-5}{\psframebox[linestyle=none,framesep=.5]{c}}
+\ncline{asgn}{lhs}
+\ncline{asgn}{rhs}
+\putnode{z}{asgn}{-11}{0}{\Small{L0:}}
+\end{pspicture}
+}
+
+\newcommand{\treeG}{\Small{L1:}}
+
+\newcommand{\treeH}{%
+\psset{unit=1mm,linewidth=.15}
+\begin{pspicture}(0,1)(18,9)
+%\psframe(0,0)(18,10)
+\renewcommand{\arraystretch}{.8}
+\putnode{asgn}{origin}{12}{7}{\psframebox[linestyle=none,framesep=.5]{=}}
+\putnode{rhs}{asgn}{8}{-5}{\psframebox[linestyle=none,framesep=.5]{$T_1$}}
+\putnode{lhs}{asgn}{-7}{-5}{\psframebox[linestyle=none,framesep=.5]{a}}
+\ncline{asgn}{lhs}
+\ncline{asgn}{rhs}
+\putnode{z}{asgn}{-11}{0}{\Small{L1:}}
+\end{pspicture}
+}
+
+\newcommand{\treeList}{%
+\renewcommand{\arraystretch}{.8}%
+\scalebox{.95}{%
+\begin{tabular}{l}
+%\hline
+\treeA \\ \hline
+\treeB \\ \hline
+\treeC \\ \hline
+\treeD \\ \hline
+%\treeE \\ \hline
+\treeF \\ \hline
+%\treeG \\ \hline
+\treeH %\\ \hline
+\end{tabular}%
+}%
+}
+\newcommand{\insn}{%
+\scalebox{.9}{%
+\begin{tabular}{@{\ }l@{\ }l@{\ }}
+&     $T_0 \; \leftarrow $ b \\
+&     $T_0 \; \leftarrow \; T_0 \; < $ 10 \\
+&     $T_0 \; \leftarrow \;  ! \; T_0$ \\
+&    if $T_0 \; > \; 0$ goto L0: \\
+&     $T_1 \; \leftarrow $ b \\
+&          goto L1: \\
+L0: &     $T_1 \; \leftarrow $ c \\
+L1:  & a $\leftarrow \; T_1 $ \\
+\end{tabular}
+}
+}
+
+\newcommand{\asm}{%
+\scalebox{.9}{%
+\begin{tabular}{l@{\ }l@{\ }l}
+   &  lw   & \$t0, 4(\$fp)     \\
+   &  slti & \$t0, \$t0, 10    \\
+   &  not  & \$t0, \$t0        \\
+   &  bgtz & \$t0, L0:         \\
+   &  lw   & \$t0, 4(\$fp)     \\
+   &  b    & L1:		      \\
+L0:&  lw   & \$t0, 8(\$fp)     \\
+L1:&  sw   & 0(\$fp), \$t0     \\
+\end{tabular}
+}
+}
+\begin{frame}[fragile]
+\frametitle{Translation Sequence in Our Compiler: Parsing}
+\small
+
+\psset{unit=1mm,linewidth=.15}
+
+\begin{onlyenv}<1-|handout:1>
+\begin{pspicture}(0,0)(120,80)
+\putnode{in}{origin}{9}{77}{\psframebox[fillstyle=solid,fillcolor=pink,
+		linestyle=none]{\scalebox{.9}{\tt a=b<10?b:c;}}}
+\putnode{z}{in}{0}{-4}{\Small{Input}}
+\onslide<2->{
+\putnode{pt}{in}{41}{-14}{\psframebox[fillstyle=solid,fillcolor=yellow,
+		linestyle=none]{\parseTree}}
+\putnode{z}{pt}{0}{-19}{\Small{Parse Tree}}
+\nccurve[angleB=180,offsetB=14,doubleline=true,linewidth=.3]{->}{in}{pt}
+\putnode{issues}{pt}{0}{-40}{%
+\psshadowbox{
+\begin{minipage}{75mm}
+Issues: 
+\begin{itemize}
+\item<2-> Grammar rules, terminals, non-terminals
+\item<2-> Order of application of grammar rules
+
+	eg. is it {\tt (a = b<10?)} followed by 
+	{\tt (b:c)}?
+\item<2-> Values of terminal symbols
+
+	eg. string ``10'' vs. integer number 10.
+\end{itemize}
+\end{minipage}
+}
+}
+}
+\end{pspicture}
+\end{onlyenv}
+\only<0|handout:2>{\notesPage}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Translation Sequence in Our Compiler: Semantic Analysis}
+
+\small
+\psset{unit=1mm,linewidth=.15}
+
+\begin{onlyenv}<1-|handout:1>
+\begin{pspicture}(0,0)(120,80)
+\putnode{in}{origin}{9}{77}{\psframebox[fillstyle=solid,fillcolor=pink,
+		linestyle=none]{\scalebox{.9}{\tt a=b<10?b:c;}}}
+\putnode{z}{in}{0}{-4}{\Small{Input}}
+\putnode{pt}{in}{41}{-14}{\psframebox[fillstyle=solid,fillcolor=yellow,
+		linestyle=none]{\parseTree}}
+\putnode{z}{pt}{0}{-19}{\Small{Parse Tree}}
+\nccurve[angleB=180,offsetB=14,doubleline=true,linewidth=.3]{->}{in}{pt}
+\onslide<2->{
+\putnode{ast}{pt}{50}{0}{\psframebox[fillstyle=solid,fillcolor=lightblue,
+		linestyle=none]{\asTree}}
+\putnode{z}{ast}{0}{-19}{\Small{Abstract Syntax Tree}}
+\putnode{x}{z}{0}{-3}{\Small{(with attributes)}}
+\ncline[doubleline=true,linewidth=.3]{->}{pt}{ast}
+\putnode{issues}{pt}{0}{-45}{%
+\psshadowbox{
+\begin{minipage}{90mm}
+Issues: 
+\begin{itemize}
+\item<2-> Symbol tables
+
+	Have variables been declared? What are their types? 
+	What is their scope?
+
+\item<2-> Type consistency of operators and operands
+
+        The result of computing {\tt b<10?} is bool and not int
+
+\end{itemize}
+\end{minipage}
+}
+}
+}
+\end{pspicture}
+\end{onlyenv}
+\only<0|handout:2>{\notesPage}
+
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Translation Sequence in Our Compiler: IR Generation}
+\small
+
+\psset{unit=1mm,linewidth=.15}
+
+\begin{onlyenv}<1-|handout:1>
+\begin{pspicture}(0,0)(120,80)
+\putnode{in}{origin}{9}{77}{\psframebox[fillstyle=solid,fillcolor=pink,
+		linestyle=none]{\scalebox{.9}{\tt a=b<10?b:c;}}}
+\putnode{z}{in}{0}{-4}{\Small{Input}}
+\putnode{pt}{in}{41}{-14}{\psframebox[fillstyle=solid,fillcolor=yellow,
+		linestyle=none]{\parseTree}}
+\putnode{z}{pt}{0}{-19}{\Small{Parse Tree}}
+\nccurve[angleB=180,offsetB=14,doubleline=true,linewidth=.3]{->}{in}{pt}
+\putnode{ast}{pt}{50}{0}{\psframebox[fillstyle=solid,fillcolor=lightblue,
+		linestyle=none]{\asTree}}
+\putnode{z}{ast}{0}{-19}{\Small{Abstract Syntax Tree}}
+\putnode{x}{z}{0}{-3}{\Small{(with attributes)}}
+\ncline[doubleline=true,linewidth=.3]{->}{pt}{ast}
+\onslide<2->{
+\putnode{tl}{in}{2}{-44}{\psframebox[fillstyle=solid,fillcolor=lightgray,
+		framesep=0,linestyle=none]{\treeList}}
+\ncangle[doubleline=true,angleA=270,angleB=0,linewidth=.3,offsetB=-6,
+		linearc=2,offsetA=-16]{->}{ast}{tl}
+\putnode{z}{tl}{0}{35}{\Small{Tree List}}
+\putnode{issues}{tl}{60}{-15}{%
+\psshadowbox{
+\begin{minipage}{76mm}
+Issues: 
+\begin{itemize}
+\item<2-> Convert to maximal trees which can be implemented without
+	  altering control flow
+
+	Simplifies instruction selection and scheduling, register allocation etc.
+
+\item<2-> Linearise control flow by flattening nested control constructs
+
+\end{itemize}
+\end{minipage}
+}
+}
+}
+\end{pspicture}
+\end{onlyenv}
+\only<0|handout:2>{\notesPage}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Translation Sequence in Our Compiler: Instruction Selection}
+\small
+
+\psset{unit=1mm,linewidth=.15}
+
+\begin{onlyenv}<1-|handout:1>
+\begin{pspicture}(0,0)(120,80)
+\putnode{in}{origin}{9}{77}{\psframebox[fillstyle=solid,fillcolor=pink,
+		linestyle=none]{\scalebox{.9}{\tt a=b<10?b:c;}}}
+\putnode{z}{in}{0}{-4}{\Small{Input}}
+\putnode{pt}{in}{41}{-14}{\psframebox[fillstyle=solid,fillcolor=yellow,
+		linestyle=none]{\parseTree}}
+\putnode{z}{pt}{0}{-19}{\Small{Parse Tree}}
+\nccurve[angleB=180,offsetB=14,doubleline=true,linewidth=.3]{->}{in}{pt}
+\putnode{ast}{pt}{50}{0}{\psframebox[fillstyle=solid,fillcolor=lightblue,
+		linestyle=none]{\asTree}}
+\putnode{z}{ast}{0}{-19}{\Small{Abstract Syntax Tree}}
+\putnode{x}{z}{0}{-3}{\Small{(with attributes)}}
+\ncline[doubleline=true,linewidth=.3]{->}{pt}{ast}
+\putnode{tl}{in}{2}{-44}{\psframebox[fillstyle=solid,fillcolor=lightgray,
+		framesep=0,linestyle=none]{\treeList}}
+\ncangle[doubleline=true,angleA=270,angleB=0,linewidth=.3,offsetB=-6,
+		linearc=2,offsetA=-16]{->}{ast}{tl}
+\putnode{z}{tl}{0}{35}{\Small{Tree List}}
+\onslide<2->{
+\putnode{il}{tl}{39}{-17}{\psframebox[fillstyle=solid,fillcolor=lpink,framesep=0,
+		linestyle=none]{\insn}}
+\nccurve[angleB=180,offsetA=-17,doubleline=true,linewidth=.3]{->}{tl}{il}
+\putnode{z}{il}{0}{18}{\Small{Instruction List}}
+\putnode{issues}{il}{47}{5}{%
+\psshadowbox{
+\begin{minipage}{46mm}
+Issues: 
+\begin{itemize}
+\item<2-> Cover trees with as few machine instructions
+	  as possible
+
+\item<2-> Use temporaries and local registers
+
+
+\end{itemize}
+\end{minipage}
+}
+}
+}
+\end{pspicture}
+\end{onlyenv}
+\only<0|handout:2>{\notesPage}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Translation Sequence in Our Compiler: Emitting Instructions}
+\small
+
+\psset{unit=1mm,linewidth=.15}
+
+\begin{onlyenv}<1-|handout:1>
+\begin{pspicture}(0,0)(120,80)
+\putnode{in}{origin}{9}{77}{\psframebox[fillstyle=solid,fillcolor=pink,
+		linestyle=none]{\scalebox{.9}{\tt a=b<10?b:c;}}}
+\putnode{z}{in}{0}{-4}{\Small{Input}}
+\putnode{pt}{in}{41}{-14}{\psframebox[fillstyle=solid,fillcolor=yellow,
+		linestyle=none]{\parseTree}}
+\putnode{z}{pt}{0}{-19}{\Small{Parse Tree}}
+\nccurve[angleB=180,offsetB=14,doubleline=true,linewidth=.3]{->}{in}{pt}
+\putnode{ast}{pt}{50}{0}{\psframebox[fillstyle=solid,fillcolor=lightblue,
+		linestyle=none]{\asTree}}
+\putnode{z}{ast}{0}{-19}{\Small{Abstract Syntax Tree}}
+\putnode{x}{z}{0}{-3}{\Small{(with attributes)}}
+\ncline[doubleline=true,linewidth=.3]{->}{pt}{ast}
+\putnode{tl}{in}{2}{-44}{\psframebox[fillstyle=solid,fillcolor=lightgray,
+		framesep=0,linestyle=none]{\treeList}}
+\ncangle[doubleline=true,angleA=270,angleB=0,linewidth=.3,offsetB=-6,
+		linearc=2,offsetA=-16]{->}{ast}{tl}
+\putnode{z}{tl}{0}{35}{\Small{Tree List}}
+\putnode{il}{tl}{39}{-17}{\psframebox[fillstyle=solid,fillcolor=lpink,framesep=0,
+		linestyle=none]{\insn}}
+\nccurve[angleB=180,offsetA=-17,doubleline=true,linewidth=.3]{->}{tl}{il}
+\putnode{z}{il}{0}{18}{\Small{Instruction List}}
+\onslide<2->{
+\putnode{a}{il}{44}{0}{\psframebox[fillstyle=solid,fillcolor=pink,framesep=0,
+		linestyle=none]{\asm}}
+\ncline[doubleline=true,linewidth=.3]{->}{il}{a}
+\putnode{z}{a}{0}{18}{\Small{Assembly Code}}
+}
+\onslide<2->{
+\putnode{issues}{a}{-37}{38}{%
+\psshadowbox[fillstyle=solid,fillcolor=white]{
+\begin{minipage}{46mm}
+Issues: 
+\begin{itemize}
+\item<2-> Offsets of variables in the stack frame
+
+\item<2-> Actual register numbers and assembly mnemonics
+
+\item<2> Code to construct and discard activation records
+\end{itemize}
+\end{minipage}
+}
+}
+}
+\end{pspicture}
+\end{onlyenv}
+\only<0|handout:2>{\notesPage}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{i386 Assembly }
+
+\begin{onlyenv}<presentation:1-|handout:1,3,5,7>
+{\blue\bf Dump file: {\tt test.s}}
+
+\begin{tabular}{ll}
+\begin{minipage}{68mm}
+\begin{semiverbatim}
+{\only<2|handout:3>{\red}      jmp  .L2
+.L3:
+      addl  \$1, -4(\%ebp)
+.L2:
+      cmpl  \$7, -4(\%ebp)
+      jle  .L3}
+{\only<3|handout:5>{\red}      cmpl  \$12, -4(\%ebp)
+      jg   .L6}
+{\only<4|handout:7>{\red}      movl  -8(\%ebp), \%edx
+      movl  -4(\%ebp), \%eax
+      leal  (%edx,%eax), %eax
+      addl  -12(\%ebp), \%eax
+      movl  \%eax, -4(\%ebp)}
+.L6:
+\end{semiverbatim}
+\end{minipage}
+&
+\psset{unit=1mm}
+\begin{pspicture}(0,0)(20,38)
+\onslide<1-|handout:1,3,5,7>{
+\psframe[linestyle=none,fillcolor=lightblue,fillstyle=solid](-7,-20)(32,32)
+\putnode[l]{n1}{origin}{-2}{7}{\begin{minipage}{35mm}
+\begin{semiverbatim}
+{\only<2|handout:3>{\red}while (a <= 7)
+
+\{ 
+
+\ \ \ \    a = a+1;
+
+\}} 
+
+{\only<3|handout:5>{\red} if (a <= 12)}
+
+{\only<4|handout:7>{\red} \{
+
+\ \ \ \  a = a+b+c;  
+
+\}}
+\end{semiverbatim}%
+\end{minipage}}
+}
+\end{pspicture}
+\end{tabular}
+
+\end{onlyenv}
+\only<presentation:0|handout:2,4,6,8>{
+\notesPage
+}
+\end{frame}
+
+
+\part{Conclusions}
+\frame[plain]{\partpage}
+
+
+\frame{
+\frametitle{Conclusions}
+
+\begin{itemize}
+\item LaTeX + Pstricks + Beamer: Magic Potion for Making Presentations
+\item We have barely scratched the surface
+\item Initial learning seems difficult but the payoffs are immense
+\item Excellent guides and tutorials are available
+\item All sources and slides of this presentation will be soon uploaded on
+
+	\htmladdnormallink{http://www.cse.iitb.ac.in/$\tilde{\ }$uday/latex/}{http://www.cse.iitb.ac.in/~uday/latex/}
+\end{itemize}
+}
+
+\frame{
+\frametitle{Last But Not the Least}
+
+\begin{center}
+\scalebox{1.75}{\blue\Large\itshape Thank You!}
+\end{center}
+
+}
+
+\end{document}
+http://www.math.umbc.edu/~rouben/beamer/
+http://heather.cs.ucdavis.edu/~matloff/beamer.html
+Indian tex users group
