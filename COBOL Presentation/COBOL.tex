@@ -140,7 +140,7 @@
 		\item
 			COBOL steht für COmmon Business-Oriented Language.
 		\item
-			Entwickelt für betriebswirtschaftliche Programme (im Gegensatz zum Fokus auf technische-wissenschaftliche Anwendungen vorheriger Programmiersprachen).
+			entwickelt für betriebswirtschaftliche Programme (im Gegensatz zum technische-wissenschaftliche Anwendungen Fokus anderer Sprachen).
 	\end{itemize}
 \end{frame}
 
@@ -149,31 +149,34 @@
 \begin{frame}{Anfänge}
 	\begin{itemize}
 		\item
-			Entwickelt durch eine Arbeitsgruppe in der 2. H\"alfte von 1959.
+			entwickelt durch Arbeitsgruppe in der 2. H\"alfte von 1959
 		\item
-			Federführend war Grace Hopper, die Erfinderin des ersten Compilers (A-0) und Mitentwicklerin einiger fr\"uher Computer (zB Harvard Mark I+II, UNIVAC I)
+			federführend war Grace Hopper, die Erfinderin des ersten Compilers (A-0) und Mitentwicklerin einiger fr\"uher Computer (zB Harvard Mark I+II, UNIVAC I)
 		\item
-			Entwicklung basierte auf Hoppers FLOW-MATIC und IBMs COMTRAN (``Business-Version'' von FORTRAN)
+			basierte auf Hoppers FLOW-MATIC und IBMs COMTRAN (``Business-Version'' von FORTRAN)
 		\item
-		Offizielle Festlegung des Standards (bekannt als COBOL 60) am 03. Januar 1960, danach individuelle (inkompatibele) Erweiterungen durch verschiedene Firmen und Universit\"aten
+		offizielle Festlegung des Standards (COBOL 60) am 03. Januar 1960, danach individuelle (inkompatibele) Erweiterungen von verschiedenen Firmen
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Versionen des Standards}
 	\begin{itemize}
 		\item
-			ANS COBOL 1968: ANSI Standard um die verschiedenen \"Anderungen nach 1959 wieder zu einer kompatiblen Basis zusammenzufassen.
+			ANS COBOL 1968: ANSI Standard um die verschiedenen \"Anderungen nach 1959 zu einer kompatiblen Basis zusammenzufassen
 		\item
-			COBOL 1974: dieser zweite ANSI Standard f\"uhrte neue Features ein wie Datei-Organisation, das Report Modul und das Segmentierungsmodul, schaffte allerdings auch Features ab wie das \texttt{NOTE} Statement. Inkompatibel zu vorherigen Standards
+			COBOL 1974: 2. ANSI Standard, neue Features ein wie Datei-Organisation, Report Modul, Segmentierungsmodul; Abschaffung von Features ab wie das \texttt{NOTE} Statement, inkompatibel zu vorherigen Standards
 		\item
-			COBOL 1985: dieser \"uberarbeitete ANSI Standard f\"uhrte G\"ultigkeitsbereich Terminatoren wie \texttt{END-IF} ein. Ebenso Features wie geschachtelte Unterprogramme, die Statements \texttt{CONTINUE}, \texttt{EVALUATE} und \texttt{INITIALIZE}, die Operatoren >= und <= sowie Referenz Modifikation
+			COBOL 1985: \"uberarbeiteter ANSI Standard, Einf\"uhrung G\"ultigkeitsbereich-Terminatoren wie \texttt{END-IF}, Features wie geschachtelte Unterprogramme, die Statements \texttt{CONTINUE}, \texttt{EVALUATE}, \texttt{INITIALIZE}, die Operatoren >= und <=, Referenz Modifikation
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Versionen des Standards (2)}
 		\begin{itemize}
 			\item
-				COBOL 2002 und objekorientiertes COBOL: Anfang der 90er wurde entschieden das dem n\"achste Standard von COBOL Objektorientierung hinzugef\"ugt werden sollte.
+				viele in den 80ern und davor geschriebenen Programme verwendeten Records mit Datumsfeldern mit fester 2 stelliger Jahreszahl
+			\item
+				=> um 1999/2000 rum Massensterben unter COBOL Anwendungen wegen Y2K-Bug; Programme mussten entweder grundlegend überarbeitet oder ganz ersetzt werden 
+%				COBOL 2002 und objekorientiertes COBOL: Anfang der 90er wurde entschieden das dem n\"achste Standard von COBOL Objektorientierung hinzugef\"ugt werden sollte
 		\end{itemize}
 \end{frame}
 
@@ -195,13 +198,11 @@
 \begin{frame}{heutiger Einsatz}
 	\begin{itemize}
 		\item
-			COBOL hatte auf die meisten sp\"ateren Programmiersprachen nicht viel Einfluss da der Fokus auf relativ simple Algorithmen und hohes I/O-Volumen akademisch uninteressant waren
+			COBOL hatte wenig Einfluss auf sp\"atere Programmiersprachen da Fokus auf relativ simple Algorithmen und hohes I/O-Volumen akademisch uninteressant
 		\item
-			die meisten heute noch verwendeten COBOL Anwendungen sind Teil \"uber Jahrzehnte gewachsene Systeme, komplette Neuentwicklungen finden nur noch selten in COBOL statt
-%		\item
-%			aber immer noch verwendet in vielen großen Rechnungssystemen, da die Neuentwicklung dieser Systeme sehr teuer wäre, u.a. wegen oft fehlender Dokumentation
+			die meisten noch verwendeten COBOL Anwendungen sind Teil von jahrzehntelang gewachsene Systeme, komplette Neuentwicklungen finden nur noch selten in COBOL statt
 		\item
-			es wird gesch\"atzt das 2009 \"uber 40 Milliarden Zeilen COBOL Code in Industrieprogrammen verwendet wird, mit einer Wachstumsrate von 4 Milliarden Zeilen Code pro Jahr
+			2009 wurden geschätzt \"uber 40 Milliarden Zeilen COBOL Code in Industrieprogrammen verwendet, Wachstumsrate 4 Milliarden Zeilen Code pro Jahr
 		\item
 			SAPs Programmiersprache ABAP wurde sehr stark von COBOL beeinflusst
 	\end{itemize}
@@ -244,16 +245,18 @@
 \begin{frame}{Entwicklungsumgebung}
 	\begin{itemize}
 		\item
-			da COBOL auf Firmen ausgerichtet ist und aus der Zeit stammt in der jeder Computerhersteller sein eigenes (meistens inkompatibles) Betriebssystem hatte gibt/gab es von jedem dieser Hersteller (zB IBM, Siemens, Unisys, HP) eigene Compiler, teilweise f\"ur verschiedene Standards
+			viele Computer/Betriebsystemhersteller (zB IBM, Siemens, Unisys, HP) entwickelten (und vertreiben teilweise auch heute noch) eigene Compiler, teilweise mit eigenen Erweiterungen des Standards
 		\item
 			es gibt verschiedene Codegeneratoren die COBOL-Programme oder Teile davon generieren um die Entwicklungsarbeit zu erleichtern
+		\item
+			Plugins für viele gängige IDEs, z.B. cobolclipse für Eclipse
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Entwicklungsumgebung (2)}
 	\begin{itemize}			
 		\item
-			die verbreiteste (kommerzielle) IDE für COBOL ist Visual COBOL von der Firma Micro Focus; diese besitzt moderne Features wie Generierung von Java Byte-Code aus COBOL Code, .NET Unterstützung und Webservices
+			verbreiteste (kommerzielle) COBOL IDE ist Visual COBOL von Micro Focus; besitzt moderne Features wie Generierung von Java Byte-Code, .NET Unterstützung und Webservices
 		\includegraphics[width=9cm]{VisualCOBOL2}
 	\end{itemize}
 \end{frame}
@@ -265,7 +268,9 @@
 		\item
 			COBOL wurde so entworfen das der Code relativ lesbarem Englisch entspricht (z.B. \texttt{ADD b TO c GIVING a} f\"ur a = b + c)
 		\item
-			
+			importieren von Programmteilen als sgn. Copybooks mit dem Befehl \texttt{COPY}, vergleichbar mit \texttt{\#include} in C u.\"A.
+		\item
+			Standard Kontrollstrukturen wie 
 	\end{itemize}
 \end{frame}
 
@@ -285,11 +290,15 @@
 \begin{frame}{Aufteilung eines Programms}
 	\begin{itemize}
 		\item
-			jedes Programm besteht aus 4 Teilen um hardwareabh\"angigen Code von unabh\"angigem und Algorithmen Beschreibungen von Daten Beschreibungen zu trennen
+			jedes Programm besteht aus 4 Teilen zum trennen von:
+			\begin{itemize}
+			 \item hardwareabh\"angigem und unabh\"angigem Code
+			 \item Algorithmen Beschreibungen und Daten Beschreibungen
+			 \end{itemize}
 		\item
-			\texttt{IDENTIFICATION}: beginnt jedes Programm und dient dazu das Programm und den Autor zu benennen und um andere Kommentare als Dokumentation anzugeben
+			\texttt{IDENTIFICATION}: beginnt jedes Programm, benennt Programm und den Autor (Autor optional), für andere Kommentare als Dokumentation
 		\item
-			\texttt{ENVIRONMENT}: beinhaltet die maschinenabhängigen Programmspezifikationen wie zB die Verbindungen zwischen dem Programm und externen Daten
+			\texttt{ENVIRONMENT}: beinhaltet maschinenabhängige Programmspezifikationen wie zB Verbindungen zwischen dem Programm und externen Daten
 		\item
 			\texttt{PROCEDURE}: beinhaltet die Algorithmen
 		\item
