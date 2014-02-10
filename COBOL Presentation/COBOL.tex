@@ -198,8 +198,8 @@
 			COBOL hatte auf die meisten sp\"ateren Programmiersprachen nicht viel Einfluss da der Fokus auf relativ simple Algorithmen und hohes I/O-Volumen akademisch uninteressant waren
 		\item
 			die meisten heute noch verwendeten COBOL Anwendungen sind Teil \"uber Jahrzehnte gewachsene Systeme, komplette Neuentwicklungen finden nur noch selten in COBOL statt
-		\item
-			aber immer noch verwendet in vielen großen Rechnungssystemen, da die Neuentwicklung dieser Systeme sehr teuer wäre, u.a. wegen oft fehlender Dokumentation
+%		\item
+%			aber immer noch verwendet in vielen großen Rechnungssystemen, da die Neuentwicklung dieser Systeme sehr teuer wäre, u.a. wegen oft fehlender Dokumentation
 		\item
 			es wird gesch\"atzt das 2009 \"uber 40 Milliarden Zeilen COBOL Code in Industrieprogrammen verwendet wird, mit einer Wachstumsrate von 4 Milliarden Zeilen Code pro Jahr
 		\item
@@ -218,6 +218,8 @@
 		\item
 			durch mehrstufiges Design der einzelnen Programmsprachen-Module lassen sich COBOL-Programme auf sehr eingeschr\"ankter Hardware mit geringen Anpassungen ausf\"uhren
 		\item
+			der ANSI-Standard wird durchschnittlich alle 10-15 Jahre an neue Gegebenheiten angepasst, z.B. kam 2002 Unterstüzung für Objektorientierung dazu
+		\item
 			es gibt einen kostenlosen quelloffenen Compiler namens GNU COBOL (ehemals OpenCOBOL) für POSIX-kompatible Betriebssysteme
 	\end{itemize}
 \end{frame}
@@ -230,6 +232,8 @@
 		    bis COBOL 74 gab es keine M\"oglichkeit Programme zu strukturieren, zB waren alle Variablen global
 		\item
 			aufgrund vieler Eigenentwicklungen von Firmen und anderen Gruppen gibt es viele verschiedene Standards von COBOL die teilweise inkompatibel zueinander sind
+		\item
+			da die Syntax sich an geschriebenem Englisch orientiert werden COBOL Programme schnell recht langwierig zu schreiben
 	\end{itemize}
 \end{frame}
 
@@ -246,6 +250,14 @@
 	\end{itemize}
 \end{frame}
 
+\begin{frame}{Entwicklungsumgebung (2)}
+	\begin{itemize}			
+		\item
+			die verbreiteste (kommerzielle) IDE für COBOL ist Visual COBOL von der Firma Micro Focus; diese besitzt moderne Features wie Generierung von Java Byte-Code aus COBOL Code, .NET Unterstützung und Webservices
+		\includegraphics[width=9cm]{VisualCOBOL2}
+	\end{itemize}
+\end{frame}
+
 \subsection{Sprachspezifikation}
 
 \begin{frame}{Sprachspezifikation}
@@ -253,12 +265,27 @@
 		\item
 			COBOL wurde so entworfen das der Code relativ lesbarem Englisch entspricht (z.B. \texttt{ADD b TO c GIVING a} f\"ur a = b + c)
 		\item
-			jedes Programm besteht aus 4 Teilen um hardwareabh\"angigen Code von unabh\"angigem und Algorithmen Beschreibungen von Daten Beschreibungen zu trennen
+			
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Datenstrukturen}
+	\begin{itemize}
+		\item
+			Grunddatenstruktur ist ein sogenannter Record, ein multidimensionales heterogenes Array
+		\item
+			Records k\"onnen mit gew\"ohnlicheren homogenen Arrays gemischt verwendet werden, ein Array kann also Inhalt eines Records sein und umgekehrt
+		\item
+			über die \texttt{PICTURE} Klausel kann man den Inhalt (inklusive Feldgrößen) von Records exakt definieren
+		\item
+			Variablen müssen bei der Deklaration typisiert werden, allerdings hat man Dank Records und der \texttt{PICTURE} Klausel vergleichsweise viel Freiheit dabei
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Aufteilung eines Programms}
 	\begin{itemize}
+		\item
+			jedes Programm besteht aus 4 Teilen um hardwareabh\"angigen Code von unabh\"angigem und Algorithmen Beschreibungen von Daten Beschreibungen zu trennen
 		\item
 			\texttt{IDENTIFICATION}: beginnt jedes Programm und dient dazu das Programm und den Autor zu benennen und um andere Kommentare als Dokumentation anzugeben
 		\item
@@ -267,6 +294,13 @@
 			\texttt{PROCEDURE}: beinhaltet die Algorithmen
 		\item
 			\texttt{DATA}: beinhaltet die Daten Beschreibungen
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Sequenzkontrolle}
+	\begin{itemize}
+		\item
+			
 	\end{itemize}
 \end{frame}
 
