@@ -224,5 +224,7 @@ pip-log.txt
 *.out
 *.snm
 *.synctex.gz
+*.synctex.gz(busy)^
 *.toc
 *.nav
+*.vrb
