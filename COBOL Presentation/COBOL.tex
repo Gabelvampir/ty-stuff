@@ -94,16 +94,16 @@
 \subsection{Namensbedeutung}
 
 \begin{frame}{Namensbedeutung}
-\begin{columns}[b]
-	\begin{column}{5cm}
-		\includegraphics{CobolCogLogo}\\ 
-		\includegraphics[width=5cm]{GnuCOBOLLogoTransparent}
-	\end{column}
-	\begin{column}{5cm}
-		\includegraphics[width=2.5cm]{DOSMSCOBOL45}
-		\includegraphics[width=2.5cm]{StandardCobol}
-	\end{column}
-\end{columns}
+	\begin{columns}[c]
+		\begin{column}{4cm}
+			\includegraphics[width=4cm]{CobolCogLogo}\\ 
+			\includegraphics[width=4cm]{GnuCOBOLLogoTransparent}
+		\end{column}
+		\begin{column}{6cm}
+			\includegraphics[width=2.5cm]{DOSMSCOBOL45} \hspace{1.5pt}
+			\includegraphics[width=2.5cm]{StandardCobol}
+		\end{column}
+	\end{columns}
 	\begin{itemize}
 		\item
 			COBOL steht für COmmon Business-Oriented Language.
@@ -134,7 +134,7 @@
 		\item
 			COBOL 1974: 2. ANSI Standard, neue Features wie Datei-Organisation, Report Modul; Einführung der Möglichkeit ein Programm in Funktionen zu unterteilen; Abschaffung von Features, deshalb inkompatibel zu vorherigen Standards
 		\item
-			COBOL 1985: \"uberarbeiteter ANSI Standard, Einf\"uhrung G\"ultigkeitsbereich-Terminatoren (z.B. \texttt{END-IF}), neue Features geschachtelte Unterprogramme, neue Statements, die Operatoren >= und <=; ersetzen von selbstmodifizierenden Code über \texttt{ALTER} durch Referenz Modifikation
+			COBOL 1985: \"uberarbeiteter ANSI Standard, Einf\"uhrung G\"ultigkeitsbereich-Terminatoren (z.B. \texttt{END-IF}), neue Features geschachtelte Unterprogramme, neue Statements, die Operatoren >= und <=; ersetzen von selbstmodifizierenden Code (\texttt{ALTER}) durch Referenz Modifikation
 	\end{itemize}
 \end{frame}
 
@@ -237,11 +237,17 @@
 \begin{frame}{Sprachspezifikation}
 	\begin{itemize}
 		\item
-			COBOL wurde so entworfen das der Code relativ lesbarem Englisch entspricht (z.B. \texttt{ADD b TO c GIVING a} f\"ur a = b + c)
+			COBOL wurde so entworfen das der Code relativ lesbarem Englisch entspricht z.B. ``\texttt{ADD b TO c GIVING a}'' (a = b + c)
 		\item
-			importieren von Programmteilen als sgn. Copybooks mit dem Befehl \texttt{COPY}, vergleichbar mit \texttt{\#include} in C u.\"A.
+			importieren von Programmteilen als sgn. Copybooks mit \texttt{COPY} Befehl, vergleichbar mit \texttt{\#include} in C u.\"A.
 		\item
-			Standard Kontrollstrukturen: \texttt{IF...THEN...ELSE}, 
+			Kontrollstrukturen: 
+			\begin{itemize}
+				\item \texttt{IF...THEN...ELSE}: funktioniert wie erwartet
+				\item \texttt{EVALUATE}: vergleichbar mit CASE/Switch (eingeführt mit COBOL 85)
+				\item \texttt{PERFORM}: vergleichbar mit for-Schleifen
+				\item \texttt{GO TO}: Standard GOTO, optional mit Bedingung
+			\end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -263,8 +269,8 @@
 		\item
 			jedes Programm besteht aus 4 Teilen zum trennen von:
 			\begin{itemize}
-			 \item hardwareabh\"angigem und unabh\"angigem Code
-			 \item Algorithmen Beschreibungen und Daten Beschreibungen
+			 	\item hardwareabh\"angigem und unabh\"angigem Code
+				\item Algorithmen Beschreibungen und Daten Beschreibungen
 			 \end{itemize}
 		\item
 			\texttt{IDENTIFICATION}: beginnt jedes Programm, benennt Programm und den Autor (Autor optional), für andere Kommentare als Dokumentation
