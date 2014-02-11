@@ -11,7 +11,7 @@
 % The content is otherwise unchanged from the original distributed with the beamer package.
 
 \documentclass[handout]{beamer}
-
+%\documentclass{beamer}
 
 % Copyright 2004 by Till Tantau <tantau@users.sourceforge.net>.
 %
@@ -44,43 +44,52 @@
 	\setbeamertemplate{navigation symbols}{}%remove navigation symbols
 }
 
-%stuff for code environment
-\usepackage{listings}
-\usepackage{color}
-
-\definecolor{dkgreen}{rgb}{0,0.6,0}
-\definecolor{gray}{rgb}{0.5,0.5,0.5}
-\definecolor{mauve}{rgb}{0.58,0,0.82}
-
-\lstset{frame=tb,
-  language=Cobol,
-  aboveskip=3mm,
-  belowskip=3mm,
-  showstringspaces=false,
-  columns=flexible,
-  basicstyle={\small\ttfamily},
-  numbers=none,
-  numberstyle=\tiny\color{gray},
-  keywordstyle=\color{blue},
-  commentstyle=\color{dkgreen},
-  stringstyle=\color{mauve},
-  breaklines=true,
-  breakatwhitespace=true
-  tabsize=3
-}
-
-
 \usepackage[ngerman]{babel}
-% or whatever
-
 \usepackage[utf8x]{inputenc}
-% or whatever
+
+\usepackage{graphicx}
 
 %\usepackage{times}
 \usepackage{lmodern}
 \usepackage[T1]{fontenc}
 % Or whatever. Note that the encoding and the font should match. If T1
 % does not look nice, try deleting the line with the fontenc.
+
+%code listing stuff
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+%  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,                    % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{mygreen},       % keyword style
+  language=Cobol,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=none,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\ttfamily\color{red},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
 
 
 \title[COBOL-\"Uberblick]   % (optional, use only with long paper titles)
@@ -114,10 +123,9 @@
   \titlepage
 \end{frame}
 
+
 \section{Übersicht}
-
 \subsection{Namensbedeutung}
-
 \begin{frame}{Namensbedeutung}
 	\begin{columns}[c]
 		\begin{column}{4cm}
@@ -129,7 +137,7 @@
 			\includegraphics[width=2.5cm]{StandardCobol}
 		\end{column}
 	\end{columns}
-	\begin{itemize}
+	\begin{itemize}[<+->]
 		\item
 			COBOL steht für COmmon Business-Oriented Language.
 		\item
@@ -137,10 +145,10 @@
 	\end{itemize}
 \end{frame}
 
-\subsection{Historische Entwicklung}
 
+\subsection{Historische Entwicklung}
 \begin{frame}{Anfänge}
-	\begin{itemize}
+	\begin{itemize}[<+->]
 		\item
 			entwickelt durch Arbeitsgruppe in der 2. H\"alfte von 1959
 		\item
@@ -153,7 +161,7 @@
 \end{frame}
 
 \begin{frame}{Versionen des Standards}
-	\begin{itemize}
+	\begin{itemize}[<+->]
 		\item
 			ANS COBOL 1968: ANSI Standard um die verschiedenen \"Anderungen nach 1959 zu einer neuen Basis zusammenzufassen
 		\item
@@ -164,11 +172,11 @@
 \end{frame}
 
 \begin{frame}{Entwicklung um und nach 2000}
-	\begin{itemize}
+	\begin{itemize}[<+->]
 		\item
-			viele in den 80ern und davor geschriebenen Programme verwendeten Records mit Datumsfeldern mit fester 2 stelliger Jahreszahl
+			viele Programm aus den 80ern und davor verwendeten in Records Datumsfelder mit fester 2-stelliger Jahreszahl
 		\item
-			=> um 1999/2000 Massensterben unter COBOL Anwendungen wegen Y2K-Bug; Programme mussten entweder grundlegend überarbeitet oder ganz ersetzt werden 
+			=> um 1999/2000 Massensterben unter COBOL Anwendungen wegen Y2K-Bug; Programme mussten entweder grundlegend überarbeitet oder ganz ersetzt werden
 		\item
 			COBOL 2002: neue zeitgemäße Features wie Locale/Unicode-Unterstützung, Objektorientierung zur Einbindung in Java und .NET-Frameworks, Fließkommaunterstützung
 		\item
@@ -176,23 +184,22 @@
 		\end{itemize}
 \end{frame}
 
+
 \section{Einsatz}
-
 \subsection{Einsatzgebiete}
-
 \begin{frame}{Einsatzgebiete}
-	\begin{itemize}
+	\begin{itemize}[<+->]
 		\item
 			Haupteinsatzgebiet ist betriebswirtschaftliche Datenverarbeitung
 		\item
-			bei klassischer Aufteilung nach Benutzerschnittstelle, Verabreitungsteil und Datenhaltungsteil stellt COBOL normal den Verarbeitungsteil eine EDV-Programms
+			bei klassischer Aufteilung nach Benutzerschnittstelle, Verabreitungsteil und Datenhaltungsteil stellt COBOL den Verarbeitungsteil eines EDV-Programms
 	\end{itemize}
 \end{frame}
 
-\subsection{heutiger Einsatz}
 
+\subsection{heutiger Einsatz}
 \begin{frame}{heutiger Einsatz}
-	\begin{itemize}
+	\begin{itemize}[<+->]
 		\item
 			COBOL hatte wenig Einfluss auf sp\"atere Programmiersprachen da Fokus auf relativ simple Algorithmen und hohes I/O-Volumen akademisch uninteressant (Ausnahme: SAPs Programmiersprache ABAP)
 		\item
@@ -204,12 +211,11 @@
 	\end{itemize}
 \end{frame}
 
+
 \section{Vor- und Nachteile}
-
 \subsection{Vorteile}
-
 \begin{frame}{Vorteile}
-	\begin{itemize}
+	\begin{itemize}[<+->]
 		\item
 			entworfen um Programme auf verschiedener Hardware laufen zu lassen ohne große Ver\"anderung des Codes
 		\item
@@ -221,10 +227,10 @@
 	\end{itemize}
 \end{frame}
 
-\subsection{Nachteile}
 
+\subsection{Nachteile}
 \begin{frame}{Nachteile}
-	\begin{itemize}
+	\begin{itemize}[<+->]
 		\item
 		    bis COBOL 74 gab es keine M\"oglichkeit Programme zu strukturieren, zB waren alle Variablen global
 		\item
@@ -234,14 +240,13 @@
 	\end{itemize}
 \end{frame}
 
+
 \section{Praxis}
-
 \subsection{Entwicklungsumgebung}
-
 \begin{frame}{Entwicklungsumgebung}
-	\begin{itemize}
+	\begin{itemize}[<+->]
 		\item
-			viele Computer/Betriebsystemhersteller (zB IBM, Siemens, Unisys, HP) entwickelten (und vertreiben teilweise auch heute noch) eigene Compiler, teilweise mit eigenen Erweiterungen des Standards
+			viele Computer/Betriebsystemhersteller (zB IBM, Siemens, Unisys, HP) entwickelten (und vertreiben teilweise immer noch) eigene Compiler, oft mit eigenen Erweiterungen des Standards
 		\item
 			es gibt verschiedene Codegeneratoren die COBOL-Programme oder Teile davon generieren um die Entwicklungsarbeit zu erleichtern
 		\item
@@ -250,24 +255,24 @@
 \end{frame}
 
 \begin{frame}{Entwicklungsumgebung (2)}
-	\begin{itemize}			
+	\begin{itemize}
 		\item
 			verbreiteste (kommerzielle) COBOL IDE ist Visual COBOL von Micro Focus; besitzt moderne Features wie Generierung von Java Byte-Code, .NET Unterstützung und Webservices
 		\includegraphics[width=9cm]{VisualCOBOL2}
 	\end{itemize}
 \end{frame}
 
-\subsection{Sprachspezifikation}
 
+\subsection{Sprachspezifikation}
 \begin{frame}{Sprachspezifikation}
-	\begin{itemize}
+	\begin{itemize}[<+->]
 		\item
 			COBOL wurde so entworfen das der Code relativ lesbarem Englisch entspricht z.B. ``\texttt{ADD b TO c GIVING a}'' (a = b + c)
 		\item
 			importieren von Programmteilen als sgn. Copybooks mit \texttt{COPY} Befehl, vergleichbar mit \texttt{\#include} in C u.\"A.
 		\item
-			Kontrollstrukturen: 
-			\begin{itemize}
+			Kontrollstrukturen:
+			\begin{itemize}[<+->]
 				\item \texttt{IF...THEN...ELSE}: funktioniert wie erwartet
 				\item \texttt{EVALUATE}: vergleichbar mit CASE/Switch (eingeführt mit COBOL 85)
 				\item \texttt{PERFORM}: vergleichbar mit for-Schleifen
@@ -277,11 +282,11 @@
 \end{frame}
 
 \begin{frame}{Datenstrukturen}
-	\begin{itemize}
+	\begin{itemize}[<+->]
 		\item
 			Grunddatenstruktur ist ein sogenannter Record, ein multidimensionales heterogenes Array
 		\item
-			Records k\"onnen mit gew\"ohnlicheren homogenen Arrays gemischt verwendet werden, ein Array kann also Inhalt eines Records sein und umgekehrt
+			Records k\"onnen mit homogenen Arrays gemischt verwendet werden, ein Array kann also Inhalt eines Records sein und umgekehrt
 		\item
 			über die \texttt{PICTURE} Klausel kann man den Inhalt (inklusive Feldgrößen) von Records exakt definieren
 		\item
@@ -290,15 +295,15 @@
 \end{frame}
 
 \begin{frame}{Aufteilung eines Programms}
-	\begin{itemize}
+	\begin{itemize}[<+->]
 		\item
-			jedes Programm besteht aus 4 Teilen zum trennen von:
-			\begin{itemize}
+			jedes Programm besteht aus 4 Teilen (\texttt{DIVISION}) zur Trennung von:
+			\begin{itemize}[<+->]
 			 	\item hardwareabh\"angigem und unabh\"angigem Code
 				\item Algorithmen Beschreibungen und Daten Beschreibungen
 			 \end{itemize}
 		\item
-			\texttt{IDENTIFICATION}: beginnt jedes Programm, benennt Programm und den Autor (Autor optional), für andere Kommentare als Dokumentation
+			\texttt{IDENTIFICATION}: beginnt jedes Programm, benennt Programm und den Autor (Autor optional), sonstige Kommentare als Dokumentation
 		\item
 			\texttt{ENVIRONMENT}: beinhaltet maschinenabhängige Programmspezifikationen wie zB Verbindungen zwischen dem Programm und externen Daten
 		\item
@@ -308,28 +313,44 @@
 	\end{itemize}
 \end{frame}
 
-%https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings
-\begin{frame}{Code-Beispiele}
-	\begin{lstlisting}
-IDENTIFICATION DIVISION.
-PROGRAM-ID. HELLO-WORLD.
-PROCEDURE DIVISION.
-	DISPLAY Hello, world.
-	STOP RUN.
+\begin{frame}[fragile]{Code-Beispiele}
+	\noindent\begin{minipage}{.44\textwidth}
+		\begin{lstlisting}{Hello World}
+			IDENTIFICATION DIVISION.
+			PROGRAM-ID. HELLO-WORLD.
+			PROCEDURE DIVISION.
+			 DISPLAY "Hello, world."
+			 STOP RUN.
+		\end{lstlisting}
+	\end{minipage}\hfill\pause
+	\noindent\begin{minipage}{.53\textwidth}
+		\begin{lstlisting}{Schleifen}
+			PERFORM VARYING i FROM 0 BY 1
+			 UNTIL i >= 10
+			 ...
+			END-PERFORM
+		\end{lstlisting}
+	\end{minipage}\pause%\hfill
+%	\noindent\begin{minipage}{.52\textwidth}
+	\lstset{numbers=left}
+	\begin{lstlisting}{EVALUATE}
+		EVALUATE True
+		 WHEN Nenner > 0
+		  COMPUTE Zahl = Zaehler / Nenner
+		 WHEN Nenner < 0
+		  COMPUTE Zahl = Zaehler / Nenner * -1
+		 WHEN Other
+		  DISPLAY "Fehler"
+		  MOVE 0 TO Zaehler
+		End-Evaluate
 	\end{lstlisting}
+%	\end{minipage}
 \end{frame}
 
-%\begin{frame}{Sequenzkontrolle}
-%	\begin{itemize}
-%		\item
-%			
-%	\end{itemize}
-%\end{frame}
 
 \section{Quellen}
-
 \begin{frame}{Quellen}
-	\begin{itemize}
+	\begin{enumerate}
 		\item
 			\url{http://en.wikipedia.org/wiki/COBOL}
 		\item
@@ -337,7 +358,7 @@ PROCEDURE DIVISION.
 		\item
 			Terrence W. Pratt - Programming Languages: Design and Implementation (Prentice Hill 1975)
 		\item OpenCOBOL Programmers Guide
-	\end{itemize}
+	\end{enumerate}
 \end{frame}
 
 
