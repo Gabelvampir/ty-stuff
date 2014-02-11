@@ -113,29 +113,31 @@
 		\item
 			basierte auf Hoppers FLOW-MATIC und IBMs COMTRAN (``Business-Version'' von FORTRAN)
 		\item
-		offizielle Festlegung des Standards (COBOL 60) am 03. Januar 1960, danach individuelle (inkompatibele) Erweiterungen von verschiedenen Firmen
+		erster Standard (COBOL 60) festgelegt am 03. Januar 1960, danach individuelle (inkompatibele) Erweiterungen von verschiedenen Firmen
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Versionen des Standards}
 	\begin{itemize}
 		\item
-			ANS COBOL 1968: ANSI Standard um die verschiedenen \"Anderungen nach 1959 zu einer kompatiblen Basis zusammenzufassen
+			ANS COBOL 1968: ANSI Standard um die verschiedenen \"Anderungen nach 1959 zu einer neuen Basis zusammenzufassen
 		\item
-			COBOL 1974: 2. ANSI Standard, neue Features ein wie Datei-Organisation, Report Modul, Segmentierungsmodul; Abschaffung von Features ab wie das \texttt{NOTE} Statement, inkompatibel zu vorherigen Standards
+			COBOL 1974: 2. ANSI Standard, neue Features wie Datei-Organisation, Report Modul; Einführung der Möglichkeit ein Programm in Funktionen zu unterteilen; Abschaffung von Features, deshalb inkompatibel zu vorherigen Standards
 		\item
-			COBOL 1985: \"uberarbeiteter ANSI Standard, Einf\"uhrung G\"ultigkeitsbereich-Terminatoren wie \texttt{END-IF}, Features wie geschachtelte Unterprogramme, die Statements \texttt{CONTINUE}, \texttt{EVALUATE}, \texttt{INITIALIZE}, die Operatoren >= und <=, Referenz Modifikation
+			COBOL 1985: \"uberarbeiteter ANSI Standard, Einf\"uhrung G\"ultigkeitsbereich-Terminatoren (z.B. \texttt{END-IF}), neue Features geschachtelte Unterprogramme, neue Statements, die Operatoren >= und <=; ersetzen von selbstmodifizierenden Code über \texttt{ALTER} durch Referenz Modifikation
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Entwicklung um und nach 2000}
-		\begin{itemize}
-			\item
-				viele in den 80ern und davor geschriebenen Programme verwendeten Records mit Datumsfeldern mit fester 2 stelliger Jahreszahl
-			\item
-				=> um 1999/2000 rum Massensterben unter COBOL Anwendungen wegen Y2K-Bug; Programme mussten entweder grundlegend überarbeitet oder ganz ersetzt werden 
-			\item
-				COBOL 2002 und objekorientiertes COBOL: Anfang der 90er wurde entschieden das dem n\"achste Standard von COBOL Objektorientierung hinzugef\"ugt werden sollte
+	\begin{itemize}
+		\item
+			viele in den 80ern und davor geschriebenen Programme verwendeten Records mit Datumsfeldern mit fester 2 stelliger Jahreszahl
+		\item
+			=> um 1999/2000 Massensterben unter COBOL Anwendungen wegen Y2K-Bug; Programme mussten entweder grundlegend überarbeitet oder ganz ersetzt werden 
+		\item
+			COBOL 2002: neue zeitgemäße Features wie Locale/Unicode-Unterstützung, Objektorientierung zur Einbindung in Java und .NET-Frameworks, Fließkommaunterstützung
+		\item
+			Ausblick: COBOL 20XX Standard in Entwicklung (erwartet 2014-6), baut primär Objektorientierung aus und passt Datentypen an neue Standards an
 		\end{itemize}
 \end{frame}
 
@@ -157,13 +159,13 @@
 \begin{frame}{heutiger Einsatz}
 	\begin{itemize}
 		\item
-			COBOL hatte wenig Einfluss auf sp\"atere Programmiersprachen da Fokus auf relativ simple Algorithmen und hohes I/O-Volumen akademisch uninteressant
+			COBOL hatte wenig Einfluss auf sp\"atere Programmiersprachen da Fokus auf relativ simple Algorithmen und hohes I/O-Volumen akademisch uninteressant (Ausnahme: SAPs Programmiersprache ABAP)
 		\item
-			die meisten noch verwendeten COBOL Anwendungen sind Teil von jahrzehntelang gewachsene Systeme, komplette Neuentwicklungen finden nur noch selten in COBOL statt
+			geschätzte 70-80\% aller Geschäftstransaktion involvieren COBOL Programme, oft als Teil von jahrzehntelang gewachsenen Systemen
 		\item
-			2009 wurden geschätzt \"uber 40 Milliarden Zeilen COBOL Code in Industrieprogrammen verwendet, Wachstumsrate 4 Milliarden Zeilen Code pro Jahr
+			komplette Neuentwicklungen nur noch selten in COBOL
 		\item
-			SAPs Programmiersprache ABAP wurde sehr stark von COBOL beeinflusst
+			2009 geschätzt \"uber 40 Milliarden Zeilen COBOL Code in Industrieprogrammen verwendet, Wachstumsrate 4 Milliarden Zeilen Code pro Jahr
 	\end{itemize}
 \end{frame}
 
@@ -286,5 +288,3 @@
 
 
 \end{document}
-
-
