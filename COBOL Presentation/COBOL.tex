@@ -10,8 +10,8 @@
 % The header comments and encoding in this file were modified for inclusion with TeXworks.
 % The content is otherwise unchanged from the original distributed with the beamer package.
 
-\documentclass[handout]{beamer}
-%\documentclass{beamer}
+%\documentclass[handout]{beamer}
+\documentclass{beamer}
 
 % Copyright 2004 by Till Tantau <tantau@users.sourceforge.net>.
 %
@@ -317,6 +317,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{Code-Beispiele}
+	\onslide<1-1>
 	\noindent\begin{minipage}{.44\textwidth}
 		\begin{lstlisting}{Hello World}
 			IDENTIFICATION DIVISION.
@@ -326,6 +327,7 @@
 			 STOP RUN.
 		\end{lstlisting}
 	\end{minipage}\hfill\pause
+	\onslide<2-2>
 	\noindent\begin{minipage}{.53\textwidth}
 		\begin{lstlisting}{Schleifen}
 			PERFORM VARYING i FROM 0 BY 1
@@ -334,6 +336,7 @@
 			END-PERFORM
 		\end{lstlisting}
 	\end{minipage}\pause
+	\onslide<3-3>
 	\lstset{numbers=left,firstnumber=1}
 	\begin{lstlisting}{EVALUATE}
 		EVALUATE True
