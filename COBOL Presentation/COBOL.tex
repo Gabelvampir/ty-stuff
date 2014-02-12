@@ -49,6 +49,7 @@
 \usepackage[utf8x]{inputenc}
 
 \usepackage{graphicx}
+\usepackage{wrapfig}
 
 %\usepackage{times}
 \usepackage{lmodern}
@@ -142,7 +143,7 @@
 		\item
 			COBOL steht für COmmon Business-Oriented Language.
 		\item
-			entwickelt für betriebswirtschaftliche Programme (im Gegensatz zum technisch-wissenschaftlichen Fokus anderer Sprachen).
+			entwickelt für betriebswirtschaftliche Programme (im Gegensatz zum technisch-wissenschaftlichen Fokus anderer Sprachen)
 	\end{itemize}
 \end{frame}
 
@@ -153,11 +154,18 @@
 		\item
 			entwickelt durch Arbeitsgruppe in der 2. H\"alfte von 1959
 		\item
-			federführend Grace Hopper, Erfinderin des ersten Compilers (A-0) und Mitentwicklerin fr\"uher Computer (z.B. Harvard Mark I+II, UNIVAC I)
+  \begin{minipage}[t]{0.7\textwidth}
+%	\vspace{-5pt}
+	federführend war Grace Hopper, Erfinderin des ersten Compilers (A-0) und Mitentwicklerin fr\"uher Computer (z.B. Harvard Mark I+II, UNIVAC I)
+	\end{minipage}\hspace{2pt}
+	\begin{minipage}[t]{0.15\textwidth}
+	\vspace{-12pt}%\raggedright
+    \includegraphics[width=1.5cm]{Grace_Hopper_small}
+	\end{minipage}
 		\item
 			basierte auf Hoppers FLOW-MATIC, IBMs COMTRAN (``Business-Version'' von FORTRAN) und Honeywells FACT
 		\item
-		erster Standard (COBOL 60) festgelegt am 03. Januar 1960, danach individuelle (inkompatibele) Erweiterungen von verschiedenen Firmen
+		erster Standard (COBOL 60) festgelegt am 03. Januar 1960, danach individuelle (inkompatible) Erweiterungen von verschiedenen Firmen
 	\end{itemize}
 \end{frame}
 
@@ -189,6 +197,21 @@
 \section{Einsatz}
 \subsection{Einsatzgebiete}
 \begin{frame}{Einsatzgebiete}
+	\pause
+	\begin{columns}[t]
+		\begin{column}{4cm}
+			\includegraphics[width=4cm]{Deutsche-boerse}
+		\end{column}
+	\pause
+		\begin{column}{3cm}
+			\includegraphics[width=3cm]{sparda_logo}
+		\end{column}
+	\pause
+		\begin{column}{3.5cm}
+			\includegraphics[width=3.5cm]{california-state-flag1} 
+		\end{column}
+	\end{columns}
+	\pause
 	\begin{itemize}[<+->]
 		\item
 			Haupteinsatzgebiet ist betriebswirtschaftliche Datenverarbeitung
@@ -317,7 +340,7 @@
 \end{frame}
 
 \setbeamercovered{transparent}
-\def\beamertemplatetransparentcoveredmedium{\setbeamercovered{transparent=40}}
+\def\beamertemplatetransparentcoveredmedium{\setbeamercovered{transparent=20}}
 \beamertemplatetransparentcoveredmedium
 \begin{frame}[fragile]{Code-Beispiele}
 	\onslide<1-1>
@@ -335,7 +358,7 @@
 		\begin{lstlisting}{Schleifen}
 			PERFORM VARYING i FROM 0 BY 1
 			 UNTIL i >= 10
-			 ...
+			 DISPLAY i
 			END-PERFORM
 		\end{lstlisting}
 	\end{minipage}\pause
@@ -347,15 +370,15 @@
 		  COMPUTE Zahl = Zaehler / Nenner
 		 WHEN Nenner < 0
 		  COMPUTE Zahl = Zaehler / Nenner * -1
-		 WHEN Other
+		 WHEN OTHER
 		  DISPLAY "Fehler"
 		  MOVE 0 TO Zaehler
-		End-Evaluate
+		END-EVALUATE
 	\end{lstlisting}
 \end{frame}
 
 
-\section{Quellen}
+\section*{Quellen}
 \begin{frame}{Quellen}
 	\begin{enumerate}
 		\item COBOL Artikel englische Wikipedia
