@@ -4,6 +4,8 @@
 \documentclass[handout]{beamer}
 %\documentclass{beamer}
 
+\usepackage{pgfpages} %for {show notes on second screen option}
+
 \mode<presentation>
 {
   %\usetheme{Rochester}
@@ -21,6 +23,7 @@
   % or whatever (possibly just delete it)
 
 \setbeamertemplate{navigation symbols}{}%remove navigation symbols
+%\setbeameroption{show notes on second screen}
 }
 
 \usepackage[ngerman]{babel}
@@ -123,7 +126,7 @@ title=\lstname                   % show the filename of files included with \lst
 			entwickelt für betriebswirtschaftliche Programme (im Gegensatz zum technisch-wissenschaftlichen Fokus anderer Sprachen)
 	\end{itemize}
 \end{frame}
-
+\note{4 Grafiken plus 2}
 
 \subsection{Historische Entwicklung}
 \begin{frame}{Anfänge}
@@ -145,6 +148,7 @@ title=\lstname                   % show the filename of files included with \lst
 		erster Standard (COBOL 60) festgelegt am 03. Januar 1960, danach individuelle (inkompatible) Erweiterungen von verschiedenen Firmen
 	\end{itemize}
 \end{frame}
+\note{4}
 
 \begin{frame}{Versionen des Standards}
 	\begin{itemize}[<+->]
@@ -156,6 +160,7 @@ title=\lstname                   % show the filename of files included with \lst
 			COBOL 1985: \"uberarbeiteter ANSI Standard, Einf\"uhrung G\"ultigkeitsbereich-Terminatoren (z.B. \texttt{END-IF}), neue Features geschachtelte Unterprogramme, neue Statements, die Operatoren >= und <=; ersetzen von selbstmodifizierenden Code (\texttt{ALTER}) durch Referenz Modifikation
 	\end{itemize}
 \end{frame}
+\note{4}
 
 \begin{frame}{Entwicklung um und nach 2000}
 	\begin{itemize}[<+->]
@@ -169,7 +174,7 @@ title=\lstname                   % show the filename of files included with \lst
 			Ausblick: COBOL 20XX Standard in Entwicklung (erwartet 2014-6), baut primär Objektorientierung aus und passt Datentypen an neue Standards an
 		\end{itemize}
 \end{frame}
-
+\note{4}
 
 \section{Einsatz}
 \subsection{Einsatzgebiete}
@@ -196,7 +201,7 @@ title=\lstname                   % show the filename of files included with \lst
 			bei klassischer Aufteilung nach Benutzerschnittstelle, Verabreitungsteil und Datenhaltungsteil stellt COBOL den Verarbeitungsteil eines EDV-Programms
 	\end{itemize}
 \end{frame}
-
+\note{3 Grafiken plus 2}
 
 \subsection{heutiger Einsatz}
 \begin{frame}{heutiger Einsatz}
@@ -211,7 +216,17 @@ title=\lstname                   % show the filename of files included with \lst
 			2010 geschätzt \"uber 40 Milliarden Zeilen COBOL Code in Industrieprogrammen verwendet, Wachstumsrate 4 Milliarden Zeilen Code pro Jahr
 	\end{itemize}
 \end{frame}
-
+\note{4
+		\begin{itemize}
+			\item
+			
+			\item
+				täglich 200 mal mehr COBOL-Transaktion als Google Suchanfragen
+			\item
+				primär Erweiterungen alter Systeme
+			\item
+				1997 schätze Gartner noch 200 Mrd Zeilen bei 5 Mrd Wachstum
+		\end{itemize}}
 
 \section{Vor- und Nachteile}
 \subsection{Vorteile}
@@ -227,7 +242,7 @@ title=\lstname                   % show the filename of files included with \lst
 			es gibt einen kostenlosen quelloffenen Compiler namens GNU COBOL (ehemals OpenCOBOL) für POSIX-kompatible Betriebssysteme
 	\end{itemize}
 \end{frame}
-
+\note{4}
 
 \subsection{Nachteile}
 \begin{frame}{Nachteile}
@@ -242,7 +257,7 @@ title=\lstname                   % show the filename of files included with \lst
 			COBOL Programmierer sterben langsam aus
 	\end{itemize}
 \end{frame}
-
+\note{4}
 
 \section{Praxis}
 \subsection{Entwicklungsumgebung}
@@ -256,6 +271,7 @@ title=\lstname                   % show the filename of files included with \lst
 			Plugins für viele gängige IDEs, z.B. cobolclipse für Eclipse
 	\end{itemize}
 \end{frame}
+\note{3}
 
 \begin{frame}{Entwicklungsumgebung (2)}
 	\begin{itemize}
@@ -283,6 +299,7 @@ title=\lstname                   % show the filename of files included with \lst
 			\end{itemize}
 	\end{itemize}
 \end{frame}
+\note{3+4}
 
 \begin{frame}{Datenstrukturen}
 	\begin{itemize}[<+->]
@@ -296,6 +313,7 @@ title=\lstname                   % show the filename of files included with \lst
 			Variablen müssen bei der Deklaration typisiert werden, allerdings hat man Dank Records und der \texttt{PICTURE} Klausel vergleichsweise viel Freiheit dabei
 	\end{itemize}
 \end{frame}
+\note{4}
 
 \begin{frame}{Aufteilung eines Programms}
 	\begin{itemize}[<+->]
@@ -315,6 +333,7 @@ title=\lstname                   % show the filename of files included with \lst
 			\texttt{DATA}: beinhaltet die Daten Beschreibungen
 	\end{itemize}
 \end{frame}
+\note{1+2,4}
 
 \setbeamercovered{transparent}
 \def\beamertemplatetransparentcoveredmedium{\setbeamercovered{transparent=20}}
@@ -353,7 +372,7 @@ title=\lstname                   % show the filename of files included with \lst
 		END-EVALUATE
 	\end{lstlisting}
 \end{frame}
-
+\note{3 Listings}
 
 \section{}%section shall not be visible in navbar, hence empty name
 \begin{frame}{Quellen}
