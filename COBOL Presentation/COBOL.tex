@@ -1,30 +1,8 @@
 % !TEX TS-program = pdflatex
 % !TEX encoding = UTF-8 Unicode
 
-% This file is a template using the "beamer" package to create slides for a talk or presentation
-% - Giving a talk on some subject.
-% - The talk is between 15min and 45min long.
-% - Style is ornate.
-
-% MODIFIED by Jonathan Kew, 2008-07-06
-% The header comments and encoding in this file were modified for inclusion with TeXworks.
-% The content is otherwise unchanged from the original distributed with the beamer package.
-
 \documentclass[handout]{beamer}
 %\documentclass{beamer}
-
-% Copyright 2004 by Till Tantau <tantau@users.sourceforge.net>.
-%
-% In principle, this file can be redistributed and/or modified under
-% the terms of the GNU Public License, version 2.
-%
-% However, this file is supposed to be a template to be modified
-% for your own needs. For this reason, if you use this file as a
-% template and not specifically distribute it as part of a another
-% package/program, I grant the extra permission to freely copy and
-% modify this file as you see fit and even to delete this copyright
-% notice. 
-
 
 \mode<presentation>
 {
@@ -37,12 +15,12 @@
   %\usetheme{Copenhagen}
   %\usetheme{Berlin}
   %\usetheme{Warsaw}
-\useinnertheme{circles}
+\useinnertheme{circles} %bullet points look nice to me that way (especially numbered ones)
 
   %\setbeamercovered{transparent}
   % or whatever (possibly just delete it)
 
-	\setbeamertemplate{navigation symbols}{}%remove navigation symbols
+\setbeamertemplate{navigation symbols}{}%remove navigation symbols
 }
 
 \usepackage[ngerman]{babel}
@@ -60,37 +38,35 @@
 %code listing stuff
 \usepackage{listings}
 \usepackage{color}
-
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
 \definecolor{mymauve}{rgb}{0.58,0,0.82}
-
 \lstset{ %
-  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
-  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
-  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
-  breaklines=true,                 % sets automatic line breaking
+backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+breaklines=true,                 % sets automatic line breaking
 %  captionpos=b,                    % sets the caption-position to bottom
-  commentstyle=\color{mygreen},    % comment style
-  deletekeywords={...},            % if you want to delete keywords from the given language
-  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
-  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
-  frame=single,                    % adds a frame around the code
-  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
-  keywordstyle=\color{mygreen},       % keyword style
-  language=Cobol,                 % the language of the code
-  morekeywords={*,...},            % if you want to add more keywords to the set
-  numbers=none,                    % where to put the line-numbers; possible values are (none, left, right)
-  numbersep=5pt,                   % how far the line-numbers are from the code
-  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
-  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
-  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
-  showstringspaces=false,          % underline spaces within strings only
-  showtabs=false,                  % show tabs within strings adding particular underscores
-  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
-  stringstyle=\ttfamily\color{red},     % string literal style
-  tabsize=2,                       % sets default tabsize to 2 spaces
-  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+commentstyle=\color{mygreen},    % comment style
+deletekeywords={...},            % if you want to delete keywords from the given language
+escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+frame=single,                    % adds a frame around the code
+keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+keywordstyle=\color{mygreen},       % keyword style
+language=Cobol,                 % the language of the code
+morekeywords={*,...},            % if you want to add more keywords to the set
+numbers=none,                    % where to put the line-numbers; possible values are (none, left, right)
+numbersep=5pt,                   % how far the line-numbers are from the code
+numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+showstringspaces=false,          % underline spaces within strings only
+showtabs=false,                  % show tabs within strings adding particular underscores
+stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+stringstyle=\ttfamily\color{red},     % string literal style
+tabsize=2,                       % sets default tabsize to 2 spaces
+title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
 }
 
 
@@ -129,7 +105,7 @@
 \section{Übersicht}
 \subsection{Namensbedeutung}
 \begin{frame}{Namensbedeutung}
-	\begin{columns}[c]
+	\begin{columns}[c]%sort the graphics with columns
 		\begin{column}{4cm}
 			\includegraphics[width=4cm]{CobolCogLogo}\\ 
 			\includegraphics[width=4cm]{GnuCOBOLLogoTransparent}
@@ -140,7 +116,7 @@
 		\end{column}
 	\end{columns}
 	\pause
-	\begin{itemize}[<+->]
+	\begin{itemize}[<+->]%auto-generate pause after each item
 		\item
 			COBOL steht für COmmon Business-Oriented Language.
 		\item
@@ -154,7 +130,7 @@
 	\begin{itemize}[<+->]
 		\item
 			entwickelt durch Arbeitsgruppe in der 2. H\"alfte von 1959
-		\item
+		\item%here comes some tricky stuff to position a picture next to text in an itemize environment
   \begin{minipage}[t]{0.7\textwidth}
 %	\vspace{-5pt}
 	federführend war Grace Hopper, Erfinderin des ersten Compilers (A-0) und Mitentwicklerin fr\"uher Computer (z.B. Harvard Mark I+II, UNIVAC I)
@@ -215,7 +191,7 @@
 	\pause
 	\begin{itemize}[<+->]
 		\item
-			Haupteinsatzgebiet ist betriebswirtschaftliche Datenverarbeitung
+			Haupteinsatzgebiet ist betriebswirtschaftliche Datenverarbeitung (z.B. Gehaltsabrechnungen, Touristik)
 		\item
 			bei klassischer Aufteilung nach Benutzerschnittstelle, Verabreitungsteil und Datenhaltungsteil stellt COBOL den Verarbeitungsteil eines EDV-Programms
 	\end{itemize}
@@ -342,9 +318,9 @@
 
 \setbeamercovered{transparent}
 \def\beamertemplatetransparentcoveredmedium{\setbeamercovered{transparent=20}}
-\beamertemplatetransparentcoveredmedium
+\beamertemplatetransparentcoveredmedium %covered stuff is now only semi-transparent
 \begin{frame}[fragile]{Code-Beispiele}
-	\onslide<1-1>
+	\onslide<1-1>%Listing 1 only fully visible on slide 1
 	\noindent\begin{minipage}{.44\textwidth}
 		\begin{lstlisting}{Hello World}
 			IDENTIFICATION DIVISION.
@@ -379,7 +355,7 @@
 \end{frame}
 
 
-\section{}
+\section{}%section shall not be visible in navbar, hence empty name
 \begin{frame}{Quellen}
 	\begin{enumerate}
 		\item COBOL Artikel englische Wikipedia
