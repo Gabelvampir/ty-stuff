@@ -4,7 +4,7 @@
 % This is a simple template for a LaTeX document using the "article" class.
 % See "book", "report", "letter" for other types of document.
 
-\documentclass[12pt,a4paper]{article} % use larger type; default would be 10pt
+\documentclass[12pt,a4paper,titlepage]{article} % use larger type; default would be 10pt
 
 \usepackage[utf8x]{inputenc} % set input encoding (not needed with XeLaTeX)
 
@@ -71,16 +71,18 @@
 
 \begin{document}
 \maketitle %title (page)
-\newpage
-\tableofcontents
-\newpage
 
+\tableofcontents
+
+\newpage
+\pagestyle{headings}
 \section{Installation von Windows Server 2008 R2}
 Vor der Installation von Windows Server 2008 R2 sollte man erst einmal sicherstellen das man genug freien Platz auf der Festplatte hat, und diese wenn möglich schon einmal vorpartitionieren. Um noch etwas Luft zum arbeiten zu haben sollte man mindestens 30 GB reservieren.\\
 Um die Installation nun zu starten legt man die Installations-DVD ins Laufwerk und bootet von dieser. Das Installationsprogramm ist selbsterklärend, man sollte aber darauf achten die richtige Partition als Installationsziel auszuwählen.\\
-Wenn man einen anderen Bootloader als den von Windows verwendet (wie z.B. grub von Linux) muss man diesen nach der Installation wieder herstellen und einen Booteintrag für Windows Server 2008 R2.
-\newpage
+Wenn man einen anderen Bootloader als den von Windows verwendet (wie z.B. grub von Linux) muss man diesen nach der Installation wieder herstellen und einen Booteintrag für Windows Server 2008 R2.\\
+Nun lässt man Windows noch seine zahlreichen Updates installieren und dann kann man mit den Vorarbeiten beginnen.
 
+\newpage
 \section{Vorarbeiten}
 Zunächst einmal sollte man dem Rechner der Domaincontroller werden soll einen Namen zuweisen. Dazu klickt man mit der rechten Maustaste auf \emph{Computer} und wählt \emph{Eigenschaften}. Hier wird der Computername angezeigt. Um ihn zu ändern klickt man die Schaltfläche \emph{Einstellungen ändern} (roter Kasten).
 
@@ -107,6 +109,22 @@ Dazu stellt man den Radiobutton auf \emph{Folgende IP-Adresse verwenden} und gib
 Damit wären die Vorarbeiten abgeschlosen, als nächstes wird die Active Directory-Domänendienste Rolle installiert.
 
 \newpage
-\section{Active Directory-Domänendienste installieren und einrichten}
+\section{Active Directory-Domänendienste einrichten}
+Zum installieren der Active Directory-Domänendienste öffnet man wie zum installieren jeder anderen Rolle auch den \emph{Server Manager}. Standardmäßig findet sich dieser in der Taskleiste. In der \emph{Rollenübersicht} wählt man \emph{Rollen hinzufügen} um die Rolle Active Directory-Domänendienste zu installieren.\\
 
+	\includegraphics[width=14cm]{Bilder/006}\\
+	
+Den Bildschirm mit den Vorbemerkungen mit einem Klick auf \emph{Weiter} zur Kenntnis. Im \emph{Serverrollen auswählen} Dialog wählt man \emph{Active Directory-Domänendienste} aus und klickt auf \emph{Weiter}.\\
+
+	\includegraphics[height=9cm]{Bilder/008}\\
+	
+ Die anderen Rollen die wir später noch installieren wollen können wir jetzt noch nicht installieren das Windows erst die Active Directory-Domänendienste Rolle komplett konfigurieren will bevor man weitere Rollen installieren darf.\\
+ 
+ 	\includegraphics[height=9cm]{Bilder/009}\\
+ 	
+Wenn es nicht bereits installiert ist will der Server Manager das benötigte .NET Framework 3.5.1 noch mitinstallieren. Den \emph{Einführung in die Active Directory-Domänendienste} Dialog durchlesen und mit einem Klick auf \emph{Weiter} zur Kenntnis nehmen. Daraufhin erhält man eine Übersicht der zu installierenden Rollen und Features, die man mit einem Klick auf \emph{Installieren} bestätigt.\\
+
+ 	\includegraphics[height=9cm]{Bilder/011}\\
+ 
+ Daraufhin installiert Windows die Rollen und Features, dies kann einige Minuten in Anspruch nehmen. Zum Abschluss erscheint der \emph{Installationsergebnisse} Dialog, der für alles eine erfolgreiche Installation melden sollte.
 \end{document}
