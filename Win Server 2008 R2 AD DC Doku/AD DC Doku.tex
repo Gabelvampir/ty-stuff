@@ -15,7 +15,7 @@
 %%% PAGE DIMENSIONS
 \usepackage[a4paper]{geometry} % to change the page dimensions
 %\geometry{a4paper} % or letterpaper (US) or a5paper or....
-%\geometry{bottom=3.5cm} % for example, change the margins to 2 inches all round
+\geometry{bottom=3.5cm} % for example, change the margins to 2 inches all round
 % \geometry{landscape} % set up the page for landscape
 %   read geometry.pdf for detailed page layout information
 
@@ -74,9 +74,6 @@
 \begin{document}
 \maketitle %title (page)
 
-\tableofcontents
-
-\newpage
 %\pagestyle{headings}
 \pagestyle{fancy}
 \lhead{}
@@ -86,7 +83,10 @@
 \cfoot{}
 \rfoot{Seite \thepage}
 
+\thispagestyle{fancy}
+\tableofcontents
 
+\newpage
 \section{Installation von Windows Server 2008 R2}
 Vor der Installation von Windows Server 2008 R2 sollte man erst einmal sicherstellen das man genug freien Platz auf der Festplatte hat, und diese wenn möglich schon einmal vorpartitionieren. Um noch etwas Luft zum arbeiten zu haben sollte man mindestens 30 GB reservieren.\\
 Um die Installation nun zu starten legt man die Installations-DVD ins Laufwerk und bootet von dieser. Das Installationsprogramm ist selbsterklärend, man sollte aber darauf achten die richtige Partition als Installationsziel auszuwählen.\\
@@ -220,4 +220,26 @@ Nach ein paar Minuten sollte die Installation erfolgreich abgeschlossen sein, al
 
 \newpage
 \section{Domänenbenutzer anlegen}
+Um Domänenbenutzer anzulegen rufen wir zuerst Active Directory-Benutzer und -Computer Verwaltungskonsole unter \emph{Start \ding{221} Verwaltung \ding{221} Active Directory-Benutzer und -Computer} auf. Hier klappen wir den Baum unter unserer Domäne auf und wählen im Kontextmenü von \emph{Users} den Punkt \emph{Neu \ding{221} Benutzer}. In das darauf erscheinende Fenster tragen wir die diversen Namen des Benutzers ein (Vor- und Nachname und Anmeldename).\\
+
+	\includegraphics[height=7cm]{Bilder/050}\\
+	
+Auf der nächsten Seite muss dem Benutzer ein den Kennwortrichtlinien entsprechendes Passwort zugewiesen werden. Die Option \emph{Benutzer muss Kennwort bei der nächsten Anmeldung ändern} sollte aktiviert werden, damit der Anwender beim ersten Anmelden aufgefordert wird ein persönlicheres Passwort zu vergeben.\\
+
+	\includegraphics[height=7cm]{Bilder/051}\\
+	
+Auf der letzten Seite erhält man noch eine Übersicht über die angegebene Daten, mit einem Klick auf \emph{Fertig stellen} wird der Benutzer erstellt.
+Will man einem Benutzer zusätzlich Administratorenrechte geben, so sucht man den Benutzer im rechten Teil der Active Directory-Benutzer und -Computer Verwaltungskonsole (nach Auswahl von Users) und wählt im Kontextmenü des Benutzernamens den Punkt \emph{Eigenschaften}. Reiter \emph{Mitglied von} kann man den Benutzer über den Button \emph{Hinzufügen...} Mitglied neuer Gruppen werden lassen.\\
+
+	\includegraphics[height=7cm]{Bilder/052}\\
+	
+In den Dialog danach gibt man dann den Namen der gewünschten Gruppe (oder den eindeutigen Anfang des Namens) an und klickt auf \emph{Namen überprüfen}.\\
+	
+	\includegraphics[height=3.5cm]{Bilder/053}\\
+	
+Die für uns hier interessanten Gruppen sind \emph{Adminstratoren} (die Gruppe der Benutzer mir Adminsitratorrechten auf diesem Rechner) und \emph{Domänen-Admins} (Benutzer die Administratorenrechte für die Domäne und alle Mitglieds-Rechner besitzen).\\
+Zuletzt wollen wir noch einen Rechner unserer Domäne hinzufügen.
+
+\newpage
+\section{Client-Rechner der Domäne hinzufügen}
 \end{document}
