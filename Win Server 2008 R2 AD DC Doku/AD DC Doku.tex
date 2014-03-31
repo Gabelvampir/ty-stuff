@@ -4,7 +4,7 @@
 % This is a simple template for a LaTeX document using the "article" class.
 % See "book", "report", "letter" for other types of document.
 
-\documentclass[12pt,a4paper,titlepage]{article} % use larger type; default would be 10pt
+\documentclass[12pt,a4paper,titlepage]{scrartcl} % use larger type; default would be 10pt
 
 \usepackage[utf8x]{inputenc} % set input encoding (not needed with XeLaTeX)
 
@@ -50,6 +50,8 @@
 \lhead{}\chead{}\rhead{}
 \lfoot{}\cfoot{\thepage}\rfoot{}
 
+\setlength{\parindent}{0mm}
+
 %%% SECTION TITLE APPEARANCE
 \usepackage{sectsty}
 \allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
@@ -74,6 +76,7 @@
 \begin{document}
 \maketitle %title (page)
 
+\noindent
 %\pagestyle{headings}
 \pagestyle{fancy}
 \lhead{}
@@ -82,6 +85,8 @@
 \lfoot{Sebastian Deußer}
 \cfoot{}
 \rfoot{Seite \thepage}
+
+\noindent
 
 \thispagestyle{fancy}
 \tableofcontents
@@ -97,22 +102,23 @@ Nun lassen wir Windows noch seine zahlreichen Updates installieren und dann kön
 \section{Vorarbeiten}
 Zunächst einmal sollten wir dem Rechner der Domaincontroller werden soll einen Namen zuweisen. Dazu klicken wir mit der rechten Maustaste auf \emph{Computer} und wählen \emph{Eigenschaften}. Hier wird der Computername angezeigt. Um ihn zu ändern klicken wir die Schaltfläche \emph{Einstellungen ändern} (roter Kasten) an.
 
-\includegraphics[width=14cm]{Bilder/001(Kasten)}\\
-\newpage
-Daraufhin erscheint folgender Dialog:
+	\includegraphics[width=14cm]{Bilder/001(Kasten)}\\
 
-	\includegraphics[height=7cm]{Bilder/002}
-	
+\newpage
+Daraufhin erscheint folgender Dialog:\\
+
+	\includegraphics[height=7cm]{Bilder/002}\\
+		
 Hier können wir mit der Schaltfläche \emph{ändern} einen anderen Computernamen angeben.\\
 
-	\includegraphics[height=7cm]{Bilder/003}
-	
+	\includegraphics[height=7cm]{Bilder/003}\\
+		
 Die Arbeitsgruppe kann auf dem Standard belassen werden da dies später bei der Installation des Domain Controllers angepasst wird.\\
 Als nächstes müssen wir die IP-Einstellungen der Netzwerkkarte überprüfen, da ein Domain Controller eine feste IP benötigt. Die Einstellungen findet sich z.B. unter \emph{Systemsteuerung \ding{221} Alle Systemsteuerungselemente \ding{221} Netzwerk- und Freigabecenter}, dort den Netzwerkadapter suchen und im rechte Maustasten Menü \emph{Eigenschaften} wählen. Hier \emph{Internetprotokoll Version 4 (TCP/IPv4)} auswählen und auf die Schaltfläche \emph{Eigenschaften} klicken.\\ %\ding{221} is one of the left arrows from pifont
 
 	\includegraphics[height=7cm]{Bilder/004}\\
 	
-In dem folgenden Dialog können wir dann die IP-Adresse des Rechners festlegen. 
+In dem folgenden Dialog können wir dann die IP-Adresse des Rechners festlegen.\\ 
 
 	\includegraphics[height=7cm]{Bilder/005}\\
 	
@@ -129,7 +135,7 @@ Den Bildschirm mit den Vorbemerkungen mit einem Klick auf \emph{Weiter} zur Kenn
 
 	\includegraphics[height=9cm]{Bilder/008}\\
 	
-Die anderen Rollen die wir später noch installieren wollen können wir jetzt noch nicht installieren das Windows erst die Active Directory-Domänendienste Rolle komplett konfigurieren will bevor man weitere Rollen installieren darf.\\
+Die anderen Rollen die wir später noch installieren wollen können wir jetzt noch nicht installieren da Windows erst die Active Directory-Domänendienste Rolle komplett konfigurieren will bevor man weitere Rollen installieren darf.\\
  
  	\includegraphics[height=9cm]{Bilder/009}\\
  	
