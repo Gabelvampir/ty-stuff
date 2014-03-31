@@ -88,14 +88,14 @@
 
 \newpage
 \section{Installation von Windows Server 2008 R2}
-Vor der Installation von Windows Server 2008 R2 sollte man erst einmal sicherstellen das man genug freien Platz auf der Festplatte hat, und diese wenn möglich schon einmal vorpartitionieren. Um noch etwas Luft zum arbeiten zu haben sollte man mindestens 30 GB reservieren.\\
-Um die Installation nun zu starten legt man die Installations-DVD ins Laufwerk und bootet von dieser. Das Installationsprogramm ist selbsterklärend, man sollte aber darauf achten die richtige Partition als Installationsziel auszuwählen.\\
-Wenn man einen anderen Bootloader als den von Windows verwendet (wie z.B. grub von Linux) muss man diesen nach der Installation wieder herstellen und ggf. einen Booteintrag für Windows Server 2008 R2 hinzufügen.\\
-Nun lässt man Windows noch seine zahlreichen Updates installieren und dann kann man mit den Vorarbeiten beginnen.
+Vor der Installation von Windows Server 2008 R2 sollten wir erst einmal sicherstellen das man genug freien Platz auf der Festplatte hat, und diese wenn möglich schon einmal vorpartitionieren. Um noch etwas Luft zum arbeiten zu haben reservieren wir mindestens 30 GB.\\
+Um die Installation nun zu starten legen wir die Installations-DVD ins Laufwerk ein und bootet von dieser. Das Installationsprogramm ist selbsterklärend, es sollte aber darauf geachten werden die richtige Partition als Installationsziel auszuwählen.\\
+Wenn ein anderer Bootloader als der von Windows verwendet wird (wie z.B. grub von Linux) muss dieser nach der Installation wieder hergestellt werden und ggf. einen Booteintrag für Windows Server 2008 R2 hinzugefügt werden.\\
+Nun lassen wir Windows noch seine zahlreichen Updates installieren und dann können wir mit den Vorarbeiten beginnen.
 
 \newpage
 \section{Vorarbeiten}
-Zunächst einmal sollte man dem Rechner der Domaincontroller werden soll einen Namen zuweisen. Dazu klickt man mit der rechten Maustaste auf \emph{Computer} und wählt \emph{Eigenschaften}. Hier wird der Computername angezeigt. Um ihn zu ändern klickt man die Schaltfläche \emph{Einstellungen ändern} (roter Kasten).
+Zunächst einmal sollten wir dem Rechner der Domaincontroller werden soll einen Namen zuweisen. Dazu klicken wir mit der rechten Maustaste auf \emph{Computer} und wählen \emph{Eigenschaften}. Hier wird der Computername angezeigt. Um ihn zu ändern klicken wir die Schaltfläche \emph{Einstellungen ändern} (roter Kasten) an.
 
 \includegraphics[width=14cm]{Bilder/001(Kasten)}\\
 \newpage
@@ -103,29 +103,29 @@ Daraufhin erscheint folgender Dialog:
 
 	\includegraphics[height=7cm]{Bilder/002}
 	
-Hier kann man mit der Schaltfläche \emph{ändern} einen anderen Computernamen angeben.\\
+Hier können wir mit der Schaltfläche \emph{ändern} einen anderen Computernamen angeben.\\
 
 	\includegraphics[height=7cm]{Bilder/003}
 	
 Die Arbeitsgruppe kann auf dem Standard belassen werden da dies später bei der Installation des Domain Controllers angepasst wird.\\
-Als nächstes muss man die IP-Einstellungen der Netzwerkkarte überprüfen, da ein Domain Controller eine feste IP benötigt. Die Einstellungen findet man z.B. unter \emph{Systemsteuerung \ding{221} Alle Systemsteuerungselemente \ding{221} Netzwerk- und Freigabecenter}, dort den Netzwerkadapter suchen und im rechte Maustasten Menü \emph{Eigenschaften} wählen. Dort \emph{Internetprotokoll Version 4 (TCP/IPv4)} auswählen und auf die Schaltfläche \emph{Eigenschaften} klicken.\\ %\ding{221} is one of the left arrows from pifont
+Als nächstes müssen wir die IP-Einstellungen der Netzwerkkarte überprüfen, da ein Domain Controller eine feste IP benötigt. Die Einstellungen findet sich z.B. unter \emph{Systemsteuerung \ding{221} Alle Systemsteuerungselemente \ding{221} Netzwerk- und Freigabecenter}, dort den Netzwerkadapter suchen und im rechte Maustasten Menü \emph{Eigenschaften} wählen. Hier \emph{Internetprotokoll Version 4 (TCP/IPv4)} auswählen und auf die Schaltfläche \emph{Eigenschaften} klicken.\\ %\ding{221} is one of the left arrows from pifont
 
 	\includegraphics[height=7cm]{Bilder/004}\\
 	
-In dem folgenden Dialog kann man dann die IP-Adresse des Rechners fest. 
+In dem folgenden Dialog können wir dann die IP-Adresse des Rechners festlegen. 
 
 	\includegraphics[height=7cm]{Bilder/005}\\
 	
-Dazu stellt man den Radiobutton auf \emph{Folgende IP-Adresse verwenden} und gibt dann eine in dem lokalen Netzwerk von keinem anderen Rechner benutzte IP-Adresse an, mit der passenden Subnetzmaske. als Standardgateway dient üblicherweise der Netzwerkrouter. Den DNS-Server muss man nun auch von Hand eingeben, dieser läuft üblicherweise auch auf dem Netzwerkrouter.\\
+Dazu stellen wir den Radiobutton auf \emph{Folgende IP-Adresse verwenden} und geben dann eine in dem lokalen Netzwerk von keinem anderen Rechner benutzte IP-Adresse an, mit der passenden Subnetzmaske. als Standardgateway dient üblicherweise der Netzwerkrouter. Den DNS-Server müssen wir nun auch von Hand eingeben, dieser läuft üblicherweise auch auf dem Netzwerkrouter.\\
 Damit wären die Vorarbeiten abgeschlosen, als nächstes wird die Active Directory-Domänendienste Rolle installiert.
 
 \newpage
 \section{Active Directory-Domänendienste installieren}
-Zum installieren der Active Directory-Domänendienste öffnet man wie zum installieren jeder anderen Rolle auch den \emph{Server Manager}. Standardmäßig findet sich dieser in der Taskleiste. In der \emph{Rollenübersicht} wählt man \emph{Rollen hinzufügen} um die Rolle Active Directory-Domänendienste zu installieren.\\
+Zum installieren der Active Directory-Domänendienste öffnen wir wie zum installieren jeder anderen Rolle den \emph{Server Manager}. Standardmäßig findet sich dieser in der Taskleiste. In der \emph{Rollenübersicht} wählen wir \emph{Rollen hinzufügen} um die Rolle Active Directory-Domänendienste zu installieren.\\
 
 	\includegraphics[width=14cm]{Bilder/006}\\
 	
-Den Bildschirm mit den Vorbemerkungen mit einem Klick auf \emph{Weiter} zur Kenntnis. Im \emph{Serverrollen auswählen} Dialog wählt man \emph{Active Directory-Domänendienste} aus und klickt auf \emph{Weiter}.\\
+Den Bildschirm mit den Vorbemerkungen mit einem Klick auf \emph{Weiter} zur Kenntnis nehmen. Im \emph{Serverrollen auswählen} Dialog wählen wir \emph{Active Directory-Domänendienste} aus und klicken auf \emph{Weiter}.\\
 
 	\includegraphics[height=9cm]{Bilder/008}\\
 	
@@ -133,7 +133,7 @@ Die anderen Rollen die wir später noch installieren wollen können wir jetzt no
  
  	\includegraphics[height=9cm]{Bilder/009}\\
  	
-Wenn es nicht bereits installiert ist will der Server Manager das benötigte .NET Framework 3.5.1 noch mitinstallieren. Den \emph{Einführung in die Active Directory-Domänendienste} Dialog durchlesen und mit einem Klick auf \emph{Weiter} zur Kenntnis nehmen. Daraufhin erhält man eine Übersicht der zu installierenden Rollen und Features, die man mit einem Klick auf \emph{Installieren} bestätigt.\\
+Wenn es nicht bereits installiert ist will der Server Manager das benötigte .NET Framework 3.5.1 noch mitinstallieren. Den \emph{Einführung in die Active Directory-Domänendienste} Dialog durchlesen und mit einem Klick auf \emph{Weiter} zur Kenntnis nehmen. Daraufhin erhalten wir eine Übersicht der zu installierenden Rollen und Features, die wir mit einem Klick auf \emph{Installieren} bestätigen.\\
 
  	\includegraphics[height=9cm]{Bilder/011}\\
  
@@ -141,7 +141,7 @@ Daraufhin installiert Windows die Rollen und Features, dies kann einige Minuten 
  
  \newpage
  \section{Active Directory-Domänendienste einrichten}
-Um die Active Directory-Domänendienste einzurichten ruft man die dcpromo.exe auf.\\
+Um die Active Directory-Domänendienste einzurichten rufen wir dcpromo.exe auf.\\
 
 	\includegraphics[height=7cm]{Bilder/014(dcpromo_exe01)}\\
 	
@@ -169,16 +169,16 @@ Nach einem Klick auf \emph{Weiter} erscheint eine Fehlermeldung da wir den DNS-S
 Den Dialog mit \emph{Ja} bestätigen.\\
 Danach wird nach den Speicherorten für Datanbank, Protokolldateien und SYSVOL gefragt. Da wir nichts an den Standardorten ändern wollen bestätigen wir das Ganze einfach mit \emph{Weiter}.\\
 Danach müssen wir dem Administratorkonto für die Domäne ein Kennwort vergeben, nach den üblichen Richtlinien (mindestens 8 Stellen, mindestens 1 Buchstabe, mindestens 1 Zahl). Hier sollte ein möglichst sicheres Kennwort gewählt werden. Dies eintragen und nochmal zur Bestätigung eintragen, danach \emph{Weiter} wählen.\\
-Nun wird eine Zusammenfassung unserer Einstellungen angezeigt bevor diese ausgeführt werden. Hier könnte man diese Einstellungen durch klicken auf \emph{Einstellungen exportieren} falls wir dieselben Einstellungen auf mehreren Rechnern ausführen wollen würden. Aber dies ist bei dem primären Domaincontroller nicht allzu sinnvoll und auch nicht Ziel diese Dokumentation. Nach der Bestätigung mit \emph{Weiter} richtet Windows den Domänencontroller ein. Dies kann einige Minuten in Anspruch nehmen.\\
-Sobald alles eingerichtet ist beendet man den Assistenten mit einem Klick auf \emph{Fertig stellen}, danach muss man den Server neu starten. Dies schließt auch die Installation des Active Directory-Domänendienste ab.
+Nun wird eine Zusammenfassung unserer Einstellungen angezeigt bevor diese ausgeführt werden. Hier könnten wir diese Einstellungen durch klicken auf \emph{Einstellungen exportieren} falls wir dieselben Einstellungen auf mehreren Rechnern ausführen wollen würden. Aber dies ist bei dem primären Domaincontroller nicht allzu sinnvoll und auch nicht Ziel diese Dokumentation. Nach der Bestätigung mit \emph{Weiter} richtet Windows den Domänencontroller ein. Dies kann einige Minuten in Anspruch nehmen.\\
+Sobald alles eingerichtet ist beenden wir den Assistenten mit einem Klick auf \emph{Fertig stellen}, danach muss der Server neu gestartet werden. Dies schließt auch die Installation des Active Directory-Domänendienste ab.
 
 \newpage
 \section{DNS-Server installieren und einrichten}
-Zuerst einmal muss hierfür die DNS-Server Rolle im \emph{Server Manager} installiert werden. Dies geht analog zur Installation der Active Directory-Domänendienste Rolle aus Kapitel 2. Danach öffnet man die DNS Einstellungen im Server Manager und klappt den Baum so lange auf bis man den Punkt \emph{Reverse-Lookupzonen} sieht.\\
+Zuerst einmal muss hierfür die DNS-Server Rolle im \emph{Server Manager} installiert werden. Dies geht analog zur Installation der Active Directory-Domänendienste Rolle aus Kapitel 2. Danach öffnen wir die DNS Einstellungen im Server Manager und klappen den Baum so lange auf bis wir den Punkt \emph{Reverse-Lookupzonen} sehen.\\
 
 	\includegraphics[height=9cm]{Bilder/029(DNS01)}\\
 
-Um eine neue Reverse-Lookupzone zu erstellen wählt man diesen Punkt mit der rechten Maustaste an und wählt \emph{Neue Zone} aus.\\
+Um eine neue Reverse-Lookupzone zu erstellen wählen wir diesen Punkt mit der rechten Maustaste an und wählen \emph{Neue Zone} aus.\\
 Den Willkommensbildschirm nehmen wir mit der Auswahl von \emph{Weiter} zur Kenntnis. Als nächstens wählen wir die vorausgewählte Option \emph{Primäre Zone} da dies die erste (und vorerst die einzige) Zone ist die wir erstellen. Mit \emph{Weiter} bestätigen. Auch im nächsten Bildschirm wählen wir für die Zonenreplikation die vorausgewählte Option \emph{Auf allen Servern, die auf Domänencontrollern in dieser Domäne ausgeführt werden: \textit{Domänenname}} (in unserem Beispiel tikl1701.local). \emph{Weiter} führt auch hier... weiter. In unserem Beispiel arbeiten wir mit IPv4 Adressen, deswegen wählen wir im nächsten Bildschirm wieder die Voreinstellung \emph{IPv4 Reverse-Lookupzone}.\\
 Die Auswahl von \emph{Weiter} führt wie fast immer zum nächsten Dialog in welchen nun der \emph{Name der Reverse-Lookupzone} angegeben werden soll.\\
 
@@ -228,7 +228,7 @@ Auf der nächsten Seite muss dem Benutzer ein den Kennwortrichtlinien entspreche
 
 	\includegraphics[height=7cm]{Bilder/051}\\
 	
-Auf der letzten Seite erhält man noch eine Übersicht über die angegebene Daten, mit einem Klick auf \emph{Fertig stellen} wird der Benutzer erstellt.
+Auf der letzten Seite erhalten wir noch eine Übersicht über die angegebene Daten, mit einem Klick auf \emph{Fertig stellen} wird der Benutzer erstellt.
 Will man einem Benutzer zusätzlich Administratorenrechte geben, so sucht man den Benutzer im rechten Teil der Active Directory-Benutzer und -Computer Verwaltungskonsole (nach Auswahl von Users) und wählt im Kontextmenü des Benutzernamens den Punkt \emph{Eigenschaften}. Reiter \emph{Mitglied von} kann man den Benutzer über den Button \emph{Hinzufügen...} Mitglied neuer Gruppen werden lassen.\\
 
 	\includegraphics[height=7cm]{Bilder/052}\\
@@ -242,4 +242,29 @@ Zuletzt wollen wir noch einen Rechner unserer Domäne hinzufügen.
 
 \newpage
 \section{Client-Rechner der Domäne hinzufügen}
+Als letztes wollen wir noch einen Windows 7 Client-Rechner unserer Domäne hinzufügen.\\
+Hierzu müssen wir zuerst den DNS-Server unserer Domäne als bevorzugten DNS-Server eintragen. Dazu rufen wir \emph{Systemsteuerung \ding{221} Netzwerk und Internet \ding{221} Netzwerk- und Freigabecenter} auf und rufen in den Adaptereigenschaften unserer Netzwerkkarte die \emph{Eigenschaften} von \emph{Internetprotokoll Version 4 (TCP/IPv4)} auf. Dort tragen wir in unserem Fall folgendes ein:\\
+
+	\includegraphics[height=7cm]{Bilder/Client/Client01}\\
+	
+Als nächstes rufen wir wie in Kapitel 1 über den Punkt \emph{Eigenschaften} im Kontextmenü von Computer (z.B. in der Sidebar des Startmenüs) die Basisinformationen des Systems auf. Wieder wählen wir \emph{Einstellungen ändern}. In dem Fenster das sich daraufhin öffnet klicken wir den Button \emph{Ändern} an. Es öffnet sich der Dialog den wir schon aus Kapitel 1 kennen.\\
+
+	\includegraphics[height=7cm]{Bilder/Client/Client03}\\
+	
+Hier tragen wir nun unsere neue Domäne ein. Danach fragt Windows nach dem Benutzernamen und Passwort eines Benutzerkontos das der Domäne beitreten darf.\\
+
+	\includegraphics[height=4cm]{Bilder/Client/Client04}\\
+
+Hier tragen wir z.B. einen unserer in Kapitel 6 neu erstellten Benutzer ein. Nach richtiger Eingabe der Daten erscheint die Willkommensmeldung zu Domäne.\\
+
+	\includegraphics[width=6.5cm]{Bilder/Client/Client05}\\
+	
+Gefolgt wird diese von Aufforderungen zum Begrüßungsneustart.\\
+
+	\includegraphics[width=6.5cm]{Bilder/Client/Client06}\\
+	
+	\includegraphics[width=6.5cm]{Bilder/Client/Client07}\\
+
+Nach dem durchführen des Neustarts können wir uns dann mit dem Benutzerkonto eines Domänenbenutzers anmelden. Dazu müssen wir noch das richtige Benutzerkonto über auswählen von \emph{Benutzer wechseln \ding{221} Anderes Benutzerkonto} auswählen. Die Domäne ist in der Eingabemaske dann schon voreingestellt.\\
+Die Eingabe korrekter Zugangsdaten vorrausgesetzt können wir nun mit dem Client in unserer neuen Domäne arbeiten.
 \end{document}
