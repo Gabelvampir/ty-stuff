@@ -151,5 +151,12 @@ Nach einem Klick auf \emph{Weiter} wird erst die vorhanden DNS-Konfiguration gep
 	\includegraphics[height=7cm]{Bilder/021(dcpromo_exe08)}\\
 
 Da wir später auch noch einen \emph{DNS-Server} aufsetzen wollen wählen wir diese Option aus. Da wir den ersten Domain Controller der Domäne einrichten muss die Option \emph{Globaler Katalog} zwingend aktiviert sein und darf auch nicht deaktiviert werden. Aus demselben Grund kann die Option \emph{Schreibgeschützer Domänencontroller (RODC)} nicht aktiviert werden.\\
-Nach einem Klick auf \emph{Ja}.
+Nach einem Klick auf \emph{Weiter} erscheint eine Fehlermeldung da wir den DNS-Server noch nicht eingerichtet haben und kein übergeordneter DNS-Server verfügbar ist.\\
+
+	\includegraphics[height=7cm]{Bilder/022(dcpromo_exe09)}\\
+	
+Den Dialog mit \emph{Ja} bestätigen.\\
+Danach wird nach den Speicherorten für Datanbank, Protokolldateien und SYSVOL gefragt. Da wir nichts an den Standardorten ändern wollen bestätigen wir das Ganze einfach mit \emph{Weiter}.\\
+Danach müssen wir dem Administratorkonto für die Domäne ein Kennwort vergeben, nach den üblichen Richtlinien (mindestens 8 Stellen, mindestens 1 Buchstabe, mindestens 1 Zahl). Hier sollte ein möglichst sicheres Kennwort gewählt werden. Dies eintragen und nochmal zur Bestätigung eintragen, danach \emph{Weiter} wählen.\\
+Nun wird eine Zusammenfassung unserer Einstellungen angezeigt bevor diese ausgeführt werden. Hier könnte man diese Einstellungen durch klicken auf \emph{Einstellungen exportieren} falls wir dieselben Einstellungen auf mehreren Rechnern ausführen wollen würden. Aber dies ist bei dem primären Domaincontroller nicht allzu sinnvoll und auch nicht Ziel diese Dokumentation.
 \end{document}
