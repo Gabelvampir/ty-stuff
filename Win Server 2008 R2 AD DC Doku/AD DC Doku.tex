@@ -13,9 +13,9 @@
 % See the LaTeX Companion or other references for full information.
 
 %%% PAGE DIMENSIONS
-\usepackage{geometry} % to change the page dimensions
-\geometry{a4paper} % or letterpaper (US) or a5paper or....
-% \geometry{margin=2in} % for example, change the margins to 2 inches all round
+\usepackage[a4paper]{geometry} % to change the page dimensions
+%\geometry{a4paper} % or letterpaper (US) or a5paper or....
+%\geometry{bottom=3.5cm} % for example, change the margins to 2 inches all round
 % \geometry{landscape} % set up the page for landscape
 %   read geometry.pdf for detailed page layout information
 
@@ -33,6 +33,8 @@
 % These packages are all incorporated in the memoir class to one degree or another...
 \usepackage[ngerman]{babel}
 \usepackage{pifont} %for symbols (i.e. arrows)
+\usepackage{fancyhdr}
+%\usepackage{showframe}
 
 %%redifine of emph, see http://tex.stackexchange.com/questions/6754/what-is-the-canonical-way-to-redefine-the-emph-command
 \makeatletter
@@ -75,7 +77,16 @@
 \tableofcontents
 
 \newpage
-\pagestyle{headings}
+%\pagestyle{headings}
+\pagestyle{fancy}
+\lhead{}
+\chead{\leftmark}
+\rhead{}
+\lfoot{Sebastian Deußer}
+\cfoot{}
+\rfoot{Seite \thepage}
+
+
 \section{Installation von Windows Server 2008 R2}
 Vor der Installation von Windows Server 2008 R2 sollte man erst einmal sicherstellen das man genug freien Platz auf der Festplatte hat, und diese wenn möglich schon einmal vorpartitionieren. Um noch etwas Luft zum arbeiten zu haben sollte man mindestens 30 GB reservieren.\\
 Um die Installation nun zu starten legt man die Installations-DVD ins Laufwerk und bootet von dieser. Das Installationsprogramm ist selbsterklärend, man sollte aber darauf achten die richtige Partition als Installationsziel auszuwählen.\\
@@ -194,5 +205,19 @@ Die allgemeinen Hinweise zu DHCP-Servern, ebenso wie die vorherige Auswahl, best
 
 	\includegraphics[height=9cm]{Bilder/041(DHCP03)}\\
 	
-Da wir kein WINS verwenden wollen wählen wir im nächsten Dialog die Option \emph{WINS ist für Anwendungen in diesem Netzwerk nicht erforderlich} und bestätigen dies mit \emph{Weiter}. Als nächstes sollen wir auswählen welche IPs der DHCP Server verteilen soll. Dazu klicken wir auf \emph{Hinzufügen}
+Da wir kein WINS verwenden wollen wählen wir im nächsten Dialog die Option \emph{WINS ist für Anwendungen in diesem Netzwerk nicht erforderlich} und bestätigen dies mit \emph{Weiter}. Als nächstes sollen wir auswählen welche IPs der DHCP Server verteilen soll. Dazu klicken wir auf \emph{Hinzufügen}. Daraufhin erscheint das Fenster zum Hinzufügen eines Adressbereiches.\\
+
+	\includegraphics[height=7cm]{Bilder/043(DHCP05)}\\
+	
+Hier tragen wir einen möglichst gut \emph{identifizierbaren Namen} für den Bereich, die \emph{Start- und End-IP-Adresse} des Bereichs und die \emph{Leasedauer} ein. Die Leasedauer kann vorerst auf 8 Tage gesetzt werden solange dies nicht irgendwelche Probleme aufwirft. Unten geben wir noch die \emph{Subnetzmaske} und das lokale \emph{Gateway} an damit die Clients diese Einstellung richtig verteilt bekommen.\\	
+Bei dem Ganzen ist darauf zu achten das aus dem IP-Bereich keine Adressen bereits verwendet (oder von einem anderen DHCP verteilt) werden und der Haken bei \emph{Diesen Bereich aktivieren} gesetzt ist. Nach dem Bestätigen mit \emph{Ok} könnten wir noch andere Adressbereiche hinzufügen, aber in diesem Beispiel verwenden wir nur einen. Deswegen klicken wir auf \emph{Weiter}.\\
+Die IPv6-Optionen in den nächsten 2 Bildschirmen lassen wir auf den Standardwerten stehen da diese bereits richtig eingestellt sind und wir uns hier auf IPv4 kontentrieren. Zuletzt müssen wir noch die Serverautorisierung angeben. Da wir auch den Domänencontroller auf demselben Rechner verwalten wählen wir die Option \emph{Aktuelle Anmeldeinformationen verwenden}.\\
+Im letzten Dialog erhalten wir wieder eine Übersicht über die vorzunehmende Installation und Konfiguration, mit dem Button \emph{Installieren} wird der Vorgang gestartet.\\ 
+
+	\includegraphics[height=9cm]{Bilder/048(DHCP10)}\\
+	
+Nach ein paar Minuten sollte die Installation erfolgreich abgeschlossen sein, als nächstes legen wir Benutzer für unsere Domäne an.
+
+\newpage
+\section{Domänenbenutzer anlegen}
 \end{document}
