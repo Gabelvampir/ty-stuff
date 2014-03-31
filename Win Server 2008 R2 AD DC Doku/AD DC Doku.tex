@@ -90,20 +90,20 @@ Zunächst einmal sollte man dem Rechner der Domaincontroller werden soll einen N
 \newpage
 Daraufhin erscheint folgender Dialog:
 
-	\includegraphics[width=8cm]{Bilder/002}
+	\includegraphics[height=7cm]{Bilder/002}
 	
 Hier kann man mit der Schaltfläche \emph{ändern} einen anderen Computernamen angeben.\\
 
-	\includegraphics[width=8cm]{Bilder/003}
+	\includegraphics[height=7cm]{Bilder/003}
 	
 Die Arbeitsgruppe kann auf dem Standard belassen werden da dies eh angepasst wird bei der Installation des Domain Controllers.\\
 Als nächstes muss man die IP-Einstellungen der Netzwerkkarte überprüfen, da ein Domain Controller eine feste IP benötigt. Die Einstellungen findet man z.B. unter \emph{Systemsteuerung \ding{221} Alle Systemsteuerungselemente \ding{221} Netzwerk- und Freigabecenter}, dort den Netzwerkadapter suchen und im rechte Maustasten Menü \emph{Eigenschaften} wählen. Dort \emph{Internetprotokoll Version 4 (TCP/IPv4)} auswählen und auf die Schaltfläche \emph{Eigenschaften} klicken.\\ %\ding{221} is one of the left arrows from pifont
 
-	\includegraphics[width=8cm]{Bilder/004}\\
+	\includegraphics[height=7cm]{Bilder/004}\\
 	
 In dem folgenden Dialog kann man dann die IP-Adresse des Rechners fest. 
 
-	\includegraphics[width=8cm]{Bilder/005}\\
+	\includegraphics[height=7cm]{Bilder/005}\\
 	
 Dazu stellt man den Radiobutton auf \emph{Folgende IP-Adresse verwenden} und gibt dann eine in dem lokalen Netzwerk von keinem anderen Rechner benutzte IP-Adresse an, mit der passenden Subnetzmaske. als Standardgateway dient üblicherweise der Netzwerkrouter. Den DNS-Server muss man nun auch von Hand eingeben, dieser läuft üblicherweise auch auf dem Netzwerkrouter.\\
 Damit wären die Vorarbeiten abgeschlosen, als nächstes wird die Active Directory-Domänendienste Rolle installiert.
@@ -132,5 +132,24 @@ Daraufhin installiert Windows die Rollen und Features, dies kann einige Minuten 
  \section{Active Directory-Domänendienste einrichten}
 Um die Active Directory-Domänendienste einzurichten ruft man die dcpromo.exe auf.\\
 
-	\includegraphics[width=8cm]{Bilder/014(dcpromo_exe01)}\\
+	\includegraphics[height=7cm]{Bilder/014(dcpromo_exe01)}\\
+	
+Der Hinweis zur Betriebssystemkompatibilität kann von uns hier ignoriert werden, sollte aber trotzdem durchgelesen und dann mit \emph{Weiter} abgenickt werden. In dem darauffolgenden Dialog wählen wir \emph{Neue Domäne in neuer Gesamtstrutktur erstellen} da wir über keine bestehende Do,mäne verfügen die wir verwenden wollen.\\
+
+	\includegraphics[height=7cm]{Bilder/015(dcpromo_exe02)}\\
+	
+Als nächstes muss der Fully Qualified Domain Name (\emph{FQDN}) der neuen Domäne angegeben werden. Da wir keine internetfähige Domäne verwalten wollen geben wir einen Namen an der auf \emph{.local} endet.\\
+
+	\includegraphics[height=7cm]{Bilder/017(dcpromo_exe04)}\\
+		
+Nach dem klicken auf \emph{Weiter} wird geprüft ob der angegebene Name schon verwendet wird. Als nächstes sollen wir die Funktionsebene der Gesamtstruktur festlegen. Da wir die Domäne komplett neu aufsetzen wählen wir das neueste verfügbare, also \emph{Windows Server 2008 R2}.\\
+
+	\includegraphics[height=7cm]{Bilder/019(dcpromo_exe06)}\\
+	
+Nach einem Klick auf \emph{Weiter} wird erst die vorhanden DNS-Konfiguration geprüft, danach erscheint der Dialog \emph{Weitere Domänencontrolleroptionen}.\\
+
+	\includegraphics[height=7cm]{Bilder/021(dcpromo_exe08)}\\
+
+Da wir später auch noch einen \emph{DNS-Server} aufsetzen wollen wählen wir diese Option aus. Da wir den ersten Domain Controller der Domäne einrichten muss die Option \emph{Globaler Katalog} zwingend aktiviert sein und darf auch nicht deaktiviert werden. Aus demselben Grund kann die Option \emph{Schreibgeschützer Domänencontroller (RODC)} nicht aktiviert werden.\\
+Nach einem Klick auf \emph{Ja}.
 \end{document}
