@@ -4,9 +4,9 @@
 % This is a simple template for a LaTeX document using the "article" class.
 % See "book", "report", "letter" for other types of document.
 
-\documentclass[11pt]{article} % use larger type; default would be 10pt
+\documentclass[12pt]{article} % use larger type; default would be 10pt
 
-\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+\usepackage[utf8x]{inputenc} % set input encoding (not needed with XeLaTeX)
 
 %%% Examples of Article customizations
 % These packages are optional, depending whether you want the features they provide.
@@ -30,6 +30,8 @@
 \usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
 \usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
 % These packages are all incorporated in the memoir class to one degree or another...
+\usepackage[ngerman]{babel}
+
 
 %%% HEADERS & FOOTERS
 \usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
@@ -44,29 +46,33 @@
 % (This matches ConTeXt defaults)
 
 %%% ToC (table of contents) APPEARANCE
-\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
-\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
-\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
-\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+%\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+%\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+%\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+%\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
 
 %%% END Article customizations
 
 %%% The "real" document content comes below...
 
-\title{Brief Article}
-\author{The Author}
+\title{Installation und Einrichtung von Microsoft Windows Server 2008 R2 zu einem Domain Controller}
+\author{Sebastian Deußer}
 %\date{} % Activate to display a given date or no date (if empty),
          % otherwise the current date is printed 
+\setcounter{section}{-1}
 
 \begin{document}
-\maketitle
+\maketitle %title (page)
+\newpage
+\tableofcontents
+\newpage
 
-\section{First section}
+\section{Installation von Windows Server 2008 R2}
+Vor der Installation von Windows Server 2008 R2 sollte man erst einmal sicherstellen das man genug freien Platz auf der Festplatte hat, und diese wenn möglich schon einmal vorpartitionieren. Um noch etwas Luft zum arbeiten zu haben sollte man mindestens 30 GB reservieren.\\
+Um die Installation nun zu starten legt man die Installations-DVD ins Laufwerk und bootet von dieser. Das Installationsprogramm ist selbsterklärend, man sollte aber darauf achten die richtige Partition als Installationsziel auszuwählen.\\
+Wenn man einen anderen Bootloader als den von Windows verwendet (wie z.B. grub von Linux) muss man diesen nach der Installation wieder herstellen und einen Booteintrag für Windows Server 2008 R2.
+\newpage
+\section{Vorarbeiten}
 
-Your text goes here.
-
-\subsection{A subsection}
-
-More text.
 
 \end{document}
