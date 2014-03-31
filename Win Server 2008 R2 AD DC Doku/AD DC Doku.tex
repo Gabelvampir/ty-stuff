@@ -163,4 +163,18 @@ Sobald alles eingerichtet ist beendet man den Assistenten mit einem Klick auf \e
 
 \newpage
 \section{DNS-Server installieren und einrichten}
+Zuerst einmal muss hierfür die DNS-Server Rolle im \emph{Server Manager} installiert werden. Dies geht analog zur Installation der Active Directory-Domänendienste Rolle aus Kapitel 2. Danach öffnet man die DNS Einstellungen im Server Manager und klappt den Baum so lange auf bis man den Punkt \emph{Reverse-Lookupzonen} sieht.\\
+
+	\includegraphics[height=9cm]{Bilder/029(DNS01)}\\
+
+Um eine neue Reverse-Lookupzone zu erstellen wählt man diesen Punkt mit der rechten Maustaste an und wählt \emph{Neue Zone} aus.\\
+Den Willkommensbildschirm nehmen wir mit der Auswahl von \emph{Weiter} zur Kenntnis. Als nächstens wählen wir die vorausgewählte Option \emph{Primäre Zone} da dies die erste (und vorerst die einzige) Zone ist die wir erstellen. Mit \emph{Weiter} bestätigen. Auch im nächsten Bildschirm wählen wir für die Zonenreplikation die vorausgewählte Option \emph{Auf allen Servern, die auf Domänencontrollern in dieser Domäne ausgeführt werden: \textit{Domänenname}} (in unserem Beispiel tikl1701.local). \emph{Weiter} führt auch hier... weiter. In unserem Beispiel arbeiten wir mit IPv4 Adressen, deswegen wählen wir im nächsten Bildschirm wieder die Voreinstellung \emph{IPv4 Reverse-Lookupzone}.\\
+Die Auswahl von \emph{Weiter} führt wie fast immer zum nächsten Dialog in welchen nun der \emph{Name der Reverse-Lookupzone} angegeben werden soll.\\
+
+	\includegraphics[height=7cm]{Bilder/034(DNS06)}\\
+	
+Hier muss nun die Netzwerk-ID angeben werden, also in unserem Beispiel die 192.168.0. Die Auswahl von \emph{Weiter} führt zu Dialog \emph{Dynamisches Update}. Hier wählen wir \emph{Nur sichere dynamische Updates zulassen} da dies die empfohlene Option für Active Directory ist.\\
+Die Auswahl von \emph{Weiter} führt uns auch schon zum \emph{Fertigstellen des Assistenten} Dialogs, der nochmal die vorzunehmenden Einstellungen zusammenfasst. Dieser wird dann mit \emph{Fertig stellen} beendet.\\
+
+	\includegraphics[height=7cm]{Bilder/036(DNS08)}\\
 \end{document}
