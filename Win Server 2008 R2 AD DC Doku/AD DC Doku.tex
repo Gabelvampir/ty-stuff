@@ -109,7 +109,7 @@ Dazu stellt man den Radiobutton auf \emph{Folgende IP-Adresse verwenden} und gib
 Damit wären die Vorarbeiten abgeschlosen, als nächstes wird die Active Directory-Domänendienste Rolle installiert.
 
 \newpage
-\section{Active Directory-Domänendienste einrichten}
+\section{Active Directory-Domänendienste installieren}
 Zum installieren der Active Directory-Domänendienste öffnet man wie zum installieren jeder anderen Rolle auch den \emph{Server Manager}. Standardmäßig findet sich dieser in der Taskleiste. In der \emph{Rollenübersicht} wählt man \emph{Rollen hinzufügen} um die Rolle Active Directory-Domänendienste zu installieren.\\
 
 	\includegraphics[width=14cm]{Bilder/006}\\
@@ -118,7 +118,7 @@ Den Bildschirm mit den Vorbemerkungen mit einem Klick auf \emph{Weiter} zur Kenn
 
 	\includegraphics[height=9cm]{Bilder/008}\\
 	
- Die anderen Rollen die wir später noch installieren wollen können wir jetzt noch nicht installieren das Windows erst die Active Directory-Domänendienste Rolle komplett konfigurieren will bevor man weitere Rollen installieren darf.\\
+Die anderen Rollen die wir später noch installieren wollen können wir jetzt noch nicht installieren das Windows erst die Active Directory-Domänendienste Rolle komplett konfigurieren will bevor man weitere Rollen installieren darf.\\
  
  	\includegraphics[height=9cm]{Bilder/009}\\
  	
@@ -126,5 +126,11 @@ Wenn es nicht bereits installiert ist will der Server Manager das benötigte .NE
 
  	\includegraphics[height=9cm]{Bilder/011}\\
  
- Daraufhin installiert Windows die Rollen und Features, dies kann einige Minuten in Anspruch nehmen. Zum Abschluss erscheint der \emph{Installationsergebnisse} Dialog, der für alles eine erfolgreiche Installation melden sollte.
+Daraufhin installiert Windows die Rollen und Features, dies kann einige Minuten in Anspruch nehmen. Zum Abschluss erscheint der \emph{Installationsergebnisse} Dialog, der für alles eine erfolgreiche Installation melden sollte. Danach muss der Active Directory-Domänendienst eingerichtet werden.
+ 
+ \newpage
+ \section{Active Directory-Domänendienste einrichten}
+Um die Active Directory-Domänendienste einzurichten ruft man die dcpromo.exe auf.\\
+
+	\includegraphics[width=8cm]{Bilder/014(dcpromo_exe01)}\\
 \end{document}
