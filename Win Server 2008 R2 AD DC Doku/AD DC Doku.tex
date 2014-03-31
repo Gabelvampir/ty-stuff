@@ -79,7 +79,7 @@
 \section{Installation von Windows Server 2008 R2}
 Vor der Installation von Windows Server 2008 R2 sollte man erst einmal sicherstellen das man genug freien Platz auf der Festplatte hat, und diese wenn möglich schon einmal vorpartitionieren. Um noch etwas Luft zum arbeiten zu haben sollte man mindestens 30 GB reservieren.\\
 Um die Installation nun zu starten legt man die Installations-DVD ins Laufwerk und bootet von dieser. Das Installationsprogramm ist selbsterklärend, man sollte aber darauf achten die richtige Partition als Installationsziel auszuwählen.\\
-Wenn man einen anderen Bootloader als den von Windows verwendet (wie z.B. grub von Linux) muss man diesen nach der Installation wieder herstellen und einen Booteintrag für Windows Server 2008 R2.\\
+Wenn man einen anderen Bootloader als den von Windows verwendet (wie z.B. grub von Linux) muss man diesen nach der Installation wieder herstellen und ggf. einen Booteintrag für Windows Server 2008 R2 hinzufügen.\\
 Nun lässt man Windows noch seine zahlreichen Updates installieren und dann kann man mit den Vorarbeiten beginnen.
 
 \newpage
@@ -96,7 +96,7 @@ Hier kann man mit der Schaltfläche \emph{ändern} einen anderen Computernamen a
 
 	\includegraphics[height=7cm]{Bilder/003}
 	
-Die Arbeitsgruppe kann auf dem Standard belassen werden da dies eh angepasst wird bei der Installation des Domain Controllers.\\
+Die Arbeitsgruppe kann auf dem Standard belassen werden da dies später bei der Installation des Domain Controllers angepasst wird.\\
 Als nächstes muss man die IP-Einstellungen der Netzwerkkarte überprüfen, da ein Domain Controller eine feste IP benötigt. Die Einstellungen findet man z.B. unter \emph{Systemsteuerung \ding{221} Alle Systemsteuerungselemente \ding{221} Netzwerk- und Freigabecenter}, dort den Netzwerkadapter suchen und im rechte Maustasten Menü \emph{Eigenschaften} wählen. Dort \emph{Internetprotokoll Version 4 (TCP/IPv4)} auswählen und auf die Schaltfläche \emph{Eigenschaften} klicken.\\ %\ding{221} is one of the left arrows from pifont
 
 	\includegraphics[height=7cm]{Bilder/004}\\
@@ -190,5 +190,9 @@ Zuerst einmal muss die DHCP-Server Rolle mit dem \emph{Server Manager} installie
 
 	\includegraphics[height=9cm]{Bilder/039(DHCP01)}\\
 
-Die allgemeinen Hinweise zu DHCP-Servern, ebenso wie die vorherige Auswahl, bestätigen wir mit einem Klick auf \emph{Weiter}. Als nächstes müssen wir den Namen unserer Domäne angeben
+Die allgemeinen Hinweise zu DHCP-Servern, ebenso wie die vorherige Auswahl, bestätigen wir mit einem Klick auf \emph{Weiter}. Als nächstes müssen wir den Namen unserer Domäne angeben und unseren DNS-Server. Da wir den DNS-Server auf demselben Rechner laufen lassen geben wir hier die IP von localhost (127.0.0.1) an. Des weiteren empfiehlt es sich den DNS-Server des lokalen Netzes als alternativen Server anzugeben.Das Ganze mit \emph{Weiter} bestätigen.\\
+
+	\includegraphics[height=9cm]{Bilder/041(DHCP03)}\\
+	
+Da wir kein WINS verwenden wollen wählen wir im nächsten Dialog die Option \emph{WINS ist für Anwendungen in diesem Netzwerk nicht erforderlich} und bestätigen dies mit \emph{Weiter}. Als nächstes sollen wir auswählen welche IPs der DHCP Server verteilen soll. Dazu klicken wir auf \emph{Hinzufügen}
 \end{document}
