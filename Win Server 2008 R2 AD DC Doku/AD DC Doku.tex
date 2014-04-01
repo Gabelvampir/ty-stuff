@@ -44,6 +44,7 @@
 \makeatother
 
 %%% HEADERS & FOOTERS
+%set with fancy layout package
 \usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
 \pagestyle{fancy} % options: empty , plain , fancy
 \renewcommand{\headrulewidth}{0pt} % customise the layout...
@@ -76,8 +77,7 @@
 \begin{document}
 \maketitle %title (page)
 
-\noindent
-%\pagestyle{headings}
+%header and footer definitions for fancyhdr
 \pagestyle{fancy}
 \lhead{}
 \chead{\leftmark}
