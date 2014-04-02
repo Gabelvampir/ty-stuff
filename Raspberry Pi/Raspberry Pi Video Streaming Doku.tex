@@ -146,7 +146,13 @@ Die Raspberry Pi Kamera muss wie auf dem Foto zu sehen ist angeschlossen werden,
 
 \item Starte MJPG-Streamer:\newline
 \textnormal{Die Kamera schreibt nun Bilder, man muss nur noch MJPG-Streamer starten:}\newline
-\texttt{\$ LD\_LIBRARY\_PATH=/usr/local/lib mjpg\_streamer -i \char`\"input\_file.so -f /tmp/stream -n pic.jpg\char`\" -o \char`\"output\_http.so -w /usr/local/www\char`\"} % \char`\" is a crude hack for straight quotation marks
+\ttfamily
+\begin{lstlisting}[breaklines]
+$ LD_LIBRARY_PATH=/usr/local/lib mjpg_streamer 
+   -i "input_file.so -f /tmp/stream -n pic.jpg" 
+   -o "output_http.so -w /usr/local/www"
+\end{lstlisting}
+\normalfont
 
 \item Schau den Stream an!\newline
 \textnormal{Nun kann man sich über einen Web-Browser verbinden und den Live-Stream ansehen. Man kann ihn vom Raspberry Pi selbst per Eingabe von \url{http://localhost:8080} in der Browser-Adresszeile ansehen. Oder wenn man ihn von einem anderen Rechner im Netzwerk ansehen will muss man \url{http://<IP-Adresse>:8080} aufrufen.}\newline
@@ -167,7 +173,7 @@ Nachdem die Raspberry Pi Kamera über raspi-config eingerichtet wurde kann man d
 
 \ttfamily
 \begin{lstlisting}[breaklines]
-raspivid -o - -t 9999999 |cvlc -vvv stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8554/}' :demux=h264
+$ raspivid -o - -t 9999999 |cvlc -vvv stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8554/}' :demux=h264
 \end{lstlisting}
 
 \normalfont
@@ -176,7 +182,7 @@ Mit diesem Befehl streamt der Pi auf Port 8554. Man kann sich dies anschaun inde
 
 \ttfamily
 \begin{lstlisting}[breaklines]
-raspivid -o - -t 9999999 |cvlc -vvv stream:///dev/stdin --sout '#standard{access=http,mux=ts,dst=:8554}' :demux=h264
+$ raspivid -o - -t 9999999 |cvlc -vvv stream:///dev/stdin --sout '#standard{access=http,mux=ts,dst=:8554}' :demux=h264
 \end{lstlisting}
 
 \normalfont
@@ -186,7 +192,7 @@ Eine weitere Möglichkeit ist Video-Streaming über HLS (HTTP Live Streaming). D
 
 \ttfamily
 \begin{lstlisting}[breaklines]
-raspivid -o -  -w 920 -h 540 -t 9999999 |  vlc -v -I "dummy" stream:///dev/stdin :sout="#std{access=livehttp{seglen=10,delsegs=true,numsegs=5, index=/var/www/streaming/stream.m3u8, index-url=http://<IPofRaspberryPi>/streaming/stream-########.ts}, mux=ts{use-key-frames}, dst=/var/www/streaming/stream-########.ts}" :demux=h264
+$ raspivid -o -  -w 920 -h 540 -t 9999999 |  vlc -v -I "dummy" stream:///dev/stdin :sout="#std{access=livehttp{seglen=10,delsegs=true,numsegs=5, index=/var/www/streaming/stream.m3u8, index-url=http://<IPofRaspberryPi>/streaming/stream-########.ts}, mux=ts{use-key-frames}, dst=/var/www/streaming/stream-########.ts}" :demux=h264
 \end{lstlisting}
 
 \normalfont
