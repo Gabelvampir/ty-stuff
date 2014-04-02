@@ -28,7 +28,7 @@
 %\usepackage{booktabs} % for much better looking tables
 %\usepackage{array} % for better arrays (eg matrices) in maths
 \usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
-%\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
 %\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
 % These packages are all incorporated in the memoir class to one degree or another...
 \usepackage[ngerman]{babel}
@@ -39,6 +39,7 @@
 \usepackage[colorlinks]{hyperref} % package for hyperlinks with \url
 \usepackage[svgnames]{xcolor}
 \usepackage[anythingbreaks]{breakurl}
+\usepackage{listings}
 
 %%redifine of emph, see http://tex.stackexchange.com/questions/6754/what-is-the-canonical-way-to-redefine-the-emph-command
 \makeatletter
@@ -81,7 +82,7 @@
 \author{Sebastian Deußer}
 %\date{2. April 2014} % Activate to display a given date or no date (if empty),
          % otherwise the current date is printed 
-\setcounter{section}{-1}
+\setcounter{section}{-1} % sets the section counter to start with 0
 
 \begin{document}
 \maketitle %title (page)
@@ -108,9 +109,8 @@ Die Raspberry Pi Kamera muss wie auf dem Foto zu sehen ist angeschlossen werden,
 \section{Methode 1: Mit MJPG-Streamer}
 \small{(Quelle: \href{http://blog.miguelgrinberg.com/post/how-to-build-and-run-mjpg-streamer-on-the-raspberry-pi}{http://blog.miguelgrinberg.com/post/how-to-build-and-run-mjpg-streamer-on-the-raspberry-pi})}
 \normalsize
-
 \begin{enumerate}
-\bfseries
+\bfseries %number and `title' of an item shall be bold
 
 \item build Abhängigkeiten von mjpg-streamer installieren:\newline
 \texttt{\$ sudo apt-get install libjpeg8-dev imagemagick libv4l-dev}
@@ -157,4 +157,38 @@ Die Raspberry Pi Kamera muss wie auf dem Foto zu sehen ist angeschlossen werden,
 \texttt{\$ cd ../../\newline
 \$ rm -rf mjpg-streamer-182}
 \end{enumerate}
+
+\newpage
+\section{Methode 2: H.264 Streaming mit VLC}
+\small{(Quelle: \href{http://www.mybigideas.co.uk/RPi/RPiCamera/}{http://www.mybigideas.co.uk/RPi/RPiCamera/})}
+\normalsize
+
+Nachdem die Raspberry Pi Kamera über raspi-config eingerichtet wurde kann man das Streaming über VLC über RTSP wie folgt aktivieren:
+
+\ttfamily
+\begin{lstlisting}[breaklines]
+raspivid -o - -t 9999999 |cvlc -vvv stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8554/}' :demux=h264
+\end{lstlisting}
+
+\normalfont
+(bei unserem Raspberry hat die Netzwerkschnittstelle Streaming mit vollen 1080p nicht verkraftet, testweise haben wir mit -w 640 -h 480 das Bild auf 640x480 runtergesetzt)
+Mit diesem Befehl streamt der Pi auf Port 8554. Man kann sich dies anschaun indem man auf einem PC VLC startet und einen “Network Stream” öffnet mit der Adresse \url{rtsp://<IPofRaspberryPi>:8554}. RTSP funktioniert gut im lokalen Netz, aber es ist schwierig dies über den Router ins Internet zu streamen. Dies kann man umgehen indem man VLC auf Streaming über HTTP konfiguriert. Allerdings braucht VLC dabei etwas mehr CPU und es kann vorkommen das Frames gedropt werden. Dafür kann man dies über einen einfachen Port-Forward routen.
+
+\ttfamily
+\begin{lstlisting}[breaklines]
+raspivid -o - -t 9999999 |cvlc -vvv stream:///dev/stdin --sout '#standard{access=http,mux=ts,dst=:8554}' :demux=h264
+\end{lstlisting}
+
+\normalfont
+Dies kann man sich wieder über VLC auf der Adresse \url{http://<IPofRaspberryPi>:8554/ ansehen.}
+
+Eine weitere Möglichkeit ist Video-Streaming über HLS (HTTP Live Streaming). Dieses scheint für iOS Geräte besser zu sein. Damit dies funktioniert muss ein Webserver auf dem Pi installiert sein. Um einen HLS Stream zu starten ruft man folgendes auf:
+
+\ttfamily
+\begin{lstlisting}[breaklines]
+raspivid -o -  -w 920 -h 540 -t 9999999 |  vlc -v -I "dummy" stream:///dev/stdin :sout="#std{access=livehttp{seglen=10,delsegs=true,numsegs=5, index=/var/www/streaming/stream.m3u8, index-url=http://<IPofRaspberryPi>/streaming/stream-########.ts}, mux=ts{use-key-frames}, dst=/var/www/streaming/stream-########.ts}" :demux=h264
+\end{lstlisting}
+
+\normalfont
+Diesen kann man über \url{http://<IPofRaspberryPi>/streaming/stream.m3u8} ansehen, allerdings braucht dies noch mehr CPU auf dem Pi als das Streaming über http.
 \end{document}
