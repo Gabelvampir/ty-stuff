@@ -4,7 +4,7 @@
 % This is a simple template for a LaTeX document using the "article" class.
 % See "book", "report", "letter" for other types of document.
 
-\documentclass[12pt,a4paper,titlepage]{scrartcl} % use larger type; default would be 10pt
+\documentclass[11pt,a4paper,titlepage]{scrartcl} % use larger type; default would be 10pt
 
 \usepackage[utf8x]{inputenc} % set input encoding (not needed with XeLaTeX)
 
@@ -134,11 +134,11 @@ Folgende Datenraten wurden beobachtet:
 \item Port 5: 63 MByte/s
 \end{itemize}
 Die Datenraten von Port 1 und 3 entsprechen 100 Mbit/s.
-Es konnten nicht mehr als 63 MByte/s erzielt werden da die Leserate von der Festplatte des Fileservers nur 63 MByte/s beträgt (gemessen durch ablesen der angezeigten Geschwindigkeit von\ttfamily dd if=10GBTestdatei of=/dev/null \normalfont auf dem Fileserver).
+Es konnten nicht mehr als 63 MByte/s erzielt werden da die Leserate von der Festplatte des Fileservers nur 63 MByte/s beträgt (gemessen durch ablesen der angezeigten Geschwindigkeit von \ttfamily{dd if=10GBTestdatei of=/dev/null} \normalfont auf dem Fileserver).
 
 \newpage
 \section{Zweite Messung}
-Um testen zu können ob über Port 2, 4 und 5 eine Gigabit Verbindung möglich ist musste eine Testdatei auf einer schnelleren Datenquelle erzeugt werden. Dazu wurde auf der SMB-Freigabe des Fileservers eine neuer Ordner namens RAM erzeugt und dort eine RAM-Disk eingehängt (\ttfamily{mount -t ramfs ramfs RAM}\normalfont). auf dieser wurde dann analog zum \ttfamily{dd}\normalfont-Befehl von der ersten Messung mit \ttfamily{count=512}\normalfont eine 512 MiB große Testdatei erzeugt. Die kleinere Größe war notwendig wegen mangelnder RAM-Ausstattung des Fileservers. Die maximale Lesegeschwindkeit dieser Datei war nun 660 MByte/s (wieder gemessen durch ablesen der angezeigten Geschwindigkeit von\ttfamily dd if=Testdatei of=/dev/null \normalfont auf dem Fileserver). Mit dieser Datei wurden dann Messungen mit derselben Methode wie im ersten Versuch durchgeführt.
+Um testen zu können ob über Port 2, 4 und 5 eine Gigabit Verbindung möglich ist musste eine Testdatei auf einer schnelleren Datenquelle erzeugt werden. Dazu wurde auf der SMB-Freigabe des Fileservers eine neuer Ordner namens RAM erzeugt und dort eine RAM-Disk eingehängt (\ttfamily{mount -t ramfs ramfs RAM}\normalfont). auf dieser wurde dann analog zum \ttfamily{ dd}\normalfont-Befehl von der ersten Messung mit \ttfamily{count=512}\normalfont eine 512 MiB große Testdatei erzeugt. Die kleinere Größe war notwendig wegen mangelnder RAM-Ausstattung des Fileservers. Die maximale Lesegeschwindkeit dieser Datei war nun 660 MByte/s (wieder gemessen durch ablesen der angezeigten Geschwindigkeit von \ttfamily{dd if=Testdatei of=/dev/null} \normalfont auf dem Fileserver). Mit dieser Datei wurden dann Messungen mit derselben Methode wie im ersten Versuch durchgeführt.
 
 Es wurde nun folgende Datenraten gemessen:
 \begin{itemize}
