@@ -1,0 +1,31 @@
+    <HTML>
+    <TITLE>Java Menu Thing</TITLE>
+    <BODY>
+    <SCRIPT LANGUAGE="javascript">
+    function changePicture1()
+    {
+    var selection1 = document.DropPicture1.Picture1.selectedIndex; //grabs what user selected
+    document.pic1.src = document.DropPicture1.Picture1.options[selection1].value; //adds 'selection' to grab 'value'
+    }
+    function changePicture2()
+    {
+    var selection2 = document.DropPicture1.Picture2.selectedIndex; //grabs what user selected
+    document.pic2.src = document.DropPicture1.Picture2.options[selection2].value; //adds 'selection' to grab 'value'
+    }
+    </SCRIPT>
+    <IMG SRC="blank.gif" NAME="pic1" BORDER="0">
+    <IMG SRC="blank.gif" NAME="pic2" BORDER="0">
+    <BR>
+    <BR>
+    <FORM NAME="DropPicture1">
+    <SELECT NAME="Picture1" onChange="changePicture1()"> <!---Calls The Function--->
+    <OPTION SELECTED VALUE="blank.gif">Pictures!
+    <OPTION VALUE="pic1.gif">Picture One
+    <OPTION VALUE="pic2.jpg">Picture Two
+    </SELECT>
+    <SELECT NAME="Picture2" onChange="changePicture2()"> <!---Calls The Function--->
+    <OPTION SELECTED VALUE="blank.gif">Pictures!
+    <OPTION VALUE="pic1.gif">Picture One
+    <OPTION VALUE="pic2.jpg">Picture Two
+    </SELECT>
+    </FORM>
