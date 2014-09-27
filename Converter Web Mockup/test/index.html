@@ -1,31 +1,227 @@
-    <HTML>
-    <TITLE>Java Menu Thing</TITLE>
-    <BODY>
-    <SCRIPT LANGUAGE="javascript">
+<HTML>
+<HEAD>
+  <TITLE>Webfrontend Mockup</TITLE>
+  <link rel="stylesheet" href="style.css" type="text/css">
+  <SCRIPT type="text/javascript" src="json2.js"></SCRIPT>
+  
+  <SCRIPT LANGUAGE="javascript">
+    function appendCheckbox(port)
+    {
+	// create the necessary elements
+	var label= document.createElement("label");
+	var description = document.createTextNode(port);
+	var checkbox = document.createElement("input");
+
+	checkbox.type = "checkbox";    // make the element a checkbox
+	checkbox.name = "slct[]";      // give it a name we can check on the server side
+	checkbox.value = port;         // make its value "pair"
+
+	label.appendChild(checkbox);   // add the box to the element
+	label.appendChild(description);// add the description to the element
+
+	// add the label element to your div
+	document.getElementById('port_placeholder').appendChild(label);
+
+
+    }
     function changePicture1()
     {
     var selection1 = document.DropPicture1.Picture1.selectedIndex; //grabs what user selected
-    document.pic1.src = document.DropPicture1.Picture1.options[selection1].value; //adds 'selection' to grab 'value'
+    var json1 = JSON.parse(document.DropPicture1.Picture1.options[selection1].value);
+    document.source.src = json1.file; //adds 'selection' to grab 'value'
+    var selection2 = document.DropPicture1.Picture2.selectedIndex; //grabs what user selected // need other value for port number comparison
+    var json2 = JSON.parse(document.DropPicture1.Picture2.options[selection2].value);
+	if (json1.ports > json2.ports){
+	var div = document.getElementById('portwarning');
+        div.style.visibility = 'visible';
+	} else {
+	var div = document.getElementById('portwarning');
+        div.style.visibility = 'hidden';
+	}
+	
+    // clear the former content of a given <div id="some_div"></div>
+    document.getElementById('port_placeholder').innerHTML = '';
+
+    if (json1.combosfp.length > 0) { // maybe needs else
+      document.getElementById('port_placeholder').innerHTML = "Please select which combo SFP ports are in use:<br>";
+      for ( i = 0; i < json1.combosfp.length; i++ ) {
+        appendCheckbox(json1.combosfp[i]);
+      }
     }
+    }
+
     function changePicture2()
     {
     var selection2 = document.DropPicture1.Picture2.selectedIndex; //grabs what user selected
-    document.pic2.src = document.DropPicture1.Picture2.options[selection2].value; //adds 'selection' to grab 'value'
+    var json2 = JSON.parse(document.DropPicture1.Picture2.options[selection2].value);
+    document.target.src = json2.file; //adds 'selection' to grab 'value'
+    var selection1 = document.DropPicture1.Picture1.selectedIndex; //grabs what user selected // need other value for port number comparison
+    var json1 = JSON.parse(document.DropPicture1.Picture1.options[selection1].value);
+	if (json1.ports > json2.ports){
+	var div = document.getElementById('portwarning');
+        div.style.visibility = 'visible';
+	} else {
+	var div = document.getElementById('portwarning');
+        div.style.visibility = 'hidden';
+	}
+    if (json2.modules == 1) {
+      var div = document.getElementById('module_slot_a');
+      div.style.visibility = 'visible';
+      var div = document.getElementById('module_slot_b');
+      div.style.visibility = 'visible';
+    } else {
+      var div = document.getElementById('module_slot_a');
+      div.style.visibility = 'hidden';
+      var div = document.getElementById('module_slot_b');
+      div.style.visibility = 'hidden';
     }
-    </SCRIPT>
-    <IMG SRC="blank.gif" NAME="pic1" BORDER="0">
-    <IMG SRC="blank.gif" NAME="pic2" BORDER="0">
-    <BR>
-    <BR>
-    <FORM NAME="DropPicture1">
-    <SELECT NAME="Picture1" onChange="changePicture1()"> <!---Calls The Function--->
-    <OPTION SELECTED VALUE="blank.gif">Pictures!
-    <OPTION VALUE="pic1.gif">Picture One
-    <OPTION VALUE="pic2.jpg">Picture Two
-    </SELECT>
-    <SELECT NAME="Picture2" onChange="changePicture2()"> <!---Calls The Function--->
-    <OPTION SELECTED VALUE="blank.gif">Pictures!
-    <OPTION VALUE="pic1.gif">Picture One
-    <OPTION VALUE="pic2.jpg">Picture Two
-    </SELECT>
-    </FORM>
+    }
+
+    function clickFunction()
+    {
+    var div1 = document.getElementById('output-heading');
+    if (div1.style.visibility == 'hidden'){
+	div1.style.visibility = 'visible';
+       } else {
+        div1.style.visibility = 'hidden';
+       }
+    div1 = document.getElementById('output-field');
+    if (div1.style.visibility == 'hidden'){
+	div1.style.visibility = 'visible';
+       } else {
+        div1.style.visibility = 'hidden';
+       }
+    div1 = document.getElementById('output-button');
+    if (div1.style.visibility == 'hidden'){
+	div1.style.visibility = 'visible';
+       } else {
+        div1.style.visibility = 'hidden';
+       }
+    var tmp = document.getElementById('warnings');
+    if (tmp.checked){
+      var div1 = document.getElementById('warnings-heading');
+      if (div1.style.visibility == 'hidden'){
+  	  div1.style.visibility = 'visible';
+        } else {
+          div1.style.visibility = 'hidden';
+      }
+      div1 = document.getElementById('warnings-field');
+      if (div1.style.visibility == 'hidden'){
+	 div1.style.visibility = 'visible';
+      } else {
+         div1.style.visibility = 'hidden';
+      }
+      div1 = document.getElementById('warnings-button');
+      if (div1.style.visibility == 'hidden'){
+        div1.style.visibility = 'visible';
+        } else {
+          div1.style.visibility = 'hidden';
+        }
+      }
+    }
+  </SCRIPT>
+</HEAD>
+<BODY>
+  <div><a id="logo"></a></div>
+  <div id=oben><b>Converter for configs</b></div>
+   <div id="main">Please select the source and the target switch:<br><br>
+  <table>
+    <tr>
+      <td><IMG SRC="pics/none.png" NAME="source" BORDER="0" width="400"></td>
+      <td></td>
+      <td></td>
+      <td><IMG SRC="pics/none.png" NAME="target" BORDER="0" width="400"></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <FORM NAME="DropPicture1">
+      <td><SELECT NAME="Picture1" onChange="changePicture1()"> <!---Calls The Function--->
+          <OPTION SELECTED VALUE='{"file":"pics/none.png","ports":999,"combosfp":[]}'>- None selected -
+          <OPTION VALUE='{"file":"pics/EOS/C5G124-24-scaled.jpg","ports":24,"combosfp":[21,22,23,24]}'>C5G124-24
+          <OPTION VALUE='{"file":"pics/EOS/C5K125-48P2-scaled.jpg","ports":48,"combosfp":[]}'>C5K125-48P2
+          <OPTION VALUE='{"file":"pics/EOS/C5K175-24-scaled.jpg","ports":24,"combosfp":[]}'>C5K175-24
+<!---          <OPTION VALUE='{"file":"pics/XOS/Summit-X460-48t-scaled.jpg","ports":48,"combosfp":[]}'>Summit X460-48t --->
+    </SELECT></td>
+      <td></td>
+      <td></td>
+      <td><SELECT NAME="Picture2" onChange="changePicture2()"> <!---Calls The Function--->
+          <OPTION SELECTED VALUE='{"file":"pics/none.png","ports":999,"modules":0}'>- None selected -
+<!---          <OPTION VALUE='{"file":"pics/EOS/C5G124-24-scaled.jpg","ports":24}'>C5G124-24
+          <OPTION VALUE='{"file":"pics/EOS/C5K125-48P2-scaled.jpg","ports":48}'>C5K125-48P2
+          <OPTION VALUE='{"file":"pics/EOS/C5K175-24-scaled.jpg","ports":24}'>C5K175-24 --->
+          <OPTION VALUE='{"file":"pics/XOS/Summit-X460-48t-scaled.jpg","ports":48,"modules":1}'>Summit X460-48t
+          </SELECT></td>
+        </FORM>
+      </tr>
+      <tr>
+      <td><br><div id="port_placeholder"></div><br>
+          <div id="portwarning" style="color:#FF0000;visibility:hidden"><b>Warning!! Target has fewer ports then source</b></div></td>
+      <td></td>
+      <td></td>
+      <td><div id="module_slot_a" style="visibility: hidden">module slot A:<br>
+            <SELECT NAME="slot_a"> 
+            <OPTION SELECTED VALUE='{"file":"pics/none.png","ports":999}'>- None selected -
+            <OPTION VALUE='{"file":"pics/none.png","ports":2}'>XGM3S-2XF
+            <OPTION VALUE='{"file":"pics/none.png","ports":2}'>XGM3S-2SF
+            </SELECT></div>
+      <div id="module_slot_b" style="visibility: hidden">module slot B:<br>
+            <SELECT NAME="slot_b"> 
+            <OPTION SELECTED VALUE='{"file":"pics/none.png","ports":999}'>- None selected -
+            <OPTION VALUE='{"file":"pics/none.png","ports":4}'>XGM3S-4SF
+            <OPTION VALUE='{"file":"pics/none.png","ports":2}'>SummitStack Module
+            <OPTION VALUE='{"file":"pics/none.png","ports":2}'>Summitstack-V80 Module
+            </SELECT></div>
+      </td>
+      </tr>
+    </table>
+  Please enter source config here:
+  <form>
+    <textarea rows="20" cols="100" id="conf-input-field" style="resize: none;" data-role="none"></textarea>
+   <br><br>
+   <table>
+     <tr>
+       <td>Options:</td>
+     </tr>
+     <tr>
+       <td><form>
+             select warning log level <select><option>1</option>
+		<option>2</option>
+		<option>3</option>
+		<option>4</option></select><br>
+             <input type="checkbox" id="warnings" value=1> Show warnings<br>
+             <input type="checkbox"> Enable switch defaults<br>
+             <input type="checkbox"> Keep unknown lines in ouput<br>
+             <input type="checkbox"> Treat translation errors as warnings<br>
+             <input type="checkbox"> Treat unknown input lines as errors<br>
+       </td>
+       <td></td>
+       <td><button type="button">Upload config file</button></td>
+       <td></td>
+       <td><input id="convert" type="button" value="Convert Config" onclick="clickFunction()"></input></td>
+      </tr>
+   </table>
+   <br><br>
+   <div id="output-heading" style="visibility: hidden">Converted config:</div>
+   <div id="output-field" style="visibility: hidden; overflow: scroll; width: 710px; max-height: 200px; padding: 5px; border: 2px solid black">
+        create vlan data<br>
+	configure vlan data tag 2<br>
+	configure vlan data ipaddress 10.0.2.1/24<br>
+	create vlan voice<br>
+	configure vlan voice tag 3<br>
+	configure vlan voice ipaddress 10.0.3.1/24<br>
+	enable ipforwarding<br></div>
+   <br>
+   <div id="output-button" style="visibility: hidden"><button type="button">Download config file</button></div>
+   <br>
+   <div id="warnings-heading" style="visibility: hidden">Warnings:</div>
+   <div id="warnings-field" style="visibility: hidden; overflow: scroll; width: 710px; max-height: 200px; padding: 5px; border: 2px solid black">Nix</div>
+   <br>
+   <div id="warnings-button" style="visibility: hidden"><button type="button">Download warnings log file</button></div>
+</div>
+</BODY>
+</HTML>

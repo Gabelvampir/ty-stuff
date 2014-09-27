@@ -1,0 +1,45 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+#oben {
+    padding: 3em 1em 0.5em 10em;
+    background-color: #000000;
+    color: #FFFFFF;
+}
+
+#logo {
+    position: absolute;
+    z-index: 20;
+    left: 0;
+    top: 1em;
+    height: 2.4em;
+    width: 7em;
+    background-image: url(pics/temp-logo.png);
+}
+
+#main {
+    margin: 8;
+}
+
+#source-pic {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+#source-select {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+#target-pic {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+#target-select {
+    margin-left: auto;
+    margin-right: 0;
+}
+
