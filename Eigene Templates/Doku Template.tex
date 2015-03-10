@@ -21,6 +21,7 @@
 
 \usepackage{graphicx} % support the \begin{center}\includegraphics command and options
 \usepackage{float}
+\usepackage{tocstyle}
 
 % \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
 
@@ -98,8 +99,11 @@
 
 \thispagestyle{fancy}
 
+\usetocstyle{standard}  %style docu see koma script docu tocstyle.pdf table 1
 \tableofcontents
-\section{Testkapitel}
+
+\chapter{Testkapitel}
+\section{Testsektion}
 Dies ist eine Testaufzählung:
 \begin{itemize}
 \item Item 1
