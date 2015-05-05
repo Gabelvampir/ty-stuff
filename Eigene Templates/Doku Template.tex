@@ -1,0 +1,117 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+% This is a simple template for a LaTeX document using the "article" class.
+% See "book", "report", "letter" for other types of document.
+
+\documentclass[11pt,a4paper,titlepage]{scrreprt} % use larger type; default would be 10pt
+
+\usepackage[utf8x]{inputenc} % set input encoding (not needed with XeLaTeX)
+
+%%% Examples of Article customizations
+% These packages are optional, depending whether you want the features they provide.
+% See the LaTeX Companion or other references for full information.
+
+%%% PAGE DIMENSIONS
+\usepackage{geometry} % to change the page dimensions
+%\geometry{a4paper} % or letterpaper (US) or a5paper or....
+\geometry{bottom=3.5cm} % for example, change the margins to 2 inches all round
+% \geometry{landscape} % set up the page for landscape
+%   read geometry.pdf for detailed page layout information
+
+\usepackage{graphicx} % support the \begin{center}\includegraphics command and options
+\usepackage{float}
+
+% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+%\usepackage{booktabs} % for much better looking tables
+%\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+%\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+% These packages are all incorporated in the memoir class to one degree or another...
+\usepackage[ngerman]{babel}
+\usepackage{pifont} %for symbols (i.e. arrows)
+\usepackage{fancyhdr}
+%\usepackage{showframe} %shows the margins
+
+\usepackage[colorlinks]{hyperref} % package for hyperlinks with \url
+%\usepackage[svgnames]{xcolor}
+%\usepackage[anythingbreaks]{breakurl}
+%\usepackage{listings}
+
+%%redifine of emph, see http://tex.stackexchange.com/questions/6754/what-is-the-canonical-way-to-redefine-the-emph-command
+\makeatletter
+\DeclareRobustCommand{\em}{%
+  \@nomath\em \if b\expandafter\@car\f@series\@nil
+  \normalfont \else \bfseries \fi}
+\makeatother
+
+%%% HEADERS & FOOTERS
+%set with fancy layout package
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+\setlength{\parindent}{0mm} %set paragraph begin indentation to 0
+
+% hyperlink color definitions
+%\hypersetup{citecolor=DeepPink4}
+%\hypersetup{linkcolor=DarkRed}
+%\hypersetup{urlcolor=DarkBlue} 
+
+%%% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+%\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+%\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+%\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+%\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+%%% END Article customizations
+
+%%% The "real" document content comes below...
+
+\title{STANDARDDOKUMENT}
+\author{Sebastian Deußer}
+%\date{4. April 2014} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed 
+%\setcounter{section}{-1} % sets the section counter to start with 0
+
+\begin{document}
+\maketitle %title (page)
+
+%header and footer definitions for fancyhdr
+\pagestyle{fancy}
+\lhead{}
+\chead{\leftmark}
+\rhead{}
+\lfoot{Sebastian Deußer}
+\cfoot{}
+\rfoot{Seite \thepage}
+
+\thispagestyle{fancy}
+
+\tableofcontents
+
+\chapter{Testkapitel}
+\section{Testsektion}
+Dies ist eine Testaufzählung:
+\begin{itemize}
+\item Item 1
+\item Item 2
+\item Item 3
+\item Item 4
+\end{itemize}
+Und weiter im Text.
+
+Hier bricht die Seite nun um.\newpage
+
+
+\end{document}
