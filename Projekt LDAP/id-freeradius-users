@@ -1,0 +1,4 @@
+#
+# Allow user accounts from LDAP
+#
+DEFAULT Auth-Type := LDAP
