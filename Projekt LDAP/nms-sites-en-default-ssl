@@ -1,0 +1,14 @@
+<-snip->
+
+  <Location />
+    AuthType  Basic
+    AuthName  "FGN NMS"
+    AuthzLDAPAuthoritative  off
+    AuthBasicProvider ldap
+#   AuthLDAPURL ldaps://id.fg-networking.de:636/dc=fg-networking,dc=de?uid?sub?
+    AuthLDAPURL ldap://aio.fg-networking.de:389/cn=fg-networking.de?uid?sub?
+    require valid-user
+    Satisfy any
+  </Location>
+
+<-snip>
