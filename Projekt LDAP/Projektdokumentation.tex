@@ -36,11 +36,15 @@
 %\usepackage{blindtext}
 %\usepackage{pifont} %for symbols (i.e. arrows)
 %\usepackage{showframe} %shows the margins
+%\usepackage{soul} %used for text highlighting
 
 \usepackage[colorlinks]{hyperref} % package for hyperlinks with \url
 %\usepackage[svgnames]{xcolor}
 %\usepackage[anythingbreaks]{breakurl}
 %\usepackage{listings}
+
+\newcommand{\hilight}[1]{\colorbox{yellow}{#1}} %command for magic marker highlighting
+%   (from http://pleasemakeanote.blogspot.de/2009/08/how-to-highlight-text-in-latex.html)
 
 %%redifine of emph, see http://tex.stackexchange.com/questions/6754/what-is-the-canonical-way-to-redefine-the-emph-command
 \makeatletter
@@ -90,6 +94,7 @@
 
 \section{Analyse und Planung}
 \subsection{Ist-Analyse}
+Der CommuniGate Server der fgn GmbH für E-Mail und Identity Management (LDAP und RADIUS) wurde seit langem nicht aktualisiert und ist deswegen eine sehr in die Jahre gekommene Version (v5.0.13 von November 2006). Schon seit l\"angerem gibt es deswegen regelm\"a\ss{}ig Probleme, zB mit der SSL Authentifizierung neuerer E-Mail Clients. Da eine Aktualisierung von CommuniGate mit \"ahnlichem Aufwand verbunden w\"are wie ein komplettes Neuaufsetzen von Ersatzservern (und au\ss{}erdem mit dem Kauf einer neuen Lizenz verbunden w\"are) wurde entschieden die Serverkomponenten E-Mail und Identity Management durch neue Server abzul\"osen. \hilight{TODO} Da die E-Mail Infrastruktur sehr kritisch f\"ur die Arbeit der Firma ist und bei der Migration der E-Mailkonten mit vielen vertraulichen firmeninternen Informationen hantiert werden muss soll die Installation des neuen E-Mail Servers von einem Mitarbeiter von fgn durchgeführt werden.
 
 %\section{Testkapitel}
 %\subsection{Testsektion}
