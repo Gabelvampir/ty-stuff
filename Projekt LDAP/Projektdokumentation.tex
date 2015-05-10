@@ -33,10 +33,9 @@
 %\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
 % These packages are all incorporated in the memoir class to one degree or another...
 \usepackage[ngerman]{babel}
-%\usepackage{blindtext}
+\usepackage{blindtext}
 %\usepackage{pifont} %for symbols (i.e. arrows)
 %\usepackage{showframe} %shows the margins
-%\usepackage{soul} %used for text highlighting
 
 \usepackage[colorlinks]{hyperref} % package for hyperlinks with \url
 %\usepackage[svgnames]{xcolor}
@@ -92,9 +91,19 @@
 \tableofcontents
 \newpage
 
+\section{Einleitung}
+In den meisten Firmennetzwerken wird eine zentrale Stelle benötigt um verschiedene Anwender Metadaten zu verwalten. F\"ur diese Aufgabe wird \"ublicherweise ein Verzeichnisdienst verwendet. Basis eines Verzeichnisdienstes ist eine hierarchische Datenbank, die im Netzwerk verteilt angelegt sein kann. In dieser Datenbank k\"onnen Daten zu verschiedenen Objekten abgelegt werden wie etwa Konfigurationsdaten f\"ur Rechner oder diverse Daten f\"ur Anwender wie z.B. Name, Passwort, E-Mail Konto, Gruppenzugeh\"origkeiten u.s.w.. Die Anforderungen an einen Verzeichnisdienst wurden in den 80er Jahren von der International Telecommunication Union in der X.500 Spezifikation festgeschrieben nachdem weltweit Telekommunikationsunternehmen jahrzehntelang Praxiserfahrungen mit dem Thema bei Erstellung und Verwaltung von Telefon Verzeichnissen sammelten und dann zur Spezifikation beisteuerten.
+Das verbreiteste Protokoll zur Abfrage dieser Daten \"uber ein IP-Netzwerk (z.B. zum verifizieren des Passworts bei der Rechneranmeldung) ist LDAP (Lightweight Directory Access Protocol).
+
 \section{Analyse und Planung}
 \subsection{Ist-Analyse}
-Der CommuniGate Server der fgn GmbH für E-Mail und Identity Management (LDAP und RADIUS) wurde seit langem nicht aktualisiert und ist deswegen eine sehr in die Jahre gekommene Version (v5.0.13 von November 2006). Schon seit l\"angerem gibt es deswegen regelm\"a\ss{}ig Probleme, zB mit der SSL Authentifizierung neuerer E-Mail Clients. Da eine Aktualisierung von CommuniGate mit \"ahnlichem Aufwand verbunden w\"are wie ein komplettes Neuaufsetzen von Ersatzservern (und au\ss{}erdem mit dem Kauf einer neuen Lizenz verbunden w\"are) wurde entschieden die Serverkomponenten E-Mail und Identity Management durch neue Server abzul\"osen. \hilight{TODO} Da die E-Mail Infrastruktur sehr kritisch f\"ur die Arbeit der Firma ist und bei der Migration der E-Mailkonten mit vielen vertraulichen firmeninternen Informationen hantiert werden muss soll die Installation des neuen E-Mail Servers von einem Mitarbeiter von fgn durchgeführt werden.
+\hilight{TODO} Im Praktikumsbetrieb fgn GmbH l\"auft s\"amtlicher Mailverkehr und die Authentifizierung an den internen Webservices u.\"a. \"uber einen CommuniGate Server. Urspr\"unglich wurde der CommuniGate Server auf einem eigenen Rechner aufgesetzt, inzwischen aber wie viele andere Rechner der Firma virtualisiert. Die Webservices, die ihn zur Anwender-Authentifizierung verwenden, laufen auf drei anderen VMs. Lediglich die Anwenderkonten auf den Betriebssystemen der diversen Anwender-PCs sind nicht von CommuniGate abh\"angig.
+
+
+\subsection{Soll-Analyse}
+\hilight{TODO} Der CommuniGate Server der fgn GmbH f\"ur E-Mail und Identity Management (\mbox{LDAP} und \mbox{RADIUS}) wurde seit langem nicht aktualisiert und ist deswegen eine sehr in die Jahre gekommene Version (v5.0.13 von November 2006). Schon seit l\"angerem gibt es deswegen regelm\"a\ss{}ig Probleme, zB mit der SSL Authentifizierung neuerer E-Mail Clients. Da eine Aktualisierung von CommuniGate mit \"ahnlichem Aufwand verbunden w\"are wie ein komplettes Neuaufsetzen von Ersatzservern (und au\ss{}erdem mit dem Kauf einer neuen Lizenz verbunden w\"are) wurde entschieden die Serverkomponenten E-Mail und Identity Management durch neue Server abzul\"osen.
+\hilight{TODO} Da die E-Mail Infrastruktur sehr kritisch f\"ur die Arbeit der Firma ist und bei der Migration der E-Mailkonten mit vielen vertraulichen firmeninternen Informationen hantiert werden muss soll die Installation des neuen E-Mail Servers von einem Mitarbeiter von fgn durchgef\"uhrt werden.
+
 
 %\section{Testkapitel}
 %\subsection{Testsektion}
