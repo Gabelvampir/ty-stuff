@@ -127,14 +127,12 @@ Die fgn GmbH wurde im August 2000 als SpinOff der Technische Universität (TU) K
 
 Die Kernkompetenz der fgn GmbH ist anspruchsvolles Netzwerk-Knowhow, welches als Dienstleistung in drei eng verknüpften Tätigkeitsfeldern angeboten wird: Schulungen, Workshops und Netzwerk-Consulting (Beratung und vor Ort Support von Firmen bei Problemen, Umstrukturierungen, Erweiterungen und Neuaufbau von Produktivnetzwerken).
 
-
 \subsection{Ist-Analyse}
 Im Praktikumsbetrieb fgn GmbH l\"auft der E-Mailverkehr und die Authentifizierung an den internen Webservices und OpenVPN Server \"uber einen alten CommuniGate Server (v5.0.13 von November 2006). Urspr\"unglich wurde dieser auf einem eigenen Rechner aufgesetzt, inzwischen aber wie viele andere Rechner der Firma virtualisiert. 
 
 Die Webservices, die ihn zur Anwender-Authentifizierung verwenden, laufen auf drei anderen VMs, ebenso der OpenVPN Server. Lediglich die Anwenderkonten auf den Betriebssystemen der diversen Anwender-PCs sind nicht von CommuniGate abh\"angig. Da die fgn GmbH \"uber das Netz der Technischen Universit\"at Kaiserslautern angebunden ist m\"ussen alle E-Mails auch \"uber die Mailserver der Universit\"at laufen. Diese verwenden RADIUS um zu pr\"ufen ob die E-Mailkonten der fg-networking.de Domain tats\"achlich vorhanden sind. Der RADIUS Server dazu wird ebenso von CommuniGate bereitgestellt. 
 
 Wegen der recht alten Softwareversion gibt es schon seit l\"angerem regelm\"a\ss{}ig Probleme, z.B. mit der SSL Authentifizierung neuerer E-Mail Clients (die unterst\"utzen Versionen von SSL/TLS benutzen aktuelle E-Mail Clients aus Sicherheitsgr\"unden nur noch ungern).
-
 
 \subsection{Soll-Analyse}
 Eine Aktualisierung von CommuniGate w\"are mit \"ahnlichem Aufwand verbunden wie ein komplettes Neuaufsetzen von Ersatzservern (und au\ss{}erdem mit dem Kauf einer neuen Lizenz verbunden w\"are). Deswegen wurde entschieden die Serverkomponenten E-Mail und Identity Management durch neue Server abzul\"osen. In der Firma momentan sehr viel freie Software verwendet wird sollen die Ersatzserver auch auf auf Basis von freie Software aufgesetzt werden. Da die E-Mail Infrastruktur sehr kritisch f\"ur die Arbeit der Firma ist und bei der Migration der E-Mailkonten mit vielen vertraulichen firmeninternen Informationen hantiert werden muss soll die Installation des neuen E-Mail Servers von einem Mitarbeiter von fgn durchgef\"uhrt werden.
@@ -152,8 +150,9 @@ Somit m\"ussen im Rahmen der Projektarbeit folgende Arbeiten durchgef\"uhrt werd
 \item Verzeichnisstruktur erstellen
 \item grundlegenden Benutzerdaten (Name, Passwort) aus bestehenden System \"ubernehmen
 \item FreeRADIUS Server installieren
-\item FreeRADIUS Server konfigurieren und an den OpenLDAP Server angebinden
+\item FreeRADIUS Server konfigurieren und an den OpenLDAP Server anbinden
 \item Absicherung des Systems
+\item Umkonfiguration der entsprechenden Systeme auf den neuen LDAP-Server
 \item Funktions- und Sicherheitstests
 \end{itemize}
 
@@ -162,17 +161,22 @@ Somit m\"ussen im Rahmen der Projektarbeit folgende Arbeiten durchgef\"uhrt werd
 \subsubsection{Wirtschaftliche Vorgaben}
 Wie die meisten anderen Server der fgn GmbH soll der Server in einer neuen VM auf einem bereits bestehenden VMware ESXi-Servers laufen, somit fallen keine zus\"atzlichen Hardwarekosten an. Da in dem Projekt  ausschlie\ss{}lich freie Software zum Einsatz kommen soll fallen auch keine zus\"atzlichen Softwarelizenzkosten an.
 
-
 \subsubsection{Organisatorische Vorgaben}
 Das Projekt wird im Praktikumsbetrieb mit Unterst\"utzung des Mitarbeiters Erik Auerswald durchgef\"uhrt.
 Zur Projektdokumentation werden zus\"atzlich jeweils eine Kundendokumentation für Administratoren im firmeninternen Wiki erstellt. Hinzu kommen Funktions- und Sicherheitstests zur Qualit\"atssicherung. Eine Anwenderdokumentation ist nicht notwendig da sich aus Sicht des Anwenders nichts gegen\"uber des Ausgangszustandes \"andern soll.
-
 
 \subsubsection{Zeitliche Vorgaben}
 Das Projekt wird im Zeitraum vom 04.05.2015 – 18.05.2015 durchgef\"uhrt, wobei die Bearbeitungszeit von 35 Stunden nicht \"uberschritten werden darf.
 
 \section{Projektplanung}
+\subsection{Planung des Ersatzservers}
+Als Ersatzserver wird eine neue Virtual Machine auf einen der firmeneigenen ESXi Servern verwendet. Als Betriebssystem wird Debian Stable (zur Durchf\"uhrungszeit des Projektes Version 8.0 Jessie) mit der Standardpaketauswahl ohne zus\"atzliche Vorauswahlen.
 
+\subsection{Planung des Kommunikationskonzepts}
+S\"amtliche firmeninterne Webservices, der VPN, der kommende neue E-Mailserver und der FreeRADIUS Daemon greifen \"uber das LDAP-Protokoll auf den OpenLDAP Daemon zu um Benutzer zu authentifizieren und Einstellungen zu diesen zu holen. Der E-Mailserver der Universit\"at greift auf den FreeRADIUS Daemon zu um Benutzerkonten zu pr\"ufen, welcher wiederrum die Daten beim OpenLDAP-Daemon erfragt.
+
+\subsection{Planung des Sicherheitskonzepts}
+Das Firmennetzwerk der fgn GmbH ist \"uber die Netzwerk der TU Kaiserslautern ans Internet angebunden. Entsprechend wird jeglicher Netzwerkverkehr von der TU Firewall vorgefiltert. Das Firmennetz von fgn ist zus\"atzlich noch durch eine eigene Firewall gesichert. In diese muss eine Ausnahme f\"ur den neuen RADIUS Server eingetragen werden (analog zur alten Regel). Zus\"atzlich wird auf dem neuen Server eine Software-Firewall installiert die nur die f\"ur LDAP, RADIUS und zur Wartung ben\"otigten Ports zulassen soll.
 
 \subsection{Projektablaufplan}
 Analyse und Planung (insgesamt 6 h)
