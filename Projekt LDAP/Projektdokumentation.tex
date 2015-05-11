@@ -78,7 +78,7 @@
 
 %%% The "real" document content comes below...
 
-\title{Projektdokumentation "Aufsetzen eines LDAP- und RADIUS-Servers zum abl\"osen eines alten CommuniGate Servers"}
+\title{Projektdokumentation "Aufsetzen eines Authentifizierungsservers als Ersatz eines veralteten propriet\"aren CommuniGate Servers"}
 \author{Sebastian Deu\ss{}er}
 %\date{4. April 2014} % Activate to display a given date or no date (if empty),
          % otherwise the current date is printed 
@@ -93,7 +93,10 @@
 
 \section{Einleitung}
 In den meisten Firmennetzwerken wird eine zentrale Stelle benötigt um verschiedene Anwender Metadaten zu verwalten. F\"ur diese Aufgabe wird \"ublicherweise ein Verzeichnisdienst verwendet. Basis eines Verzeichnisdienstes ist eine hierarchische Datenbank, die im Netzwerk verteilt angelegt sein kann. In dieser Datenbank k\"onnen Daten zu verschiedenen Objekten abgelegt werden wie etwa Konfigurationsdaten f\"ur Rechner oder diverse Daten f\"ur Anwender wie z.B. Name, Passwort, E-Mail Konto, Gruppenzugeh\"origkeiten u.s.w.. Die Anforderungen an einen Verzeichnisdienst wurden in den 80er Jahren von der International Telecommunication Union in der X.500 Spezifikation festgeschrieben nachdem weltweit Telekommunikationsunternehmen jahrzehntelang Praxiserfahrungen mit dem Thema bei Erstellung und Verwaltung von Telefon Verzeichnissen sammelten und dann zur Spezifikation beisteuerten.
-Das verbreiteste Protokoll zur Abfrage dieser Daten \"uber ein IP-Netzwerk (z.B. zum verifizieren des Passworts bei der Rechneranmeldung) ist LDAP (Lightweight Directory Access Protocol).
+
+In der Praxis stellte es sich als unpraktikabel f\"ur so gut wie alle Firmen au\ss{}er große Telekommunikationsunternehmen heraus die gesamte X.500 Spezifikation zu implementieren da dies einen hohen Implementierungsaufwand darstellt und der Betrieb sehr Hardware intensiv ist. Deswegen wurde an der Universität von Michigan 1993 LDAP (Lightweight Directory Access Protocol) entwickelt das ursprünglich als abgespeckte Alternative zu DAP (Directory Access Protocol) das traditionell zum Zugriff auf X.500 Verzeichnisse verwendet wurde. Der Ansatz von LDAP war den Zugriff durch den TCP/IP Protokollstapel zur ermöglichen, was weit weniger Implementierungsaufwand darstellt als die komplette Implementierung alles OSI-Schichten wie es bei DAP der Fall ist. Heutzutage ist LDAP das verbreiteste Protokoll zur Abfrage von Verzeichnisdiensten, u.a. auch da TCP/IP-basierte Netzwerke der verbreitesten Netzwerktyp ist. LDAP wird in vielen Anwendungen eingesetzt, vor allem im Adressbuchteil der meisten E-Mail Clients wie z.B. Apple Adressbuch, Microsoft Outlook, Mozilla Thunderbird und in Verzeichnisdiensten wie z.B. Microsoft Active Directory Services, Apple Open Directory und dem aussterbenden Pionier Novell eDirectory.
+
+In diesem Projekt wurde OpenLDAP verwendet, die verbreiteste freie Open Source Implementierung des Netzwerkstandards und steht unter einen eigenen freien Lizenz, der OpenLDAP Public License. OpenLDAP ist au\ss{}erdem die Referenzimplementierung des Standards, weswegen es in vielen Belangen (z.B. bei Schemadateien) mehr auf Protokollkonformit\"at als andere Implementierungen. Der OpenLDAP Server ist nicht nur das Abfrageprotokoll enthalten sondern auch ein Verzeichnisdienst.
 
 \section{Analyse und Planung}
 \subsection{Ist-Analyse}
