@@ -121,7 +121,7 @@ RADIUS (Remote Authentication Dial-In User Service) ist ebenfalls ein Client/Ser
 
 Hier wurde FreeRADIUS verwendet, der laut Aussage des Projektes weltweit verbreiteste RADIUS Server. Das freie Open Source Projekt unter GPLv2 umfasst neben dem RADIUS Server au\ss{}erdem eine PAM Bibliothek, ein Apache Webserver Modul und eine Client Bibliothek (im Gegensatz zum Rest unter BSD Lizenz).
 
-\section{Analyse und Planung}
+\section{Projektbeschreibung}
 \subsection{Projektumfeld}
 Die fgn GmbH wurde im August 2000 als SpinOff der Technische Universität (TU) Kaiserslautern gegründet. Die Gründer waren zuvor mehrere Jahre (seit 1996 bzw. 1989) als freischaffende Consultants und Trainer tätig. Die Firma pflegt enge Kontakte zum Regionalen Hochschulrechenzentrum Kaiserslautern (RHRK), da die meisten Mitarbeiter das Netz der TU Kaiserslautern mit ca. 10.000 Ports, Diensten wie Mail, DNS und DHCP in der Vergangenheit betreut haben oder es heute noch betreuen.
 
@@ -143,7 +143,7 @@ F\"ur das Identity Management sollen OpenLDAP und FreeRADIUS zum Einsatz kommen 
 
 F\"ur den E-Mail Teil soll ein postfix Server verwendet werden, allerdings war dieser zur Fertigstellung dieses Projektes noch nicht einsatzf\"ahig. Die Intergration des neuen E-Mailservers ist damit nicht Teil dieses Projektes und wird zu einem sp\"ateren Zeitpunkt durchgef\"uhrt. Es werden lediglich die Vorarbeiten auf der Seite vom Identity Management get\"atigt die dazu unabh\"angig von der endg\"ultigen Konfiguration des neuen E-Mail Servers sind.\newline
 
-\noindent
+\noindent 		%verhindert einmalig Einrueckung
 Somit m\"ussen im Rahmen der Projektarbeit folgende Arbeiten durchgef\"uhrt werden: 
 \begin{itemize}
 \item Linux Grundsystem installieren
@@ -153,20 +153,71 @@ Somit m\"ussen im Rahmen der Projektarbeit folgende Arbeiten durchgef\"uhrt werd
 \item grundlegenden Benutzerdaten (Name, Passwort) aus bestehenden System \"ubernehmen
 \item FreeRADIUS Server installieren
 \item FreeRADIUS Server konfigurieren und an den OpenLDAP Server angebinden
+\item Absicherung des Systems
+\item Funktions- und Sicherheitstests
 \end{itemize}
 
 
 \subsection{Vorgaben}
 \subsubsection{Wirtschaftliche Vorgaben}
+Wie die meisten anderen Server der fgn GmbH soll der Server in einer neuen VM auf einem bereits bestehenden VMware ESXi-Servers laufen, somit fallen keine zus\"atzlichen Hardwarekosten an. Da in dem Projekt  ausschlie\ss{}lich freie Software zum Einsatz kommen soll fallen auch keine zus\"atzlichen Softwarelizenzkosten an.
+
+
 \subsubsection{Organisatorische Vorgaben}
-Zur Projektdokumentation werden zus\"atzlich jeweils eine Kundendokumentation für Administratoren und Anwender erstellt. Hinzu kommen Funktions- und Sicherheitstests zur Qualit\"atssicherung.
+Das Projekt wird im Praktikumsbetrieb mit Unterst\"utzung des Mitarbeiters Erik Auerswald durchgef\"uhrt.
+Zur Projektdokumentation werden zus\"atzlich jeweils eine Kundendokumentation für Administratoren im firmeninternen Wiki erstellt. Hinzu kommen Funktions- und Sicherheitstests zur Qualit\"atssicherung. Eine Anwenderdokumentation ist nicht notwendig da sich aus Sicht des Anwenders nichts gegen\"uber des Ausgangszustandes \"andern soll.
 
 
 \subsubsection{Zeitliche Vorgaben}
 Das Projekt wird im Zeitraum vom 04.05.2015 – 18.05.2015 durchgef\"uhrt, wobei die Bearbeitungszeit von 35 Stunden nicht \"uberschritten werden darf.
 
-\newpage
 \section{Projektplanung}
+
+
+\subsection{Projektablaufplan}
+Analyse und Planung (insgesamt 6 h)
+\begin{itemize}
+\item Ist-Analyse (3 h)
+\begin{itemize}
+\item Analyse des bestehenden CommuniGate Servers und der damit verbundenen Webservices (2 h)
+\item Aufnahme der Anforderungen an einen Ersatzserver (1 h)
+\end{itemize}
+\item Planung (3 h)
+\begin{itemize}
+\item Ausarbeitung eines Konzepts für den Ersatzserver (1 h)
+\item Ausarbeitung des Sicherheitskonzepts (unter Berücksichtigung des Firmenkonzepts) (1 h)
+\item Ausarbeitung des Kommunikationskonzepts (Serverdienste untereinander und extern) (1 h)
+\end{itemize}
+\end{itemize}
+Umsetzung (insgesamt 20 h)
+\begin{itemize}
+\item Vorbereitungen (6 h)
+\begin{itemize}
+\item Dokumentation der Konfiguration des zu ersetzenden Servers (2 h)
+\item Erstellen einer Liste aller Dienste, die das bestehende Identity Management nutzen (2 h)
+\item Prüfung von Möglichkeiten zum Importieren der bestehenden Anwender-Konten in die neue Lösung (2 h)
+\end{itemize}
+\item Installation und Einrichtung des neuen Servers (8 h)
+\begin{itemize}
+\item Grundinstallation des Linux Systems des neuen Servers (1 h)
+\item Installation und Konfiguration des LDAP Servers (3 h)
+\item Installation und Konfiguration des RADIUS Servers (2 h)
+\item Absicherung des Rechners (Firewall etc) (2 h)
+\end{itemize}
+\item Abschließende Arbeiten (6 h)
+\begin{itemize}
+\item Umkonfiguration der Webservices (2 h)
+\item Import/Anlegen der Anwender Konten (2 h)
+\item Funkions- und Sicherheitstests (2 h)
+\end{itemize}
+\end{itemize}
+Dokumentation (insgesamt 9 h)
+\begin{itemize}
+\item Erstellen der Projektdokumentation (8 h)
+\item Erstellen der Dokumentation für das firmeninterne Wiki (1 h)
+\end{itemize}
+
+\newpage
 \section{Realisierung}
 \section{Qualit\"atssicherung}
 \section{Projektkosten}
