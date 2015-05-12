@@ -15,7 +15,7 @@
 %%% PAGE DIMENSIONS
 \usepackage{geometry} % to change the page dimensions
 %\geometry{a4paper} % or letterpaper (US) or a5paper or....
-\geometry{bottom=3.5cm} % for example, change the margins to 2 inches all round
+\geometry{top=3.5cm,bottom=3.5cm} % for example, change the margins to 2 inches all round
 % \geometry{landscape} % set up the page for landscape
 %   read geometry.pdf for detailed page layout information
 
@@ -130,7 +130,9 @@ Die Kernkompetenz der fgn GmbH ist anspruchsvolles Netzwerk-Knowhow, welches als
 \subsection{Ist-Analyse}
 Im Praktikumsbetrieb fgn GmbH l\"auft der E-Mailverkehr und die Authentifizierung an den internen Webservices und OpenVPN Server \"uber einen alten CommuniGate Server (v5.0.13 von November 2006). Urspr\"unglich wurde dieser auf einem eigenen Rechner aufgesetzt, inzwischen aber wie viele andere Rechner der Firma virtualisiert. 
 
-Die Webservices, die ihn zur Anwender-Authentifizierung verwenden, laufen auf drei anderen VMs, ebenso der OpenVPN Server. Lediglich die Anwenderkonten auf den Betriebssystemen der diversen Anwender-PCs sind nicht von CommuniGate abh\"angig. Da die fgn GmbH \"uber das Netz der Technischen Universit\"at Kaiserslautern angebunden ist m\"ussen alle E-Mails auch \"uber die Mailserver der Universit\"at laufen. Diese verwenden RADIUS um zu pr\"ufen ob die E-Mailkonten der fg-networking.de Domain tats\"achlich vorhanden sind. Der RADIUS Server dazu wird ebenso von CommuniGate bereitgestellt. 
+Die Webservices, die ihn zur Anwender-Authentifizierung verwenden, laufen auf drei anderen VMs, ebenso der OpenVPN Server. Sie kommunizieren mit dem LDAP-Teil von CommuniGate mittels den Apache Modul \texttt{mod\_ldap} und verwenden zur Autorisierung entsprechend \texttt{mod\_authnz\_ldap} (bzw. auf einem Rechner wegen eines veralteten Apache Webserver noch \texttt{mod\_auth\_ldap}). Apache pr\"uft dabei momentan nur auf Existenz des angegebene Benutzeraccounts und ob das richtige Passwort angegeben wurde, weitere Berechtigungen sind momentan nicht implementiert. Ausnahme dabei ist Nagios, aber dort werden die Berechtigungsgruppen intern verwaltet und nicht in LDAP abgelegt.
+
+Lediglich die Anwenderkonten auf den Betriebssystemen der diversen Anwender-PCs sind nicht von CommuniGate abh\"angig. Da die fgn GmbH \"uber das Netz der Technischen Universit\"at Kaiserslautern angebunden ist m\"ussen alle E-Mails auch \"uber die Mailserver der Universit\"at laufen. Diese verwenden RADIUS um zu pr\"ufen ob die E-Mailkonten der fg-networking.de Domain tats\"achlich vorhanden sind. Der RADIUS Server dazu wird ebenso von CommuniGate bereitgestellt. 
 
 Wegen der recht alten Softwareversion gibt es schon seit l\"angerem regelm\"a\ss{}ig Probleme, z.B. mit der SSL Authentifizierung neuerer E-Mail Clients (die unterst\"utzen Versionen von SSL/TLS benutzen aktuelle E-Mail Clients aus Sicherheitsgr\"unden nur noch ungern).
 
@@ -148,7 +150,7 @@ Somit m\"ussen im Rahmen der Projektarbeit folgende Arbeiten durchgef\"uhrt werd
 \item OpenLDAP Server auf dem Linux System installieren
 \item OpenLDAP Server konfigurieren
 \item Verzeichnisstruktur erstellen
-\item grundlegenden Benutzerdaten (Name, Passwort) aus bestehenden System \"ubernehmen
+\item grundlegende Benutzerdaten (Name, Passwort) aus bestehendem System \"ubernehmen
 \item FreeRADIUS Server installieren
 \item FreeRADIUS Server konfigurieren und an den OpenLDAP Server anbinden
 \item Absicherung des Systems
@@ -199,16 +201,16 @@ Umsetzung (insgesamt 20 h)
 		\begin{itemize}
 		\item Dokumentation der Konfiguration des zu ersetzenden Servers (2 h)
 		\item Erstellen einer Liste aller Dienste, die das bestehende Identity Management nutzen (2 h)
-		\item Prüfung von Möglichkeiten zum Importieren der bestehenden Anwender-Konten in die neue Lösung (2 h)
+		\item Pr\"ufung von M\"oglichkeiten zum Importieren der bestehenden Anwender-Konten in die neue L\"osung (2 h)
 		\end{itemize}
 	\item Installation und Einrichtung des neuen Servers (8 h)
 		\begin{itemize}
 		\item Grundinstallation des Linux Systems des neuen Servers (1 h)
 		\item Installation und Konfiguration des LDAP Servers (3 h)
 		\item Installation und Konfiguration des RADIUS Servers (2 h)
-		\item Absicherung des Rechners (Firewall etc) (2 h)
+		\item Absicherung des Rechners (Firewall etc.) (2 h)
 		\end{itemize}
-	\item Abschließende Arbeiten (6 h)
+	\item Abschlie\ss{}ende Arbeiten (6 h)
 		\begin{itemize}
 		\item Umkonfiguration der Webservices (2 h)
 		\item Import/Anlegen der Anwender Konten (2 h)
@@ -221,8 +223,35 @@ Dokumentation (insgesamt 9 h)
 	\item Erstellen der Dokumentation für das firmeninterne Wiki (1 h)
 	\end{itemize}
 
-\newpage
 \section{Realisierung}
+\subsection{Vorbereitungen}
+\subsubsection{Dokumentation der Konfiguration des zu ersetzenden Servers}
+\hilight{TODO}
+\subsubsection{Erstellen einer Liste aller Dienste die das bestehende Identity Management nutzen}
+\hilight{TODO}
+\subsubsection{Pr\"ufung von M\"oglichkeiten zum Importieren der bestehenden Anwender-Konten in die neue L\"osung}
+\hilight{TODO}
+
+\subsection{Installation und Einrichtung des neuen Servers}
+\subsubsection{Grundinstallation des Linux Systems des neuen Servers}
+\hilight{TODO}
+\subsubsection{Installation und Konfiguration des LDAP Servers}
+\hilight{TODO}
+\subsubsection{Installation und Konfiguration des RADIUS Servers}
+\hilight{TODO}
+\subsubsection{Absicherung des Rechners (Firewall etc.)}
+\hilight{TODO}
+
+\subsection{Abschlie\ss{}ende Arbeiten}
+\subsubsection{Umkonfiguration der Webservices}
+\hilight{TODO}
+\subsubsection{Import/Anlegen der Anwender Konten}
+\hilight{TODO}
+\subsubsection{Funkions- und Sicherheitstests}
+\hilight{TODO}
+
+
+\newpage
 \section{Qualit\"atssicherung}
 \section{Projektkosten}
 \section{Projektabschluss}
