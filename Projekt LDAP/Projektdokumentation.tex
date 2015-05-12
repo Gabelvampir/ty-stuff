@@ -268,7 +268,13 @@ Auf dem Server wurden die Pakete \texttt{freeradius} und \texttt{freeradius-ldap
 \subsubsection{Absicherung des Rechners (Firewall etc.)}
 Wie in \nameref{sec:Sicherheitskonzept} erläutert sind dem Server schon 2 bereits existierende Firewalls vorgeschaltet. Die einzige Änderung die an diesen vorgenommen werden muss ist das Eintragen einer Ausnahmeregel um den Zugriff auf den RADIUS Server aus dem Universitätsnetz zu erlauben. Dafür wird die bereits bestehende Firewall Regel für den in CommuniGate enthaltenem RADIUS auf die IP des neuen Servers angepasst.
 
-\hilight{TODO}Da das Firmennetz der fgn GmbH schon durch diese Firewall geschützt ist wurde die simpel zu bedienende Uncomplicated Firewall (\texttt{ufw}) verwendet und lediglich die für OpenLDAP, FreeRADIUS und SSH notwendigen Ports offen gelassen, der Rest wurde geschlossen. Näheres zur Firewall Konfiguration siehe \autoref{sec:Firewall-Konfig}.
+Zusätzlich zu den Firewalls die bereits das Firmennetz der fgn GmbH bereits schützen wurde die simpel zu bedienende Uncomplicated Firewall (\texttt{ufw}) verwendet um lediglich die für OpenLDAP, FreeRADIUS und SSH notwendigen Ports zuzulassen, und Netzwerkverbindungen auf den restlichen Ports nicht zuzlassen. Näheres zur Firewall Konfiguration siehe \autoref{sec:Firewall-Konfig}.
+
+Der OpenLDAP Server wurde so konfiguriert das es lediglich SSL verschlüsselte Verbindungen zulässt, somit ist ein Abhören der Kommunikation mit dem LDAP Server erschwert. Modifikation des Daten im Verzeichnisdienst ist nur dem Administrator LDAP Benutzer gestattet, der mit einem den Passwortrichtlinien von fgn entsprechendem Passwort gesichert ist. Die Firewall von fgn lässt außerdem nur Verbindungen aus dem Firmennetz auf dem entsprechenden Port (636) zu. Als anonymer Benutzer ist lediglich der Zugriff auf Attribute die nur anderweitig öffentlich verfügbare Informationen wie Name des Anwenders enthalten und das Testen eines Passworts gegen den gespeicherten Passwort Hash. Letzteres ist ein ernstzunehmender Angriffspunkt der bisher nur durch die Verbindungseinschränkungen durch die Firewall abgefedert wird und auf jeden Fall noch versucht werden muss anderweitig abzusichern.
+
+Zum FreeRADIUS Server können sich generell nur Clients verbinden die vorher in die Konfiguration eingetragen wurden da beide Seiten das Shared Secret einstellen müssen. Verbindungen von komplett unbekannten Clients können somit schon rein prinzipbedingt nicht aufgebaut werden. Der einzige Angriffsvektor in diese Richtung ist also ein Client der das Shared Secret zwischen dem FreeRADIUS und den TU E-Mailservern kennt. Leider ist das Shared Secret die große Schwachstelle des RADIUS Protokolls (was auch seit ungefähr 15 Jahren hinlänglich bekannt ist), somit ist das einzige was gegen dagegen hilft die Verbindungsbeschränkungen durch die fgn Firewall. Die einzige Möglichkeit eines Zugriffs wäre also die das herausfinden des Shared Secrets und das Spoofing der IP eines TU Kaiserslautern E-Mailservers. Beides zusammen genommen ist recht unwahrscheinlich und erschwerend hinzu kommt noch das die TU selbst Maßnahmen gegen IP-Spoofing in ihrem Netz (131.246.0.0/16) betreibt.
+
+Der OpenSSH Server der außerdem auf dem Rechner für Fernzugriffe läuft wird mit der Debian Standardkonfiguration betrieben unter denen Zugriff auf den root Account nur mit einem eingetragenen SSH Key möglich ist. Es existieren auch keine normalen Benutzer auf den Rechner weswegen das Angriffsszenario vom Kapern eines Benutzeraccounts und dem darauf folgenden Erlangen von root Rechten durch eine Schwachstelle (Priviledge Escalation) ausfällt. Weitere Sicherheit wird auch hier durch die fgn gegeben da sie nur SSH Zugang auf den Server aus dem fgn Firmennetz zulässt.
 
 \subsection{Abschließende Arbeiten}
 \subsubsection{Umkonfiguration der Webservices}
@@ -279,6 +285,7 @@ Wie vorher geschildert (in \nameref{sec:Importsuche}) wurde entschieden, das die
 Mit Hilfe der von Herrn Auerswald erstellten Skripte (Skripte siehe \autoref{sec:SkriptA} und \autoref{sec:SkriptB}) wurde dann aus den Daten von CommuniGate eine LDIF Datei erzeugt die dann mit \texttt{ldapadd} importiert wurde.
 
 Anmerkung: CommuniGate speichert Mailinglisten und Ähnliches ebenfalls in LDAP Objekten, es wurden hier nur die Konten von echten Anwendern und zur Verwaltung der Webservices etc. nötige Konten importiert.
+
 \subsubsection{Funkions- und Sicherheitstests}
 \hilight{TODO}
 
