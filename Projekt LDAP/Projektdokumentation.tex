@@ -227,7 +227,7 @@ Dokumentation (insgesamt 9 h)
 
 \section{Realisierung}
 \subsection{Vorbereitungen}
-\subsubsection{Dokumentation der Konfiguration des zu ersetzenden Servers}
+\subsubsection{Dokumentation der Konfiguration des zu ersetzenden Servers}\label{sec:Konfig-Doku-Alt}
 Da die Konfigurationsdateien des CommuniGate Servers s\"amtliche Anwenderpassw\"orter im Klartext enth\"alt konnte mir bei der Durchf\"uhrung des Projektes aus Sicherheitsgr\"unden kein direkter Zugriff auf den Server gewehrt werden. Allerdings war dies auch nicht notwendig, da zur Erfassen der wichtigen Konfigurationsdetails (vornehmlich der Struktur des integrierten Verzeichnisdienstes) lediglich Zugriff auf das Webinterface des Servers (zug\"anglich und Port \texttt{9010} auf dem bisherigen Server \texttt{mail.fg-networking.de}, Zugriff durch Firewall von au\ss{}erhalb des Firmennetzes geblockt) notwendig war. Unter Aufsicht von Herrn Auerswald wurde ein Auszug (vor allem der Eintrag f\"ur meinen eigenen Benutzer da mir dieses Passwort bereits bekannt ist) der im Klartext gespeicherten Benutzerdaten begutachtet. Dabei fiel auf das alles in einer gut organisierten Ordnerstruktur abgelegt ist, es existiert eine Datei pro Anwender und die Daten in der Datei sind in bezeichneten Feldern abgelegt.
 
 F\"ur das Projekt am wichtigsten zu beachten war das der E-Mailserver f\"ur 3 Domains Anwenderkonten verwaltet: \texttt{fg-networking.de}, \texttt{schabler.de} und \texttt{worden.de}. Dies musste nat\"urlich beim Entwurf der neuen Verzeichnistruktur beachtet werden um sp\"ater die Anbindung des neuen E-Mailserver ohne unn\"otige erneute Umbauten am LDAP zu erm\"oglichen.
@@ -240,7 +240,7 @@ Somit ist bei der Konfiguration von allen prinzipiell dasselbe zu \"andern damit
 Oberfl\"achlich gibt es in der Konfiguration na\"urlich auch Unterschiede. So haben auf \texttt{aio} mehrere Tools eigene Unterseiten Eintr\"age in der Konfiguration in denen jeweils der LDAP Server eingestellt ist, auf \texttt{nms} gibt es lediglich einen Eintrag f\"ur alle Webtools. Aber diese Detailunterschiede machen keinen wirklichen Unterschied in den sp\"ater vorzunehmenden \"Anderungen.
 
 \subsubsection{Pr\"ufung von M\"oglichkeiten zum Importieren der bestehenden Anwender-Konten in die neue L\"osung}
-Leider bietet CommuniGate selbst keine Funktion zum Export seiner Benutzerdaten an. \"Uber die Standard LDAP Tools w\"are ein Auslesen der Daten m\"oglich, in einer Form die man in das neue LDAP wieder importieren k\"onnte. Da allerdings CommuniGate f\"ur die E-Mail bezogenen Attribute ein propriet\"ares LDAP-Schema benutzt w\"are der Nachbearbeitungsaufwand f\"ur diese Daten sehr hoch. Es sollen aber einmal nur die notwendigsten Attribute (siehe \nameref{sec:LDAP-Attribute}) \"ubernommen werden und CommuniGate speichert die Anwenderdaten in einer mit den Standard Unix/Linux Textverarbeitungswerkzeugen (\texttt{sed}, \texttt{awk}, \texttt{cut}) vergleichsweise einfach verarbeitbaren Form. 
+Leider bietet CommuniGate selbst keine Funktion zum Export seiner Benutzerdaten an. \"Uber die Standard LDAP Tools w\"are ein Auslesen der Daten m\"oglich, in einer Form die man in das neue LDAP wieder importieren k\"onnte. Da allerdings CommuniGate f\"ur die E-Mail bezogenen Attribute ein propriet\"ares LDAP-Schema benutzt w\"are der Nachbearbeitungsaufwand f\"ur diese Daten sehr hoch. Es sollen aber einmal nur die notwendigsten Attribute (siehe \autoref{sec:LDAP-Attribute}) \"ubernommen werden und CommuniGate speichert die Anwenderdaten in einer mit den Standard Unix/Linux Textverarbeitungswerkzeugen (\texttt{sed}, \texttt{awk}, \texttt{cut}) vergleichsweise einfach verarbeitbaren Form. 
 
 Somit stellt das Erzeugen von durch LDAP importierbaren Datens\"atze aus den gespeicherten Dateien von CommuniGate mit Hilfe von Skripten in diesem Fall die sinnvollste Vorgehensweise dar. Da das entwickeln der Skripte ohne Zugriff auf die Daten umst\"andlich w\"are hatte Herr Auerswald sich bereit erkl\"art diese zu schreiben da ihm Zugriff auf die Anwenderpassw\"orter erlaubt ist. Als Unterst\"utzung dieser Arbeit habe ich dann Herrn Auerswald einm Template der zu generierenden LDAP Importdaten und den Befehlsaufruf von \texttt{slappasswd} (zum passenden hashen der Passw\"orter damit die diese in den Importdaten als Hashes stehen und nicht mehr im Klartext stehen) zur Verf\"ugung gestellt.
 
@@ -249,13 +249,21 @@ Somit stellt das Erzeugen von durch LDAP importierbaren Datens\"atze aus den ges
 Nach der Erstellung einer neuen VM durch einem Mitarbeiter von fgn auf dem entsprechendem ESXi-Server wurde der Installer der aktuellen Debian Stable (Version 8.0 Jessie zur Bearbeitungszeit des Projektes) ausgef\"uhrt und von ihm das Grundsystem installiert. Dabei wurden keine zus\"atzlichen Paketvorauswahlen hinzugenommen.  Der Debian Installer hat bei w\"ahrend des Installationsprozeses nach R\"uckfragen auch die Grundeinrichtung vorgenommen f\"ur grundlegende Einstellung wie z.B. IP Adressen und Hostname vorgenommen. F\"ur den neuen Rechner wurde der Hostname \texttt{id.fg-networking.de} gew\"aehlt.
 
 \subsubsection{Installation und Konfiguration des LDAP Servers}
-Nach der Grundinstallation wurde im neuen System dann die Pakete \texttt{slapd} (benannt nach dem Namen des OpenLDAP Daemons) , \texttt{ldap-utils} und \texttt{ldapscripts} sowie deren noch nicht im System vorhandenen Paketabh\"angigkeiten installiert. Da LDAPS (LDAP over SSL) verwendet werden soll damit die \"uber LDAP abgefragten Daten verschl\"usselt \"ubertragen werden mussten mit der Certificate Authority (CA) der Firma ein Zertifikat und ein Private Key f\"ur den Server erstellt und zusammen mit dem Stammzertifikat der CA auf den neuen Server kopiert werden.
+Nach der Grundinstallation wurde im neuen System dann die Pakete \texttt{slapd} (benannt nach dem Namen des OpenLDAP Daemons) , \texttt{ldap-utils} und \texttt{ldapscripts} sowie deren noch nicht im System vorhandenen Paketabh\"angigkeiten installiert. Da LDAPS (LDAP over SSL) verwendet werden soll damit die \"uber LDAP abgefragten Daten verschl\"usselt \"ubertragen werden mussten mit der Certificate Authority (CA) der Firma ein Zertifikat und ein Private Key f\"ur den Server erstellt und zusammen mit dem Stammzertifikat der CA auf den neuen Server kopiert werden.\newline
 
 Beim Entwurf der Verzeichnisstruktur ergaben sich verschiedene Probleme:
 
-\noindent Um in einem LDAP neue Attribute zu definieren gibt es sogenannte Schemas (eigener Ausdruck, nicht zu verwechseln mit Schema/Schemen). CommuniGate verwendet zum Verwalten der E-Mail Anwenderdaten ein eigenes propriet\"ares LDAP Schema um die Daten in selbsdefinierten Attributen zu speichern. Diese Attribute k\"onnen somit nicht ins neue LDAP \"ubernommen werden ohne verschiedene Implementierungsentscheidungen f\"ur den neuen E-Mailserver zu kennen. Da dieser zur Bearbeitungszeit dieses Projektes noch nicht weit genug fortgeschritten war um eine Absprache zu erm\"oglichen wurde entschieden erst einmal nur die wichtigsten Attribute zu \"ubernehmen und die E-Mail Attribute sp\"ater anzupassen. Dies wird sehr wahrscheinlich auch wieder per Skript generierten Datens\"atzen m\"oglich sein und stellt somit einen vertretbaren Mehraufwand f\"ur die E-Mail Server Einrichtung dar.
+\noindent Um in einem LDAP neue Attribute zu definieren gibt es sogenannte Schemas (eigener Ausdruck, nicht zu verwechseln mit Schema/Schemen). CommuniGate verwendet zum Verwalten der E-Mail Anwenderdaten ein eigenes propriet\"ares LDAP Schema um die Daten in selbsdefinierten Attributen zu speichern. Diese Attribute k\"onnen somit nicht ins neue LDAP \"ubernommen werden ohne verschiedene Implementierungsentscheidungen f\"ur den neuen E-Mailserver zu kennen. Da dieser zur Bearbeitungszeit dieses Projektes noch nicht weit genug fortgeschritten war um eine Absprache zu erm\"oglichen wurde entschieden erst einmal nur die wichtigsten Attribute zu \"ubernehmen und die E-Mail Attribute sp\"ater anzupassen. Dies wird sehr wahrscheinlich auch wieder per Skript generierten Datens\"atzen m\"oglich sein und stellt somit einen vertretbar geringen Mehraufwand f\"ur die E-Mail Server Einrichtung dar.
 
-\subsubsection{Installation und Konfiguration des RADIUS Servers}
+Weiterhin musste die neue Verzeichnisstruktur ber\"ucksichtigen das mehrere voneinander unabh\"angige Namensr\"aume (die 3 in \nameref{sec:Konfig-Doku-Alt} erw\"ahnten E-Mail Domains) zu verwalten sind. Das bedeutet das in den Domains Konten mit demselben unqualifizierten Namen haben k\"onnen die aber voneinander unabh\"angig sind. Der erste Ansatz dazu war jedem der 3 Domains eine eigene Datenbank (im Sinne von getrennten Dateien die von einem LDAP Server verwaltet werden) zu geben. Allerdings lie\ss{}en sich in verschiedenen Versuchen die Datenbanke zwar anlegen, allerdings war ein Zugriff auf sie nicht m\"oglich (getestet wurde dies mit entsprechenden \texttt{ldapsearch} Aufrufen). Da sich unter Anderem wegen den eher unpraktischen Logleveln (siehe \autoref{sec:LDAP-Loglevel} von OpenLDAP das genaue Problem mit dieser Vorgehensweise nicht lokalisieren lies musste eine andere Struktur ersonnen werden.
+
+Der Ansatz f\"ur die alternative Verzeichnisstruktur basierte unter Anderem darauf wie LDAP mit Domain Namen umgeht. Diese werden von LDAP an den Trennzeichen (Punkt) aufgespalten in einzelne Domain Component (LDAP Bezeichnung \texttt{dc}). Da alle 3 Domain Namen mit \texttt{.de} enden konnte \texttt{dc=de} als Wurzel der des Baumes hierarchischen LDAP Verzeichnisstruktur verwendet werden. In der 1. Ebene unter der Wurzel verzweigt dieser Baum dann in die 3 Domain Components  \texttt{fg-networking.de}, \texttt{schabler.de} und \texttt{worden.de}. Da Objektnamen von ihrem vollen Kontext (quasi ihrem Pfad im Baum) abh\"angen sind auch in diesem Modell 3 unabh\"angige Namensr\"aume gew\"ahrleistet. In den Domains \texttt{schabler.de} und \texttt{worden.de} sind nur relativ wenig Benutzerkonten hinterlegt (weniger als 10 jeweils) und beide Domains haben auch keinen Administratoren (sie werden von fgn mit administriert) gibt es auch keine Bedenken hinsichtlich Datenschutz und Performance wenn sich alles in einer gemeinsamen Datenbank befindet.
+
+Die oberste Ebene der Verzeichnisstruktur (die \texttt{de} Wurzel) wurde mit Hilfe des Debian Konfigurationsskript erstellt. Dabei wurden neben den 4 Schema der Debian Standardkonfiguration (\texttt{core}, \texttt{cosine}, \texttt{nis} und \texttt{inetorgperson}) zus\"atzlich das \texttt{freeradius} Schema aus dem \texttt{freeradius} Paket (siehe \nameref{sec:RADIUS-Konf}) und ein \texttt{postfix} Schema (aus den Galileo Press Praxisbuch zu OpenLDAP 2.4) verwendet. Die 1. Ebene wurde dann mit \texttt{slapadd} angelegt und die Grundstruktur darunter mit \texttt{ldapadd} erstellt (genaue Beschreibung der verwendeten Dateien im LDAP Data Interchange Format (LDIF) siehe \autoref{sec:Erstelle-DB}). Mit Hilfe der von Herrn Auerswald erstellten Skripte (Skripte siehe \autoref{sec:SkriptA} und \autoref{sec:SkriptB}) wurde dann aus den Daten von CommuniGate eine LDIF Datei erzeugt die dann mit \texttt{ldapadd} importiert wurde.
+
+Anmerkung: CommuniGate speichert Mailinglisten und \"Ahnliches ebenfalls in LDAP Objekten, es wurden hier nur die Konten von echten Anwendern und zur Verwaltung der Webservices etc. n\"otige Konten importiert.
+
+\subsubsection{Installation und Konfiguration des RADIUS Servers}\label{sec:RADIUS-Konf}
 \hilight{TODO}
 \subsubsection{Absicherung des Rechners (Firewall etc.)}
 \hilight{TODO}
@@ -277,7 +285,18 @@ Beim Entwurf der Verzeichnisstruktur ergaben sich verschiedene Probleme:
 \subsection{Ausblick}
 
 \appendix
+\addcontentsline{toc}{section}{Anh\"ange} %fügt Ueberschrift Anhaenge in die TOC ein
+\newpage
 \section{\"Ubernommene LDAP Attribute} \label{sec:LDAP-Attribute}
+\newpage
+\section{Erkl\"arung der OpenLDAP Loglevel} \label{sec:LDAP-Loglevel}
+\newpage
+\section{Erstellung der Verzeichnisstruktur}\label{sec:Erstelle-DB}
+\newpage
+\section{Skript zum Auslesen der Anwenderkonten aus der CommuniGate Dateien}\label{sec:SkriptA}
+\newpage
+\section{Skript zum Hashen der Anwenderpassw\"orter}\label{sec:SkriptB}
+
 %\section{Testkapitel}
 %\subsection{Testsektion}
 %Dies ist eine Testaufz\"ahlung:
