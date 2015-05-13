@@ -140,13 +140,13 @@ Lediglich die Anwenderkonten auf den Betriebssystemen der diversen Anwender-PCs 
 Wegen der recht alten Softwareversion gibt es schon seit längerem regelmäßig Probleme, z.B. mit der SSL Authentifizierung neuerer E-Mail Clients (die unterstützen Versionen von SSL/TLS benutzen aktuelle E-Mail Clients aus Sicherheitsgründen nur noch ungern). Ein weiteres großes Sicherheitsproblem von CommuniGate ist das es die Passwörter aller Anwenderkonten im Klartext (ohne sie vorher zu hashen oder ähnliches) in Textdateien auf dem Server abspeichert.
 
 \subsection{Soll-Analyse}
-Eine Aktualisierung von CommuniGate wäre mit ähnlichem Aufwand verbunden wie ein komplettes Neuaufsetzen von Ersatzservern (und wäre außerdem mit dem Kauf einer neuen Lizenz verbunden). Deswegen wurde entschieden die Serverkomponenten E-Mail und Identity Management durch neue Server abzulösen. In der Firma momentan sehr viel freie Software verwendet wird sollen die Ersatzserver auch auf auf Basis von freier Software aufgesetzt werden. Da die E-Mail Infrastruktur sehr kritisch für die Arbeit der Firma ist und bei der Migration der E-Mailkonten mit vielen vertraulichen firmeninternen Informationen hantiert werden muss soll die Installation des neuen E-Mail Servers von einem Mitarbeiter von fgn durchgeführt werden.
+Eine Aktualisierung von CommuniGate wäre mit ähnlichem Aufwand verbunden wie ein komplett neues Aufsetzen von Ersatzservern (und wäre außerdem mit dem Kauf einer neuen Lizenz verbunden). Deswegen wurde entschieden die Serverkomponenten E-Mail und Identity Management durch neue Server abzulösen. In der Firma momentan sehr viel freie Software verwendet wird sollen die Ersatzserver auch auf auf Basis von freier Software aufgesetzt werden. Da die E-Mail Infrastruktur sehr kritisch für die Arbeit der Firma ist und bei der Migration der E-Mailkonten mit vielen vertraulichen firmeninternen Informationen hantiert werden muss soll die Installation des neuen E-Mail Servers von einem Mitarbeiter von fgn durchgeführt werden.
 
 Für das Identity Management sollen OpenLDAP und FreeRADIUS zum Einsatz kommen da dies die verbreitesten freien Implementierungen von LDAP und RADIUS sind und somit das meiste Know How in Büchern und dem Internet verfügbar ist. Außerdem erleichert es die spätere Pflege des Systems, da sich für solche verbreiteten Systeme einfacher Personal mit Fachkenntnis finden lassen als für die meisten anderen proprietären Implementierungen.
 
 Für den E-Mail Teil soll ein \texttt{postfix} Server verwendet werden, allerdings war dieser zur Fertigstellung dieses Projektes noch nicht einsatzfähig. Die Intergration des neuen E-Mailservers ist damit nicht Teil dieses Projektes und wird zu einem späteren Zeitpunkt durchgeführt. Es werden lediglich die Vorarbeiten auf der Seite vom Identity Management getätigt die dazu unabhängig von der endgültigen Konfiguration des neuen E-Mail Servers sind.
 
-\medskip \noindent 		%überspringt Zeile; verhindert einmalig Einrueckung
+\medskip \noindent 		%überspringt Zeile; verhindert einmalig Einrückung
 Somit müssen im Rahmen der Projektarbeit folgende Arbeiten durchgeführt werden: 
 \begin{itemize}
 \item Linux Grundsystem installieren
@@ -226,7 +226,7 @@ Dokumentation (insgesamt 9 h)
 	\item Erstellen der Dokumentation für das firmeninterne Wiki (1 h)
 	\end{itemize}
 
-\section{Realisierung}
+\section{Umsetzung}
 \subsection{Vorbereitungen}
 \subsubsection{Dokumentation der Konfiguration des zu ersetzenden Servers}\label{sec:Konfig-Doku-Alt}
 Da die Konfigurationsdateien des CommuniGate Servers sämtliche Anwenderpasswörter im Klartext enthält konnte mir bei der Durchführung des Projektes aus Sicherheitsgründen kein direkter Zugriff auf den Server gewehrt werden. Allerdings war dies auch nicht notwendig, da zur Erfassen der wichtigen Konfigurationsdetails (vornehmlich der Struktur des integrierten Verzeichnisdienstes) lediglich Zugriff auf das Webinterface des Servers (zugänglich und Port \texttt{9010} auf dem bisherigen Server \texttt{mail.fg-networking.de}, Zugriff durch Firewall von außerhalb des Firmennetzes geblockt) notwendig war. Unter Aufsicht von Herrn Auerswald wurde ein Auszug (vor allem der Eintrag für meinen eigenen Benutzer da mir dieses Passwort bereits bekannt ist) der im Klartext gespeicherten Benutzerdaten begutachtet. Dabei fiel auf das alles in einer gut organisierten Ordnerstruktur abgelegt ist, es existiert eine Datei pro Anwender und die Daten in der Datei sind in bezeichneten Feldern abgelegt.
@@ -270,11 +270,11 @@ Wie in \nameref{sec:Sicherheitskonzept} erläutert sind dem Server schon 2 berei
 
 Zusätzlich zu den Firewalls die bereits das Firmennetz der fgn GmbH bereits schützen wurde die simpel zu bedienende Uncomplicated Firewall (\texttt{ufw}) verwendet um lediglich die für OpenLDAP, FreeRADIUS und SSH notwendigen Ports zuzulassen, und Netzwerkverbindungen auf den restlichen Ports nicht zuzlassen. Näheres zur Firewall Konfiguration siehe \autoref{sec:Firewall-Konfig}.
 
-Der OpenLDAP Server wurde so konfiguriert das es lediglich SSL verschlüsselte Verbindungen zulässt, somit ist ein Abhören der Kommunikation mit dem LDAP Server erschwert. Modifikation des Daten im Verzeichnisdienst ist nur dem Administrator LDAP Benutzer gestattet, der mit einem den Passwortrichtlinien von fgn entsprechendem Passwort gesichert ist. Die Firewall von fgn lässt außerdem nur Verbindungen aus dem Firmennetz auf dem entsprechenden Port (636) zu. Als anonymer Benutzer ist lediglich der Zugriff auf Attribute die nur anderweitig öffentlich verfügbare Informationen wie Name des Anwenders enthalten und das Testen eines Passworts gegen den gespeicherten Passwort Hash. Letzteres ist ein ernstzunehmender Angriffspunkt der bisher nur durch die Verbindungseinschränkungen durch die Firewall abgefedert wird und auf jeden Fall noch versucht werden muss anderweitig abzusichern.
+Der OpenLDAP Server wurde so konfiguriert das es lediglich SSL verschlüsselte Verbindungen zulässt, somit ist ein Abhören der Kommunikation mit dem LDAP Server erschwert. Modifikation des Daten im Verzeichnisdienst ist nur dem Administrator LDAP Benutzer gestattet, der mit einem den Passwortrichtlinien von fgn entsprechendem Passwort gesichert ist. Die Firewall auf dem Server lässt außerdem nur Verbindungen aus dem Firmennetz auf dem entsprechenden Port (636) zu. Als anonymer Benutzer ist lediglich der Zugriff auf Attribute die nur anderweitig öffentlich verfügbare Informationen wie Name des Anwenders enthalten und das Testen eines Passworts gegen den gespeicherten Passwort Hash. Letzteres ist ein ernstzunehmender Angriffspunkt der bisher nur durch die Verbindungseinschränkungen durch die Firewall abgefedert wird und auf jeden Fall noch versucht werden muss anderweitig abzusichern.
 
 Zum FreeRADIUS Server können sich generell nur Clients verbinden die vorher in die Konfiguration eingetragen wurden da beide Seiten das Shared Secret einstellen müssen. Verbindungen von komplett unbekannten Clients können somit schon rein prinzipbedingt nicht aufgebaut werden. Der einzige Angriffsvektor in diese Richtung ist also ein Client der das Shared Secret zwischen dem FreeRADIUS und den TU E-Mailservern kennt. Leider ist das Shared Secret die große Schwachstelle des RADIUS Protokolls (was auch seit ungefähr 15 Jahren hinlänglich bekannt ist), somit ist das einzige was gegen dagegen hilft die Verbindungsbeschränkungen durch die fgn Firewall. Die einzige Möglichkeit eines Zugriffs wäre also die das herausfinden des Shared Secrets und das Spoofing der IP eines TU Kaiserslautern E-Mailservers. Beides zusammen genommen ist recht unwahrscheinlich und erschwerend hinzu kommt noch das die TU selbst Maßnahmen gegen IP-Spoofing in ihrem Netz (131.246.0.0/16) betreibt.
 
-Der OpenSSH Server der außerdem auf dem Rechner für Fernzugriffe läuft wird mit der Debian Standardkonfiguration betrieben unter denen Zugriff auf den root Account nur mit einem eingetragenen SSH Key möglich ist. Es existieren auch keine normalen Benutzer auf den Rechner weswegen das Angriffsszenario vom Kapern eines Benutzeraccounts und dem darauf folgenden Erlangen von root Rechten durch eine Schwachstelle (Priviledge Escalation) ausfällt. Weitere Sicherheit wird auch hier durch die fgn gegeben da sie nur SSH Zugang auf den Server aus dem fgn Firmennetz zulässt.
+Der OpenSSH Server der außerdem auf dem Rechner für Fernzugriffe läuft wird mit der Debian Standardkonfiguration betrieben unter denen Zugriff auf den root Account nur mit einem eingetragenen SSH Key möglich ist. Es existieren auch keine normalen Benutzer auf den Rechner weswegen das Angriffsszenario vom Kapern eines Benutzeraccounts und dem darauf folgenden Erlangen von root Rechten durch eine Schwachstelle (Priviledge Escalation) ausfällt. Wie bei sämtlichen fgn Servern wurde der SSH Zugang aus dem gesamten Internet erlaubt. Hier werden aber Brute Force Attacken durch die fgn Firewall erschwert da diese für SSH Verbindungsversuche einen Rate Limiter eingestellt hat.
 
 \subsection{Abschließende Arbeiten}
 \subsubsection{Umkonfiguration der Webservices}
@@ -294,18 +294,27 @@ Die Webservices auf \texttt{nms} wurden dann kurzzeitig auf dieses LDAP umgestel
 
 Die Anbindung des FreeRADIUS Servers an den OpenLDAP Server wurden mit Hilfe des Programms \texttt{radtest} aus den FreeRADIUS Utils getestet. Hier wurde ebenfalls das oben erwähnte Testkonto abgefragt zusammen mit dem Shared Secret. Mit demselben Befehl (aber einem echten Anwenderkonto) wurde auch der CommuniGate Server getestet um einen Vergleichswert zu haben, da ein echter Praxistest erst bei Fertigstellung des neuen E-Mailservers durchgeführt werden kann.
 
-\medskip \noindent \hilight{TODO} Sicherheitstests
+Abschließend wurde noch getestet einen Managed Switch an den RADIUS Server anzubinden damit darüber die Benutzerkonten aus dem LDAP zum anmelden verwendet werden können. Nach Informationen aus den LDAP Logs funktionierte das authentifizieren am Server auch, allerdings konnte man sich trotzdem nicht erfolgreich am Switch anmelden. Dafür hätte man zusätzliche Berechtigungen im LDAP hinterlegen müssen. Da nicht sofort ersichtlich wurde was genau dafür zu konfigurieren wäre und die Anbindung von Switches erst irgendwann in Zukunft geschehen soll, wurde das Ganze dann nicht weiter verfolgt.
 
+\medskip \noindent
+An Sicherheitstests wurde nach der Umstellung der Webservices erfolglos versucht sich an diesen mit Anmeldeinformationen (falscher Benutzername, richtiger Benutzername mit falschem Passwort) anzumelden. Dasselbe wurde mit \texttt{radtest} am RADIUS Server getestet.
+Abschließend wurde noch per \texttt{nmap} von innerhalb des Firmennetzes und von einem externen Rechner aus geprüft ausschließlich die richtigen Ports geöffnet sind (näheres dazu in \autoref{sec:NMAP-Test-int} und \autoref{sec:NMAP-Test-ext}).
 
 \section{Projektkosten}
 \hilight{TODO}
 
 \section{Projektabschluss}
 \subsection{Fazit}
-\hilight{TODO}
+Sämtliche Systeme von fgn die vorher den LDAP Server von CommuniGate benutzten wurden erfolgreich auf den neuen OpenLDAP Server umgestellt. Da der alte E-Mailserver weiterhin in Betrieb bleibt bis er vom neuen Server abgelöst wird findet bis dahin quasi ein Parallelbetrieb der LDAP Server statt. Deswegen werden die Benutzerpasswörter bei Fertigstellung des neuen E-Mailservers noch einmal zur Sicherheit synchronisiert werden müssen, allerdings wird die über Skripte wieder einfach zu bewerkstelligen sein. Die Skripte werden allerdings leicht modifiziert werden müssen da diesmal LDAP Daten verändert werden sollen statt neu hinzugefügt und die LDIF Syntax dafür leicht anders ist.
+
+Der FreeRADIUS Server wurde ebenso erfolgreich eingerichtet und einfacher als erwartet an den OpenLDAP Server angebunden. Allerdings verrichtet er bisher noch keinen sinnvollen Dienst da bei fgn RADIUS momentan nur beim E-Mailserver benutzt wird und dieser ja noch selbst einen RADIUS Server betreibt. Dies wird sich voraussichtlich erst mit der Fertigstellung des neuen E-Mailservers ändern.
+
+Bei der Zeitplanung des Projektes wäre im Nachhinein folgendes zu verbessern gewesen: Für den Entwurf und die Implementierung der Verzeichnisstruktur hätte mehr Zeit eingeplant werden müssen. Als der Zeitplan für den Projektantrag ausgearbeitet wurde waren die Vorrecherchen zu LDAP und vor Allem zur bestehenden Konfiguration noch nicht weit genug fortgeschritten als das Probleme aus dieser Richtung vorhersehbar gewesen wären. Insgesamt wäre der Entwurf der LDAP Verzeichnisstruktur am Besten als zusätzlicher Punkt zur Planung hinzugefügt worden. In der Umsetzungsphase weniger Zeit für die Vorbereitung veranschlagen können, da nur eine übersichtlich kleine Anzahl an Diensten den LDAP Server verwendet und bei diesen nicht viel an der Konfiguration zu ändern war.
 
 \subsection{Ausblick}
-Mailserver, Umstellung lokale Anwenderkonten, Samba, Switches (RADIUS)
+Die erste zukünftige Änderung für die in diesem Projekt erstellten Serverdienste wird nach aktueller Planung die Anbindung des neuen E-Mailservers sein.
+
+\hilight{TODO} Mailserver, Umstellung lokale Anwenderkonten, Samba, Switches (RADIUS)
 
 
 \appendix
