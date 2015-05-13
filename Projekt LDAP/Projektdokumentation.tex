@@ -314,7 +314,9 @@ Bei der Zeitplanung des Projektes wäre im Nachhinein folgendes zu verbessern ge
 \subsection{Ausblick}
 Die erste zukünftige Änderung für die in diesem Projekt erstellten Serverdienste wird nach aktueller Planung die Anbindung des neuen E-Mailservers sein. Dafür werden den in OpenLDAP bestehenden Benutzerkonten die Attribute die der E-Mailserver benötigt (wie z.B. die E-Mailadresse) befüllt werden müssen. Dies wird voraussichtlich wieder über durch Skripte erstellte LDIF Dateien geschehen.
 
-\hilight{TODO} Mailserver, Umstellung lokale Anwenderkonten, Samba, Switches (RADIUS)
+Ebenso bietet sich für eine Erweiterung des Projektsystems die Einbindung der anderen Linux Rechner in der Firma an. Dort könnte man dadurch die bisherigen lokalen Benutzerkonten durch ein zentral in LDAP abgelegtes und verwaltetes Konto ersetzen. Dazu müsste man auf den Linux Rechnern LDAP an das PAM System anbinden (dazu müsste dort vermutlich ein passendes PAM-LDAP Modul installiert werden und eventuell auch noch das LDAP Modul für den Name Switch Service (\texttt{NSS})) und im LDAP Server die Benutzer um die passenden Attribute (wie z.B. Home-Verzeichnis, UID, Gruppen) erweitern. Letzteres kann wieder geskriptet werden. Als Anwendersystem wird im Moment allerdings nur 1 Rechner verwendet (\texttt{fgnfs}) für den der Aufwand im Rahmen des Projektes zu groß schien für das zu erwartende Ergebnis.
+
+\hilight{TODO} Samba, Switches (RADIUS)
 
 
 \appendix
