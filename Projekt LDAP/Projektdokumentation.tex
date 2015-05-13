@@ -316,12 +316,14 @@ Die erste zukünftige Änderung für die in diesem Projekt erstellten Serverdien
 
 Ebenso bietet sich für eine Erweiterung des Projektsystems die Einbindung der anderen Linux Rechner in der Firma an. Dort könnte man dadurch die bisherigen lokalen Benutzerkonten durch ein zentral in LDAP abgelegtes und verwaltetes Konto ersetzen. Dazu müsste man auf den Linux Rechnern LDAP an das PAM System anbinden (dazu müsste dort vermutlich ein passendes PAM-LDAP Modul installiert werden und eventuell auch noch das LDAP Modul für den Name Switch Service (\texttt{NSS})) und im LDAP Server die Benutzer um die passenden Attribute (wie z.B. Home-Verzeichnis, UID, Gruppen) erweitern. Letzteres kann wieder geskriptet werden. Als Anwendersystem wird im Moment allerdings nur 1 Rechner verwendet (\texttt{fgnfs}) für den der Aufwand im Rahmen des Projektes zu groß schien für das zu erwartende Ergebnis.
 
-\hilight{TODO} Samba, Switches (RADIUS)
+Eine weitere für fgn attraktive Erweiterungsmöglichkeit ist das Anbinden der Managed Switches des Schulungslabore an den FreeRADIUS Server (und somit LDAP). Dies würde Probleme durch Änderungen der Anmeldeinformationen der Switche durch Schulungsteilnehmer vorbeugen die abundzu auftreten. Da die Schulungslabore in einem VPN sind müsste RADIUS dazu ebenfalls ins VPN gehängt werden. Des weiteren müssten Konten für die Switches erstellt werden mit den passenden Attributen die zu Autorisierung benötigt werden. In die Switche müsste außerdem der RADIUS Server eingetragen werden und im RADIUS Server die Clients eingetragen werden (jeweils dann mit passenden Shared Secret "Paaren").
+
+fgn hat neben den diversen Linux Rechnern auch noch 2 Windows PCs in der Verwaltung sowie einige virtuelle Windows Rechner an den Schulungslaboren angeschlossen. Für diese könnte man mit Samba 4 eine kleine Active Directory Domäne aufbauen die an den OpenLDAP Server angebunden wird. Allerdings benötigt Samba 4 inzwischen ein eigenes LDAP (dies wird für Replikationsfunktionen benötigt) und lässt sich somit nur umständlich an das nun bestehende LDAP anbinden. Dieser Erweiterungsmöglichkeit stellt insgesamt von den aufgezählten für fgn die unattraktivste dar, da es nur wenige Windowsrechner gibt die davon tatsächlich profitieren würden und der Aufwand dafür recht hoch wäre.
 
 
 \appendix
-\addcontentsline{toc}{section}{Anhänge} %fügt Überschrift Anhänge in die TOC ein
 \newpage
+\addcontentsline{toc}{section}{Anhänge} %fügt Überschrift Anhänge in die TOC ein
 \section{Übernommene LDAP Attribute} \label{sec:LDAP-Attribute}
 \newpage
 \section{Erklärung der OpenLDAP Loglevel} \label{sec:LDAP-Loglevel}
