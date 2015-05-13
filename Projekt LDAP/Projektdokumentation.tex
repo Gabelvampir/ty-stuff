@@ -278,7 +278,7 @@ Der OpenSSH Server der außerdem auf dem Rechner für Fernzugriffe läuft wird m
 
 \subsection{Abschließende Arbeiten}
 \subsubsection{Umkonfiguration der Webservices}
-\hilight{TODO}
+Da die umzustellenden Dienste (Webservices und OpenVPN) bereits den alten LDAP Server verwenden musste hier nicht viel eingerichtet werden. Die größte Änderung die vorzunehmen war ist daher das zusätzliche Eintragen des CA Stammzertifikates in die Konfigurationsdatei \texttt{/etc/apache2/mods-available/ldap.conf} (bzw. bei OpenVPN in die entsprechende Konfigurationsdatei) da sonst keine LDAP Verbindung über SSL aufgebaut werden kann. Ansonsten muss nur noch in der Site-Konfiguration die URL des LDAP Servers und die BaseDN angepasst werden (OpenVPN ist analog anzupassen). Zu Details der anzupassenden Konfigurationen siehe \autoref{sec:Apache-Konfig} und \autoref{sec:VPN-Konfig}.
 
 \subsubsection{Import/Anlegen der Anwender Konten}
 Wie vorher geschildert (in \nameref{sec:Importsuche}) wurde entschieden, das die praktikabelste Methode um die Benutzerkonten im neuen Verzeichnisdienst zu erstellen, eine Generierung einer von LDAP importierbaren 
@@ -287,13 +287,23 @@ Mit Hilfe der von Herrn Auerswald erstellten Skripte (Skripte siehe \autoref{sec
 Anmerkung: CommuniGate speichert Mailinglisten und Ähnliches ebenfalls in LDAP Objekten, es wurden hier nur die Konten von echten Anwendern und zur Verwaltung der Webservices etc. nötige Konten importiert.
 
 \subsubsection{Funkions- und Sicherheitstests}
+Schon während der Arbeiten wurden immer wieder prüfbare Teilkomponenten getestet: 
+Vor dem Erstellen der Verzeichnisstruktur wurde bereits eine Teststruktur die lediglich die \texttt{fg-networking} Domain enthielt und ein Testkonto. Dieses Testkonto wurde dann mit Hilfe von \texttt{ldapsearch} aus den LDAP Utils abgefragt, zuerst noch bevor LDAPS eingerichtet war. Nach der Einrichtung von LDAPS musste das Stammzertifikat in die Konfigurationsdatei \texttt{/etc/ldap/ldap.conf} eingetragen werden, dies ist aber für den Normalbetrieb nicht notwendig da dieser Eintrag nur von den LDAP Utils ausgewertet wird. Apache und OpenVPN haben dazu eigene Einstellungen.
+
+Die Webservices auf \texttt{nms} wurden dann kurzzeitig auf dieses LDAP umgestellt um die generelle Funktion der Authentifizierung testen zu können. Der Rechner \texttt{nms} wurde gewählt da die Webservices auf ihm wenig benutzt werden, und das auch nur von Mitarbeitern die zur Bearbeitungszeit vor Ort waren und so einfach und schnell über die Tests informiert werden konnten. Hierbei viel auf das es anfänglich noch einen Fehler in den SSL Einstellungen gab, dieser stellte sich aber lediglich als Tippfehler in der Apache Konfiguration heraus. Nach Korrektur dessen konnte man sich mit dem Testkonto erfolgreich an den Webservices anmelden.
+
+Die Anbindung des FreeRADIUS Servers an den OpenLDAP Server wurden mit Hilfe des Programms \texttt{radtest} aus den FreeRADIUS Utils getestet. Hier wurde ebenfalls das oben erwähnte Testkonto abgefragt zusammen mit dem Shared Secret. Mit demselben Befehl (aber einem echten Anwenderkonto) wurde auch der CommuniGate Server getestet um einen Vergleichswert zu haben, da ein echter Praxistest erst bei Fertigstellung des neuen E-Mailservers durchgeführt werden kann.
+
+\medskip \noindent \hilight{TODO} Sicherheitstests
+
+
+\section{Projektkosten}
 \hilight{TODO}
 
-
-\newpage
-\section{Projektkosten}
 \section{Projektabschluss}
 \subsection{Fazit}
+\hilight{TODO}
+
 \subsection{Ausblick}
 Mailserver, Umstellung lokale Anwenderkonten, Samba, Switches (RADIUS)
 
@@ -316,6 +326,10 @@ Mailserver, Umstellung lokale Anwenderkonten, Samba, Switches (RADIUS)
 \section{Konfiguration des FreeRADIUS Servers}\label{sec:RADIUS-Konfig}
 \newpage
 \section{Konfiguration der Firewall}\label{sec:Firewall-Konfig}
+\newpage
+\section{Änderungen an der Apache Konfiguration}\label{sec:Apache-Konfig}
+\newpage
+\section{Änderungen an der OpenVPN Konfiguration}\label{sec:VPN-Konfig}
 \newpage
 \section{Ergebnis eines fgn internen NMAP Tests}\label{sec:NMAP-Test-int}
 \newpage
