@@ -168,7 +168,7 @@ Um das Passwort eine Users im LDAP Verzeichnis zu ändern bietet sich für die K
 \begin{lstlisting}
 ldappasswd -S -W -D "cn=admin,dc=de" -x "uid=username,ou=people,dc=fg-networking,dc=de"
 \end{lstlisting}
-Dieser Befehl fragt auf der Kommandozeile das neue Passwort für den Account ''username'' ab (mit Wiederholung), fragt wenn beide Passwörte übereinstimmen nach dem Passwort des LDAP-Administrators. Mit den Daten meldet es sich dann am LDAP Server an und speichert das Passwort dann gehashed in der LDAP Datenbank. Username muss natürlich durch den richtigen Namen ersetzt werden und eventuell die erste dc angepasst werden.
+Dieser Befehl fragt auf der Kommandozeile das neue Passwort für den Account \texttt{username} ab (mit Wiederholung) und fragt wenn beide Passwörte übereinstimmen nach dem Passwort des LDAP-Administrators. Mit den Daten meldet es sich dann am LDAP Server an und speichert das Passwort dann gehashed in der LDAP Datenbank. Username muss natürlich durch den richtigen Namen ersetzt werden und eventuell die erste dc angepasst werden.
 
 \subsection{Ausgeben des Inhalts der LDAP Datenbank}
 Mit dem Kommandozeilenprogramm \texttt{ldapsearch} kann man nach Einträgen in der LDAP Datenbank suchen. Man kann sich damit auch den gesamten Inhalt der Datenbank anzeigen lassen. Dies geht am einfachsten mit
@@ -280,13 +280,13 @@ LDAPTrustedGlobalCert CA_BASE64 /etc/ssl/certs/fg-networking.de.pem
 
 
 \subsection{Anbindung von FreeRADIUS}
-Zuerst einmal zusätzlich das Paket \texttt{freeradius-ldap} installieren (bei Debian sind zwar schon Beispielkonfigs für LDAP mitgeliefert, aber die tatsächlichen Module sind erst in diesem Paket enthalten). In \texttt{/etc/freeradius/clients.conf} muss unter \texttt{secret} das zu den Uni Mailservern passende Shared Secret eingetragen werden (dies wurde aus der Konfiguration von !CommuniGate ausgelesen). Wenn noch Clients an den RADIUS angebunden werden sollen muss unten für die passenden IPs ein Shared Secret vergeben werden das dann auch im Client eingetragen werden muss.
+Zuerst einmal zusätzlich das Paket \texttt{freeradius-ldap} installieren (bei Debian sind zwar schon Beispielkonfigs für LDAP mitgeliefert, aber die tatsächlichen Module sind erst in diesem Paket enthalten). In \texttt{/etc/freeradius/clients.conf} muss unter \texttt{secret} das zu den Uni Mailservern passende Shared Secret eingetragen werden (dies wurde aus der Konfiguration von CommuniGate ausgelesen). Wenn noch Clients an den RADIUS angebunden werden sollen muss unten für die passenden IPs ein Shared Secret vergeben werden das dann auch im Client eingetragen werden muss.
 
 Um LDAP als Authentifizierungsmethode für User zu aktivieren muss in \texttt{/etc/""free""radius/""users} folgende Zeile eingetragen werden:
 \begin{lstlisting}
 DEFAULT Auth-Type := LDAP
 \end{lstlisting}
-Hier ist zu beachten das '''EAP nicht mehr funktioniert'''. Soll EAP irgendwann benutzt werden sollen muss hier eine andere Möglichkeit gefunden werden (die Dokumentation schlägt eine ähnliche Eintragung für jeden Benutzer einzeln vor).
+Hier ist zu beachten das \textbf{EAP nicht mehr funktioniert}. Soll EAP irgendwann benutzt werden sollen muss hier eine andere Möglichkeit gefunden werden (die Dokumentation schlägt eine ähnliche Eintragung für jeden Benutzer einzeln vor).
 
 In \texttt{/etc/freeradius/modules/ldap} muss unter \texttt{server} der richtige LDAP Server (\texttt{id.""fg-networking.""de}) und unter \texttt{basedn} die richtige Searchbase angegeben werden (hier \texttt{dc=fg-networking,""dc=de}, \textbf{muss evtl. noch angepasst werden})
 
@@ -304,7 +304,7 @@ Die Werte in spitzen Klammern müssen natürlich durch die entsprechenden Werte 
 \setcounter{enumi}{-1}
 \item \texttt{core} - Enthält LDAP Core Attribute (X.501), wird immer benötigt
 \item \texttt{cosine} - Enthält die LDAPv3 Attribute (Cosine and Internet X.500 (RFC1274))
-\item \texttt{nis} - Schema zur Verwendung von NIS, bei uns vermutlich nicht benötigt aber Teil der !Linux/Unix Standardinstallationen
+\item \texttt{nis} - Schema zur Verwendung von NIS, bei uns vermutlich nicht benötigt aber Teil der Linux/Unix Standardinstallationen
 \item \texttt{inetorgperson} - Schema für die gängigen Personenattribute und andere Attribute für organisationsorientierte Dienste
 \item \texttt{freeradius} - Schema für RADIUS Atrribute, aus der FreeRADIUS Doku (\texttt{/usr/""share/""doc/""freeradius/""examples/""openldap"".schema})
 \item \texttt{postfix} - Schema mit zusätzlichen Attributen für postfix address rewrite, von den Autoren des Galileo Press OpenLDAP 2.4 Praxisbuches (in der FGN Bibliothek)
@@ -358,7 +358,7 @@ Die wurde dann in die Datenbank eingefügt mit
 \begin{lstlisting}
 ldapmodify -a -H ldapi:/// -D cn=admin,dc=de -W -f add_content.ldif
 \end{lstlisting}
-Anschließend kann man die User einfügen. Wir haben dazu nach dem folgenden minimalem Template per Skript aus den Klartextdateien von !CommuniGate das LDIF dafür generiert.
+Anschließend kann man die User einfügen. Wir haben dazu nach dem folgenden minimalem Template per Skript aus den Klartextdateien von CommuniGate das LDIF dafür generiert.
 \begin{lstlisting}
 dn: uid=username,ou=people,dc=fg-networking,dc=de
 objectClass: inetOrgPerson
