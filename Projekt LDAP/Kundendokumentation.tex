@@ -1,0 +1,374 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+% This is a simple template for a LaTeX document using the "article" class.
+% See "book", "report", "letter" for other types of document.
+
+\documentclass[11pt,a4paper,titlepage=firstiscover]{scrartcl} % use larger type; default would be 10pt
+
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+\usepackage[T1]{fontenc} % maps glyphs to dictonary characters, needed for seperation
+
+%%% Examples of Article customizations
+% These packages are optional, depending whether you want the features they provide.
+% See the LaTeX Companion or other references for full information.
+
+%%% PAGE DIMENSIONS
+\usepackage{geometry} % to change the page dimensions
+%\geometry{a4paper} % or letterpaper (US) or a5paper or....
+\geometry{top=3.5cm,bottom=3.5cm} % for example, change the margins to 2 inches all round
+% \geometry{landscape} % set up the page for landscape
+%   read geometry.pdf for detailed page layout information
+
+\usepackage{graphicx} % support the \begin{center}\includegraphics command and options
+\usepackage{float}
+\usepackage{tocstyle}
+
+% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+%\usepackage{booktabs} % for much better looking tables
+%\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+%\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+% These packages are all incorporated in the memoir class to one degree or another...
+\usepackage[ngerman]{babel}
+\usepackage{blindtext}
+%\usepackage{pifont} %for symbols (i.e. arrows)
+%\usepackage{showframe} %shows the margins
+
+\usepackage[colorlinks,linkcolor=blue]{hyperref} % package for hyperlinks with \url
+%\usepackage[svgnames]{xcolor}
+%\usepackage[anythingbreaks]{breakurl}
+\usepackage{listings}
+
+\newcommand{\hilight}[1]{\colorbox{yellow}{#1}} %command for magic marker highlighting
+%   (from http://pleasemakeanote.blogspot.de/2009/08/how-to-highlight-text-in-latex.html)
+
+%%redifine of emph, see http://tex.stackexchange.com/questions/6754/what-is-the-canonical-way-to-redefine-the-emph-command
+\makeatletter
+\DeclareRobustCommand{\em}{%
+  \@nomath\em \if b\expandafter\@car\f@series\@nil
+  \normalfont \else \bfseries \fi}
+\makeatother
+
+%%% HEADERS & FOOTERS
+%set with fancy layout package
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%\setlength{\parindent}{0mm} %set paragraph begin indentation to 0
+
+% hyperlink color definitions
+%\hypersetup{citecolor=DeepPink4}
+%\hypersetup{linkcolor=DarkRed}
+%\hypersetup{urlcolor=DarkBlue} 
+
+%%% SECTION TITLE APPEARANCE
+%\usepackage{sectsty}
+%\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+%\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+%\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+%\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+%\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+%\usepackage{uarial}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+%%% END Article customizations
+
+%%% The "real" document content comes below...
+
+\titlehead{taylorix institut für berufliche Bildung e.V.}
+\title{Kundendokumentation zum Projekt "Aufsetzen eines Authentifizierungsservers als Ersatz eines veralteten proprietären CommuniGate Servers"}
+\author{Sebastian Deußer}
+\date{18. Mai 2015} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed 
+%\setcounter{section}{-1} % sets the section counter to start with 0
+
+\begin{document}
+\maketitle %title (page)
+
+%header and footer definitions for fancyhdr
+\pagestyle{fancy}
+\lhead{}
+\chead{\leftmark}
+\rhead{}
+\lfoot{Sebastian Deußer}
+\cfoot{}
+\rfoot{Seite \thepage}
+
+
+%\thispagestyle{empty}
+%\tableofcontents
+%\newpage
+\thispagestyle{fancy}
+\setcounter{page}{1}  %Seitenzahlen erst nach TOC zählen
+
+\section{OpenLDAP}
+Server id.fg-networking.de
+verwendet LDAP over SSL (Port 636), LDAP Standardport nur für Loopback aktiviert (zu ändern in /etc/default/slapd)[[BR]]
+Purge des slapd Pakets löscht nicht die LDAP Datenbank (Konfiguration dieses Verhaltens über das Debian Paketkonfigurationsskript)
+
+
+\subsection{Nützliche Links}
+%[https://wiki.debian.org/LDAP/OpenLDAPSetup][[BR]]
+%[https://wiki.debian.org/FreeRadiusToLdap] (zu RADIUS+LDAP, etwas angestaubt sogar für Debian Verhältnisse)[[BR]]
+%[http://www.postfix.org/LDAP_README.html] (Postfix+LDAP Doku)[[BR]]
+%[http://www.yolinux.com/TUTORIALS/LinuxTutorialLDAP-LDIF-example1.html] (Beispiel für mehrere Domains in einem LDAP)[[BR]]
+%[http://www.zytrax.com/books/ldap/ch11/multi-dit.html] (Anderes Beispiel für mehrere Domains)[[BR]]
+%[http://httpd.apache.org/docs/2.2/mod/mod_authnz_ldap.html] (Apache Doku zum LDAP Auth Modul)[[BR]]
+
+
+\subsection{Ändern des Passworts eines LDAP Users}
+Um das Passwort eine Users im LDAP Verzeichnis zu ändern bietet sich für die Kommandozeile \texttt{ldappasswd} an. Dazu sollten die LDAP Utils auf dem jeweiligen Rechner richtig konfiguriert sein (siehe in Einrichten von LDAPS (LDAP over SSL) den unteren Teil zur \texttt{/etc/ldap/ldap.conf}).
+\begin{lstlisting}
+ldappasswd -S -W -D "cn=admin,dc=de" -x "uid=username,ou=people,dc=fg-networking,dc=de"
+\end{lstlisting}
+Dieser Befehl fragt auf der Kommandozeile das neue Passwort für den Account ''username'' ab (mit Wiederholung), fragt wenn beide Passwörte übereinstimmen nach dem Passwort des LDAP-Administrators. Mit den Daten meldet es sich dann am LDAP Server an und speichert das Passwort dann gehashed in der LDAP Datenbank. Username muss natürlich durch den richtigen Namen ersetzt werden und eventuell die erste dc angepasst werden.
+
+\subsection{Ausgeben des Inhalts der Datenbank}
+Mit dem Kommandozeilenprogramm \texttt{ldapsearch} kann man nach Einträgen in der LDAP Datenbank suchen. Man kann sich damit auch den gesamten Inhalt der Datenbank anzeigen lassen. Dies geht am einfachsten mit
+\begin{lstlisting}
+ldapsearch -x -LLL -H ldaps://id.fg-networking.de -b dc=de
+\end{lstlisting}
+Erklärung der Parameter: -x stellt auf einfache Authentifizierung um (im Gegensatz zu SASL), -LLL gibt die Daten im LDIF Format aus, ohne Kommentare und ohne Anzeige der Versionsnummer, mit -H wird die URI des LDAP Servers übergeben und -b gibt den Startpunkt im Datenbankbaum für die Suche an.
+
+
+\subsection{Einfügen eigener Konfig und Schema}
+Neuer Versionen von OpenLDAP benutzen nicht mehr die slapd.conf, sondern ein Konfigurationsverzeichnis slapd.d mit eigener Datenstruktur.
+Um neue Konfig hinzuzufügen legt man ein ldif File mit der Konfig an und importiert diese mit
+\begin{lstlisting}
+ldapmodify -Y EXTERNAL -H ldapi:/// -f <file.ldif> 
+\end{lstlisting}
+
+Um ein neues Schema einzufügen kopiert man das .schema File nach \texttt{/etc/ldap/schema}.
+Dann erstellt man sich ein temporäres Konfigfile (hier als Beispiel \texttt{/tmp/schema.conf}) mit folgendem Inhalt
+\begin{lstlisting}
+include /etc/ldap/schema/core.schema
+include /etc/ldap/schema/cosine.schema
+include /etc/ldap/schema/nis.schema
+include /etc/ldap/schema/inetorgperson.schema
+include /etc/ldap/schema/mypersonalschema.schema
+\end{lstlisting}
+mypersonalschema.schema sei hier das neue Schema. Nun erstellt man sich ein temporäres Verzeichnis (hier \texttt{/tmp/ldif_output}) und ruft folgendes auf
+\begin{lstlisting}
+slaptest -f /tmp/schema.conf -F /tmp/ldif_output
+\end{lstlisting}
+Nun editiert man das generierte File zB mit
+\begin{lstlisting}
+vim /tmp/ldif_output/cn\=config/cn\=schema/cn\=\{4\}mypersonalschema.ldif
+\end{lstlisting}
+Hier ändert man dann die ersten 3 Zeilen wie folgt
+\begin{lstlisting}
+dn: cn=mypersonalschema,cn=schema,cn=config
+objectClass: olcSchemaConfig
+cn: mypersonalschema
+\end{lstlisting}
+Am Ende der Datei löscht man dann noch die Zeilen mit folgenden Anfängen
+\begin{lstlisting}
+structuralObjectClass:
+entryUUID:
+creatorsName:
+createTimestamp:
+entryCSN:
+modifiersName:
+modifyTimestamp:
+\end{lstlisting}
+Nun kann man das Ganze in die Systemkonfig importieren
+\begin{lstlisting}
+ldapadd -Y EXTERNAL -H ldapi:/// -f /tmp/ldif_output/cn\=config/cn\=schema/cn\=\{4\}mypersonalschema.ldif
+\end{lstlisting}
+Bei erfolgreichen Import findet sich das Schema nun in /etc/ldap/slapd.d/cn=config/cn=schema/cn=!{4}mypersonalschema.ldif
+
+
+\subsection{Einrichten von LDAPS (LDAP over SSL)}
+Zuerst muss man Zertifikat und privaten Schlüssel für das LDAP erzeugen (siehe wiki:FGN-CA) und diese zusammen mit dem Zertifikat der CA auf den LDAP Server ablegen (vorzugsweise in /etc/ssl/certs bzw ../private). Damit der LDAP Server die auch verwendet erstellt man eine entsprechende LDIF Datei (hier olcSSL.ldif).
+\begin{lstlisting}
+dn: cn=config
+add: olcTLSCACertificateFile
+olcTLSCACertificateFile: /etc/ssl/certs/fg-networking.de_ca.pem
+-
+add: olcTLSCertificateKeyFile
+olcTLSCertificateKeyFile: /etc/ssl/private/id.fg-networking.de-key-2015-05-05.pem
+-
+add: olcTLSCertificateFile
+olcTLSCertificateFile: /etc/ssl/certs/id.fg-networking.de-crt-2015-05-05.pem
+\end{lstlisting}
+die man dann in die Konfig importiert mit
+\begin{lstlisting}
+ldapmodify -Y EXTERNAL -H ldapi:/// -f olcSSL.ldif
+\end{lstlisting}
+Nun muss man noch den SLAPD_SERVICES Eintrag in /etc/default/slapd anpassen damit LDAP auf SSL Verbindungen lauscht.
+\begin{lstlisting}
+SLAPD_SERVICES="ldap://127.0.0.1:389/ ldaps:/// ldapi:///"
+\end{lstlisting}
+(für localhost kann man weiterhin den Standard LDAP (ohne SLL) Port 389 verwenden, LDAPS lauscht standardmäßig auf Port 636). Nach einem Neustart von slapd ist LDAP over SSL nun verwendbar.[[BR]]
+Auf den Clients muss dann das FGN CA Zertifikat an passende Stelle gelegt werden und folgende Zeile in /etc/ldap/ldap.conf eingetragen werden.
+\begin{lstlisting}
+TLS_CACERT  /etc/ssl/certs/fg-networking.de_ca.pem
+\end{lstlisting}
+Fehlt die kann der Client nicht das LDAP Server Zertifikat verifizieren und bricht bei Debian Standardeinstellungen die Verbindung ab. Außerdem muss man in dieselbe Datei noch die neue LDAP Server URI eintragen, z.B.
+\begin{lstlisting}
+URI ldaps://id.fg-networking.de
+BASE dc=fg-networking,dc=de
+\end{lstlisting}
+Hier sollte man unter \texttt{BASE} auch die LDAP Standard Searchbase angeben, die sinnvollsten Werte dürften hier \texttt{dc=fg-networking,dc=de} und \texttt{dc=de} sein.
+
+
+\subsection{Anbindung von Apache an den LDAPS Server}
+Zur Anbindung von LDAP an einen Apache Web-Server wird die mod_authnz_ldap verwendet. In der Konfig-Datei /etc/apache2/mods-available/ldap.conf muss auch wieder das CA Zertifikat eingetragen werden um LDAPS verwenden zu können. Dazu trägt man (außerhalb jeglichen <Location> Kontexts) ein:
+\begin{lstlisting}
+LDAPTrustedGlobalCert CA_BASE64 /etc/ssl/certs/fg-networking.de.pem
+\end{lstlisting}
+(In dieser Datei war bereits auch schon der ldap-status handler definiert, an dieser Einstellung muss nichts verändert werden). In der passenden Seitenkonfig (auf NMS: /etc/apache2/sites-available/default-ssl) muss man dann noch die URL vom LDAP Server anpassen. Auf NMS sieht die neue Konfig wie folgt aus:
+\begin{lstlisting}
+ <Location />
+    AuthType  Basic
+    AuthName  "FGN NMS"
+    AuthzLDAPAuthoritative  off
+    AuthBasicProvider ldap
+    AuthLDAPURL ldaps://id.fg-networking.de:636/dc=fg-networking,dc=de?uid?sub?
+    require valid-user
+    Satisfy any
+  </Location>
+\end{lstlisting}
+
+
+\subsection{Anbindung von FreeRADIUS}
+Zuerst einmal zusätzlich das Paket \texttt{freeradius-ldap} installieren (bei Debian sind zwar schon Beispielkonfigs für LDAP mitgeliefert, aber die tatsächlichen Module sind erst in diesem Paket enthalten). In \texttt{/etc/freeradius/clients.conf} muss unter \texttt{secret} das zu den Uni Mailservern passende Shared Secret eingetragen werden (dies wurde aus der Konfiguration von !CommuniGate ausgelesen). Wenn noch Clients an den RADIUS angebunden werden sollen muss unten für die passenden IPs ein Shared Secret vergeben werden das dann auch im Client eingetragen werden muss.[[BR]]
+Um LDAP als Authentifizierungsmethode für User zu aktivieren muss in \texttt{/etc/freeradius/users} folgende Zeile eingetragen werden:
+\begin{lstlisting}
+DEFAULT Auth-Type := LDAP
+\end{lstlisting}
+Hier ist zu beachten das '''EAP nicht mehr funktioniert'''. Soll EAP benutzt werden muss hier eine andere Möglichkeit gefunden werden (die Dokumentation schlägt eine ähnliche Eintragung für jeden Benutzer einzeln vor).[[BR]]
+In \texttt{/etc/freeradius/modules/ldap} muss unter \texttt{server} der richtige LDAP Server (\texttt{id.fg-networking.de}) und unter \texttt{basedn} die richtige Searchbase angegeben werden (hier \texttt{dc=fg-networking,dc=de}, '''muss evtl. noch angepasst werden''')[[BR]]
+In \texttt{/etc/freeradius/sites-enabled/default} müssen alle Zeilen die \texttt{ldap} einkommentiert werden. Einzige Ausnahme bildet die Zeile bei der in den Kommentaren davor erwähnt das sie nur benötigt wird wenn \texttt{edir_account_policy_check = yes} eingestellt wurde (Zeile 488 in der aktuellen Datei)[[BR]]
+Zum Testen des Ganzen wurde \texttt{radtest} aus dem Paket \texttt{freeradius-utils} verwendet. Der Aufruf war
+\begin{lstlisting}
+radtest <username> <passwort> id.fg-networking.de:1812 10 <shared-secret>
+\end{lstlisting}
+Die Werte in spitzen Klammern müssen natürlich durch die entsprechenden Werte ersetzt werden (ohne die spitzen Klammern).
+
+
+\subsection{Momentan verwendete Schema (in Reihenfolge)}
+0) core - Enthält LDAP Core Attribute (X.501), wird immer benötigt[[BR]]
+1) cosine - Enthält die LDAPv3 Attribute (Cosine and Internet X.500 (RFC1274))[[BR]]
+2) nis - Schema zur Verwendung von NIS, bei uns vermutlich nicht benötigt aber Teil der !Linux/Unix Standardinstallationen[[BR]]
+3) inetorgperson - Schema für die gängigen Personenattribute und andere Attribute für organisationsorientierte Dienste[[BR]]
+4) freeradius - Schema für RADIUS Atrribute, aus der FreeRADIUS Doku (/usr/share/doc/freeradius/examples/openldap.schema)[[BR]]
+5) postfix - Schema mit zusätzlichen Attributen für postfix address rewrite, von den Autoren des Galileo Computing OpenLDAP 2.4 Praxisbuches (in der FGN Bibliothek), wird bei uns vermutlich nicht notwendig sein[[BR]]
+(0-3 sind Teil der Debian Standardkonfig)
+
+
+\subsection{Erzeugung der LDAP Verzeichnisstruktur}
+Die leere Datenbank wurde mit dem interaktiven Debian config script (aufgerufen mit dpkg-reconfigure slapd) erzeugt. Als Domain und Organization Name wurde "de" genommen. Die restlichen Fragen wurden mit den Standardantworten beantwortet, '''somit löscht purge von slapd nicht die LDAP Datenbank'''. Für die 3 Domains wurde dann folgende LDIF Datei (add_DNs.ldif) zum erzeugen verwendet
+\begin{lstlisting}
+dn: dc=fg-networking,dc=de
+o: fg-networking.de
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+
+dn: dc=schabler,dc=de
+o: schabler.de
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+
+dn: dc=worden,dc=de
+o: worden.de
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+
+\end{lstlisting}
+Diese wird (nachdem man den LDAP daemon slapd gestoppt hat) in die Datenbank eingefügt mit
+\begin{lstlisting}
+slapadd -n 1 -l add_DNs.ldif
+\end{lstlisting}
+(Der Content wird hier mit slapadd eingefügt da dies der einfachste Weg ist um dcObjects in der LDAP Datenbank zu erstellen. Für die meisten anderen Datenmanipulationen ist ldapmodify die sicherere und sauberere Variante)[[BR]]
+Danach kann (und muss man für den nächsten Schritt auch) man den slapd wieder starten. Als nächstes wurden die "people" organizationalUnits erzeugt, in die alle User Einträge kommen sollen (da wir vor der Fertigstellung des neuen Mailservers nur echte Anwenderaccounts migrieren (keine Mailinglisten Accounts u.ä.) ist dies auch erstmal die einzige benötigte OU). Zum erzeugen der OUs wurde wieder eine LDIF Datei (add_content.ldif) erstellt.
+\begin{lstlisting}
+dn: ou=people,dc=fg-networking,dc=de
+objectClass: organizationalUnit
+ou: people
+
+dn: ou=people,dc=schabler,dc=de
+objectClass: organizationalUnit
+ou: people
+
+dn: ou=people,dc=worden,dc=de
+objectClass: organizationalUnit
+ou: people
+\end{lstlisting}
+Die wurde dann in die Datenbank eingefügt mit
+\begin{lstlisting}
+ldapmodify -a -H ldapi:/// -D cn=admin,dc=de -W -f add_content.ldif
+\end{lstlisting}
+Anschließend kann man die User einfügen. Wir haben dazu nach dem folgenden minimalem Template per Skript aus den Klartextdateien von !CommuniGate das LDIF dafür generiert.
+\begin{lstlisting}
+dn: uid=username,ou=people,dc=fg-networking,dc=de
+objectClass: inetOrgPerson
+objectClass: person
+uid: username
+sn: Nachname
+givenName: Vorname
+cn: Vorname Nachname
+displayName: Vorname Nachname
+userPassword: password
+\end{lstlisting}
+
+
+\subsection{OpenVPN}
+Konfigurationsdateien \texttt{/etc/openvpn/tcp.config} und \texttt{/etc/openvpn/udp.config}
+\begin{lstlisting}
+plugin /usr/lib/openvpn/openvpn-auth-ldap.so /etc/openvpn/auth-ldap.config
+\end{lstlisting}
+Die Einträge sind notwendig damit das LDAP Plugin überhaupt verwendet wird.
+
+Konfigurationsdatei \texttt{/etc/openvpn/auth-ldap.config}
+\begin{lstlisting}
+<LDAP>
+        URL             ldaps://id.fg-networking.de:636
+        Timeout         15
+        TLSEnable       no
+        FollowReferrals yes
+        TLSCACertFile   /etc/ssl/certs/fg-networking.de_ca.pem
+</LDAP>
+
+<Authorization>
+        BaseDN          "dc=fg-networking,dc=de"
+        SearchFilter    "(&(uid=%u))"
+        RequireGroup    false
+</Authorization>
+\end{lstlisting}
+OpenVPN muss neu gestartet werden, um die geänderte Konfigurationsdatei anzuwenden.
+
+
+\subsection{Auf den neuen LDAP Server umgestellte Systeme}
+nms Webserver[[BR]]
+aio Webserver[[BR]]
+lab-mm Webserver[[BR]]
+OpenVPN[[BR]]
+
+
+\subsection{Noch nicht umgestellte Systeme}
+Egroupware (mangels Passwort und Ahnung vom System)[[BR]]
+Mailserver[[BR]]
+
+
+\subsection{TODO}
+Praxistest des RADIUS (evtl \texttt{basedn} in \texttt{/etc/freeradius/modules/ldap} anpassen)[[BR]]
+FreeRADIUS: checken ob \texttt{edir_account_policy_check = yes} benötigt wird.
+
+
+\end{document}
