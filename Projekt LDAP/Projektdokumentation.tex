@@ -4,7 +4,7 @@
 % This is a simple template for a LaTeX document using the "article" class.
 % See "book", "report", "letter" for other types of document.
 
-\documentclass[11pt,a4paper,titlepage=firstiscover]{scrartcl} % use larger type; default would be 10pt
+\documentclass[11pt,a4paper,titlepage=firstiscover,headsepline]{scrartcl} % use larger type; default would be 10pt
 
 \usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
 \usepackage[T1]{fontenc} % maps glyphs to dictonary characters, needed for seperation
@@ -20,8 +20,6 @@
 % \geometry{landscape} % set up the page for landscape
 %   read geometry.pdf for detailed page layout information
 
-\usepackage{graphicx} % support the \begin{center}\includegraphics command and options
-\usepackage{float}
 \usepackage{tocstyle}
 
 % \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
@@ -29,8 +27,7 @@
 %%% PACKAGES
 %\usepackage{booktabs} % for much better looking tables
 %\usepackage{array} % for better arrays (eg matrices) in maths
-\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
-\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+
 %\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
 % These packages are all incorporated in the memoir class to one degree or another...
 \usepackage[ngerman]{babel}
@@ -39,6 +36,11 @@
 %\usepackage{showframe} %shows the margins
 
 \usepackage[colorlinks,linkcolor=blue]{hyperref} % package for hyperlinks with \url
+% hyperlink color definitions
+%\hypersetup{citecolor=DeepPink4}
+%\hypersetup{linkcolor=DarkRed}
+%\hypersetup{urlcolor=DarkBlue} 
+
 %\usepackage[svgnames]{xcolor}
 %\usepackage[anythingbreaks]{breakurl}
 \usepackage{listings}
@@ -73,27 +75,18 @@ numbers=none,                    % where to put the line-numbers; possible value
 \newcommand{\hilight}[1]{\colorbox{yellow}{#1}} %command for magic marker highlighting
 %   (from http://pleasemakeanote.blogspot.de/2009/08/how-to-highlight-text-in-latex.html)
 
-%%redifine of emph, see http://tex.stackexchange.com/questions/6754/what-is-the-canonical-way-to-redefine-the-emph-command
-\makeatletter
-\DeclareRobustCommand{\em}{%
-  \@nomath\em \if b\expandafter\@car\f@series\@nil
-  \normalfont \else \bfseries \fi}
-\makeatother
 
 %%% HEADERS & FOOTERS
-%set with fancy layout package
-\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
-\pagestyle{fancy} % options: empty , plain , fancy
-\renewcommand{\headrulewidth}{0pt} % customise the layout...
-\lhead{}\chead{}\rhead{}
-\lfoot{}\cfoot{\thepage}\rfoot{}
+\usepackage[automark]{scrlayer-scrpage} %header and footer definitions
+\ihead{}
+\chead{\headmark}
+\ohead{}
+\ifoot{Sebastian Deußer}
+\cfoot{}
+\ofoot{Seite \pagemark}
 
 %\setlength{\parindent}{0mm} %set paragraph begin indentation to 0
 
-% hyperlink color definitions
-%\hypersetup{citecolor=DeepPink4}
-%\hypersetup{linkcolor=DarkRed}
-%\hypersetup{urlcolor=DarkBlue} 
 
 %%% SECTION TITLE APPEARANCE
 %\usepackage{sectsty}
@@ -122,23 +115,13 @@ numbers=none,                    % where to put the line-numbers; possible value
 %\setcounter{section}{-1} % sets the section counter to start with 0
 
 \begin{document}
+\pagestyle{empty}
 \maketitle %title (page)
 
-%header and footer definitions for fancyhdr
-\pagestyle{fancy}
-\lhead{}
-\chead{\leftmark}
-\rhead{}
-\lfoot{Sebastian Deußer}
-\cfoot{}
-\rfoot{Seite \thepage}
-
-
-\thispagestyle{empty}
 \tableofcontents
 \newpage
-\thispagestyle{fancy}
 \setcounter{page}{1}  %Seitenzahlen erst nach TOC zählen
+\pagestyle{scrheadings}
 
 \section{Einleitung}
 In den meisten Firmennetzwerken wird eine zentrale Stelle benötigt um verschiedene Anwender Metadaten zu verwalten. Für diese Aufgabe wird üblicherweise ein Verzeichnisdienst verwendet. Basis eines Verzeichnisdienstes ist eine hierarchische Datenbank, die im Netzwerk verteilt angelegt sein kann. In dieser Datenbank können Daten zu verschiedenen Objekten abgelegt werden wie etwa Konfigurationsdaten für Rechner oder diverse Daten für Anwender wie z.B. Name, Passwort, E-Mail Konto, Gruppenzugehörigkeiten u.s.w.. Die Anforderungen an einen Verzeichnisdienst wurden in den 80er Jahren von der International Telecommunication Union in der X.500 Spezifikation festgeschrieben nachdem weltweit Telekommunikationsunternehmen jahrzehntelang Praxiserfahrungen mit dem Thema bei Erstellung und Verwaltung von Telefon Verzeichnissen sammelten und dann zur Spezifikation beisteuerten.
