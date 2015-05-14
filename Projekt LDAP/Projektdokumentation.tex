@@ -445,16 +445,81 @@ userPassword: password
 
 \newpage
 \section{Skript zum Auslesen der Anwenderkonten aus der CommuniGate Dateien}\label{sec:SkriptA}
+\lstinputlisting[language=sh]{cg_accounts_to_ldap.sh}
+
 \newpage
 \section{Skript zum Hashen der Anwenderpasswörter}\label{sec:SkriptB}
+\lstinputlisting[language=sh]{hash_passwords.sh}
+
 \newpage
 \section{Konfiguration des FreeRADIUS Servers}\label{sec:RADIUS-Konfig}
+Zuerst einmal zusätzlich das Paket \texttt{freeradius-ldap} installieren (bei Debian sind zwar schon Beispielkonfigs für LDAP mitgeliefert, aber die tatsächlichen Module sind erst in diesem Paket enthalten). In \texttt{/etc/freeradius/clients.conf} muss unter \texttt{secret} das zu den Uni Mailservern passende Shared Secret eingetragen werden (dies wurde aus der Konfiguration von CommuniGate ausgelesen). Wenn noch Clients an den RADIUS angebunden werden sollen muss unten für die passenden IPs ein Shared Secret vergeben werden das dann auch im Client eingetragen werden muss.
+
+Um LDAP als Authentifizierungsmethode für User zu aktivieren muss in \texttt{/etc/""free""radius/""users} folgende Zeile eingetragen werden:
+\begin{lstlisting}
+DEFAULT Auth-Type := LDAP
+\end{lstlisting}
+Hier ist zu beachten das \textbf{EAP nicht mehr funktioniert}. Soll EAP irgendwann benutzt werden sollen muss hier eine andere Möglichkeit gefunden werden (die Dokumentation schlägt eine ähnliche Eintragung für jeden Benutzer einzeln vor).
+
+In \texttt{/etc/freeradius/modules/ldap} muss unter \texttt{server} der richtige LDAP Server (\texttt{id.""fg-networking.""de}) und unter \texttt{basedn} die richtige Searchbase angegeben werden (hier \texttt{dc=fg-networking,""dc=de}, \textbf{muss evtl. noch angepasst werden})
+
+In \texttt{/etc/freeradius/sites-enabled/default} müssen alle Zeilen die \texttt{ldap} einkommentiert werden. Einzige Ausnahme bildet die Zeile bei der in den Kommentaren davor erwähnt das sie nur benötigt wird wenn \texttt{edir\_account\_policy\_check = yes} eingestellt wurde (Zeile 488 in der aktuellen Datei).
+
+Zum Testen des Ganzen wurde \texttt{radtest} aus dem Paket \texttt{freeradius-utils} verwendet. Der Aufruf war:
+\begin{lstlisting}
+radtest <username> <passwort> id.fg-networking.de:1812 10	<shared-secret>
+\end{lstlisting}
+Die Werte in spitzen Klammern müssen natürlich durch die entsprechenden Werte ersetzt werden (ohne die spitzen Klammern).
+
+
 \newpage
 \section{Konfiguration der Firewall}\label{sec:Firewall-Konfig}
+
 \newpage
 \section{Änderungen an der Apache Konfiguration}\label{sec:Apache-Konfig}
+Zur Anbindung von LDAP an einen Apache Web-Server wird die \texttt{mod\_authnz\_ldap} verwendet. In der Konfig-Datei \texttt{/etc/apache2/mods-available/ldap.conf} muss auch wieder das CA Zertifikat eingetragen werden um LDAPS verwenden zu können. Dazu trägt man (außerhalb jeglichen \texttt{<Location>} Kontexts) ein:
+\begin{lstlisting}
+LDAPTrustedGlobalCert CA_BASE64 /etc/ssl/certs/fg-networking.de.pem
+\end{lstlisting}
+(In dieser Datei war bereits auch schon der ldap-status handler definiert, an dieser Einstellung muss nichts verändert werden). In der passenden Seitenkonfig (auf NMS: \texttt{/etc/apache2/sites-available/default-ssl}) muss man dann noch die URL vom LDAP Server anpassen. Auf NMS sieht die neue Konfig wie folgt aus:
+\begin{lstlisting}
+ <Location />
+    AuthType  Basic
+    AuthName  "FGN NMS"
+    AuthzLDAPAuthoritative  off
+    AuthBasicProvider ldap
+    AuthLDAPURL ldaps://id.fg-networking.de:636/dc=fg-networking,dc=de?uid?sub?
+    require valid-user
+    Satisfy any
+  </Location>
+\end{lstlisting}
+
 \newpage
 \section{Änderungen an der OpenVPN Konfiguration}\label{sec:VPN-Konfig}
+Konfigurationsdateien \texttt{/etc/openvpn/tcp.config} und \texttt{/etc/openvpn/udp.config}
+\begin{lstlisting}
+plugin /usr/lib/openvpn/openvpn-auth-ldap.so /etc/openvpn/auth-ldap.config
+\end{lstlisting}
+Die Einträge sind notwendig damit das LDAP Plugin überhaupt verwendet wird.
+
+Konfigurationsdatei \texttt{/etc/openvpn/auth-ldap.config}
+\begin{lstlisting}
+<LDAP>
+        URL             ldaps://id.fg-networking.de:636
+        Timeout         15
+        TLSEnable       no
+        FollowReferrals yes
+        TLSCACertFile   /etc/ssl/certs/fg-networking.de_ca.pem
+</LDAP>
+
+<Authorization>
+        BaseDN          "dc=fg-networking,dc=de"
+        SearchFilter    "(&(uid=%u))"
+        RequireGroup    false
+</Authorization>
+\end{lstlisting}
+OpenVPN muss neu gestartet werden, um die geänderte Konfigurationsdatei anzuwenden.
+
 \newpage
 \section{Ergebnis eines fgn internen NMAP Tests}\label{sec:NMAP-Test-int}
 \newpage
