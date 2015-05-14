@@ -45,11 +45,9 @@
 %\usepackage[anythingbreaks]{breakurl}
 \usepackage{listings}
 \lstset{ %
-%backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
-%basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+%basicstyle=\sfdefault,        % the size of the fonts that are used for the code
 %breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
 breaklines=true,                 % sets automatic line breaking
-%  captionpos=b,                    % sets the caption-position to bottom
 %commentstyle=\color{mygreen},    % comment style
 %deletekeywords={...},            % if you want to delete keywords from the given language
 %escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
@@ -57,7 +55,6 @@ breaklines=true,                 % sets automatic line breaking
 frame=single,                    % adds a frame around the code
 keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
 %keywordstyle=\color{mygreen},       % keyword style
-%language=Cobol,                 % the language of the code
 %morekeywords={*,...},            % if you want to add more keywords to the set
 numbers=none,                    % where to put the line-numbers; possible values are (none, left, right)
 %numbersep=5pt,                   % how far the line-numbers are from the code
@@ -78,6 +75,7 @@ numbers=none,                    % where to put the line-numbers; possible value
 
 %%% HEADERS & FOOTERS
 \usepackage[automark]{scrlayer-scrpage} %header and footer definitions
+\setkomafont{pageheadfoot}{\normalfont\normalcolor} %um kursiv abzuschalten in header/footer
 \ihead{}
 \chead{\headmark}
 \ohead{}
@@ -110,7 +108,7 @@ numbers=none,                    % where to put the line-numbers; possible value
 \titlehead{taylorix institut für berufliche Bildung e.V.}
 \title{Projektdokumentation "Aufsetzen eines Authentifizierungsservers als Ersatz eines veralteten proprietären CommuniGate Servers"}
 \author{Sebastian Deußer}
-%\date{4. April 2014} % Activate to display a given date or no date (if empty),
+%\date{18. Mai 2015} % Activate to display a given date or no date (if empty),
          % otherwise the current date is printed 
 %\setcounter{section}{-1} % sets the section counter to start with 0
 
