@@ -41,7 +41,40 @@
 \usepackage[colorlinks,linkcolor=blue]{hyperref} % package for hyperlinks with \url
 %\usepackage[svgnames]{xcolor}
 %\usepackage[anythingbreaks]{breakurl}
+
+%code listing stuff
 \usepackage{listings}
+%\usepackage{color}
+%\definecolor{mygreen}{rgb}{0,0.6,0}
+%\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+%\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\lstset{ %
+%backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+%basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+%breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+breaklines=true,                 % sets automatic line breaking
+%  captionpos=b,                    % sets the caption-position to bottom
+%commentstyle=\color{mygreen},    % comment style
+%deletekeywords={...},            % if you want to delete keywords from the given language
+%escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+%extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+frame=single,                    % adds a frame around the code
+keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+%keywordstyle=\color{mygreen},       % keyword style
+%language=Cobol,                 % the language of the code
+%morekeywords={*,...},            % if you want to add more keywords to the set
+numbers=none,                    % where to put the line-numbers; possible values are (none, left, right)
+%numbersep=5pt,                   % how far the line-numbers are from the code
+%numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+%rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+%showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+%showstringspaces=false,          % underline spaces within strings only
+%showtabs=false,                  % show tabs within strings adding particular underscores
+%stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+%stringstyle=\ttfamily\color{red},     % string literal style
+%tabsize=2,                       % sets default tabsize to 2 spaces
+%title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
 
 \newcommand{\hilight}[1]{\colorbox{yellow}{#1}} %command for magic marker highlighting
 %   (from http://pleasemakeanote.blogspot.de/2009/08/how-to-highlight-text-in-latex.html)
@@ -114,19 +147,22 @@
 \setcounter{page}{1}  %Seitenzahlen erst nach TOC zählen
 
 \section{OpenLDAP}
-Server id.fg-networking.de
-verwendet LDAP over SSL (Port 636), LDAP Standardport nur für Loopback aktiviert (zu ändern in /etc/default/slapd)[[BR]]
-Purge des slapd Pakets löscht nicht die LDAP Datenbank (Konfiguration dieses Verhaltens über das Debian Paketkonfigurationsskript)
+\begin{itemize}
+\item Server \texttt{id.fg-networking.de}
+\item verwendet LDAP over SSL (Port 636), LDAP Standardport nur für Loopback aktiviert (zu ändern in /etc/default/slapd)
+\item Purge des slapd Pakets löscht nicht die LDAP Datenbank (Konfiguration dieses Verhaltens über das Debian Paketkonfigurationsskript)
+\end{itemize}
 
 
 \subsection{Nützliche Links}
-%[https://wiki.debian.org/LDAP/OpenLDAPSetup][[BR]]
+\begin{itemize}
+\item https://wiki.debian.org/LDAP/OpenLDAPSetup
 %[https://wiki.debian.org/FreeRadiusToLdap] (zu RADIUS+LDAP, etwas angestaubt sogar für Debian Verhältnisse)[[BR]]
 %[http://www.postfix.org/LDAP_README.html] (Postfix+LDAP Doku)[[BR]]
 %[http://www.yolinux.com/TUTORIALS/LinuxTutorialLDAP-LDIF-example1.html] (Beispiel für mehrere Domains in einem LDAP)[[BR]]
 %[http://www.zytrax.com/books/ldap/ch11/multi-dit.html] (Anderes Beispiel für mehrere Domains)[[BR]]
 %[http://httpd.apache.org/docs/2.2/mod/mod_authnz_ldap.html] (Apache Doku zum LDAP Auth Modul)[[BR]]
-
+\end{itemize}
 
 \subsection{Ändern des Passworts eines LDAP Users}
 Um das Passwort eine Users im LDAP Verzeichnis zu ändern bietet sich für die Kommandozeile \texttt{ldappasswd} an. Dazu sollten die LDAP Utils auf dem jeweiligen Rechner richtig konfiguriert sein (siehe in Einrichten von LDAPS (LDAP over SSL) den unteren Teil zur \texttt{/etc/ldap/ldap.conf}).
@@ -135,7 +171,7 @@ ldappasswd -S -W -D "cn=admin,dc=de" -x "uid=username,ou=people,dc=fg-networking
 \end{lstlisting}
 Dieser Befehl fragt auf der Kommandozeile das neue Passwort für den Account ''username'' ab (mit Wiederholung), fragt wenn beide Passwörte übereinstimmen nach dem Passwort des LDAP-Administrators. Mit den Daten meldet es sich dann am LDAP Server an und speichert das Passwort dann gehashed in der LDAP Datenbank. Username muss natürlich durch den richtigen Namen ersetzt werden und eventuell die erste dc angepasst werden.
 
-\subsection{Ausgeben des Inhalts der Datenbank}
+\subsection{Ausgeben des Inhalts der LDAP Datenbank}
 Mit dem Kommandozeilenprogramm \texttt{ldapsearch} kann man nach Einträgen in der LDAP Datenbank suchen. Man kann sich damit auch den gesamten Inhalt der Datenbank anzeigen lassen. Dies geht am einfachsten mit
 \begin{lstlisting}
 ldapsearch -x -LLL -H ldaps://id.fg-networking.de -b dc=de
@@ -143,7 +179,7 @@ ldapsearch -x -LLL -H ldaps://id.fg-networking.de -b dc=de
 Erklärung der Parameter: -x stellt auf einfache Authentifizierung um (im Gegensatz zu SASL), -LLL gibt die Daten im LDIF Format aus, ohne Kommentare und ohne Anzeige der Versionsnummer, mit -H wird die URI des LDAP Servers übergeben und -b gibt den Startpunkt im Datenbankbaum für die Suche an.
 
 
-\subsection{Einfügen eigener Konfig und Schema}
+\subsection{Hinzufügen eigener Konfig und Schema zum LDAP Server}
 Neuer Versionen von OpenLDAP benutzen nicht mehr die slapd.conf, sondern ein Konfigurationsverzeichnis slapd.d mit eigener Datenstruktur.
 Um neue Konfig hinzuzufügen legt man ein ldif File mit der Konfig an und importiert diese mit
 \begin{lstlisting}
@@ -159,13 +195,13 @@ include /etc/ldap/schema/nis.schema
 include /etc/ldap/schema/inetorgperson.schema
 include /etc/ldap/schema/mypersonalschema.schema
 \end{lstlisting}
-mypersonalschema.schema sei hier das neue Schema. Nun erstellt man sich ein temporäres Verzeichnis (hier \texttt{/tmp/ldif_output}) und ruft folgendes auf
+mypersonalschema.schema sei hier das neue Schema. Nun erstellt man sich ein temporäres Verzeichnis (hier \texttt{/tmp/ldif\_output}) und ruft folgendes auf
 \begin{lstlisting}
 slaptest -f /tmp/schema.conf -F /tmp/ldif_output
 \end{lstlisting}
 Nun editiert man das generierte File zB mit
 \begin{lstlisting}
-vim /tmp/ldif_output/cn\=config/cn\=schema/cn\=\{4\}mypersonalschema.ldif
+vim "/tmp/ldif_output/cn=config/cn=schema/cn={4}mypersonalschema.ldif"
 \end{lstlisting}
 Hier ändert man dann die ersten 3 Zeilen wie folgt
 \begin{lstlisting}
@@ -185,9 +221,11 @@ modifyTimestamp:
 \end{lstlisting}
 Nun kann man das Ganze in die Systemkonfig importieren
 \begin{lstlisting}
-ldapadd -Y EXTERNAL -H ldapi:/// -f /tmp/ldif_output/cn\=config/cn\=schema/cn\=\{4\}mypersonalschema.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -f "/tmp/ldif_output/cn=config/cn=schema/cn={4}mypersonalschema.ldif"
 \end{lstlisting}
-Bei erfolgreichen Import findet sich das Schema nun in /etc/ldap/slapd.d/cn=config/cn=schema/cn=!{4}mypersonalschema.ldif
+Bei erfolgreichen Import findet sich das Schema nun in
+
+\noindent\texttt{/etc/ldap/slapd.d/cn=config/cn=schema/cn=\{4\}mypersonalschema.ldif}
 
 
 \subsection{Einrichten von LDAPS (LDAP over SSL)}
@@ -207,7 +245,7 @@ die man dann in die Konfig importiert mit
 \begin{lstlisting}
 ldapmodify -Y EXTERNAL -H ldapi:/// -f olcSSL.ldif
 \end{lstlisting}
-Nun muss man noch den SLAPD_SERVICES Eintrag in /etc/default/slapd anpassen damit LDAP auf SSL Verbindungen lauscht.
+Nun muss man noch den SLAPD\_SERVICES Eintrag in /etc/default/slapd anpassen damit LDAP auf SSL Verbindungen lauscht.
 \begin{lstlisting}
 SLAPD_SERVICES="ldap://127.0.0.1:389/ ldaps:/// ldapi:///"
 \end{lstlisting}
@@ -225,7 +263,7 @@ Hier sollte man unter \texttt{BASE} auch die LDAP Standard Searchbase angeben, d
 
 
 \subsection{Anbindung von Apache an den LDAPS Server}
-Zur Anbindung von LDAP an einen Apache Web-Server wird die mod_authnz_ldap verwendet. In der Konfig-Datei /etc/apache2/mods-available/ldap.conf muss auch wieder das CA Zertifikat eingetragen werden um LDAPS verwenden zu können. Dazu trägt man (außerhalb jeglichen <Location> Kontexts) ein:
+Zur Anbindung von LDAP an einen Apache Web-Server wird die \texttt{mod\_authnz\_ldap} verwendet. In der Konfig-Datei /etc/apache2/mods-available/ldap.conf muss auch wieder das CA Zertifikat eingetragen werden um LDAPS verwenden zu können. Dazu trägt man (außerhalb jeglichen <Location> Kontexts) ein:
 \begin{lstlisting}
 LDAPTrustedGlobalCert CA_BASE64 /etc/ssl/certs/fg-networking.de.pem
 \end{lstlisting}
@@ -251,10 +289,10 @@ DEFAULT Auth-Type := LDAP
 \end{lstlisting}
 Hier ist zu beachten das '''EAP nicht mehr funktioniert'''. Soll EAP benutzt werden muss hier eine andere Möglichkeit gefunden werden (die Dokumentation schlägt eine ähnliche Eintragung für jeden Benutzer einzeln vor).[[BR]]
 In \texttt{/etc/freeradius/modules/ldap} muss unter \texttt{server} der richtige LDAP Server (\texttt{id.fg-networking.de}) und unter \texttt{basedn} die richtige Searchbase angegeben werden (hier \texttt{dc=fg-networking,dc=de}, '''muss evtl. noch angepasst werden''')[[BR]]
-In \texttt{/etc/freeradius/sites-enabled/default} müssen alle Zeilen die \texttt{ldap} einkommentiert werden. Einzige Ausnahme bildet die Zeile bei der in den Kommentaren davor erwähnt das sie nur benötigt wird wenn \texttt{edir_account_policy_check = yes} eingestellt wurde (Zeile 488 in der aktuellen Datei)[[BR]]
+In \texttt{/etc/freeradius/sites-enabled/default} müssen alle Zeilen die \texttt{ldap} einkommentiert werden. Einzige Ausnahme bildet die Zeile bei der in den Kommentaren davor erwähnt das sie nur benötigt wird wenn \texttt{edir\_account\_policy\_check = yes} eingestellt wurde (Zeile 488 in der aktuellen Datei)[[BR]]
 Zum Testen des Ganzen wurde \texttt{radtest} aus dem Paket \texttt{freeradius-utils} verwendet. Der Aufruf war
 \begin{lstlisting}
-radtest <username> <passwort> id.fg-networking.de:1812 10 <shared-secret>
+radtest <username> <passwort> id.fg-networking.de:1812 10	<shared-secret>
 \end{lstlisting}
 Die Werte in spitzen Klammern müssen natürlich durch die entsprechenden Werte ersetzt werden (ohne die spitzen Klammern).
 
@@ -270,7 +308,7 @@ Die Werte in spitzen Klammern müssen natürlich durch die entsprechenden Werte 
 
 
 \subsection{Erzeugung der LDAP Verzeichnisstruktur}
-Die leere Datenbank wurde mit dem interaktiven Debian config script (aufgerufen mit dpkg-reconfigure slapd) erzeugt. Als Domain und Organization Name wurde "de" genommen. Die restlichen Fragen wurden mit den Standardantworten beantwortet, '''somit löscht purge von slapd nicht die LDAP Datenbank'''. Für die 3 Domains wurde dann folgende LDIF Datei (add_DNs.ldif) zum erzeugen verwendet
+Die leere Datenbank wurde mit dem interaktiven Debian config script (aufgerufen mit \texttt{dpkg-reconfigure slapd}) erzeugt. Als Domain und Organization Name wurde \texttt{de} genommen. Die restlichen Fragen wurden mit den Standardantworten beantwortet, \textbf{somit löscht purge von slapd nicht die LDAP Datenbank}. Für die 3 Domains wurde dann folgende LDIF Datei (\texttt{add\_DNs.ldif}) zum erzeugen verwendet
 \begin{lstlisting}
 dn: dc=fg-networking,dc=de
 o: fg-networking.de
@@ -296,7 +334,7 @@ Diese wird (nachdem man den LDAP daemon slapd gestoppt hat) in die Datenbank ein
 slapadd -n 1 -l add_DNs.ldif
 \end{lstlisting}
 (Der Content wird hier mit slapadd eingefügt da dies der einfachste Weg ist um dcObjects in der LDAP Datenbank zu erstellen. Für die meisten anderen Datenmanipulationen ist ldapmodify die sicherere und sauberere Variante)[[BR]]
-Danach kann (und muss man für den nächsten Schritt auch) man den slapd wieder starten. Als nächstes wurden die "people" organizationalUnits erzeugt, in die alle User Einträge kommen sollen (da wir vor der Fertigstellung des neuen Mailservers nur echte Anwenderaccounts migrieren (keine Mailinglisten Accounts u.ä.) ist dies auch erstmal die einzige benötigte OU). Zum erzeugen der OUs wurde wieder eine LDIF Datei (add_content.ldif) erstellt.
+Danach kann (und muss man für den nächsten Schritt auch) man \texttt{slapd} wieder starten. Als nächstes wurden die \texttt{people} organizationalUnits erzeugt, in die alle User Einträge kommen sollen (da wir vor der Fertigstellung des neuen Mailservers nur echte Anwenderaccounts migrieren (keine Mailinglisten Accounts u.ä.) ist dies auch erstmal die einzige benötigte OU). Zum erzeugen der OUs wurde wieder eine LDIF Datei (\texttt{add\_content.ldif}) erstellt.
 \begin{lstlisting}
 dn: ou=people,dc=fg-networking,dc=de
 objectClass: organizationalUnit
@@ -368,7 +406,7 @@ Mailserver[[BR]]
 
 \subsection{TODO}
 Praxistest des RADIUS (evtl \texttt{basedn} in \texttt{/etc/freeradius/modules/ldap} anpassen)[[BR]]
-FreeRADIUS: checken ob \texttt{edir_account_policy_check = yes} benötigt wird.
+FreeRADIUS: checken ob \texttt{edir\_account\_policy\_check = yes} benötigt wird.
 
 
 \end{document}
