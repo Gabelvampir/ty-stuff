@@ -26,12 +26,13 @@
 
 %%% PACKAGES
 %\usepackage{booktabs} % for much better looking tables
+\usepackage{tabularx}  % for tables with variable width
 %\usepackage{array} % for better arrays (eg matrices) in maths
 
 %\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
 % These packages are all incorporated in the memoir class to one degree or another...
 \usepackage[ngerman]{babel}
-\usepackage{blindtext}
+%\usepackage{blindtext}
 %\usepackage{pifont} %for symbols (i.e. arrows)
 %\usepackage{showframe} %shows the margins
 
@@ -191,6 +192,8 @@ Sämtliche firmeninterne Webservices, der VPN, der kommende neue E-Mailserver un
 \subsection{Planung des Sicherheitskonzepts}\label{sec:Sicherheitskonzept}
 Das Firmennetzwerk der fgn GmbH ist über die Netzwerk der TU Kaiserslautern ans Internet angebunden. Entsprechend wird jeglicher Netzwerkverkehr von der TU Firewall vorgefiltert. Das Firmennetz von fgn ist zusätzlich noch durch eine eigene Firewall gesichert. In diese muss eine Ausnahme für den neuen RADIUS Server eingetragen werden (analog zur alten Regel). Zusätzlich wird auf dem neuen Server eine Software-Firewall installiert die nur die für LDAP, RADIUS und zur Wartung benötigten Ports zulassen soll.
 
+\hilight{TODO: fgn Netzstruktur korrigieren}
+
 \subsection{Projektablaufplan}
 Analyse und Planung (insgesamt 6 h)
 	\begin{itemize}
@@ -288,6 +291,8 @@ Zum FreeRADIUS Server können sich generell nur Clients verbinden die vorher in 
 
 Der OpenSSH Server der außerdem auf dem Rechner für Fernzugriffe läuft wird mit der Debian Standardkonfiguration betrieben unter denen Zugriff auf den root Account nur mit einem eingetragenen SSH Key möglich ist. Es existieren auch keine normalen Benutzer auf den Rechner weswegen das Angriffsszenario vom Kapern eines Benutzeraccounts und dem darauf folgenden Erlangen von root Rechten durch eine Schwachstelle (Priviledge Escalation) ausfällt. Wie bei sämtlichen fgn Servern wurde der SSH Zugang aus dem gesamten Internet erlaubt. Hier werden aber Brute Force Attacken durch die fgn Firewall erschwert da diese für SSH Verbindungsversuche einen Rate Limiter eingestellt hat.
 
+\hilight{TODO: fgn Netzstruktur korrigieren}
+
 \subsection{Abschließende Arbeiten}
 \subsubsection{Umkonfiguration der Webservices}
 Da die umzustellenden Dienste (Webservices und OpenVPN) bereits den alten LDAP Server verwenden musste hier nicht viel eingerichtet werden. Die größte Änderung die vorzunehmen war ist daher das zusätzliche Eintragen des CA Stammzertifikates in die Konfigurationsdatei \texttt{/etc/apache2/mods-available/ldap.conf} (bzw. bei OpenVPN in die entsprechende Konfigurationsdatei) da sonst keine LDAP Verbindung über SSL aufgebaut werden kann. Ansonsten muss nur noch in der Site-Konfiguration die URL des LDAP Servers und die BaseDN angepasst werden (OpenVPN ist analog anzupassen). Zu Details der anzupassenden Konfigurationen siehe \autoref{sec:Apache-Konfig} und \autoref{sec:VPN-Konfig}.
@@ -312,10 +317,12 @@ Abschließend wurde noch getestet einen Managed Switch an den RADIUS Server anzu
 
 \medskip \noindent
 An Sicherheitstests wurde nach der Umstellung der Webservices erfolglos versucht sich an diesen mit Anmeldeinformationen (falscher Benutzername, richtiger Benutzername mit falschem Passwort) anzumelden. Dasselbe wurde mit \texttt{radtest} am RADIUS Server getestet.
-Abschließend wurde noch per \texttt{nmap} von innerhalb des Firmennetzes und von einem externen Rechner aus geprüft ausschließlich die richtigen Ports geöffnet sind (näheres dazu in \autoref{sec:NMAP-Test-int} und \autoref{sec:NMAP-Test-ext}).
+Abschließend wurde noch per \texttt{nmap} von innerhalb des Firmennetzes und von einem externen Rechner aus geprüft ausschließlich die richtigen Ports geöffnet sind (näheres dazu in \autoref{sec:NMAP-Test-int}, \autoref{sec:NMAP-Test-mid} und \autoref{sec:NMAP-Test-ext}).
+\hilight{TODO: fgn Netzstruktur korrigieren}
+
 
 \section{Projektkosten}
-\hilight{TODO}
+\hilight{TODO: Kosten und Wirtschaftlichkeitsanalyse}
 
 \section{Projektabschluss}
 \subsection{Fazit}
@@ -350,6 +357,46 @@ fgn hat neben den diversen Linux Rechnern auch noch 2 Windows PCs in der Verwalt
 
 \newpage
 \section{Erklärung der OpenLDAP Loglevel} \label{sec:LDAP-Loglevel}
+\begin{tabularx}{\textwidth}{|c|l|X|}
+\hline
+Level &	Keyword &	Description\\
+\hline
+-1 &	any &	enable all debugging\\
+\hline
+0 &	  &	no debugging\\
+\hline
+1 &	(0x1 trace) &	trace function calls\\
+\hline
+2 &	(0x2 packets) &	debug packet handling\\
+\hline
+4 &	(0x4 args) &	heavy trace debugging\\
+\hline
+8 &	(0x8 conns)& 	connection management\\
+\hline
+16 &	(0x10 BER) & 	print out packets sent and received\\
+\hline
+32 &	(0x20 filter) &	search filter processing\\
+\hline
+64 &	(0x40 config) &	configuration processing\\
+\hline
+128 &	(0x80 ACL) &	access control list processing\\
+\hline
+256 &	(0x100 stats) &	stats log connections/operations/results\\
+\hline
+512 &	(0x200 stats2) &	stats log entries sent\\
+\hline
+1024 &	(0x400 shell) &	print communication with shell backends\\
+\hline
+2048 &	(0x800 parse) &	print entry parsing debugging\\
+\hline
+16384 &	(0x4000 sync) &	syncrepl consumer processing\\
+\hline
+32768 &	(0x8000 none) &	only messages that get logged whatever log level is set \\
+\hline
+\end{tabularx}
+\noindent Quelle: \url{http://www.openldap.org/doc/admin24/runningslapd.html}
+
+\noindent\hilight{TODO: Übersetzung der Log Erklärung}
 
 \newpage
 \section{Erläuterungen zu den verwendeten LDAP Schemas}\label{sec:LDAP-Schema}
@@ -427,10 +474,12 @@ userPassword: password
 \newpage
 \section{Skript zum Auslesen der Anwenderkonten aus der CommuniGate Dateien}\label{sec:SkriptA}
 \lstinputlisting[language=sh]{cg_accounts_to_ldap.sh}
+\hilight{TODO}
 
 \newpage
 \section{Skript zum Hashen der Anwenderpasswörter}\label{sec:SkriptB}
 \lstinputlisting[language=sh]{hash_passwords.sh}
+\hilight{TODO}
 
 \newpage
 \section{Konfiguration des FreeRADIUS Servers}\label{sec:RADIUS-Konfig}
@@ -455,6 +504,7 @@ Die Werte in spitzen Klammern müssen natürlich durch die entsprechenden Werte 
 
 \newpage
 \section{Konfiguration der Firewall}\label{sec:Firewall-Konfig}
+\hilight{TODO}
 
 \newpage
 \section{Änderungen an der Apache Konfiguration}\label{sec:Apache-Konfig}
@@ -502,25 +552,17 @@ Konfigurationsdatei \texttt{/etc/openvpn/auth-ldap.config}
 OpenVPN muss neu gestartet werden, um die geänderte Konfigurationsdatei anzuwenden.
 
 \newpage
-\section{Ergebnis eines fgn internen NMAP Tests}\label{sec:NMAP-Test-int}
+\section{Ergebnis eines fgn Infrastruktur-Netz NMAP Tests}\label{sec:NMAP-Test-int}
+\hilight{TODO}
+\newpage
+\section{Ergebnis eines fgn Büro-Netz NMAP Tests}\label{sec:NMAP-Test-mid}
+\hilight{TODO}
 \newpage
 \section{Ergebnis eines externen NMAP Tests}\label{sec:NMAP-Test-ext}
+\hilight{TODO}
 
-%\section{Testkapitel}
-%\subsection{Testsektion}
-%Dies ist eine Testaufzählung:
-%\begin{itemize}
-%\item Item 1
-%\item Item 2
-%\item Item 3
-%\item Item 4
-%\end{itemize}
-%Und weiter im Text.
-%
-%Hier bricht die Seite nun um.
-%
-%\Blinddocument
-%\newpage
-
+\newpage
+\section{Quellen}
+\hilight{TODO}
 
 \end{document}
