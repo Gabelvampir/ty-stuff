@@ -41,7 +41,34 @@
 \usepackage[colorlinks,linkcolor=blue]{hyperref} % package for hyperlinks with \url
 %\usepackage[svgnames]{xcolor}
 %\usepackage[anythingbreaks]{breakurl}
-%\usepackage{listings}
+\usepackage{listings}
+\lstset{ %
+%backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+%basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+%breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+breaklines=true,                 % sets automatic line breaking
+%  captionpos=b,                    % sets the caption-position to bottom
+%commentstyle=\color{mygreen},    % comment style
+%deletekeywords={...},            % if you want to delete keywords from the given language
+%escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+%extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+frame=single,                    % adds a frame around the code
+keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+%keywordstyle=\color{mygreen},       % keyword style
+%language=Cobol,                 % the language of the code
+%morekeywords={*,...},            % if you want to add more keywords to the set
+numbers=none,                    % where to put the line-numbers; possible values are (none, left, right)
+%numbersep=5pt,                   % how far the line-numbers are from the code
+%numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+%rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+%showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+%showstringspaces=false,          % underline spaces within strings only
+%showtabs=false,                  % show tabs within strings adding particular underscores
+%stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+%stringstyle=\ttfamily\color{red},     % string literal style
+%tabsize=2,                       % sets default tabsize to 2 spaces
+%title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
 
 \newcommand{\hilight}[1]{\colorbox{yellow}{#1}} %command for magic marker highlighting
 %   (from http://pleasemakeanote.blogspot.de/2009/08/how-to-highlight-text-in-latex.html)
@@ -331,12 +358,91 @@ fgn hat neben den diversen Linux Rechnern auch noch 2 Windows PCs in der Verwalt
 \newpage
 \addcontentsline{toc}{section}{Anhänge} %fügt Überschrift Anhänge in die TOC ein
 \section{Übernommene LDAP Attribute} \label{sec:LDAP-Attribute}
+\begin{itemize}
+\item\texttt{uid}: User ID, Name des Anwenderkontos
+\item\texttt{sn}: SurName, Nachname des Anwenders
+\item\texttt{givenName}: Vorname des Anwenders
+\item\texttt{cn}: CommonName, voller Name des Anwenders
+\item\texttt{displayName}: anzuzeigender Name des Anwenders
+\item\texttt{userPassword}: Passwort des Anwenders (wurde mit \texttt{slappasswd} gehashed)
+\end{itemize}
+
 \newpage
 \section{Erklärung der OpenLDAP Loglevel} \label{sec:LDAP-Loglevel}
+
 \newpage
 \section{Erläuterungen zu den verwendeten LDAP Schemas}\label{sec:LDAP-Schema}
+\begin{enumerate}
+\setcounter{enumi}{-1}
+\item \texttt{core} - Enthält LDAP Core Attribute (X.501), wird immer benötigt
+\item \texttt{cosine} - Enthält die LDAPv3 Attribute (Cosine and Internet X.500 (RFC1274))
+\item \texttt{nis} - Schema zur Verwendung von NIS, bei uns vermutlich nicht benötigt aber Teil der Linux/Unix Standardinstallationen
+\item \texttt{inetorgperson} - Schema für die gängigen Personenattribute und andere Attribute für organisationsorientierte Dienste
+\item \texttt{freeradius} - Schema für RADIUS Atrribute, aus der FreeRADIUS Doku (\texttt{/usr/""share/""doc/""freeradius/""examples/""openldap"".schema})
+\item \texttt{postfix} - Schema mit zusätzlichen Attributen für postfix address rewrite, von den Autoren des Galileo Press OpenLDAP 2.4 Praxisbuches (in der FGN Bibliothek)
+\end{enumerate}
+(0-3 sind Teil der Debian Standardkonfig)
+
 \newpage
 \section{Erstellung der Verzeichnisstruktur}\label{sec:Erstelle-DB}
+Die leere Datenbank wurde mit dem interaktiven Debian config script (aufgerufen mit \texttt{dpkg-reconfigure slapd}) erzeugt. Als Domain und Organization Name wurde \texttt{de} genommen. Die restlichen Fragen wurden mit den Standardantworten beantwortet, \textbf{somit löscht purge von slapd nicht die LDAP Datenbank}. Für die 3 Domains wurde dann folgende LDIF Datei (\texttt{add\_DNs.ldif}) zum erzeugen verwendet
+\begin{lstlisting}
+dn: dc=fg-networking,dc=de
+o: fg-networking.de
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+
+dn: dc=schabler,dc=de
+o: schabler.de
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+
+dn: dc=worden,dc=de
+o: worden.de
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+
+\end{lstlisting}
+Diese wird (nachdem man den LDAP daemon slapd gestoppt hat) in die Datenbank eingefügt mit
+\begin{lstlisting}
+slapadd -n 1 -l add_DNs.ldif
+\end{lstlisting}
+(Der Content wird hier mit \texttt{slapadd} eingefügt da dies der einfachste Weg ist um dcObjects in der LDAP Datenbank zu erstellen. Für die meisten anderen Datenmanipulationen ist ldapmodify die sicherere und sauberere Variante). Danach kann (und muss man für den nächsten Schritt auch) man \texttt{slapd} wieder starten.
+
+Als nächstes wurden die \texttt{people} organizationalUnits erzeugt, in die alle User Einträge kommen sollen (da wir vor der Fertigstellung des neuen Mailservers nur echte Anwenderaccounts migrieren (keine Mailinglisten Accounts u.ä.) ist dies auch erstmal die einzige benötigte OU). Zum Erzeugen der OUs wurde wieder eine LDIF Datei (\texttt{add\_content.ldif}) erstellt.
+\begin{lstlisting}
+dn: ou=people,dc=fg-networking,dc=de
+objectClass: organizationalUnit
+ou: people
+
+dn: ou=people,dc=schabler,dc=de
+objectClass: organizationalUnit
+ou: people
+
+dn: ou=people,dc=worden,dc=de
+objectClass: organizationalUnit
+ou: people
+\end{lstlisting}
+Die wurde dann in die Datenbank eingefügt mit
+\begin{lstlisting}
+ldapmodify -a -H ldapi:/// -D cn=admin,dc=de -W -f add_content.ldif
+\end{lstlisting}
+Anschließend kann man die User einfügen. Wir haben dazu nach dem folgenden minimalem Template per Skript aus den Klartextdateien von CommuniGate das LDIF dafür generiert.
+\begin{lstlisting}
+dn: uid=username,ou=people,dc=fg-networking,dc=de
+objectClass: inetOrgPerson
+objectClass: person
+uid: username
+sn: Nachname
+givenName: Vorname
+cn: Vorname Nachname
+displayName: Vorname Nachname
+userPassword: password
+\end{lstlisting}
+
 \newpage
 \section{Skript zum Auslesen der Anwenderkonten aus der CommuniGate Dateien}\label{sec:SkriptA}
 \newpage
