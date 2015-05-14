@@ -1,0 +1,480 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+% This is a simple template for a LaTeX document using the "article" class.
+% See "book", "report", "letter" for other types of document.
+
+\documentclass[11pt,a4paper,titlepage=firstiscover]{scrartcl} % use larger type; default would be 10pt
+
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+\usepackage[T1]{fontenc} % maps glyphs to dictonary characters, needed for seperation
+
+%%% Examples of Article customizations
+% These packages are optional, depending whether you want the features they provide.
+% See the LaTeX Companion or other references for full information.
+
+%%% PAGE DIMENSIONS
+\usepackage{geometry} % to change the page dimensions
+%\geometry{a4paper} % or letterpaper (US) or a5paper or....
+\geometry{top=3.5cm,bottom=3.5cm} % for example, change the margins to 2 inches all round
+% \geometry{landscape} % set up the page for landscape
+%   read geometry.pdf for detailed page layout information
+
+\usepackage{graphicx} % support the \begin{center}\includegraphics command and options
+\usepackage{float}
+\usepackage{tocstyle}
+
+% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+%\usepackage{booktabs} % for much better looking tables
+%\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+%\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+% These packages are all incorporated in the memoir class to one degree or another...
+\usepackage[ngerman]{babel}
+\usepackage{blindtext}
+%\usepackage{pifont} %for symbols (i.e. arrows)
+%\usepackage{showframe} %shows the margins
+
+\usepackage[colorlinks,linkcolor=blue]{hyperref} % package for hyperlinks with \url
+%\usepackage[svgnames]{xcolor}
+%\usepackage[anythingbreaks]{breakurl}
+%\usepackage{listings}
+
+\newcommand{\hilight}[1]{\colorbox{yellow}{#1}} %command for magic marker highlighting
+%   (from http://pleasemakeanote.blogspot.de/2009/08/how-to-highlight-text-in-latex.html)
+
+%%redifine of emph, see http://tex.stackexchange.com/questions/6754/what-is-the-canonical-way-to-redefine-the-emph-command
+\makeatletter
+\DeclareRobustCommand{\em}{%
+  \@nomath\em \if b\expandafter\@car\f@series\@nil
+  \normalfont \else \bfseries \fi}
+\makeatother
+
+%%% HEADERS & FOOTERS
+%set with fancy layout package
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%\setlength{\parindent}{0mm} %set paragraph begin indentation to 0
+
+% hyperlink color definitions
+%\hypersetup{citecolor=DeepPink4}
+%\hypersetup{linkcolor=DarkRed}
+%\hypersetup{urlcolor=DarkBlue} 
+
+%%% SECTION TITLE APPEARANCE
+%\usepackage{sectsty}
+%\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+%\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+%\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+%\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+%\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+%\usepackage{uarial}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+%%% END Article customizations
+
+%%% The "real" document content comes below...
+
+\titlehead{taylorix institut für berufliche Bildung e.V.}
+\title{Projektdokumentation "Aufsetzen eines Authentifizierungsservers als Ersatz eines veralteten proprietären CommuniGate Servers"}
+\author{Sebastian Deußer}
+%\date{4. April 2014} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed 
+%\setcounter{section}{-1} % sets the section counter to start with 0
+
+\begin{document}
+\maketitle %title (page)
+
+%header and footer definitions for fancyhdr
+\pagestyle{fancy}
+\lhead{}
+\chead{\leftmark}
+\rhead{}
+\lfoot{Sebastian Deußer}
+\cfoot{}
+\rfoot{Seite \thepage}
+
+\newcommand{\tcr}[1]{\textcolor{red}{#1}}
+\newcommand{\tcg}[1]{\textcolor{green}{#1}}
+
+\thispagestyle{empty}
+\tableofcontents
+\newpage
+\thispagestyle{fancy}
+\setcounter{page}{1}  %Seitenzahlen erst nach TOC zählen
+
+\section{Einleitung}
+In den meisten Firmennetzwerken wird eine zentrale Stelle \tcg{benötigt, um } 
+verschiedene \tcr{Anwender-Metadaten?} zu verwalten. Für diese Aufgabe wird 
+üblicherweise ein Verzeichnisdienst verwendet. Basis eines Verzeichnisdienstes 
+ist eine hierarchische Datenbank, die im Netzwerk verteilt angelegt sein kann. 
+In dieser Datenbank können Daten zu verschiedenen Objekten abgelegt \tcg{werden, 
+wie} etwa Konfigurationsdaten für Rechner oder diverse Daten für \tcg{Anwender, 
+wie} z.B. Name, Passwort, \tcr{E-Mail-Konto}, Gruppenzugehörigkeiten \tcr{usw.}. 
+Die Anforderungen an einen Verzeichnisdienst wurden in den 80er Jahren von der 
+International Telecommunication Union in der \tcr{X.500-Spezifikation} 
+\tcg{festgeschrieben, nachdem} weltweit Telekommunikationsunternehmen 
+jahrzehntelang Praxiserfahrungen mit dem Thema bei Erstellung und Verwaltung 
+von \tcr{Telefon-Verzeichnissen} sammelten und \tcr{dann$\to$diese?} zur 
+Spezifikation beisteuerten.
+
+In der Praxis stellte es sich als unpraktikabel für so gut wie alle Firmen 
+\tcr{- abgesehen von großen Telekommunikationsunternehmen -} \tcr{heraus, die} 
+gesamte \tcr{X.500-Spezifikation} zu \tcr{implementieren$\to$umzusetzen, da} dies 
+einen hohen Implementierungsaufwand darstellt und der Betrieb sehr \tcr{Hardware
+intensiv$\to$hardwareintensiv} ist. Deswegen wurde an der Universität von 
+Michigan 1993 \tcr{das} LDAP (Lightweight Directory Access Protocol) entwickelt,
+\tcr{das$\to$welches} ursprünglich als \tcr{abgespeckte$\to$?Synonym suchen?} 
+Alternative \tcr{zum} DAP (Directory Access Protocol) \tcr{dienen sollte}. 
+\tcr{das$\to$Das} \tcr{DAP war} traditionell \tcr{zum$\to$für den} Zugriff auf 
+\tcr{X.500-Verzeichnisse} verwendet \tcr{wurde$\to$worden}.\newline
+\tcr{Der Ansatz von$\to$Die Innovation beim?} LDAP \tcg{war, den} Zugriff durch 
+den \tcr{TCP/IP-Protokollstapel} \tcr{zur$\to$zu} ermöglichen, was weit weniger 
+\tcr{Implementierungsaufwand$\to$Aufwand} darstellt, als die komplette 
+Implementierung \tcr{alles$\to$aller} \tcg{OSI-Schichten, wie} es bei DAP der 
+Fall ist. Heutzutage ist LDAP das verbreiteste Protokoll zur Abfrage von 
+Verzeichnisdiensten, u.a. \tcg{auch, da} TCP/IP-basierte Netzwerke \tcr{der 
+verbreitesten Netzwerktyp ist$\to$ am verbreitetsten sind}. 
+\tcr{u.a. auch$\to$neben den bereits oben erwähnten Vorteilen gegenüber dem 
+DAP?} LDAP wird in vielen Anwendungen eingesetzt, vor allem im Adressbuchteil 
+der meisten \tcr{E-Mail-Clients} wie z.B. Apple Adressbuch, Microsoft Outlook, 
+Mozilla Thunderbird und in Verzeichnisdiensten wie z.B. Microsoft Active 
+Directory Services, Apple Open Directory und dem aussterbenden Pionier Novell 
+eDirectory. Wie viele Protokolle ist LDAP \tcr{Client/Server-basiert}.
+
+In diesem Projekt wurde OpenLDAP verwendet, die verbreiteste freie \tcr{Open 
+Source-Implementierung} des Netzwerkstandards und steht unter einen eigenen 
+freien Lizenz, der OpenLDAP Public License. OpenLDAP ist außerdem die 
+Referenzimplementierung des Standards, weswegen es in vielen Belangen (z.B. bei 
+Schemadateien) mehr auf Protokollkonformität \tcr{achtet? hin ausgerichtet ist?} 
+als andere Implementierungen. \tcr{Der$\to$Im?} \tcr{OpenLDAP-Server} ist nicht 
+nur das Abfrageprotokoll \tcg{enthalten, sondern} auch ein Verzeichnisdienst. 
+Es ist somit für viele Anwendungsfälle eine kostengünstige Lösung zum Aufbau 
+eines Verzeichnisdienstes \tcr{Hier Reihenfolge umgestellt}.
+
+RADIUS (Remote Authentication Dial-In User Service) ist ebenfalls ein 
+\tcr{Client/Server-basiertes} Protokoll zur Authentifizierung, Autorisierung und 
+\tcr{zum} Accounting (AAA-System) von Benutzern bei Einwahlverbindungen zu 
+Netzwerken. RADIUS stellt den \tcr{de-facto Standard$\to$de facto-Standard} zur 
+zentralen Authentifizierung von Einwahlverbindungen, wie z.B. über ISDN, DSL 
+und WLAN (über IEEE 802.1X) dar. Üblicherweise ist ein RADIUS-Server an einen 
+Verzeichnisdienst \tcg{angebunden, um} von ihm die Benutzerdaten für die 
+Authentifizierung und Autorisierung (und teilweise auch \tcr{für das} 
+Accounting) abzufragen.
+
+Hier wurde FreeRADIUS verwendet, der \tcr{-} laut Aussage des Projektes \tcr{-} 
+weltweit verbreiteste \tcr{RADIUS-Server}. Das freie \tcr{Open Source-Projekt} 
+unter GPLv2\tcr{-Lizenz?} umfasst neben dem \tcr{RADIUS-Server} außerdem eine 
+\tcr{PAM-Bibliothek}, ein \tcr{Apache-Webserver-Modul} und eine 
+\tcr{Client-Bibliothek} (im Gegensatz zum Rest unter \tcr{BSD-Lizenz}).
+\tcr{Rest von was?}
+
+
+\section{Projektbeschreibung}
+\subsection{Projektumfeld}
+Die fgn GmbH wurde im August 2000 als SpinOff der Technische Universität (TU) 
+Kaiserslautern gegründet. Die Gründer waren zuvor mehrere Jahre (seit 1996 bzw. 
+1989) als freischaffende Consultants und Trainer tätig. Die Firma pflegt enge 
+Kontakte zum Regionalen Hochschulrechenzentrum Kaiserslautern (RHRK), da die 
+meisten Mitarbeiter das Netz der TU Kaiserslautern mit ca. 10.000 Ports, 
+Diensten wie Mail, DNS und DHCP in der Vergangenheit betreut haben oder es 
+\tcr{heute noch$\to$noch heute} betreuen.
+
+Die Kernkompetenz der fgn GmbH ist anspruchsvolles Netzwerk-Knowhow, welches 
+als Dienstleistung in drei eng verknüpften Tätigkeitsfeldern angeboten wird: 
+Schulungen, Workshops und Netzwerk-Consulting (Beratung und \tcr{vor-Ort-Support, 
+auch wenns komisch aussieht} von Firmen bei Problemen, Umstrukturierungen, 
+Erweiterungen und Neuaufbau von Produktivnetzwerken).
+
+\subsection{Ist-Analyse}
+Im Praktikumsbetrieb fgn GmbH läuft der \tcr{E-Mail-Verkehr} und die 
+Authentifizierung an den internen Webservices \tcr{und am?} \tcr{OpenVPN-Server} 
+über einen alten \tcr{CommuniGate-Server} (v5.0.13 von November 2006). 
+Ursprünglich wurde dieser auf einem eigenen Rechner aufgesetzt, inzwischen aber 
+\tcr{-} wie viele andere Rechner der Firma \tcr{-} virtualisiert. 
+
+Die Webservices, die ihn zur Anwender-Authentifizierung verwenden, laufen auf 
+drei anderen VMs, ebenso der \tcr{OpenVPN-Server}. Sie kommunizieren mit dem 
+LDAP-Teil von CommuniGate mittels den \tcr{Apache-Modul} \texttt{mod\_ldap} und 
+verwenden zur Autorisierung entsprechend \texttt{mod\_authnz\_ldap} (bzw. auf 
+einem \tcr{der} Rechner wegen eines veralteten \tcr{Apache-Webservers} noch 
+\texttt{mod\_auth\_ldap}). Apache prüft dabei momentan nur auf Existenz des 
+\tcr{angegebene$\to$angegebenen} Benutzeraccounts und ob das richtige Passwort 
+angegeben wurde, weitere Berechtigungen sind momentan nicht implementiert. Die 
+Ausnahmen dabei sind Nagios und Egroupware, aber dort werden die 
+Berechtigungsgruppen intern verwaltet und nicht in LDAP abgelegt.\tcr{Ausnahme 
+wovon? Ich kapiers grad nich}
+
+Lediglich die Anwenderkonten auf den Betriebssystemen der diversen Anwender-PCs 
+sind nicht von CommuniGate abhängig. Da die fgn GmbH über das Netz der 
+Technischen Universität Kaiserslautern angebunden \tcg{ist, müssen} alle E-Mails 
+auch über die Mailserver der Universität laufen. Diese verwenden \tcg{RADIUS, um} 
+zu \tcg{prüfen, ob} die \tcr{E-Mail-Konten} der 
+\tcr{fg-networking.de Domain$\to$besser 'Domain fg-networking.de'} tatsächlich 
+vorhanden sind. Der \tcr{RADIUS-Server} dazu wird ebenso von CommuniGate 
+bereitgestellt. 
+
+Wegen der recht alten Softwareversion gibt es schon seit längerem regelmäßig 
+Probleme, z.B. mit der \tcr{SSL-Authentifizierung} neuerer \tcr{E-Mail-Clients} 
+(die \tcr{unterstützen$\to$unterstützten?} Versionen von SSL/TLS benutzen 
+aktuelle \tcr{E-Mail-Clients} aus Sicherheitsgründen nur noch ungern). Ein 
+weiteres großes Sicherheitsproblem von CommuniGate \tcg{ist, \tcr{dass}} es die 
+Passwörter aller Anwenderkonten im Klartext (ohne sie vorher zu hashen 
+\tcr{oder ähnliches$\to$o.ä.}) in Textdateien auf dem Server abspeichert.
+
+\subsection{Soll-Analyse}
+Eine Aktualisierung von CommuniGate wäre mit ähnlichem Aufwand \tcg{verbunden, 
+wie} \tcr{ihn} ein komplett neues Aufsetzen von Ersatzservern \tcr{erfordern 
+würde}(und wäre außerdem mit dem Kauf einer neuen Lizenz verbunden). Deswegen 
+wurde \tcg{entschieden, die} Serverkomponenten E-Mail und Identity Management 
+durch neue Server abzulösen. \tcr{Da} \tcr{In$\to$in} der Firma momentan sehr 
+viel freie Software verwendet \tcg{wird, sollen} die Ersatzserver auch \tcr{auf 
+auf$\to$auf} Basis von freier Software aufgesetzt werden. Da die 
+\tcr{E-Mail-Infrastruktur} sehr kritisch für die Arbeit der Firma ist und bei 
+der Migration der \tcr{E-Mail-Konten} mit vielen vertraulichen firmeninternen 
+Informationen hantiert werden \tcg{muss, soll} die Installation des neuen 
+\tcr{E-Mail-Servers} von einem Mitarbeiter von fgn durchgeführt werden.
+
+Für das Identity Management sollen OpenLDAP und FreeRADIUS zum Einsatz kommen da dies die verbreitesten freien Implementierungen von LDAP und RADIUS sind und somit das meiste Know How in Büchern und dem Internet verfügbar ist. Außerdem erleichert es die spätere Pflege des Systems, da sich für solche verbreiteten Systeme einfacher Personal mit Fachkenntnis finden lassen als für die meisten anderen proprietären Implementierungen.
+
+Für den E-Mail Teil soll ein \texttt{postfix} Server verwendet werden, allerdings war dieser zur Fertigstellung dieses Projektes noch nicht einsatzfähig. Die Intergration des neuen E-Mailservers ist damit nicht Teil dieses Projektes und wird zu einem späteren Zeitpunkt durchgeführt. Es werden lediglich die Vorarbeiten auf der Seite vom Identity Management getätigt die dazu unabhängig von der endgültigen Konfiguration des neuen E-Mail Servers sind.
+
+\medskip \noindent 		%überspringt Zeile; verhindert einmalig Einrückung
+Somit müssen im Rahmen der Projektarbeit folgende Arbeiten durchgeführt werden: 
+\begin{itemize}
+\item Linux Grundsystem installieren
+\item OpenLDAP Server auf dem Linux System installieren
+\item OpenLDAP Server konfigurieren
+\item Verzeichnisstruktur erstellen
+\item grundlegende Benutzerdaten (Name, Passwort) aus bestehendem System übernehmen
+\item FreeRADIUS Server installieren
+\item FreeRADIUS Server konfigurieren und an den OpenLDAP Server anbinden
+\item Absicherung des Systems
+\item Umkonfiguration der entsprechenden Systeme auf den neuen LDAP-Server
+\item Funktions- und Sicherheitstests
+\end{itemize}
+
+
+\subsection{Vorgaben}
+\subsubsection{Wirtschaftliche Vorgaben}
+Wie die meisten anderen Server der fgn GmbH soll der Server in einer neuen VM auf einem bereits bestehenden VMware ESXi-Servers laufen, somit fallen keine zusätzlichen Hardwarekosten an. Da in dem Projekt  ausschließlich freie Software zum Einsatz kommen soll fallen auch keine zusätzlichen Softwarelizenzkosten an.
+
+\subsubsection{Organisatorische Vorgaben}
+Das Projekt wird im Praktikumsbetrieb mit Unterstützung des Mitarbeiters Erik Auerswald durchgeführt.
+Zur Projektdokumentation werden zusätzlich jeweils eine Kundendokumentation für Administratoren im firmeninternen Wiki erstellt. Hinzu kommen Funktions- und Sicherheitstests zur Qualitätssicherung. Eine Anwenderdokumentation ist nicht notwendig da sich aus Sicht des Anwenders nichts gegenüber des Ausgangszustandes ändern soll.
+
+\subsubsection{Zeitliche Vorgaben}
+Das Projekt wird im Zeitraum vom 04.05.2015 – 18.05.2015 durchgeführt, wobei die Bearbeitungszeit von 35 Stunden nicht überschritten werden darf.
+
+\section{Projektplanung}
+\subsection{Planung des Ersatzservers}
+Als Ersatzserver wird eine neue Virtual Machine auf einen der firmeneigenen ESXi Servern verwendet. Als Betriebssystem wird Debian Stable (zur Durchführungszeit des Projektes Version 8.0 Jessie) mit der Standardpaketauswahl ohne zusätzliche Vorauswahlen.
+
+\subsection{Planung des Kommunikationskonzepts}
+Sämtliche firmeninterne Webservices, der VPN, der kommende neue E-Mailserver und der FreeRADIUS Daemon greifen über das LDAP-Protokoll auf den OpenLDAP Daemon zu um Benutzer zu authentifizieren und Einstellungen zu diesen zu holen. Der E-Mailserver der Universität greift auf den FreeRADIUS Daemon zu um Benutzerkonten zu prüfen, welcher wiederrum die Daten beim OpenLDAP-Daemon erfragt.
+
+\subsection{Planung des Sicherheitskonzepts}\label{sec:Sicherheitskonzept}
+Das Firmennetzwerk der fgn GmbH ist über die Netzwerk der TU Kaiserslautern ans Internet angebunden. Entsprechend wird jeglicher Netzwerkverkehr von der TU Firewall vorgefiltert. Das Firmennetz von fgn ist zusätzlich noch durch eine eigene Firewall gesichert. In diese muss eine Ausnahme für den neuen RADIUS Server eingetragen werden (analog zur alten Regel). Zusätzlich wird auf dem neuen Server eine Software-Firewall installiert die nur die für LDAP, RADIUS und zur Wartung benötigten Ports zulassen soll.
+
+\subsection{Projektablaufplan}
+Analyse und Planung (insgesamt 6 h)
+	\begin{itemize}
+	\item Ist-Analyse (3 h)
+		\begin{itemize}
+		\item Analyse des bestehenden CommuniGate Servers und der damit verbundenen Webservices (2 h)
+		\item Aufnahme der Anforderungen an einen Ersatzserver (1 h)
+		\end{itemize}
+	\item Planung (3 h)
+		\begin{itemize}
+		\item Ausarbeitung eines Konzepts für den Ersatzserver (1 h)
+		\item Ausarbeitung des Sicherheitskonzepts (unter Berücksichtigung des Firmenkonzepts) (1 h)
+		\item Ausarbeitung des Kommunikationskonzepts (Serverdienste untereinander und extern) (1 h)
+		\end{itemize}
+	\end{itemize}
+Umsetzung (insgesamt 20 h)
+	\begin{itemize}
+	\item Vorbereitungen (6 h)
+		\begin{itemize}
+		\item Dokumentation der Konfiguration des zu ersetzenden Servers (2 h)
+		\item Erstellen einer Liste aller Dienste, die das bestehende Identity Management nutzen (2 h)
+		\item Prüfung von Möglichkeiten zum Importieren der bestehenden Anwender-Konten in die neue Lösung (2 h)
+		\end{itemize}
+	\item Installation und Einrichtung des neuen Servers (8 h)
+		\begin{itemize}
+		\item Grundinstallation des Linux Systems des neuen Servers (1 h)
+		\item Installation und Konfiguration des LDAP Servers (3 h)
+		\item Installation und Konfiguration des RADIUS Servers (2 h)
+		\item Absicherung des Rechners (Firewall etc.) (2 h)
+		\end{itemize}
+	\item Abschließende Arbeiten (6 h)
+		\begin{itemize}
+		\item Umkonfiguration der Webservices (2 h)
+		\item Import/Anlegen der Anwender Konten (2 h)
+		\item Funkions- und Sicherheitstests (2 h)
+		\end{itemize}
+	\end{itemize}
+Dokumentation (insgesamt 9 h)
+	\begin{itemize}
+	\item Erstellen der Projektdokumentation (8 h)
+	\item Erstellen der Dokumentation für das firmeninterne Wiki (1 h)
+	\end{itemize}
+
+\section{Umsetzung}
+\subsection{Vorbereitungen}
+\subsubsection{Dokumentation der Konfiguration des zu ersetzenden Servers}\label{sec:Konfig-Doku-Alt}
+Da die Konfigurationsdateien des CommuniGate Servers sämtliche Anwenderpasswörter im Klartext enthält konnte mir bei der Durchführung des Projektes aus Sicherheitsgründen kein direkter Zugriff auf den Server gewehrt werden. Allerdings war dies auch nicht notwendig, da zur Erfassen der wichtigen Konfigurationsdetails (vornehmlich der Struktur des integrierten Verzeichnisdienstes) lediglich Zugriff auf das Webinterface des Servers (zugänglich unter Port \texttt{9010} auf dem bisherigen Server \texttt{mail.fg-networking.de}, Zugriff durch Firewall von außerhalb des Firmennetzes geblockt) notwendig war. Unter Aufsicht von Herrn Auerswald wurde ein Auszug (vor allem der Eintrag für meinen eigenen Benutzer da mir dieses Passwort bereits bekannt ist) der im Klartext gespeicherten Benutzerdaten begutachtet. Dabei fiel auf das alles in einer gut organisierten Ordnerstruktur abgelegt ist, es existiert eine Datei pro Anwender und die Daten in der Datei sind in bezeichneten Feldern abgelegt.
+
+Für das Projekt am Wichtigsten zu beachten war das der E-Mailserver für 3 Domains Anwenderkonten verwaltet: \texttt{fg-networking.de}, \texttt{schabler.de} und \texttt{worden.de}. Dies musste natürlich beim Entwurf der neuen Verzeichnistruktur beachtet werden um später die Anbindung des neuen E-Mailserver ohne unnötige erneute Umbauten am LDAP zu ermöglichen.
+
+\subsubsection{Erstellen einer Liste aller Dienste die das bestehende Identity Management nutzen}
+Die Webtools die den bisherigen LDAP Server verwenden laufen unter Apache Webservern auf den Rechnern \texttt{aio}, \texttt{nms} und \texttt{lab-mm}. Sie alle benutzen zum Abfragen von Nutzerdaten die Apache eigenen LDAP Module (\texttt{mod\_ldap} und \texttt{mod\_authnz\_ldap}, bzw. \texttt{mod\_auth\_ldap} auf \texttt{aio} da hier noch eine ältere Apache Version verwendet wird). 
+
+Somit ist bei der Konfiguration von allen prinzipiell dasselbe zu ändern damit später der neue Server verwendet wird. So verwenden z.B. alle den alten Server ohne SSL, weswegen zusätzlich zur neuen LDAP Server URI auch noch das Stammzertifkat einzutragen ist. Kopiert werden muss es nicht extra da es auf allen Rechnern bereits fürs servieren von HTTPS Verbindungen installiert wurde. 
+
+Oberflächlich gibt es in der Konfiguration natürlich auch Unterschiede. So haben auf \texttt{aio} mehrere Tools eigene Unterseiten Einträge in der Konfiguration in denen jeweils der LDAP Server eingestellt ist, auf \texttt{nms} gibt es lediglich einen Eintrag für alle Webtools. Aber diese Detailunterschiede machen keinen wirklichen Unterschied in den später vorzunehmenden Änderungen.
+
+Die Konfiguration von OpenVPN muss auch lediglich auf die neue Server URL und BaseDN umgestellt werden, und ebenso das Stammzertifikat eingetragen werden. Dies geschieht in der Datei \texttt{/etc/openvpn/auth-ldap.config}, näheres dazu siehe \autoref{sec:VPN-Konfig}.
+
+Bei Begutachtung der Egroupware-Konfiguration im Administrationsmenü fiel auf das hier keine Einstellungen zu LDAP zu finden waren. Nach kurzer Recherche stellte sich heraus in Egroupware wie bei vielen PHP-Webanwendungen manche Einstellungen nur im Installer vornehmbar sind, wie hier z.B. die LDAP Einstellungen. Das Passwort für diesen Installer war leider nicht wie sonst üblich im Firmenwiki hinterlegt und der mit dem Installer vertraute Mitarbeiter befand sich zu Bearbeitungszeit des Projektes im Urlaub. Man hätte zwar relativ einfach das Passwort des Installers durch editieren der entsprechenden PHP Datei ändern können, aber da kein Anwesender mit dem Egroupware Installer vertraut war und die Groupware sehr wichtig für die Arbeit der Firma ist wurde entschieden sie erst später vom zuständigen Mitarbeiter auf den neuen LDAP Server umstellen zu lassen.
+
+\subsubsection{Prüfung von Möglichkeiten zum Importieren der bestehenden Anwenderkonten in die neue Lösung} \label{sec:Importsuche}
+Leider bietet CommuniGate selbst keine Funktion zum Export seiner Benutzerdaten an. Über die Standard LDAP Tools wäre ein Auslesen der Daten möglich, in einer Form die man in das neue LDAP wieder importieren könnte. Da allerdings CommuniGate für die E-Mail bezogenen Attribute ein proprietäres LDAP-Schema benutzt wäre der Nachbearbeitungsaufwand für diese Daten sehr hoch. Es sollen aber einmal nur die notwendigsten Attribute (siehe \autoref{sec:LDAP-Attribute}) übernommen werden und CommuniGate speichert die Anwenderdaten in einer mit den Standard Unix/Linux Textverarbeitungswerkzeugen (\texttt{sed}, \texttt{awk}, \texttt{cut}) vergleichsweise einfach verarbeitbaren Form. 
+
+Somit stellt das Erzeugen von durch LDAP importierbaren Datensätze aus den gespeicherten Dateien von CommuniGate mit Hilfe von Skripten in diesem Fall die sinnvollste Vorgehensweise dar. Da das Entwickeln der Skripte ohne Zugriff auf die Daten umständlich wäre hatte Herr Auerswald sich bereit erklärt diese zu schreiben da ihm Zugriff auf die Anwenderpasswörter erlaubt ist. Als Unterstützung dieser Arbeit habe ich Herrn Auerswald ein Template der zu generierenden LDAP Importdaten und den Befehlsaufruf von \texttt{slappasswd} (zum passenden hashen der Passwörter damit die diese in den Importdaten als Hashes stehen und nicht mehr im Klartext stehen) zur Verfügung gestellt.
+
+\subsection{Installation und Einrichtung des neuen Servers}
+\subsubsection{Grundinstallation des Linux Systems des neuen Servers}
+Nach der Erstellung einer neuen VM durch einem Mitarbeiter von fgn auf dem entsprechendem ESXi-Server wurde der Installer der aktuellen Debian Stable (Version 8.0 \texttt{Jessie} zur Bearbeitungszeit des Projektes) ausgeführt und von ihm das Grundsystem installiert. Dabei wurden keine zusätzlichen Paketvorauswahlen hinzugenommen.  Der Debian Installer hat bei während des Installationsprozeses nach Rückfragen auch die Grundeinrichtung vorgenommen für grundlegende Einstellung wie z.B. IP Adressen und Hostname vorgenommen. Für den neuen Rechner wurde der Hostname \texttt{id.fg-networking.de} gewäehlt.
+
+\subsubsection{Installation und Konfiguration des LDAP Servers}
+Nach der Grundinstallation wurde im neuen System dann die Pakete \texttt{slapd} (benannt nach dem Namen des OpenLDAP Daemons) , \texttt{ldap-utils} und \texttt{ldapscripts} sowie deren noch nicht im System vorhandenen Paketabhängigkeiten installiert. Da LDAPS (LDAP over SSL) verwendet werden soll, damit die über LDAP abgefragten Daten verschlüsselt übertragen werden, mussten mit der Certificate Authority (CA) der Firma ein Zertifikat und ein Private Key für den Server erstellt und zusammen mit dem Stammzertifikat der CA auf den neuen Server kopiert werden.
+
+\medskip Beim Entwurf der Verzeichnisstruktur ergaben sich verschiedene Probleme:
+
+\noindent Um in einem LDAP Verzeichnis neue Attribute zu definieren gibt es sogenannte Schemas (eigener Ausdruck, nicht zu verwechseln mit Schema/Schemen). CommuniGate verwendet zum Verwalten der E-Mail Anwenderdaten ein eigenes proprietäres LDAP Schema um die Daten in selbsdefinierten Attributen zu speichern. Diese Attribute können somit nicht ins neue LDAP übernommen werden ohne verschiedene Implementierungsentscheidungen für den neuen E-Mailserver zu kennen. Da dieser zur Bearbeitungszeit dieses Projektes noch nicht weit genug fortgeschritten war um eine Absprache zu ermöglichen wurde entschieden erst einmal nur die wichtigsten Attribute zu übernehmen und die E-Mail Attribute später anzupassen. Dies wird sehr wahrscheinlich auch wieder per Skript generierten Datensätzen möglich sein und stellt somit einen vertretbar geringen Mehraufwand für die E-Mail Server Einrichtung dar.
+
+Weiterhin musste die neue Verzeichnisstruktur berücksichtigen das mehrere voneinander unabhängige Namensräume (die 3 in \nameref{sec:Konfig-Doku-Alt} erwähnten E-Mail Domains) zu verwalten sind. Das bedeutet das in den Domains Konten mit demselben unqualifizierten Namen vorhanden sein können die aber voneinander unabhängig sind. Der erste Ansatz dazu war jedem der 3 Domains eine eigene Datenbank (im Sinne von getrennten Dateien die von einem LDAP Server verwaltet werden) zu geben. Allerdings ließen sich in verschiedenen Versuchen die Datenbänke zwar anlegen, allerdings war ein Zugriff auf sie nicht möglich (getestet wurde dies mit entsprechenden \texttt{ldapsearch} Aufrufen). Da sich unter Anderem wegen den eher unpraktischen Logleveln (siehe \autoref{sec:LDAP-Loglevel} von OpenLDAP das genaue Problem mit dieser Vorgehensweise nicht lokalisieren lies musste eine andere Struktur ersonnen werden.
+
+Der Ansatz für die alternative Verzeichnisstruktur basierte unter Anderem darauf wie LDAP mit Domain Namen umgeht. Diese werden von LDAP an den Trennzeichen (Punkt) aufgespalten in einzelne Domain Component (LDAP Bezeichnung \texttt{dc}). Da alle 3 Domain Namen mit \texttt{.de} enden konnte \texttt{dc=de} als Wurzel der des Baumes hierarchischen LDAP Verzeichnisstruktur verwendet werden. In der 1. Ebene unter der Wurzel verzweigt dieser Baum dann in die 3 Domain Components  \texttt{fg-networking.de}, \texttt{schabler.de} und \texttt{worden.de}. Da Objektnamen von ihrem vollen Kontext (quasi ihrem Pfad im Baum) abhängen sind auch in diesem Modell 3 unabhängige Namensräume gewährleistet. In den Domains \texttt{schabler.de} und \texttt{worden.de} sind nur relativ wenig Benutzerkonten hinterlegt (weniger als jeweils 10 s) und beide Domains haben auch keinen eigenen Administrator (sie werden von fgn mit administriert). Somit gibt es auch keine Bedenken hinsichtlich Datenschutz und Performance wenn sich alles in 
+einer gemeinsamen Datenbank befindet. In der nächsten Ebene wurde dann jeweils eine Organizational Unit (\texttt{OU}) namens "people" angelegt in die dann die Benutzerkonten eingeordnet werden. Die "people" \texttt{OU} wurde eingezogen um zukünftig auch andere Konten als Anwenderkonten in LDAP ablegen zu können (z.B. Rechnerkonten) ohne die Verzeichnisstruktur grundlegend ändern zu müssen um eine Unterscheidung der Konten zu erhalten.
+
+Die oberste Ebene der Verzeichnisstruktur (die \texttt{de} Wurzel) wurde mit Hilfe des Debian Konfigurationsskript erstellt. Dabei wurden neben den 4 Schema der Debian Standardkonfiguration (\texttt{core}, \texttt{cosine}, \texttt{nis} und \texttt{inetorgperson}) zusätzlich das \texttt{freeradius} Schema aus dem \texttt{freeradius} Paket (siehe \nameref{sec:RADIUS-Konf}) und ein \texttt{postfix} Schema (aus den Galileo Press Praxisbuch zu OpenLDAP 2.4) verwendet (Erkläuterungen zu den Schemas siehe \autoref{sec:LDAP-Schema}). Die 1. Ebene wurde dann mit \texttt{slapadd} angelegt und die Grundstruktur darunter mit \texttt{ldapadd} erstellt (genaue Beschreibung der verwendeten LDAP Data Interchange Format (LDIF) Dateien siehe \autoref{sec:Erstelle-DB}).
+
+\subsubsection{Installation und Konfiguration des RADIUS Servers}\label{sec:RADIUS-Konf}
+Auf dem Server wurden die Pakete \texttt{freeradius} und \texttt{freeradius-ldap} und zu Testzwecken das Paket \texttt{freeradius-utils} installiert. In den Konfigurationsdateien wurde dann LDAP als mögliche Quelle für Benutzerdaten eingetragen, die LDAP Module aktiviert und der Zugriff durch die E-Mail Server der Tu Kaiserslautern erlaubt. Zusätzlich musste das zu dem TU E-Mail Servern gehörende Shared Secret eingetragen werden, welches aus den Konfigurationsdateien von CommuniGate übernommen wurde da es nicht in der firmeninternen Dokumentation festgehalten war. Näheres zur Konfiguration siehe \autoref{sec:RADIUS-Konfig}
+
+\subsubsection{Absicherung des Rechners (Firewall etc.)}
+Wie in \nameref{sec:Sicherheitskonzept} erläutert sind dem Server schon 2 bereits existierende Firewalls vorgeschaltet. Die einzige Änderung die an diesen vorgenommen werden muss ist das Eintragen einer Ausnahmeregel um den Zugriff auf den RADIUS Server aus dem Universitätsnetz zu erlauben. Dafür wird die bereits bestehende Firewall Regel für den in CommuniGate enthaltenem RADIUS auf die IP des neuen Servers angepasst.
+
+Zusätzlich zu den Firewalls die bereits das Firmennetz der fgn GmbH bereits schützen wurde die simpel zu bedienende Uncomplicated Firewall (\texttt{ufw}) verwendet um lediglich die für OpenLDAP, FreeRADIUS und SSH notwendigen Ports zuzulassen, und Netzwerkverbindungen auf den restlichen Ports nicht zuzlassen. Näheres zur Firewall Konfiguration siehe \autoref{sec:Firewall-Konfig}.
+
+Der OpenLDAP Server wurde so konfiguriert das es lediglich SSL verschlüsselte Verbindungen zulässt, somit ist ein Abhören der Kommunikation mit dem LDAP Server erschwert. Modifikation des Daten im Verzeichnisdienst ist nur dem Administrator LDAP Benutzer gestattet, der mit einem den Passwortrichtlinien von fgn entsprechendem Passwort gesichert ist. Die Firewall auf dem Server lässt außerdem nur Verbindungen aus dem Firmennetz auf dem entsprechenden Port (636) zu. Als anonymer Benutzer ist lediglich der Zugriff auf Attribute die nur anderweitig öffentlich verfügbare Informationen wie Name des Anwenders enthalten und das Testen eines Passworts gegen den gespeicherten Passwort Hash. Letzteres ist ein ernstzunehmender Angriffspunkt der bisher nur durch die Verbindungseinschränkungen durch die Firewall abgefedert wird und auf jeden Fall noch versucht werden muss anderweitig abzusichern.
+
+Zum FreeRADIUS Server können sich generell nur Clients verbinden die vorher in die Konfiguration eingetragen wurden da beide Seiten das Shared Secret einstellen müssen. Verbindungen von komplett unbekannten Clients können somit schon rein prinzipbedingt nicht aufgebaut werden. Der einzige Angriffsvektor in diese Richtung ist also ein Client der das Shared Secret zwischen dem FreeRADIUS und den TU E-Mailservern kennt. Leider ist das Shared Secret die große Schwachstelle des RADIUS Protokolls (was auch seit ungefähr 15 Jahren hinlänglich bekannt ist), somit ist das einzige was gegen dagegen hilft die Verbindungsbeschränkungen durch die fgn Firewall. Die einzige Möglichkeit eines Zugriffs wäre also die das herausfinden des Shared Secrets und das Spoofing der IP eines TU Kaiserslautern E-Mailservers. Beides zusammen genommen ist recht unwahrscheinlich und erschwerend hinzu kommt noch das die TU selbst Maßnahmen gegen IP-Spoofing in ihrem Netz (131.246.0.0/16) betreibt.
+
+Der OpenSSH Server der außerdem auf dem Rechner für Fernzugriffe läuft wird mit der Debian Standardkonfiguration betrieben unter denen Zugriff auf den root Account nur mit einem eingetragenen SSH Key möglich ist. Es existieren auch keine normalen Benutzer auf den Rechner weswegen das Angriffsszenario vom Kapern eines Benutzeraccounts und dem darauf folgenden Erlangen von root Rechten durch eine Schwachstelle (Priviledge Escalation) ausfällt. Wie bei sämtlichen fgn Servern wurde der SSH Zugang aus dem gesamten Internet erlaubt. Hier werden aber Brute Force Attacken durch die fgn Firewall erschwert da diese für SSH Verbindungsversuche einen Rate Limiter eingestellt hat.
+
+\subsection{Abschließende Arbeiten}
+\subsubsection{Umkonfiguration der Webservices}
+Da die umzustellenden Dienste (Webservices und OpenVPN) bereits den alten LDAP Server verwenden musste hier nicht viel eingerichtet werden. Die größte Änderung die vorzunehmen war ist daher das zusätzliche Eintragen des CA Stammzertifikates in die Konfigurationsdatei \texttt{/etc/apache2/mods-available/ldap.conf} (bzw. bei OpenVPN in die entsprechende Konfigurationsdatei) da sonst keine LDAP Verbindung über SSL aufgebaut werden kann. Ansonsten muss nur noch in der Site-Konfiguration die URL des LDAP Servers und die BaseDN angepasst werden (OpenVPN ist analog anzupassen). Zu Details der anzupassenden Konfigurationen siehe \autoref{sec:Apache-Konfig} und \autoref{sec:VPN-Konfig}.
+
+Wie in \nameref{sec:Konfig-Doku-Alt} geschildert konnte Egroupware zur Bearbeitungszeit dieses Projektes noch nicht umgestellt werden, dies muss dann noch vom zuständigen Mitarbeiter vorgenommen werden.
+
+\subsubsection{Import/Anlegen der Anwender Konten}
+Wie vorher geschildert (in \nameref{sec:Importsuche}) wurde entschieden, das die praktikabelste Methode um die Benutzerkonten im neuen Verzeichnisdienst zu erstellen, eine Generierung einer von LDAP importierbaren 
+Mit Hilfe der von Herrn Auerswald erstellten Skripte (Skripte siehe \autoref{sec:SkriptA} und \autoref{sec:SkriptB}) wurde dann aus den Daten von CommuniGate eine LDIF Datei erzeugt die dann mit \texttt{ldapadd} importiert wurde.
+
+Anmerkung: CommuniGate speichert Mailinglisten und Ähnliches ebenfalls in LDAP Objekten, es wurden hier nur die Konten von echten Anwendern und zur Verwaltung der Webservices etc. nötige Konten importiert.
+
+\subsubsection{Funkions- und Sicherheitstests}
+Schon während der Arbeiten wurden immer wieder prüfbare Teilkomponenten getestet: 
+Vor dem Erstellen der Verzeichnisstruktur wurde bereits eine Teststruktur die lediglich die \texttt{fg-networking} Domain enthielt und ein Testkonto. Dieses Testkonto wurde dann mit Hilfe von \texttt{ldapsearch} aus den LDAP Utils abgefragt, zuerst noch bevor LDAPS eingerichtet war. Nach der Einrichtung von LDAPS musste das Stammzertifikat in die Konfigurationsdatei \texttt{/etc/ldap/ldap.conf} eingetragen werden, dies ist aber für den Normalbetrieb nicht notwendig da dieser Eintrag nur von den LDAP Utils ausgewertet wird. Apache und OpenVPN haben dazu eigene Einstellungen.
+
+Die Webservices auf \texttt{nms} wurden dann kurzzeitig auf dieses LDAP umgestellt um die generelle Funktion der Authentifizierung testen zu können. Der Rechner \texttt{nms} wurde gewählt da die Webservices auf ihm wenig benutzt werden, und das auch nur von Mitarbeitern die zur Bearbeitungszeit vor Ort waren und so einfach und schnell über die Tests informiert werden konnten. Hierbei viel auf das es anfänglich noch einen Fehler in den SSL Einstellungen gab, dieser stellte sich aber lediglich als Tippfehler in der Apache Konfiguration heraus. Nach Korrektur dessen konnte man sich mit dem Testkonto erfolgreich an den Webservices anmelden.
+
+Die Anbindung des FreeRADIUS Servers an den OpenLDAP Server wurden mit Hilfe des Programms \texttt{radtest} aus den FreeRADIUS Utils getestet. Hier wurde ebenfalls das oben erwähnte Testkonto abgefragt zusammen mit dem Shared Secret. Mit demselben Befehl (aber einem echten Anwenderkonto) wurde auch der CommuniGate Server getestet um einen Vergleichswert zu haben, da ein echter Praxistest erst bei Fertigstellung des neuen E-Mailservers durchgeführt werden kann.
+
+Abschließend wurde noch getestet einen Managed Switch an den RADIUS Server anzubinden damit darüber die Benutzerkonten aus dem LDAP zum anmelden verwendet werden können. Nach Informationen aus den LDAP Logs funktionierte das authentifizieren am Server auch, allerdings konnte man sich trotzdem nicht erfolgreich am Switch anmelden. Dafür hätte man zusätzliche Berechtigungen im LDAP hinterlegen müssen. Da nicht sofort ersichtlich wurde was genau dafür zu konfigurieren wäre und die Anbindung von Switches erst irgendwann in Zukunft geschehen soll, wurde das Ganze dann nicht weiter verfolgt.
+
+\medskip \noindent
+An Sicherheitstests wurde nach der Umstellung der Webservices erfolglos versucht sich an diesen mit Anmeldeinformationen (falscher Benutzername, richtiger Benutzername mit falschem Passwort) anzumelden. Dasselbe wurde mit \texttt{radtest} am RADIUS Server getestet.
+Abschließend wurde noch per \texttt{nmap} von innerhalb des Firmennetzes und von einem externen Rechner aus geprüft ausschließlich die richtigen Ports geöffnet sind (näheres dazu in \autoref{sec:NMAP-Test-int} und \autoref{sec:NMAP-Test-ext}).
+
+\section{Projektkosten}
+\hilight{TODO}
+
+\section{Projektabschluss}
+\subsection{Fazit}
+Sämtliche Systeme von fgn die vorher den LDAP Server von CommuniGate benutzten wurden erfolgreich auf den neuen OpenLDAP Server umgestellt. Da der alte E-Mailserver weiterhin in Betrieb bleibt bis er vom neuen Server abgelöst wird findet bis dahin quasi ein Parallelbetrieb der LDAP Server statt. Deswegen werden die Benutzerpasswörter bei Fertigstellung des neuen E-Mailservers noch einmal zur Sicherheit synchronisiert werden müssen, allerdings wird die über Skripte wieder einfach zu bewerkstelligen sein. Die Skripte werden allerdings leicht modifiziert werden müssen da diesmal LDAP Daten verändert werden sollen statt neu hinzugefügt und die LDIF Syntax dafür leicht anders ist.
+
+Der FreeRADIUS Server wurde ebenso erfolgreich eingerichtet und einfacher als erwartet an den OpenLDAP Server angebunden. Allerdings verrichtet er bisher noch keinen sinnvollen Dienst da bei fgn RADIUS momentan nur beim E-Mailserver benutzt wird und dieser ja noch selbst einen RADIUS Server betreibt. Dies wird sich voraussichtlich erst mit der Fertigstellung des neuen E-Mailservers ändern.
+
+Bei der Zeitplanung des Projektes wäre im Nachhinein folgendes zu verbessern gewesen: Für den Entwurf und die Implementierung der Verzeichnisstruktur hätte mehr Zeit eingeplant werden müssen. Als der Zeitplan für den Projektantrag ausgearbeitet wurde waren die Vorrecherchen zu LDAP und vor Allem zur bestehenden Konfiguration noch nicht weit genug fortgeschritten als das Probleme aus dieser Richtung vorhersehbar gewesen wären. Insgesamt wäre der Entwurf der LDAP Verzeichnisstruktur am Besten als zusätzlicher Punkt zur Planung hinzugefügt worden. In der Umsetzungsphase weniger Zeit für die Vorbereitung veranschlagen können, da nur eine übersichtlich kleine Anzahl an Diensten den LDAP Server verwendet und bei diesen nicht viel an der Konfiguration zu ändern war.
+
+\subsection{Ausblick}
+Die erste zukünftige Änderung für die in diesem Projekt erstellten Serverdienste wird nach aktueller Planung die Anbindung des neuen E-Mailservers sein. Dafür werden den in OpenLDAP bestehenden Benutzerkonten die Attribute die der E-Mailserver benötigt (wie z.B. die E-Mailadresse) befüllt werden müssen. Dies wird voraussichtlich wieder über durch Skripte erstellte LDIF Dateien geschehen.
+
+Ebenso bietet sich für eine Erweiterung des Projektsystems die Einbindung der anderen Linux Rechner in der Firma an. Dort könnte man dadurch die bisherigen lokalen Benutzerkonten durch ein zentral in LDAP abgelegtes und verwaltetes Konto ersetzen. Dazu müsste man auf den Linux Rechnern LDAP an das PAM System anbinden (dazu müsste dort vermutlich ein passendes PAM-LDAP Modul installiert werden und eventuell auch noch das LDAP Modul für den Name Switch Service (\texttt{NSS})) und im LDAP Server die Benutzer um die passenden Attribute (wie z.B. Home-Verzeichnis, UID, Gruppen) erweitern. Letzteres kann wieder geskriptet werden. Als Anwendersystem wird im Moment allerdings nur 1 Rechner verwendet (\texttt{fgnfs}) für den der Aufwand im Rahmen des Projektes zu groß schien für das zu erwartende Ergebnis.
+
+Eine weitere für fgn attraktive Erweiterungsmöglichkeit ist das Anbinden der Managed Switches des Schulungslabore an den FreeRADIUS Server (und somit LDAP). Dies würde Probleme durch Änderungen der Anmeldeinformationen der Switche durch Schulungsteilnehmer vorbeugen die abundzu auftreten. Da die Schulungslabore in einem VPN sind müsste RADIUS dazu ebenfalls ins VPN gehängt werden. Des weiteren müssten Konten für die Switches erstellt werden mit den passenden Attributen die zu Autorisierung benötigt werden. In die Switche müsste außerdem der RADIUS Server eingetragen werden und im RADIUS Server die Clients eingetragen werden (jeweils dann mit passenden Shared Secret "Paaren").
+
+fgn hat neben den diversen Linux Rechnern auch noch 2 Windows PCs in der Verwaltung sowie einige virtuelle Windows Rechner an den Schulungslaboren angeschlossen. Für diese könnte man mit Samba 4 eine kleine Active Directory Domäne aufbauen die an den OpenLDAP Server angebunden wird. Allerdings benötigt Samba 4 inzwischen ein eigenes LDAP (dies wird für Replikationsfunktionen benötigt) und lässt sich somit nur umständlich an das nun bestehende LDAP anbinden. Dieser Erweiterungsmöglichkeit stellt insgesamt von den aufgezählten für fgn die unattraktivste dar, da es nur wenige Windowsrechner gibt die davon tatsächlich profitieren würden und der Aufwand dafür recht hoch wäre.
+
+
+\appendix
+\newpage
+\addcontentsline{toc}{section}{Anhänge} %fügt Überschrift Anhänge in die TOC ein
+\section{Übernommene LDAP Attribute} \label{sec:LDAP-Attribute}
+\newpage
+\section{Erklärung der OpenLDAP Loglevel} \label{sec:LDAP-Loglevel}
+\newpage
+\section{Erläuterungen zu den verwendeten LDAP Schemas}\label{sec:LDAP-Schema}
+\newpage
+\section{Erstellung der Verzeichnisstruktur}\label{sec:Erstelle-DB}
+\newpage
+\section{Skript zum Auslesen der Anwenderkonten aus der CommuniGate Dateien}\label{sec:SkriptA}
+\newpage
+\section{Skript zum Hashen der Anwenderpasswörter}\label{sec:SkriptB}
+\newpage
+\section{Konfiguration des FreeRADIUS Servers}\label{sec:RADIUS-Konfig}
+\newpage
+\section{Konfiguration der Firewall}\label{sec:Firewall-Konfig}
+\newpage
+\section{Änderungen an der Apache Konfiguration}\label{sec:Apache-Konfig}
+\newpage
+\section{Änderungen an der OpenVPN Konfiguration}\label{sec:VPN-Konfig}
+\newpage
+\section{Ergebnis eines fgn internen NMAP Tests}\label{sec:NMAP-Test-int}
+\newpage
+\section{Ergebnis eines externen NMAP Tests}\label{sec:NMAP-Test-ext}
+
+%\section{Testkapitel}
+%\subsection{Testsektion}
+%Dies ist eine Testaufzählung:
+%\begin{itemize}
+%\item Item 1
+%\item Item 2
+%\item Item 3
+%\item Item 4
+%\end{itemize}
+%Und weiter im Text.
+%
+%Hier bricht die Seite nun um.
+%
+%\Blinddocument
+%\newpage
+
+
+\end{document}
