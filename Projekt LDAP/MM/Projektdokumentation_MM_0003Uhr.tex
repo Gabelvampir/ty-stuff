@@ -513,22 +513,22 @@ wird sehr wahrscheinlich auch wieder \tcr{mittels} per Skript
 sein und stellt somit einen vertretbar geringen Mehraufwand für die 
 \tcr{E-Mail-Server-Einrichtung} dar.
 
-% Weiterhin musste die neue Verzeichnisstruktur \tcg{berücksichtigen, } \tcr{dass} 
-% mehrere voneinander unabhängige Namensräume (die \tcr{3$\to$drei} in 
-% \nameref{sec:Konfig-Doku-Alt} erwähnten E-Mail Domains) zu verwalten sind. Das 
-% \tcg{bedeutet, } \tcr{dass} in den Domains Konten mit demselben 
-% unqualifizierten \tcr{was meinst Du mit "`unqualifiziert"'?} Namen vorhanden 
-% sein \tcg{können, die} aber voneinander unabhängig sind. Der erste Ansatz dazu 
-% \tcg{war, } \tcr{jedem$\to$jeder} der \tcr{3$\to$drei} Domains eine eigene 
-% Datenbank (im Sinne von getrennten \tcg{Dateien, die} von einem \tcr{LDAP-Server} 
-% verwaltet werden) zu geben. Allerdings ließen sich in verschiedenen Versuchen 
-% \tcr{die$\to$diese} Datenbänke zwar anlegen, \tcr{allerdings$\to$jedoch} war 
-% ein Zugriff \tcr{auf sie$\to$darauf} nicht möglich. Getestet wurde dies mit 
-% entsprechenden \tcr{\texttt{ldapsearch}-Aufrufen. Da sich 
-% \tcr{unter Anderem$\to$u.a.} wegen den eher unpraktischen Logleveln 
-% (siehe \autoref{sec:LDAP-Loglevel}) von OpenLDAP das genaue Problem mit dieser 
-% Vorgehensweise nicht lokalisieren \tcr{lies$\to$ließ}\tcg{, musste} eine andere 
-% Struktur ersonnen werden.
+Weiterhin musste die neue Verzeichnisstruktur \tcg{berücksichtigen, } \tcr{dass} 
+mehrere voneinander unabhängige Namensräume (die \tcr{3$\to$drei} in 
+\nameref{sec:Konfig-Doku-Alt} erwähnten E-Mail Domains) zu verwalten sind. Das 
+\tcg{bedeutet, } \tcr{dass} in den Domains Konten mit demselben 
+unqualifizierten \tcr{was meinst Du mit "`unqualifiziert"'?} Namen vorhanden 
+sein \tcg{können, die} aber voneinander unabhängig sind. Der erste Ansatz dazu 
+\tcg{war, } \tcr{jedem$\to$jeder} der \tcr{3$\to$drei} Domains eine eigene 
+Datenbank (im Sinne von getrennten \tcg{Dateien, die} von einem \tcr{LDAP-Server} 
+verwaltet werden) zu geben. Allerdings ließen sich in verschiedenen Versuchen 
+\tcr{die$\to$diese} Datenbänke zwar anlegen, \tcr{allerdings$\to$jedoch} war 
+ein Zugriff \tcr{auf sie$\to$darauf} nicht möglich. Getestet wurde dies mit 
+entsprechenden \tcr{\texttt{ldapsearch}-Aufrufen}. Da sich 
+\tcr{unter Anderem$\to$u.a.} wegen den eher unpraktischen Logleveln 
+(siehe \autoref{sec:LDAP-Loglevel}) von OpenLDAP das genaue Problem mit dieser 
+Vorgehensweise nicht lokalisieren \tcr{lies$\to$ließ}\tcg{, musste} eine andere 
+Struktur ersonnen werden.
 
 Der Ansatz für die alternative Verzeichnisstruktur basierte 
 \tcr{unter Anderem$\to$u.a.} \tcr{darauf wie LDAP mit Domain Namen umgeht.
