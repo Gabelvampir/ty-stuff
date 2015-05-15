@@ -173,24 +173,24 @@ Somit müssen im Rahmen der Projektarbeit folgende Arbeiten durchgeführt werden
 
 \subsection{Vorgaben}
 \subsubsection{Wirtschaftliche Vorgaben}
-Wie die meisten anderen Server der fgn GmbH soll der Server in einer neuen VM auf einem bereits bestehenden VMware ESXi-Servers laufen, somit fallen keine zusätzlichen Hardwarekosten an. Da in dem Projekt  ausschließlich freie Software zum Einsatz kommen soll fallen auch keine zusätzlichen Softwarelizenzkosten an.
+Wie die meisten anderen Server der fgn GmbH soll das neue Serversystem in einer eigenen Virtual Machine auf einem der bereits bestehenden VMware ESXi-Servers laufen, weswegen keine zusätzlichen Hardwarekosten anfallen. Da in dem Projekt zudem ausschließlich freie Software zum Einsatz kommen soll fallen auch keine Softwarelizenzkosten an.
 
 \subsubsection{Organisatorische Vorgaben}
 Das Projekt wird im Praktikumsbetrieb mit Unterstützung des Mitarbeiters Erik Auerswald durchgeführt.
-Zur Projektdokumentation werden zusätzlich jeweils eine Kundendokumentation für Administratoren im firmeninternen Wiki erstellt. Hinzu kommen Funktions- und Sicherheitstests zur Qualitätssicherung. Eine Anwenderdokumentation ist nicht notwendig da sich aus Sicht des Anwenders nichts gegenüber des Ausgangszustandes ändern soll.
+Neben der Projektdokumentation werden zusätzlich jeweils eine Kundendokumentation für Administratoren im firmeninternen Wiki erstellt. Hinzu kommen Funktions- und Sicherheitstests zur Qualitätssicherung. Eine Anwenderdokumentation ist nicht notwendig, da sich aus Sicht des Anwenders nichts gegenüber des Ausgangszustandes ändern soll.
 
 \subsubsection{Zeitliche Vorgaben}
 Das Projekt wird im Zeitraum vom 04.05.2015 – 18.05.2015 durchgeführt, wobei die Bearbeitungszeit von 35 Stunden nicht überschritten werden darf.
 
 \section{Projektplanung}
 \subsection{Planung des Ersatzservers}
-Als Ersatzserver wird eine neue Virtual Machine auf einen der firmeneigenen ESXi Servern verwendet. Als Betriebssystem wird Debian Stable (zur Durchführungszeit des Projektes Version 8.0 Jessie) mit der Standardpaketauswahl ohne zusätzliche Vorauswahlen.
+Als Ersatzserver wurde eine neue Virtual Machine auf einen der firmeneigenen ESXi Servern verwendet. Als Betriebssystem wurde Debian Stable (zur Durchführungszeit des Projektes Version 8.0 Jessie) mit der Standardpaketauswahl ohne zusätzliche Vorauswahlen installiert.
 
 \subsection{Planung des Kommunikationskonzepts}
-Sämtliche firmeninterne Webservices, der VPN, der kommende neue E-Mailserver und der FreeRADIUS Daemon greifen über das LDAP-Protokoll auf den OpenLDAP Daemon zu um Benutzer zu authentifizieren und Einstellungen zu diesen zu holen. Der E-Mailserver der Universität greift auf den FreeRADIUS Daemon zu um Benutzerkonten zu prüfen, welcher wiederrum die Daten beim OpenLDAP-Daemon erfragt.
+Sämtliche firmeninternen Webservices, der OpenVPN-Server, der kommende neue E-Mail-Server und der FreeRADIUS-Daemon greifen über das LDAP - hier ist das Protokoll gemeint - auf den OpenLDAP-Daemon zu, um Benutzer zu authentifizieren und nutzerspezifische Einstellungen abzufragen. Die E-Mail-Server der Universität greifen auf den FreeRADIUS-Daemon zu um Benutzerkonten zu prüfen, welcher daraufhin die entsprechenden Daten beim OpenLDAP-Daemon - per LDAP - erfragt.
 
 \subsection{Planung des Sicherheitskonzepts}\label{sec:Sicherheitskonzept}
-Das Firmennetzwerk der fgn GmbH ist über die Netzwerk der TU Kaiserslautern ans Internet angebunden. Entsprechend wird jeglicher Netzwerkverkehr von der TU Firewall vorgefiltert. Das Firmennetz von fgn ist zusätzlich noch durch eine eigene Firewall gesichert. In diese muss eine Ausnahme für den neuen RADIUS Server eingetragen werden (analog zur alten Regel). Zusätzlich wird auf dem neuen Server eine Software-Firewall installiert die nur die für LDAP, RADIUS und zur Wartung benötigten Ports zulassen soll.
+Das Firmennetzwerk der fgn GmbH ist über das Netzwerk der TU Kaiserslautern ans Internet angebunden. Entsprechend wird jeglicher Netzwerkverkehr von der TU-Firewall vorgefiltert. Das Firmennetz von fgn ist zusätzlich noch durch eine eigene Firewall gesichert. In diese muss - analog zur alten Regel - eine Ausnahme für den neuen RADIUS Server eingetragen werden. Zusätzlich wird auf dem neuen Server eine Software-Firewall installiert, die nur die für LDAP, RADIUS und zur Wartung benötigten Ports zulassen soll.
 
 \hilight{TODO: fgn Netzstruktur korrigieren}
 
@@ -199,7 +199,7 @@ Analyse und Planung (insgesamt 6 h)
 	\begin{itemize}
 	\item Ist-Analyse (3 h)
 		\begin{itemize}
-		\item Analyse des bestehenden CommuniGate Servers und der damit verbundenen Webservices (2 h)
+		\item Analyse des bestehenden CommuniGate-Servers und der damit verbundenen Webservices (2 h)
 		\item Aufnahme der Anforderungen an einen Ersatzserver (1 h)
 		\end{itemize}
 	\item Planung (3 h)
@@ -219,16 +219,16 @@ Umsetzung (insgesamt 20 h)
 		\end{itemize}
 	\item Installation und Einrichtung des neuen Servers (8 h)
 		\begin{itemize}
-		\item Grundinstallation des Linux Systems des neuen Servers (1 h)
-		\item Installation und Konfiguration des LDAP Servers (3 h)
-		\item Installation und Konfiguration des RADIUS Servers (2 h)
+		\item Grundinstallation des Linux-Systems des neuen Servers (1 h)
+		\item Installation und Konfiguration des LDAP-Servers (3 h)
+		\item Installation und Konfiguration des RADIUS-Servers (2 h)
 		\item Absicherung des Rechners (Firewall etc.) (2 h)
 		\end{itemize}
 	\item Abschließende Arbeiten (6 h)
 		\begin{itemize}
 		\item Umkonfiguration der Webservices (2 h)
-		\item Import/Anlegen der Anwender Konten (2 h)
-		\item Funkions- und Sicherheitstests (2 h)
+		\item Import/Anlegen der Anwenderkonten (2 h)
+		\item Funktions- und Sicherheitstests (2 h)
 		\end{itemize}
 	\end{itemize}
 Dokumentation (insgesamt 9 h)
@@ -240,16 +240,16 @@ Dokumentation (insgesamt 9 h)
 \section{Umsetzung}
 \subsection{Vorbereitungen}
 \subsubsection{Dokumentation der Konfiguration des zu ersetzenden Servers}\label{sec:Konfig-Doku-Alt}
-Da die Konfigurationsdateien des CommuniGate Servers sämtliche Anwenderpasswörter im Klartext enthält konnte mir bei der Durchführung des Projektes aus Sicherheitsgründen kein direkter Zugriff auf den Server gewehrt werden. Allerdings war dies auch nicht notwendig, da zur Erfassen der wichtigen Konfigurationsdetails (vornehmlich der Struktur des integrierten Verzeichnisdienstes) lediglich Zugriff auf das Webinterface des Servers (zugänglich unter Port \texttt{9010} auf dem bisherigen Server \texttt{mail.fg-networking.de}, Zugriff durch Firewall von außerhalb des Firmennetzes geblockt) notwendig war. Unter Aufsicht von Herrn Auerswald wurde ein Auszug (vor allem der Eintrag für meinen eigenen Benutzer da mir dieses Passwort bereits bekannt ist) der im Klartext gespeicherten Benutzerdaten begutachtet. Dabei fiel auf das alles in einer gut organisierten Ordnerstruktur abgelegt ist, es existiert eine Datei pro Anwender und die Daten in der Datei sind in bezeichneten Feldern abgelegt.
+Da die Konfigurationsdateien des CommuniGate-Servers sämtliche Anwenderpasswörter im Klartext enthalten, konnte dem firmenexternen Bearbeiter dieses Projektes aus Sicherheitsgründen kein direkter Zugriff auf den Server gewährt werden. Allerdings war dies auch nur bedingt notwendig, da zum Erfassen der wichtigen Konfigurationsdetails (vornehmlich der Struktur des integrierten Verzeichnisdienstes) lediglich Zugriff auf das Webinterface des Servers (zugänglich unter Port \texttt{9010} auf dem bisherigen Server \texttt{mail.fg-networking.de}, Zugriff durch Firewall von außerhalb des Firmennetzes geblockt) notwendig war. Unter Aufsicht von Herrn Auerswald wurde ein Auszug der im Klartext gespeicherten Benutzerdaten begutachtet, vor allem der Eintrag für das Benutzerkonto des Bearbeiters da ihm dieses Passwort bereits bekannt war. Dabei fiel auf das alles in einer gut organisierten Ordnerstruktur abgelegt ist, es existiert eine Datei pro Anwender und die Daten in der Datei sind in bezeichneten Feldern abgelegt.
 
-Für das Projekt am Wichtigsten zu beachten war das der E-Mailserver für 3 Domains Anwenderkonten verwaltet: \texttt{fg-networking.de}, \texttt{schabler.de} und \texttt{worden.de}. Dies musste natürlich beim Entwurf der neuen Verzeichnistruktur beachtet werden um später die Anbindung des neuen E-Mailserver ohne unnötige erneute Umbauten am LDAP zu ermöglichen.
+Für das Projekt am Wichtigsten zu beachten war, dass der E-Mail-Server für 3 Domains Anwenderkonten verwaltet: \texttt{fg-networking.de}, \texttt{schabler.de} und \texttt{worden.de}. Dies musste natürlich beim Entwurf der neuen Verzeichnistruktur beachtet werden, um später die Anbindung des neuen E-Mailserver ohne unnötige erneute Umbauten am LDAP zu ermöglichen.
 
 \subsubsection{Erstellen einer Liste aller Dienste die das bestehende Identity Management nutzen}
-Die Webtools die den bisherigen LDAP Server verwenden laufen unter Apache Webservern auf den Rechnern \texttt{aio}, \texttt{nms} und \texttt{lab-mm}. Sie alle benutzen zum Abfragen von Nutzerdaten die Apache eigenen LDAP Module (\texttt{mod\_ldap} und \texttt{mod\_authnz\_ldap}, bzw. \texttt{mod\_auth\_ldap} auf \texttt{aio} da hier noch eine ältere Apache Version verwendet wird). 
+Die Webtools, die den bisherigen LDAP-Server verwenden, laufen unter Apache-Webservern auf den Rechnern \texttt{aio}, \texttt{nms} und \texttt{lab-mm}. Sie alle benutzen zum Abfragen von Nutzerdaten die Apache-eigenen LDAP-Module (\texttt{mod\_ldap} und \texttt{mod\_authnz\_ldap}, bzw. \texttt{mod\_auth\_ldap} auf \texttt{aio} da hier noch eine ältere Apache-Version verwendet wird). 
 
-Somit ist bei der Konfiguration von allen prinzipiell dasselbe zu ändern damit später der neue Server verwendet wird. So verwenden z.B. alle den alten Server ohne SSL, weswegen zusätzlich zur neuen LDAP Server URI auch noch das Stammzertifkat einzutragen ist. Kopiert werden muss es nicht extra da es auf allen Rechnern bereits fürs servieren von HTTPS Verbindungen installiert wurde. 
+Somit ist bei der Konfiguration aller Webserver prinzipiell dasselbe zu ändern damit später der neue Server verwendet wird. So verwenden z.B. alle den alten Server ohne SSL, weswegen zusätzlich zur neuen LDAP- Server-URI auch noch das passende CA Stammzertifkat einzutragen ist. Kopiert werden muss dieses nicht extra da es auf allen Rechnern bereits fürs servieren von HTTPS-Verbindungen installiert wurde. 
 
-Oberflächlich gibt es in der Konfiguration natürlich auch Unterschiede. So haben auf \texttt{aio} mehrere Tools eigene Unterseiten Einträge in der Konfiguration in denen jeweils der LDAP Server eingestellt ist, auf \texttt{nms} gibt es lediglich einen Eintrag für alle Webtools. Aber diese Detailunterschiede machen keinen wirklichen Unterschied in den später vorzunehmenden Änderungen.
+Oberflächlich gibt es in der Konfiguration natürlich auch Unterschiede. So haben auf \texttt{aio} mehrere Tools eigene \texttt{<Location>}-Einträge in der Konfiguration in denen jeweils der LDAP Server eingestellt ist, auf \texttt{nms} gibt es lediglich einen Eintrag für alle Webtools. Aber diese Detailunterschiede machen keinen wirklichen Unterschied in den später vorzunehmenden Änderungen.
 
 Die Konfiguration von OpenVPN muss auch lediglich auf die neue Server URL und BaseDN umgestellt werden, und ebenso das Stammzertifikat eingetragen werden. Dies geschieht in der Datei \texttt{/etc/openvpn/auth-ldap.config}, näheres dazu siehe \autoref{sec:VPN-Konfig}.
 
@@ -299,13 +299,13 @@ Da die umzustellenden Dienste (Webservices und OpenVPN) bereits den alten LDAP S
 
 Wie in \nameref{sec:Konfig-Doku-Alt} geschildert konnte Egroupware zur Bearbeitungszeit dieses Projektes noch nicht umgestellt werden, dies muss dann noch vom zuständigen Mitarbeiter vorgenommen werden.
 
-\subsubsection{Import/Anlegen der Anwender Konten}
+\subsubsection{Import/Anlegen der Anwenderkonten}
 Wie vorher geschildert (in \nameref{sec:Importsuche}) wurde entschieden, das die praktikabelste Methode um die Benutzerkonten im neuen Verzeichnisdienst zu erstellen, eine Generierung einer von LDAP importierbaren 
 Mit Hilfe der von Herrn Auerswald erstellten Skripte (Skripte siehe \autoref{sec:SkriptA} und \autoref{sec:SkriptB}) wurde dann aus den Daten von CommuniGate eine LDIF Datei erzeugt die dann mit \texttt{ldapadd} importiert wurde.
 
 Anmerkung: CommuniGate speichert Mailinglisten und Ähnliches ebenfalls in LDAP Objekten, es wurden hier nur die Konten von echten Anwendern und zur Verwaltung der Webservices etc. nötige Konten importiert.
 
-\subsubsection{Funkions- und Sicherheitstests}
+\subsubsection{Funktions- und Sicherheitstests}
 Schon während der Arbeiten wurden immer wieder prüfbare Teilkomponenten getestet: 
 Vor dem Erstellen der Verzeichnisstruktur wurde bereits eine Teststruktur die lediglich die \texttt{fg-networking} Domain enthielt und ein Testkonto. Dieses Testkonto wurde dann mit Hilfe von \texttt{ldapsearch} aus den LDAP Utils abgefragt, zuerst noch bevor LDAPS eingerichtet war. Nach der Einrichtung von LDAPS musste das Stammzertifikat in die Konfigurationsdatei \texttt{/etc/ldap/ldap.conf} eingetragen werden, dies ist aber für den Normalbetrieb nicht notwendig da dieser Eintrag nur von den LDAP Utils ausgewertet wird. Apache und OpenVPN haben dazu eigene Einstellungen.
 
