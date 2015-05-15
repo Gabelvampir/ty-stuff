@@ -4,7 +4,7 @@
 % This is a simple template for a LaTeX document using the "article" class.
 % See "book", "report", "letter" for other types of document.
 
-\documentclass[11pt,a4paper,titlepage=firstiscover,headsepline]{scrartcl} % use larger type; default would be 10pt
+\documentclass[11pt,a4paper,titlepage=firstiscover,headsepline,bibtotoc]{scrartcl} % use larger type; default would be 10pt
 
 \usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
 \usepackage[T1]{fontenc} % maps glyphs to dictonary characters, needed for seperation
@@ -32,11 +32,12 @@
 %\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
 % These packages are all incorporated in the memoir class to one degree or another...
 \usepackage[ngerman]{babel}
+\usepackage{eurosym}
 %\usepackage{blindtext}
 %\usepackage{pifont} %for symbols (i.e. arrows)
 %\usepackage{showframe} %shows the margins
 
-\usepackage[colorlinks,linkcolor=blue]{hyperref} % package for hyperlinks with \url
+\usepackage[colorlinks,linkcolor=blue,pdftex]{hyperref} % package for hyperlinks with \url
 % hyperlink color definitions
 %\hypersetup{citecolor=DeepPink4}
 %\hypersetup{linkcolor=DarkRed}
@@ -139,7 +140,7 @@ Die fgn GmbH wurde im August 2000 als SpinOff der Technische Universität (TU) K
 
 Die Kernkompetenz der fgn GmbH ist anspruchsvolles Netzwerk-Knowhow, welches als Dienstleistung in drei eng verknüpften Tätigkeitsfeldern angeboten wird: Schulungen, Workshops und Netzwerk-Consulting (Beratung und vor-Ort-Support von Firmen bei Problemen, Umstrukturierungen, Erweiterungen und Neuaufbau von Produktivnetzwerken).
 
-\subsection{Ist-Analyse}
+\subsection{Ist-Analyse}\label{sec:Ist-Analyse}
 Im Praktikumsbetrieb fgn GmbH läuft der E-Mail-Verkehr und die Authentifizierung an den internen Webservices und am OpenVPN-Server über einen alten CommuniGate-Server (v5.0.13 von November 2006). Ursprünglich wurde dieser auf einem eigenen Rechner aufgesetzt, inzwischen aber wie viele andere Rechner der Firma virtualisiert. 
 
 Die Webservices, die ihn zur Anwender-Authentifizierung verwenden, laufen auf drei anderen VMs, ebenso der OpenVPN-Server. Sie kommunizieren mit dem LDAP-Teil von CommuniGate mittels des Apache-Moduls \texttt{mod\_ldap} und verwenden zur Autorisierung entsprechend \texttt{mod\_authnz\_ldap} (bzw. auf einem der Rechner wegen eines veralteten Apache Webserver noch \texttt{mod\_auth\_ldap}). Apache prüft dabei momentan nur auf Existenz des angegebenen Benutzeraccounts und ob das richtige Passwort angegeben wurde, weitere Berechtigungen sind momentan nicht implementiert. Die Ausnahmen dazu sind Nagios und Egroupware, die zwar Berechtigungsgruppen verwenden. diese aber intern verwalten und nicht in LDAP ablegen.
@@ -170,6 +171,12 @@ Somit müssen im Rahmen der Projektarbeit folgende Arbeiten durchgeführt werden
 \item Funktions- und Sicherheitstests
 \end{itemize}
 
+\subsection{Wirtschaftlichkeits-Analyse}
+Wie bereits in der \nameref{sec:Ist-Analyse} erwähnt gibt es auf Grund des Alters der im bestehenden CommuniGate-Server enthaltenen SSL/TLS-Implementierung regelmäßig Probleme mit neueren E-Mail-Clients. Dies frisst dann jedesmal Arbeitszeit von zwei Mitarbeitern, dem Mitarbeiter mit dem ``zu neuen'' E-Mail-Client und dem fgn-Mitarbeiter der sich mit den Einstellungen im E-Mail-Client auskennt. Dies passiert inzwischen regelmäßig, praktisch bei jedem Update des verwenden E-Mail-Clients Mozillla Thunderbird (ca. 10 pro Jahr) und verschwendet bei beiden Mitarbeitern mindestens eine halbe Stunde Arbeitszeit. Dies betrifft im Moment drei Mitarbeiter (den E-Mail-Spezialisten nicht mitgerechnet), somit ist dies bei einem angenommen Stundenlohn von 71\mbox{\euro} eine Arbeitsausfall von \(3*2*10*\frac{1}{2}\mbox{h}*71\mbox{\euro}/\mbox{h}=2.130\mbox{\euro}\) pro Jahr. Und sehr wahrscheinlich wird der E-Mail-Server irgendwann überhaupt nicht mehr mit neueren E-Mail-Clients benutzbar sein, was etliche der Prozesse der Firma lahmlegen wird. Der Arbeitsausfall davon lässt sich kaum voraussagen da man in diesem Fall überhastet einen neuen E-Mail-Server aufsetzen müsste und sich die Folgen von einer überhasteten Neuinstallation nur schwer abschätzen lassen. Es würde auch bei den Kunden von fgn ein Image-Schaden entstehen der kaum in Geld auszudrücken ist.
+
+Die auf der Hand liegende Alternative zu der in diesem Projekt verwendeten Software wäre es eine neue CommuniGate Pro Firmenlizenz zu kaufen. Die Kosten dafür hängen bei von CommuniGate so genannten ``Small Licenses'' von der Anzahl der verwalteten E-Mail-Konten ab. Momentan werden bei fgn davon 46 verwaltet, die Softwarelizenz für 50 Konten würde also in absehbarer Zeit zu knapp werden. Der Preis für eine Lizenz für 75 E-Mail-Konten (die nächstgrößere Lizenz) beträgt momentan 1.849\euro. Dazu kämen dann noch zusätzliche Kosten um alle 10-26 Monate die Lizenz zu verlängern um weiterhin Updates und Support zu erhalten. Momentan sind dies zwischen 277,35\euro{} und 721,11\euro. Und es ist nicht zu erwarten das diese Preise konstant bleiben oder fallen werden. Außerdem kommt bei der Umstellung noch ein nicht unerheblicher Arbeitsaufwand hinzu bei der Migration von der sehr veralteten Server-Version in die neue Version.
+
+Da der Gegenstand dieses Projektes neu ein Teilersatz des CommuniGate-Servers war lassen sich die Kosten leider nicht 1:1 miteinander verrechnen. Trotzdem ist als Vorteil anzurechnen das keine regelmäßigen Kosten entstehen wie es bei einer ständig erneuerten CommuniGate-Lizenz oder den Problemen nach jedem Thunderbird Update. Die Gesamtkosten des Projekts betrugen 2.485\euro{} (eine genaue Aufstellung findet sich unter \nameref{sec:Kosten}), somit amortisiert sich das Projekt gegenüber dem bisherigen Zustand innerhalb des zweiten Jahres. Verglichen mit einem Upgrade von CommuniGate amortisiert es sich erst nach zwei Jahren, aber nur wenn man den Arbeitsaufwand für das CommuniGate Upgrade außer acht läßt. Da erwartet wird, dass dieser mit dem Gesamtaufwand des Projektes vergleichbar ist, sind die Projektkosten also direkt günstiger als die Kosten für dieselbe Arbeit plus den CommuniGate Lizenzkosten.
 
 \subsection{Vorgaben}
 \subsubsection{Wirtschaftliche Vorgaben}
@@ -245,7 +252,7 @@ Da die Konfigurationsdateien des CommuniGate-Servers sämtliche Anwenderpasswör
 Für das Projekt am Wichtigsten zu beachten war, dass der E-Mail-Server für 3 Domains Anwenderkonten verwaltet: \texttt{fg-networking.de}, \texttt{schabler.de} und \texttt{worden.de}. Dies musste natürlich beim Entwurf der neuen Verzeichnistruktur beachtet werden, um später die Anbindung des neuen E-Mailserver ohne unnötige erneute Umbauten am LDAP zu ermöglichen.
 
 \subsubsection{Erstellen einer Liste aller Dienste die das bestehende Identity Management nutzen}
-Die Webtools, die den bisherigen LDAP-Server verwenden, laufen unter Apache-Webservern auf den Rechnern \texttt{aio}, \texttt{nms} und \texttt{lab-mm}. Sie alle benutzen zum Abfragen von Nutzerdaten die Apache-eigenen LDAP-Module (\texttt{mod\_ldap} und \texttt{mod\_authnz\_ldap}, bzw. \texttt{mod\_auth\_ldap} auf \texttt{aio} da hier noch eine ältere Apache-Version verwendet wird). 
+Die Webtools, die den bisherigen LDAP-Server verwenden, laufen unter Apache"=Web"-servern auf den Rechnern \texttt{aio}, \texttt{nms} und \texttt{lab-mm}. Sie alle benutzen zum Abfragen von Nutzerdaten die Apache-eigenen LDAP-Module (\texttt{mod\_ldap} und \texttt{mod\_authnz\_ldap}, bzw. \texttt{mod\_auth\_ldap} auf \texttt{aio} da hier noch eine ältere Apache-Version verwendet wird). 
 
 Somit ist bei der Konfiguration aller Webserver prinzipiell dasselbe zu ändern damit später der neue Server verwendet wird. So verwenden z.B. alle den alten Server ohne SSL, weswegen zusätzlich zur neuen LDAP- Server-URI auch noch das passende CA Stammzertifkat einzutragen ist. Kopiert werden muss dieses nicht extra da es auf allen Rechnern bereits fürs servieren von HTTPS-Verbindungen installiert wurde. 
 
@@ -262,10 +269,10 @@ Aber es sollten erst einmal nur die notwendigsten Attribute (siehe \autoref{sec:
 
 \subsection{Installation und Einrichtung des neuen Servers}
 \subsubsection{Grundinstallation des Linux Systems des neuen Servers}
-Nach der Erstellung einer neuen VM durch einen Mitarbeiter von fgn auf dem entsprechendem ESXi-Server wurde der Installer der aktuellen Debian Stable (Version 8.0 \texttt{Jessie} zur Bearbeitungszeit des Projektes) ausgeführt und das Grundsystem installiert. Dabei wurden keine der zusätzlichen Paketvorauswahlen (Debian \texttt{tasksel}) dazugenommen.  Der Debian-Installer hat bei während des Installationsprozesses nach Rückfragen auch die Grundeinrichtung für Basis-Einstellung wie z.B. IP-Adressen und Hostname vorgenommen. Für den neuen Rechner wurde der Hostname \texttt{id.fg-networking.de} gewählt.
+Nach der Erstellung einer neuen VM durch einen Mitarbeiter von fgn auf dem entsprechendem ESXi-Server wurde der Installer der aktuellen Debian Stable (Version 8.0 \texttt{Jessie} zur Bearbeitungszeit des Projektes) ausgeführt und das Grundsystem installiert. Dabei wurden keine der zusätzlichen Paketvorauswahlen (Debian \texttt{tasksel}) dazugenommen.  Der Debian-Installer hat bei während des Installationsprozesses nach Rückfragen auch die Grundeinrichtung für Basis-Einstellung wie z.B. IP-Adressen und Hostname vorgenommen. Für den neuen Rechner wurde der Hostname \texttt{id} in der Domain der Firma (\texttt{fg-networking.de}) gewählt.
 
 \subsubsection{Installation und Konfiguration des LDAP Servers}
-Nach der Grundinstallation wurde im neuen System dann die Pakete \texttt{slapd} (benannt nach dem Namen des OpenLDAP-Daemons) , \texttt{ldap-utils} und \texttt{ldapscripts} sowie deren noch nicht im System vorhandenen Paketabhängigkeiten installiert. Da LDAPS (LDAP over SSL) verwendet werden soll, damit die über LDAP abgefragten Daten verschlüsselt übertragen werden, mussten mit der Certificate Authority (CA) der Firma ein Zertifikat und ein Private Key für den Server erstellt und zusammen mit dem Stammzertifikat der CA auf den neuen Server kopiert werden.
+Nach der Grundinstallation wurde im neuen System dann die Pakete \texttt{slapd} (benannt nach dem Namen des OpenLDAP-Daemons), \texttt{ldap-utils} und \texttt{ldapscripts} sowie deren noch nicht im System vorhandenen Paketabhängigkeiten installiert. Da LDAP"=over"=SSL (LDAPS) verwendet werden soll, damit die über LDAP abgefragten Daten verschlüsselt übertragen werden, mussten mit der Certificate Authority (CA) der Firma ein Zertifikat und ein Private Key für den Server erstellt und zusammen mit dem Stammzertifikat der CA auf den neuen Server kopiert werden.
 
 \medskip Beim Entwurf der Verzeichnisstruktur ergaben sich verschiedene Probleme:
 
@@ -320,7 +327,7 @@ Abschließend wurde noch per \texttt{nmap} von innerhalb der Firmennetze und von
 \hilight{TODO: fgn Netzstruktur korrigieren}
 
 
-\section{Projektkosten}
+\section{Projektkosten}\label{sec:Kosten}
 \hilight{TODO: Kosten und Wirtschaftlichkeitsanalyse}
 
 \section{Projektabschluss}
@@ -559,9 +566,18 @@ OpenVPN muss neu gestartet werden, um die geänderte Konfigurationsdatei anzuwen
 \newpage
 \section{Ergebnis eines externen NMAP Tests}\label{sec:NMAP-Test-ext}
 \hilight{TODO}
-
 \newpage
-\section{Quellen}
-\hilight{TODO}
+
+\nocite{*}
+\begin{thebibliography}{9}
+
+\bibitem{lamport94}
+  Leslie Lamport,
+  \emph{\LaTeX: a document preparation system},
+  Addison Wesley, Massachusetts,
+  2nd edition,
+  1994.
+
+\end{thebibliography}
 
 \end{document}
