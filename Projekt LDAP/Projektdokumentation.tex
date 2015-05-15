@@ -547,7 +547,30 @@ Die Werte in spitzen Klammern müssen natürlich durch die entsprechenden Werte 
 
 \newpage
 \section{Konfiguration der Firewall}\label{sec:Firewall-Konfig}
-\hilight{TODO}
+Der folgende Block zeigt die Ausgabe der Uncomplicated Firewall (\texttt{ufw}) über ihre aktuellen Regeln (\texttt{ufw} verwendet als Standardregel, die als letzte angewendet wird wenn keine andere Regel zutrifft, ein implizites \texttt{* DENY ALL} das nicht angezeigt wird):
+\begin{lstlisting}
+root@id:~# ufw status
+Status: active
+
+To                         Action      From
+--                         ------      ----
+22                         ALLOW       Anywhere
+636                        ALLOW       131.246.197.0/25
+636                        ALLOW       10.122.0.0/16
+1812                       ALLOW       131.246.197.0/25
+1813                       ALLOW       131.246.197.0/25
+1812                       ALLOW       10.122.0.0/16
+1813                       ALLOW       10.122.0.0/16
+1812                       ALLOW       131.246.120.208/28
+1812                       ALLOW       131.246.5.14
+22                         ALLOW       Anywhere (v6)
+\end{lstlisting}
+\begin{itemize}
+\item SSH (Port \texttt{22}) ist wie bei Servern bei fgn üblich von sämtlichen Quellrechnern erlaubt (IPv4 und IPv6)
+\item LDAPS (Port \texttt{636}) ist aus dem fgn-Subnetz (\texttt{131.246.197.0/25}) und dem privaten Management Netz von fgn (\texttt{10.122.0.0/16})
+\item RADIUS (Port \texttt{1812} ist der gerenelle Port des FreeRADIUS-Daemons und Port \texttt{1813} ist der Port für Accounting) sind zugelassen für Verbindungen aus dem fgn-Subnetz (\texttt{131.246.197.0/25}), dem privaten Management Netz von fgn (\texttt{10.122.0.0/16}), den TU E-Mail-Servern \texttt{131.246.120.208/28} und dem RADIUS Server der TU \texttt{131.246.5.14}. Der RADIUS-Proxy Port \texttt{1814} wurde hier nicht gebraucht weswegen keine Verbindungen zu ihn friegeschaltet wurden.
+\end{itemize}
+Die Firewall-Regeln wurden nach Vorbild der Regeln für den CommuniGate Server erstellt.
 
 \newpage
 \section{Änderungen an der Apache Konfiguration}\label{sec:Apache-Konfig}
