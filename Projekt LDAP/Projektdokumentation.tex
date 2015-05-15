@@ -32,10 +32,12 @@
 %\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
 % These packages are all incorporated in the memoir class to one degree or another...
 \usepackage[ngerman]{babel}
-\usepackage{eurosym}
+\usepackage{eurosym} %for euro symbol via \euro
 %\usepackage{blindtext}
 %\usepackage{pifont} %for symbols (i.e. arrows)
 %\usepackage{showframe} %shows the margins
+\usepackage{hhline} % more flexible hlines
+\usepackage{caption}
 
 \usepackage[colorlinks,linkcolor=blue,pdftex]{hyperref} % package for hyperlinks with \url
 % hyperlink color definitions
@@ -73,7 +75,7 @@ numbers=none,                    % where to put the line-numbers; possible value
 
 \newcommand{\hilight}[1]{\colorbox{yellow}{#1}} %command for magic marker highlighting
 %   (from http://pleasemakeanote.blogspot.de/2009/08/how-to-highlight-text-in-latex.html)
-
+\newcommand{\mcc}[2]{\multicolumn{#1}{|c|}{#2}} %multirows over X rows in tabularx
 
 %%% HEADERS & FOOTERS
 \usepackage[automark]{scrlayer-scrpage} %header and footer definitions
@@ -108,7 +110,7 @@ numbers=none,                    % where to put the line-numbers; possible value
 %%% The "real" document content comes below...
 
 \titlehead{taylorix institut für berufliche Bildung e.V.}
-\title{Projektdokumentation "Aufsetzen eines Authentifizierungsservers als Ersatz eines veralteten proprietären CommuniGate Servers"}
+\title{Projektdokumentation „Aufsetzen eines Authentifizierungsservers als Ersatz eines veralteten proprietären CommuniGate Servers“}
 \author{Sebastian Deußer}
 %\date{18. Mai 2015} % Activate to display a given date or no date (if empty),
          % otherwise the current date is printed 
@@ -171,10 +173,10 @@ Somit müssen im Rahmen der Projektarbeit folgende Arbeiten durchgeführt werden
 \item Funktions- und Sicherheitstests
 \end{itemize}
 
-\subsection{Wirtschaftlichkeits-Analyse}
-Wie bereits in der \nameref{sec:Ist-Analyse} erwähnt gibt es auf Grund des Alters der im bestehenden CommuniGate-Server enthaltenen SSL/TLS-Implementierung regelmäßig Probleme mit neueren E-Mail-Clients. Dies frisst dann jedesmal Arbeitszeit von zwei Mitarbeitern, dem Mitarbeiter mit dem ``zu neuen'' E-Mail-Client und dem fgn-Mitarbeiter der sich mit den Einstellungen im E-Mail-Client auskennt. Dies passiert inzwischen regelmäßig, praktisch bei jedem Update des verwenden E-Mail-Clients Mozillla Thunderbird (ca. 10 pro Jahr) und verschwendet bei beiden Mitarbeitern mindestens eine halbe Stunde Arbeitszeit. Dies betrifft im Moment drei Mitarbeiter (den E-Mail-Spezialisten nicht mitgerechnet), somit ist dies bei einem angenommen Stundenlohn von 71\mbox{\euro} eine Arbeitsausfall von \(3*2*10*\frac{1}{2}\mbox{h}*71\mbox{\euro}/\mbox{h}=2.130\mbox{\euro}\) pro Jahr. Und sehr wahrscheinlich wird der E-Mail-Server irgendwann überhaupt nicht mehr mit neueren E-Mail-Clients benutzbar sein, was etliche der Prozesse der Firma lahmlegen wird. Der Arbeitsausfall davon lässt sich kaum voraussagen da man in diesem Fall überhastet einen neuen E-Mail-Server aufsetzen müsste und sich die Folgen von einer überhasteten Neuinstallation nur schwer abschätzen lassen. Es würde auch bei den Kunden von fgn ein Image-Schaden entstehen der kaum in Geld auszudrücken ist.
+\subsection{Wirtschaftlichkeits-Analyse}\label{sec:Erwin}
+Wie bereits in der \nameref{sec:Ist-Analyse} erwähnt gibt es auf Grund des Alters der im bestehenden CommuniGate-Server enthaltenen SSL/TLS-Implementierung regelmäßig Probleme mit neueren E-Mail-Clients. Dies frisst dann jedesmal Arbeitszeit von zwei Mitarbeitern, dem Mitarbeiter mit dem „zu neuen“ E-Mail-Client und dem fgn-Mitarbeiter der sich mit den Einstellungen im E-Mail-Client auskennt. Dies passiert inzwischen regelmäßig, praktisch bei jedem Update des verwenden E-Mail-Clients Mozillla Thunderbird (ca. 10 pro Jahr) und verschwendet bei beiden Mitarbeitern mindestens eine halbe Stunde Arbeitszeit. Dies betrifft im Moment drei Mitarbeiter (den E-Mail-Spezialisten nicht mitgerechnet), somit ist dies bei einem angenommen Stundenlohn von 71\mbox{\euro} eine Arbeitsausfall von \(3*2*10*\frac{1}{2}\mbox{h}*71\mbox{\euro}/\mbox{h}=2.130\mbox{\euro}\) pro Jahr. Und sehr wahrscheinlich wird der E-Mail-Server irgendwann überhaupt nicht mehr mit neueren E-Mail-Clients benutzbar sein, was etliche der Prozesse der Firma lahmlegen wird. Der Arbeitsausfall davon lässt sich kaum voraussagen da man in diesem Fall überhastet einen neuen E-Mail-Server aufsetzen müsste und sich die Folgen von einer überhasteten Neuinstallation nur schwer abschätzen lassen. Es würde auch bei den Kunden von fgn ein Image-Schaden entstehen der kaum in Geld auszudrücken ist.
 
-Die auf der Hand liegende Alternative zu der in diesem Projekt verwendeten Software wäre es eine neue CommuniGate Pro Firmenlizenz zu kaufen. Die Kosten dafür hängen bei von CommuniGate so genannten ``Small Licenses'' von der Anzahl der verwalteten E-Mail-Konten ab. Momentan werden bei fgn davon 46 verwaltet, die Softwarelizenz für 50 Konten würde also in absehbarer Zeit zu knapp werden. Der Preis für eine Lizenz für 75 E-Mail-Konten (die nächstgrößere Lizenz) beträgt momentan 1.849\euro. Dazu kämen dann noch zusätzliche Kosten um alle 10-26 Monate die Lizenz zu verlängern um weiterhin Updates und Support zu erhalten. Momentan sind dies zwischen 277,35\euro{} und 721,11\euro. Und es ist nicht zu erwarten das diese Preise konstant bleiben oder fallen werden. Außerdem kommt bei der Umstellung noch ein nicht unerheblicher Arbeitsaufwand hinzu bei der Migration von der sehr veralteten Server-Version in die neue Version.
+Die auf der Hand liegende Alternative zu der in diesem Projekt verwendeten Software wäre es eine neue CommuniGate Pro Firmenlizenz zu kaufen. Die Kosten dafür hängen bei von CommuniGate so genannten „Small Licenses“ von der Anzahl der verwalteten E-Mail-Konten ab. Momentan werden bei fgn davon 46 verwaltet, die Softwarelizenz für 50 Konten würde also in absehbarer Zeit zu knapp werden. Der Preis für eine Lizenz für 75 E-Mail-Konten (die nächstgrößere Lizenz) beträgt momentan 1.849\euro. Dazu kämen dann noch zusätzliche Kosten um alle 10-26 Monate die Lizenz zu verlängern um weiterhin Updates und Support zu erhalten. Momentan sind dies zwischen 277,35\euro{} und 721,11\euro. Und es ist nicht zu erwarten das diese Preise konstant bleiben oder fallen werden. Außerdem kommt bei der Umstellung noch ein nicht unerheblicher Arbeitsaufwand hinzu bei der Migration von der sehr veralteten Server-Version in die neue Version.
 
 Da der Gegenstand dieses Projektes neu ein Teilersatz des CommuniGate-Servers war lassen sich die Kosten leider nicht 1:1 miteinander verrechnen. Trotzdem ist als Vorteil anzurechnen das keine regelmäßigen Kosten entstehen wie es bei einer ständig erneuerten CommuniGate-Lizenz oder den Problemen nach jedem Thunderbird Update. Die Gesamtkosten des Projekts betrugen 2.485\euro{} (eine genaue Aufstellung findet sich unter \nameref{sec:Kosten}), somit amortisiert sich das Projekt gegenüber dem bisherigen Zustand innerhalb des zweiten Jahres. Verglichen mit einem Upgrade von CommuniGate amortisiert es sich erst nach zwei Jahren, aber nur wenn man den Arbeitsaufwand für das CommuniGate Upgrade außer acht läßt. Da erwartet wird, dass dieser mit dem Gesamtaufwand des Projektes vergleichbar ist, sind die Projektkosten also direkt günstiger als die Kosten für dieselbe Arbeit plus den CommuniGate Lizenzkosten.
 
@@ -328,7 +330,42 @@ Abschließend wurde noch per \texttt{nmap} von innerhalb der Firmennetze und von
 
 
 \section{Projektkosten}\label{sec:Kosten}
-\hilight{TODO: Kosten und Wirtschaftlichkeitsanalyse}
+\begin{tabularx}{\textwidth}{|X|r|r|r|}
+\hline
+\mcc{4}{Kosten für die Einrichtung}\\
+\hline
+Kosten-Kategorie	&	Projekt &	CommuniGate-Upgrade &	keine Änderung\\
+\hline
+Hardware &	0,00\euro{} &	0,00\euro{} &	0,00\euro{}\\
+\hline
+Softwarelizenzen &	0,00\euro{} &	1.849,00\euro{} &	0,00\euro{}\\
+\hline
+Arbeitsaufwand &	2.485,00\euro{} &	2.485,00\euro{} &	2.350,00\euro{}\\
+\hhline{|=|=|=|=|}
+Gesamt &	2.485,00\euro{} &	4.334,00\euro{} &	2.350,00\euro{}\\
+\hline
+\end{tabularx}
+
+\medskip \noindent Anmerkungen: Es wurde ein Stundenlohn von 71\euro{} angenommen. Hardwarekosten entstehen keine da alles auf Virtual Machines läuft und die Anschaffungskosten für die ESXi-Server nur schwierig auf die VMs aufzuteilen ist. Die Zusammensetzung der beiden Vergleichskostensätze findet sich in der \nameref{sec:Erwin}.
+
+\bigskip\noindent
+\begin{tabularx}{\textwidth}{|X|r|r|r|}
+\hline
+\mcc{4}{Jährliche Kosten}\\
+\hline
+Kategorie	&	Projekt &	CommuniGate-Upgrade &	keine Änderung\\
+\hline
+Hardware &	0,00\euro{} &	0,00\euro{} &	0,00\euro{}\\
+\hline
+Softwarelizenzen &	0,00\euro{} &	332,82\euro{} &	0,00\euro{}\\
+\hline
+Arbeitsaufwand &	355,00\euro{} &	213,00\euro{} &	2.350,00\euro{}\\
+\hhline{|=|=|=|=|}
+Gesamt &	355,00\euro{} &	545,82\euro{} &	2.350,00\euro{}\\
+\hline
+\end{tabularx}
+
+\medskip \noindent Anmerkungen: Der Wartungsaufwand für das Projektsystem wurde auf fünf Stunden pro Jahr geschätzt, der für einen neuen CommuniGate Server nur auf drei Stunden da Unterstützung durch den professionellen Support der Firma wird.
 
 \section{Projektabschluss}
 \subsection{Fazit}
