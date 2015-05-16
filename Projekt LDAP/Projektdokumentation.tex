@@ -37,7 +37,8 @@
 %\usepackage{pifont} %for symbols (i.e. arrows)
 %\usepackage{showframe} %shows the margins
 \usepackage{hhline} % more flexible hlines
-\usepackage{caption}
+\usepackage{graphicx}
+
 
 \usepackage[colorlinks,linkcolor=blue,pdftex]{hyperref} % package for hyperlinks with \url
 % hyperlink color definitions
@@ -178,7 +179,7 @@ Wie bereits in der \nameref{sec:Ist-Analyse} erwähnt gibt es auf Grund des Alte
 
 Die auf der Hand liegende Alternative zu der in diesem Projekt verwendeten Software wäre es eine neue CommuniGate Pro Firmenlizenz zu kaufen. Die Kosten dafür hängen bei von CommuniGate so genannten „Small Licenses“ von der Anzahl der verwalteten E-Mail-Konten ab. Momentan werden bei fgn davon 46 verwaltet, die Softwarelizenz für 50 Konten würde also in absehbarer Zeit zu knapp werden. Der Preis für eine Lizenz für 75 E-Mail-Konten (die nächstgrößere Lizenz) beträgt momentan 1.849\euro. Dazu kämen dann noch zusätzliche Kosten um alle 10-26 Monate die Lizenz zu verlängern um weiterhin Updates und Support zu erhalten. Momentan sind dies zwischen 277,35\euro{} und 721,11\euro. Und es ist nicht zu erwarten das diese Preise konstant bleiben oder fallen werden. Außerdem kommt bei der Umstellung noch ein nicht unerheblicher Arbeitsaufwand hinzu bei der Migration von der sehr veralteten Server-Version in die neue Version.
 
-Da der Gegenstand dieses Projektes neu ein Teilersatz des CommuniGate-Servers war lassen sich die Kosten leider nicht 1:1 miteinander verrechnen. Trotzdem ist als Vorteil anzurechnen das keine regelmäßigen Kosten entstehen wie es bei einer ständig erneuerten CommuniGate-Lizenz oder den Problemen nach jedem Thunderbird Update. Die Gesamtkosten des Projekts betrugen 2.485\euro{} (eine genaue Aufstellung findet sich unter \nameref{sec:Kosten}), somit amortisiert sich das Projekt gegenüber dem bisherigen Zustand innerhalb des zweiten Jahres. Verglichen mit einem Upgrade von CommuniGate amortisiert es sich erst nach zwei Jahren, aber nur wenn man den Arbeitsaufwand für das CommuniGate Upgrade außer acht läßt. Da erwartet wird, dass dieser mit dem Gesamtaufwand des Projektes vergleichbar ist, sind die Projektkosten also direkt günstiger als die Kosten für dieselbe Arbeit plus den CommuniGate Lizenzkosten.
+Da der Gegenstand dieses Projektes ein Teilersatz des CommuniGate-Servers war lassen sich die Kosten leider nicht 1:1 miteinander verrechnen. Trotzdem ist als Vorteil anzurechnen das keine regelmäßigen Kosten entstehen wie es bei einer ständig erneuerten CommuniGate-Lizenz oder den Problemen nach jedem Thunderbird Update. Die Gesamtkosten des Projekts betrugen 2.485\euro{} (eine genaue Aufstellung findet sich unter \nameref{sec:Kosten}), somit amortisiert sich das Projekt gegenüber dem bisherigen Zustand innerhalb des zweiten Jahres. Verglichen mit einem Upgrade von CommuniGate amortisiert es sich erst nach zwei Jahren, aber nur wenn man den Arbeitsaufwand für das CommuniGate Upgrade außer acht läßt. Da erwartet wird, dass dieser mit dem Gesamtaufwand des Projektes vergleichbar ist, sind die Projektkosten also direkt günstiger als die Kosten für dieselbe Arbeit plus den CommuniGate Lizenzkosten.
 
 \subsection{Vorgaben}
 \subsubsection{Wirtschaftliche Vorgaben}
@@ -253,12 +254,12 @@ Dokumentation (insgesamt 9 h)
 \subsubsection{Dokumentation der Konfiguration des zu ersetzenden Servers}\label{sec:Konfig-Doku-Alt}
 Da die Konfigurationsdateien des CommuniGate-Servers sämtliche Anwenderpasswörter im Klartext enthalten, konnte dem firmenexternen Bearbeiter dieses Projektes aus Sicherheitsgründen kein direkter Zugriff auf den Server gewährt werden. Allerdings war dies auch nur bedingt notwendig, da zum Erfassen der wichtigen Konfigurationsdetails (vornehmlich der Struktur des integrierten Verzeichnisdienstes) lediglich Zugriff auf das Webinterface des Servers (zugänglich unter Port \texttt{9010} auf dem bisherigen Server \texttt{mail.fg-networking.de}, Zugriff durch Firewall von außerhalb des Firmennetzes geblockt) notwendig war. Unter Aufsicht von Herrn Auerswald wurde ein Auszug der im Klartext gespeicherten Benutzerdaten begutachtet, vor allem der Eintrag für das Benutzerkonto des Bearbeiters da ihm dieses Passwort bereits bekannt war. Dabei fiel auf das alles in einer gut organisierten Ordnerstruktur abgelegt ist, es existiert eine Datei pro Anwender und die Daten in der Datei sind in bezeichneten Feldern abgelegt.
 
-Für das Projekt am Wichtigsten zu beachten war, dass der E-Mail-Server für 3 Domains Anwenderkonten verwaltet: \texttt{fg-networking.de}, \texttt{schabler.de} und \texttt{worden.de}. Dies musste natürlich beim Entwurf der neuen Verzeichnistruktur beachtet werden, um später die Anbindung des neuen E-Mailserver ohne unnötige erneute Umbauten am LDAP zu ermöglichen.
+Für das Projekt am Wichtigsten zu beachten war, dass der E-Mail-Server für drei Domains Anwenderkonten verwaltet: \texttt{fg-networking.de}, \texttt{schabler.de} und \texttt{worden.de}. Dies musste natürlich beim Entwurf der neuen Verzeichnistruktur beachtet werden, um später die Anbindung des neuen E-Mailserver ohne unnötige erneute Umbauten am LDAP zu ermöglichen.
 
 \subsubsection{Erstellen einer Liste aller Dienste die das bestehende Identity Management nutzen}
 Die Webtools, die den bisherigen LDAP-Server verwenden, laufen unter Apache"=Web"-servern auf den Rechnern \texttt{aio}, \texttt{nms} und \texttt{lab-mm}. Sie alle benutzen zum Abfragen von Nutzerdaten die Apache-eigenen LDAP-Module (\texttt{mod\_ldap} und \texttt{mod\_authnz\_ldap}, bzw. \texttt{mod\_auth\_ldap} auf \texttt{aio} da hier noch eine ältere Apache-Version verwendet wird). 
 
-Somit ist bei der Konfiguration aller Webserver prinzipiell dasselbe zu ändern damit später der neue Server verwendet wird. So verwenden z.B. alle den alten Server ohne SSL, weswegen zusätzlich zur neuen LDAP- Server-URI auch noch das passende CA Stammzertifkat einzutragen ist. Kopiert werden muss dieses nicht extra da es auf allen Rechnern bereits fürs servieren von HTTPS-Verbindungen installiert wurde. 
+Somit ist bei der Konfiguration aller Webserver prinzipiell dasselbe zu ändern damit später der neue Server verwendet wird. So verwenden z.B. alle den alten Server ohne SSL, weswegen zusätzlich zur neuen LDAP- Server-URI auch noch das passende CA Stammzertifkat einzutragen ist. Kopiert werden muss dieses nicht extra da es auf allen Rechnern bereits zum Bereitstellen von HTTPS-Verbindungen installiert wurde. 
 
 Oberflächlich gibt es in der Konfiguration natürlich auch Unterschiede. So haben auf \texttt{aio} mehrere Tools eigene \texttt{<Location>}-Einträge in der Konfiguration in denen jeweils der LDAP Server eingestellt ist, während es auf \texttt{nms} lediglich einen Eintrag für alle Webtools gibt. Aber diese Detailunterschiede machen keinen wirklichen Unterschied bei den später vorzunehmenden Änderungen.
 
@@ -269,7 +270,7 @@ Bei Begutachtung der Egroupware-Konfiguration im Administrationsmenü fiel auf, 
 \subsubsection{Prüfung von Möglichkeiten zum Importieren der bestehenden Anwenderkonten in die neue Lösung} \label{sec:Importsuche}
 Leider bietet CommuniGate selbst keine Funktion zum Export seiner Benutzerdaten an. Über die OpenLDAP-Utils wäre ein Auslesen der Daten möglich, in einer Form die man in das neue LDAP wieder importieren könnte. Da allerdings CommuniGate für die E-Mail betreffenden Attribute ein proprietäres LDAP-Schema benutzt wäre der Nachbearbeitungsaufwand für diese Daten sehr hoch. 
 
-Aber es sollten erst einmal nur die notwendigsten Attribute (siehe \autoref{sec:LDAP-Attribute}) übernommen werden und CommuniGate speichert die Anwenderdaten in einer mit den Standard Unix/Linux Textverarbeitungswerkzeugen (\texttt{sed}, \texttt{awk}, \texttt{cut}) vergleichsweise einfach verarbeitbaren Form. Somit stellte das Erzeugen von durch LDAP importierbaren Datensätze aus den gespeicherten Dateien von CommuniGate mit Hilfe von Skripten in diesem Fall die sinnvollste Vorgehensweise dar. Da das Entwickeln der Skripte ohne Zugriff auf die Daten umständlich gewesen wäre, hatte Herr Auerswald sich bereit erklärt, diese zu schreiben da, ihm Zugriff auf die Anwenderpasswörter erlaubt ist. Als Unterstützung bei dieser Arbeit wurde Herrn Auerswald ein Template der zu generierenden LDAP Importdaten und der Befehlsaufruf von \texttt{slappasswd} zur Verfügung gestellt. Letzteres wird in einem zweiten Skript zum passenden hashen der Passwörter verwendet, damit in den Importdaten nur noch Passwort-Hashes stehen, und diese nur noch mit geringen Datenschutz- und Sicherheitsbedenken verwendet werden können.
+Aber es sollten erst einmal nur die notwendigsten Attribute (siehe \autoref{sec:LDAP-Attribute}) übernommen werden und CommuniGate speichert die Anwenderdaten in einer mit den Standard Unix/Linux Textverarbeitungswerkzeugen (\texttt{sed}, \texttt{awk}, \texttt{cut}) vergleichsweise einfach verarbeitbaren Form. Somit stellte das Erzeugen von durch LDAP importierbaren Datensätze aus den gespeicherten Dateien von CommuniGate mit Hilfe von Skripten in diesem Fall die sinnvollste Vorgehensweise dar. Da das Entwickeln der Skripte ohne Zugriff auf die Daten umständlich gewesen wäre, hatte Herr Auerswald sich bereit erklärt, diese zu schreiben da, ihm Zugriff auf die Anwenderpasswörter erlaubt ist. Als Unterstützung bei dieser Arbeit wurde Herrn Auerswald ein Template der zu generierenden LDAP Importdaten und der Befehlsaufruf von \texttt{slappasswd} zur Verfügung gestellt. Letzteres wird in einem zweiten Skript zum passenden hashen der Passwörter verwendet, damit in den Importdaten nur noch Passwort-Hashes stehen, und diese mit nur noch geringen Datenschutz- und Sicherheitsbedenken verwendet werden können.
 
 \subsection{Installation und Einrichtung des neuen Servers}
 \subsubsection{Grundinstallation des Linux Systems des neuen Servers}
@@ -288,7 +289,12 @@ Der Ansatz für die alternative Verzeichnisstruktur basierte u.a. darauf wie LDA
 
 Die oberste Ebene der Verzeichnisstruktur (die \texttt{de}-Wurzel) wurde mit Hilfe des Debian-Konfigurationsskripts erstellt. Dabei wurden neben den vier Schema der Debian Standardkonfiguration (\texttt{core}, \texttt{cosine}, \texttt{nis} und \texttt{inetorgperson}) zusätzlich das \texttt{freeradius}-Schema aus dem \texttt{freeradius}-Paket (siehe \nameref{sec:RADIUS-Konf}) und ein \texttt{postfix}-Schema (aus den Galileo Press Praxisbuch zu OpenLDAP 2.4) verwendet (Erläuterungen zu den Schema siehe \autoref{sec:LDAP-Schema}). Die erste Ebene wurde dann mit \texttt{slapadd} angelegt und die Grundstruktur darunter mit \texttt{ldapadd} erstellt (genaue Beschreibung der verwendeten LDAP Data Interchange Format (LDIF)-Dateien siehe \autoref{sec:Erstelle-DB}).
 
-\hilight{TODO: Graph der endgültigen Verzeichnisstruktur}
+\begin{figure}[htbp] 
+\centering
+\includegraphics[width=\textwidth]{LDAP-fgn.pdf}
+\caption{Der fertige LDAP-Verzeichnibaum}
+\label{fig:LDAP-Baum}
+\end{figure}
 
 \subsubsection{Installation und Konfiguration des RADIUS-Servers}\label{sec:RADIUS-Konf}
 Auf dem Server wurden die Pakete \texttt{freeradius} und \texttt{freeradius-ldap} sowie -- zu Testzwecken -- das Paket \texttt{freeradius-utils} installiert. In den Konfigurationsdateien wurde dann LDAP als mögliche Quelle für Benutzerdaten eingetragen, die LDAP-Module aktiviert und der Zugriff durch die E-Mail-Server der TU Kaiserslautern erlaubt. Zusätzlich musste das zu dem TU E-Mail-Servern gehörende Shared Secret eingetragen werden, welches aus den Konfigurationsdateien von CommuniGate übernommen wurde, da es nicht in der firmeninternen Dokumentation festgehalten war. Näheres zur Konfiguration siehe \autoref{sec:RADIUS-Konfig}
@@ -344,9 +350,9 @@ Hardware &	0,00\euro{} &	0,00\euro{} &	0,00\euro{}\\
 \hline
 Softwarelizenzen &	0,00\euro{} &	1.849,00\euro{} &	0,00\euro{}\\
 \hline
-Arbeitsaufwand &	2.485,00\euro{} &	2.485,00\euro{} &	2.350,00\euro{}\\
+Arbeitsaufwand &	2.485,00\euro{} &	2.485,00\euro{} &	0,00\euro{}\\
 \hhline{|=|=|=|=|}
-Gesamt &	2.485,00\euro{} &	4.334,00\euro{} &	2.350,00\euro{}\\
+Gesamt &	2.485,00\euro{} &	4.334,00\euro{} &	0,00\euro{}\\
 \hline
 \end{tabularx}
 
