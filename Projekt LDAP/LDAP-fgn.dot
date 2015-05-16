@@ -1,0 +1,16 @@
+graph G {
+  de [label="dc=de"];
+  fgn [label="dc=fg-networking", style="filled", fillcolor="gainsboro", width=2.15];
+  schabler [label="dc=schabler", style="filled", fillcolor="gainsboro", width=2.15];
+  worden [label="dc=worden", style="filled", fillcolor="gainsboro", width=2.15];
+  people1 [label="ou=people", style="filled", fillcolor="grey52"];
+  people2 [label="ou=people", style="filled", fillcolor="grey52"];
+  people3 [label="ou=people", style="filled", fillcolor="grey52"];
+  fgnpe [label=". . .", shape="plaintext"];
+  schabpe [label=". . .", shape="plaintext"];
+  wordpe [label=". . .", shape="plaintext"];
+  de -- {fgn schabler worden};
+  fgn -- people1 -- fgnpe;
+  schabler -- people2 -- schabpe;
+  worden -- people3 -- wordpe;
+  }
