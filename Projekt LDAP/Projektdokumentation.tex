@@ -297,7 +297,7 @@ Nach der Grundinstallation wurde im neuen System dann die Pakete \texttt{slapd} 
 
 \noindent Um in einem LDAP Verzeichnis neue Attribute zu definieren, gibt es sogenannte Schema (eigener Ausdruck, nicht zu verwechseln mit Schema/Schemata). CommuniGate verwendet zum Verwalten der E-Mail-Anwenderdaten ein eigenes proprietäres LDAP-Schema um die Daten in selbst definierten Attributen zu speichern. Diese Attribute können somit nicht ins neue LDAP übernommen werden, ohne verschiedene Implementierungsentscheidungen für den neuen E-Mailserver zu kennen. Da dieser zur Bearbeitungszeit dieses Projektes noch nicht weit genug fortgeschritten war, um eine Absprache zu ermöglichen wurde entschieden, erst einmal nur die wichtigsten Attribute zu übernehmen und die E-Mail Attribute später anzupassen. Dies wird sehr wahrscheinlich auch wieder mittels per Skript generierten Datensätzen möglich sein und stellt somit einen vertretbar geringen Mehraufwand für die E-Mail Server-Einrichtung dar.
 
-Weiterhin musste die neue Verzeichnisstruktur berücksichtigen, dass mehrere voneinander unabhängige Namensräume (die drei in \nameref{sec:Konfig-Doku-Alt} erwähnten E-Mail Domains) zu verwalten sind. Das bedeutet, dass in den Domains Konten mit derselben \texttt{UID} vorhanden sein können, die aber voneinander unabhängig sind. Der erste Ansatz dazu war jeder der drei Domains eine eigene Datenbank (im Sinne von getrennten Dateien, die von einem LDAP-Server verwaltet werden) zu geben. Allerdings ließen sich in verschiedenen Versuchen die Datenbänke zwar anlegen, jedoch war ein Zugriff auf sie nicht möglich (getestet wurde dies mit entsprechenden \texttt{ldapsearch}-Aufrufen). Da sich u.a. wegen den eher unpraktischen Logleveln (siehe \autoref{sec:LDAP-Loglevel} von OpenLDAP das genaue Problem mit dieser Vorgehensweise nicht lokalisieren ließ, musste eine andere Struktur ersonnen werden.
+Weiterhin musste die neue Verzeichnisstruktur berücksichtigen, dass mehrere voneinander unabhängige Namensräume (die drei in \nameref{sec:Konfig-Doku-Alt} erwähnten E-Mail Domains) zu verwalten sind. Das bedeutet, dass in den Domains Konten mit derselben \texttt{UID} vorhanden sein können, die aber voneinander unabhängig sind. Der erste Ansatz dazu war jeder der drei Domains eine eigene Datenbank (im Sinne von getrennten Dateien, die von einem LDAP-Server verwaltet werden) zu geben. Allerdings ließen sich in verschiedenen Versuchen die Datenbänke zwar anlegen, jedoch war ein Zugriff auf sie nicht möglich (getestet wurde dies mit entsprechenden \texttt{ldapsearch}-Aufrufen). Da sich u.a. wegen den eher unpraktischen Log-Leveln (siehe \autoref{sec:LDAP-Loglevel} von OpenLDAP das genaue Problem mit dieser Vorgehensweise nicht lokalisieren ließ, musste eine andere Struktur ersonnen werden.
 
 Der Ansatz für die alternative Verzeichnisstruktur basierte u.a. darauf wie LDAP mit Domainnamen umgeht: sie werden an den Trennzeichen (hier: Punkte) in einzelne Domain Component (LDAP-Bezeichnung \texttt{dc}) zerlegt. Da alle drei Domainnamen mit \texttt{.de} enden, konnte \texttt{dc=de} als Wurzel des Baumes der hierarchischen LDAP Verzeichnisstruktur verwendet werden. In der ersten Ebene unter der Wurzel verzweigt dieser Baum dann in die drei Domain Components  \texttt{fg-networking.de}, \texttt{schabler.de} und \texttt{worden.de}. Da Objektnamen von ihrem vollen Kontext (quasi ihrem Pfad im Baum) abhängen, sind auch in diesem Modell drei unabhängige Namensräume gewährleistet. In den Domains \texttt{schabler.de} und \texttt{worden.de} sind nur relativ wenige Benutzerkonten hinterlegt (weniger als 10 Konten pro Domain) und beide Domains haben auch keinen eigenen Administrator (sie werden von fgn mit administriert). Daher gibt es auch keine Bedenken hinsichtlich Datenschutz und Performance wenn sich alle Domains in einer gemeinsamen Datenbank befindet. In der nächsten Ebene wurde dann jeweils eine Organizational Unit (\texttt{OU}) namens \texttt{people} angelegt in die dann die Benutzerkonten eingeordnet werden. Die \texttt{people}-\texttt{OU} wurde eingezogen um zukünftig auch andere Kontentypen wie z.B. Rechnerkonten in LDAP ablegen zu können, ohne dessen Verzeichnisstruktur grundlegend ändern zu müssen, um eine Unterscheidung der Konten zu erhalten.
 
@@ -370,7 +370,7 @@ Gesamt &	2.485,00\euro{} &	4.334,00\euro{} &	0,00\euro{}\\
 \hline
 \end{tabularx}
 
-\medskip \noindent Anmerkungen: Es wurde ein Stundenlohn von 71\euro{} angenommen. Hardwarekosten entstehen keine da alles auf Virtual Machines läuft und die Anschaffungskosten für die ESXi-Server nur schwierig auf die VMs aufzuteilen ist. Die Zusammensetzung der beiden Vergleichskostensätze findet sich in der \nameref{sec:Erwin}.
+\medskip \noindent Anmerkungen: Es wurde ein Stundenlohn von 71\euro{} angenommen. Hardwarekosten entstehen keine da alles auf Virtual Machines läuft und die Anschaffungskosten für die ESXi-Server nur schwierig auf die VMs aufzuteilen ist.
 
 \bigskip\noindent
 \begin{tabularx}{\textwidth}{|X|r|r|r|}
@@ -389,7 +389,7 @@ Gesamt &	355,00\euro{} &	545,82\euro{} &	2.350,00\euro{}\\
 \hline
 \end{tabularx}
 
-\medskip \noindent Anmerkungen: Der Wartungsaufwand für das Projektsystem wurde auf fünf Stunden pro Jahr geschätzt, der für einen neuen CommuniGate Server nur auf drei Stunden da Unterstützung durch den professionellen Support von CommuniGate in den Lizenzkosten enthalten ist.
+\medskip \noindent Anmerkungen: Der Wartungsaufwand für das Projektsystem wurde auf fünf Stunden pro Jahr geschätzt, der für einen neuen CommuniGate Server nur auf drei Stunden da Unterstützung durch den professionellen Support von CommuniGate in den Lizenzkosten enthalten ist. Die Zusammensetzung der beiden Vergleichskostensätze findet sich in der \nameref{sec:Erwin}.
 
 \section{Projektabschluss}
 \subsection{Fazit}
@@ -416,6 +416,8 @@ fgn hat neben den diversen Linux-Rechnern auch noch 2 Windows-PCs in der Verwalt
 \item Informationen zur Entwicklung von LDAP aus \url{http://de.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol#Geschichte}
 \item Homepage des OpenLDAP-Projekts: \url{http://www.openldap.org/}
 \item Homepage des FreeRADIUS-Projekts: \url{http://freeradius.org/}
+\item
+\item OpenLDAP Log-Level: \url{http://www.openldap.org/doc/admin24/runningslapd.html}
 \end{itemize}
 %\hilight{TODO: Quellen auflisten}
 
@@ -447,7 +449,7 @@ fgn hat neben den diversen Linux-Rechnern auch noch 2 Windows-PCs in der Verwalt
 \end{itemize}
 
 \newpage
-\section{Erklärung der OpenLDAP Loglevel} \label{sec:LDAP-Loglevel}
+\section{Erklärung der OpenLDAP Log-Level} \label{sec:LDAP-Loglevel}
 \begin{tabularx}{\textwidth}{|c|l|X|}
 \hline
 Level &	Keyword &	Description\\
@@ -485,9 +487,11 @@ Level &	Keyword &	Description\\
 32768 &	(0x8000 none) &	only messages that get logged whatever log level is set \\
 \hline
 \end{tabularx}
-\noindent Quelle: \url{http://www.openldap.org/doc/admin24/runningslapd.html}
 
-\noindent\hilight{TODO: Übersetzung der Log Erklärung}
+\bigskip
+\noindent Um Log-Level einzustellen kann man entweder die entsprechende Zahl aus der ersten Spalte, den Hex-Wert oder das Schlüsselwort aus Spalte 2 verwenden. Werden die Zahlen aus Spalte 1 verwendet kann man mehrere Log-Level gleichzeitig auswählen indem man ihre Wert miteinander addiert.
+
+Zum debuggen der Probleme die bei der Durchführung des Projekts auftraten erwiesen sich die meisten der Zusatzausgaben als ungeeignet, lediglich die Traces der Level 1 (0x1 trace) und 4 (0x4 args) konnten weiterhelfen, enthielten aber auch keine weiterführenden Informationen bei Problemen mit dem Zugriff auf die Verzeichnis-Datenbank.
 
 \newpage
 \section{Erläuterungen zu den verwendeten LDAP Schemas}\label{sec:LDAP-Schema}
