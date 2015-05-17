@@ -9,6 +9,7 @@ Discovered open port 636/tcp on 131.246.197.6
 Completed SYN Stealth Scan at 15:49, 12.96s elapsed (65535 total ports)
 Nmap scan report for id.fg-networking.de (131.246.197.6)
 Host is up (0.000034s latency).
+rDNS record for 131.246.197.6: gaf-nat-core1.fg-networking.de
 Not shown: 65533 closed ports
 PORT    STATE SERVICE
 22/tcp  open  ssh
