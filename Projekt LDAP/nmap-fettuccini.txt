@@ -1,0 +1,17 @@
+
+Starting Nmap 6.47 ( http://nmap.org ) at 2015-05-17 23:32 CEST
+Initiating Parallel DNS resolution of 1 host. at 23:32
+Completed Parallel DNS resolution of 1 host. at 23:32, 0.00s elapsed
+Initiating Connect Scan at 23:32
+Scanning id.fg-networking.de (131.246.197.6) [1000 ports]
+Discovered open port 22/tcp on 131.246.197.6
+Completed Connect Scan at 23:33, 23.13s elapsed (1000 total ports)
+Nmap scan report for id.fg-networking.de (131.246.197.6)
+Host is up (0.0011s latency).
+rDNS record for 131.246.197.6: gaf-nat-core1.fg-networking.de
+Not shown: 999 filtered ports
+PORT   STATE SERVICE
+22/tcp open  ssh
+
+Read data files from: /usr/bin/../share/nmap
+Nmap done: 1 IP address (1 host up) scanned in 23.21 seconds
