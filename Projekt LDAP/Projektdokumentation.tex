@@ -20,8 +20,6 @@
 % \geometry{landscape} % set up the page for landscape
 %   read geometry.pdf for detailed page layout information
 
-\usepackage{tocstyle}
-
 % \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
 
 %%% PACKAGES
@@ -108,6 +106,19 @@ numbers=none,                    % where to put the line-numbers; possible value
 
 %%% END Article customizations
 
+\newcommand{\titel}{OpenLDAP- und FreeRADIUS-Server}
+\newcommand{\untertitel}{Aufsetzen eines Identity Managment-Servers als Ersatz eines veralteten CommuniGate Servers}
+
+\newcommand{\autor}{Sebastian Deußer}
+\newcommand{\kompletterTitel}{\titel{} -- \untertitel}
+\newcommand{\pruefungstermin}{Sommer 2015}
+\newcommand{\ort}{Ludwigshafen}
+\newcommand{\abgabetermin}{18. Mai 2015}
+\newcommand{\ausbildungsberuf}{Fachinformatiker -- Systemintegration}
+\newcommand{\betreff}{Dokumentation zur betrieblichen Projektarbeit}
+\newcommand{\logoti}{ti-Logos/url.png}
+\newcommand{\logofgn}{fgn-logos/logo_fgn}
+
 %%% The "real" document content comes below...
 
 \titlehead{taylorix institut für berufliche Bildung e.V.}
@@ -119,6 +130,7 @@ numbers=none,                    % where to put the line-numbers; possible value
 
 \begin{document}
 \pagestyle{empty}
+\include{Deckblatt}
 \maketitle %title (page)
 
 \tableofcontents
@@ -291,7 +303,7 @@ Die oberste Ebene der Verzeichnisstruktur (die \texttt{de}-Wurzel) wurde mit Hil
 
 \begin{figure}[htbp] 
 \centering
-\includegraphics[width=\textwidth]{LDAP-fgn.pdf}
+\includegraphics[width=\textwidth]{Bilder/LDAP-fgn.pdf}
 \caption{Der fertige LDAP-Verzeichnibaum}
 \label{fig:LDAP-Baum}
 \end{figure}
