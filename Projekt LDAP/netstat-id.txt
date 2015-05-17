@@ -1,0 +1,17 @@
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       User       Inode       PID/Program name
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      0          12057       574/sshd        
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      0          12187       754/master      
+tcp        0      0 0.0.0.0:636             0.0.0.0:*               LISTEN      0          12123       757/slapd       
+tcp        0      0 127.0.0.1:389           0.0.0.0:*               LISTEN      0          12120       757/slapd       
+tcp6       0      0 :::22                   :::*                    LISTEN      0          12066       574/sshd        
+tcp6       0      0 ::1:25                  :::*                    LISTEN      0          12188       754/master      
+tcp6       0      0 :::636                  :::*                    LISTEN      0          12124       757/slapd       
+udp        0      0 0.0.0.0:27070           0.0.0.0:*                           0          10948       511/dhclient    
+udp        0      0 0.0.0.0:37831           0.0.0.0:*                           106        12647       766/freeradius  
+udp        0      0 0.0.0.0:68              0.0.0.0:*                           0          11392       511/dhclient    
+udp        0      0 127.0.0.1:18120         0.0.0.0:*                           106        12645       766/freeradius  
+udp        0      0 0.0.0.0:1812            0.0.0.0:*                           106        12643       766/freeradius  
+udp        0      0 0.0.0.0:1813            0.0.0.0:*                           106        12644       766/freeradius  
+udp        0      0 0.0.0.0:1814            0.0.0.0:*                           106        12646       766/freeradius  
+udp6       0      0 :::17846                :::*                                0          10949       511/dhclient    
