@@ -63,9 +63,9 @@ numbers=none,                    % where to put the line-numbers; possible value
 %numbersep=5pt,                   % how far the line-numbers are from the code
 %numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
 %rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
-%showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
-%showstringspaces=false,          % underline spaces within strings only
-%showtabs=false,                  % show tabs within strings adding particular underscores
+showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+showstringspaces=false,          % underline spaces within strings only
+showtabs=false,                  % show tabs within strings adding particular underscores
 %stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
 %stringstyle=\ttfamily\color{red},     % string literal style
 %tabsize=2,                       % sets default tabsize to 2 spaces
@@ -109,7 +109,7 @@ numbers=none,                    % where to put the line-numbers; possible value
 %%% END Article customizations
 
 \newcommand{\titel}{OpenLDAP- und FreeRADIUS-Server}
-\newcommand{\untertitel}{Aufsetzen eines Identity Managment-Servers als Ersatz eines veralteten CommuniGate Servers}
+\newcommand{\untertitel}{Aufsetzen eines Identity Management-Servers als Ersatz eines veralteten CommuniGate Servers}
 
 \newcommand{\autor}{Sebastian Deußer}
 \newcommand{\kompletterTitel}{\titel{} -- \untertitel}
@@ -141,15 +141,15 @@ numbers=none,                    % where to put the line-numbers; possible value
 \pagestyle{scrheadings}
 
 \section{Einleitung}
-In den meisten Firmennetzwerken wird eine zentrale Stelle benötigt um verschiedene Anwender-Metadaten zu verwalten. Für diese Aufgabe wird üblicherweise ein Verzeichnisdienst verwendet. Basis eines Verzeichnisdienstes ist eine hierarchische Datenbank, die im Netzwerk verteilt angelegt sein kann. In dieser Datenbank können Daten zu verschiedenen Objekten abgelegt werden, wie etwa Konfigurationsdaten für Rechner oder diverse Daten für Anwender wie z.B. Name, Passwort, E-Mail-Konto, Gruppenzugehörigkeiten usw.. Die Anforderungen an einen Verzeichnisdienst wurden in den 80er Jahren von der International Telecommunication Union in der X.500-Spezifikation festgeschrieben, nachdem weltweit Telekommunikationsunternehmen jahrzehntelang Praxiserfahrungen mit dem Thema bei Erstellung und Verwaltung von Telefon-Verzeichnissen sammelten und diese zur Spezifikation beisteuerten.
+In den meisten Firmennetzwerken wird eine zentrale Stelle benötigt um verschiedene Anwender-Metadaten zu verwalten. Für diese Aufgabe wird üblicherweise ein Verzeichnisdienst verwendet. Basis eines Verzeichnisdienstes ist eine hierarchische Datenbank, die im Netzwerk verteilt angelegt sein kann. In dieser Datenbank können Daten zu verschiedenen Objekten abgelegt werden, wie etwa Konfigurationsdaten für Rechner oder diverse Daten für Anwender wie z.B. Name, Passwort, E-Mail-Konto, Gruppenzugehörigkeiten usw.. Die Anforderungen an einen Verzeichnisdienst wurden in den 80er Jahren von der International Telecommunication Union in der X.500-Spezifikation festgeschrieben, nachdem weltweit Telekommunikationsunternehmen jahrzehntelang Praxiserfahrungen mit dem Thema bei Erstellung und Verwaltung von Telefon"=Verzeichnissen sammelten und diese zur Spezifikation beisteuerten.
 
 In der Praxis stellte es sich als unpraktikabel für so gut wie alle Firmen -- abgesehen von den großen Telekommunikationsunternehmen -- heraus, die gesamte X.500-Spezifikation zu umzusetzen, da dies einen hohen Implementierungsaufwand darstellt und der Betrieb sehr hardwareintensiv ist. Deswegen wurde an der Universität von Michigan 1993 LDAP (Lightweight Directory Access Protocol) entwickelt welches ursprünglich als schlanke Alternative zum DAP (Directory Access Protocol) dienen sollte. DAP wurde traditionell zum Zugriff auf X.500-Verzeichnisse verwendet. Der Ansatz von LDAP war, den Zugriff durch den TCP/IP Protokollstapel zur ermöglichen, womit weit weniger Aufwand verbunden ist als es bei der kompletten Implementierung aller OSI-Schichten, wie es bei DAP der Fall ist. Heutzutage ist LDAP das verbreitetste Protokoll zur Abfrage von Verzeichnisdiensten, u.a. auch da TCP/IP-basierte Netzwerke in Firmennetzwerken der am häufigsten eingesetzte Netzwerktyp ist, und natürlich wegen dem wie beabsichtigt bedeutend geringerem mit LDAP verbundenen Aufwand. LDAP wird in vielen Anwendungen eingesetzt, vor allem im Adressbuchteil der meisten E-Mail-Clients wie z.B. Apple Adressbuch, Microsoft Outlook und Mozilla Thunderbird und in Verzeichnisdiensten wie z.B. Microsoft Active Directory Services, Apple Open Directory und dem aussterbenden Pionier Novell eDirectory. Wie viele Protokolle ist LDAP Client/Server-basiert.
 
 In diesem Projekt wurde OpenLDAP verwendet. Dies ist die am weitesten verbreitete freie Open Source-Implementierung des Netzwerkstandards und steht unter einer eigenen freien Lizenz, der OpenLDAP Public License. OpenLDAP ist außerdem die Referenzimplementierung des Standards, weswegen es in vielen Belangen (z.B. bei Schema-Dateien) mehr auf Protokollkonformität achtet als andere Implementierungen. Im OpenLDAP Projekt ist nicht nur der Serverm der das Abfrageprotokoll zur Verfügung stellt enthalten, sondern auch ein Verzeichnisdienst. Es ist somit für viele Anwendungsfälle eine kostengünstige Lösung zum Aufbau eines Verzeichnisdienstes.
 
-RADIUS (Remote Authentication Dial-In User Service) ist ebenfalls ein Client/Server-basiertes Protokoll zur Authentifizierung, Autorisierung und zum Accounting (AAA-System) von Benutzern bei Einwahlverbindungen zu Netzwerken. RADIUS stellt den de-facto-Standard zur zentralen Authentifizierung von Einwahlverbindungen wie z.B. über ISDN, DSL und WLAN (über IEEE 802.1X) dar. Üblicherweise ist ein RADIUS-Server an einen Verzeichnisdienst angebunden, um von diesem die Benutzerdaten für die Authentifizierung und Autorisierung (und teilweise auch Accounting) abzufragen.
+RADIUS (Remote Authentication Dial-In User Service) ist ebenfalls ein Client/Server-basiertes Protokoll zur Authentifizierung, Autorisierung und zum Accounting (AAA"=System) von Benutzern bei Einwahlverbindungen zu Netzwerken. RADIUS stellt den de-facto-Standard zur zentralen Authentifizierung von Einwahlverbindungen wie z.B. über ISDN, DSL und WLAN (über IEEE 802.1X) dar. Üblicherweise ist ein RADIUS-Server an einen Verzeichnisdienst angebunden, um von diesem die Benutzerdaten für die Authentifizierung und Autorisierung (und teilweise auch Accounting) abzufragen.
 
-Hier wurde FreeRADIUS verwendet, der -- laut Aussage des Projektes -- weltweit verbreitetste RADIUS-Server. Das freie Open Source-Projekt unter der GPLv2-Lizenz umfasst neben dem RADIUS Server außerdem eine PAM-Bibliothek, ein Apache-Webserver-Modul und eine Client-Bibliothek (im Gegensatz zum Rest des Projektes steht diese unter der BSD-Lizenz).
+Hier wurde FreeRADIUS verwendet, der -- laut Aussage des Projektes -- weltweit verbreitetste RADIUS-Server. Das freie Open Source-Projekt unter der GPLv2-Lizenz umfasst neben dem RADIUS Server außerdem eine PAM-Bibliothek, ein Apache"=Webserver"=Modul und eine Client-Bibliothek (im Gegensatz zum Rest des Projektes steht diese unter der BSD-Lizenz).
 
 \section{Projektbeschreibung}
 \subsection{Projektumfeld}
@@ -416,7 +416,8 @@ fgn hat neben den diversen Linux-Rechnern auch noch 2 Windows-PCs in der Verwalt
 \item Informationen zur Entwicklung von LDAP aus \url{http://de.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol#Geschichte}
 \item Homepage des OpenLDAP-Projekts: \url{http://www.openldap.org/}
 \item Homepage des FreeRADIUS-Projekts: \url{http://freeradius.org/}
-\item
+\item Oliver Liebel, John Martin Ungar - OpenLDAP 2.4: das Praxisbuch (2009, Galileo Computing)
+\item Jonathan Hassel - RADIUS (2003, O'Reilly)
 \item OpenLDAP Log-Level: \url{http://www.openldap.org/doc/admin24/runningslapd.html}
 \end{itemize}
 %\hilight{TODO: Quellen auflisten}
@@ -493,7 +494,18 @@ Level &	Keyword &	Description\\
 
 Zum debuggen der Probleme die bei der Durchführung des Projekts auftraten erwiesen sich die meisten der Zusatzausgaben als ungeeignet, lediglich die Traces der Level 1 (0x1 trace) und 4 (0x4 args) konnten weiterhelfen, enthielten aber auch keine weiterführenden Informationen bei Problemen mit dem Zugriff auf die Verzeichnis-Datenbank.
 
-Wenn wie in diesem Projekt ein OpenLDAP-Server mit einem \texttt{slapd.d}-Konfigurationsverzeichnis statt einer \texttt{slapd.conf}-Konfigurationsdatei verwendet wird muss man wie sämtliche andere Einstellungen auch den Log-Level über eine
+Wenn wie in diesem Projekt ein OpenLDAP-Server mit einem \texttt{slapd.d}"=Konfigurationsverzeichnis statt einer \texttt{slapd.conf}"=Konfigurationsdatei verwendet wird, muss man, wie sämtliche anderen Einstellungen auch, den Log-Level über eine vorbereitete Datei und \texttt{ldapmodify} verändern. Eine entsprechende Datei sieht wie folgt aus:
+\begin{lstlisting}
+dn: cn=config
+changetype: modify
+replace: olcLogLevel
+olcLogLevel: 5
+\end{lstlisting}
+Diese Datei würde den Log-Level auf 5 setzen. Der entsprechende \texttt{ldapmodify}-Aufruf ist dann:
+\begin{lstlisting}
+ldapmodify -Y EXTERNAL -H ldapi:/// -f olcLogLevel.ldif
+\end{lstlisting}
+
 
 \newpage
 \section{Erläuterungen zu den verwendeten LDAP Schemas}\label{sec:LDAP-Schema}
@@ -535,7 +547,7 @@ Diese wird (nachdem man den LDAP daemon slapd gestoppt hat) in die Datenbank ein
 \begin{lstlisting}
 slapadd -n 1 -l add_DNs.ldif
 \end{lstlisting}
-(Der Content wird hier mit \texttt{slapadd} eingefügt da dies der einfachste Weg ist um dcObjects in der LDAP Datenbank zu erstellen. Für die meisten anderen Datenmanipulationen ist ldapmodify die sicherere und sauberere Variante). Danach kann (und muss man für den nächsten Schritt auch) man \texttt{slapd} wieder starten.
+Der Content wird hier mit \texttt{slapadd} eingefügt da dies der einfachste Weg ist um dcObjects in der LDAP Datenbank zu erstellen. Für die meisten anderen Datenmanipulationen ist ldapmodify die sicherere und sauberere Variante. Danach kann man (und muss für den nächsten Schritt auch) \texttt{slapd} wieder starten.
 
 Als nächstes wurden die \texttt{people} organizationalUnits erzeugt, in die alle User Einträge kommen sollen (da wir vor der Fertigstellung des neuen Mailservers nur echte Anwenderaccounts migrieren (keine Mailinglisten Accounts u.ä.) ist dies auch erstmal die einzige benötigte OU). Zum Erzeugen der OUs wurde wieder eine LDIF Datei (\texttt{add\_content.ldif}) erstellt.
 \begin{lstlisting}
@@ -569,14 +581,18 @@ userPassword: password
 \end{lstlisting}
 
 \newpage
-\section{Skript zum Auslesen der Anwenderkonten aus den CommuniGate Dateien}\label{sec:SkriptA}
+\section{Skript zum Auslesen der Anwenderkonten aus den CommuniGate-Dateien}\label{sec:SkriptA}
 \lstinputlisting[language=sh]{cg_accounts_to_ldap.sh}
-\hilight{TODO: Erklärung}
+Dieses Skript liest die Klartext-Dateien von CommuniGate aus und wandelt diese in das passende Format für \texttt{ldapmodify} um. Dazu werden die entsprechende Daten in das am Ende von \autoref{sec:Erstelle-DB} Template eingetragen. Das Ganze wird in eine Datei geschrieben, jeder Datensatz getrennt durch eine Leerzeile.
+
+Abdruck des Skript mit freundlicher Genehmigung von fgn und dem Autor Erik Auerswald.
 
 \newpage
 \section{Skript zum Hashen der Anwenderpasswörter}\label{sec:SkriptB}
 \lstinputlisting[language=sh]{hash_passwords.sh}
-\hilight{TODO: Erklärung}
+Dieses Skript wandelt die Klartext-Passwörter in der mit dem Skript aus \autoref{sec:SkriptA} mit Hilfe von \texttt{slappasswd} in von OpenLDAP importierbare Passwort-Hashes umgewandelt.
+
+Abdruck des Skript mit freundlicher Genehmigung von fgn und dem Autor Erik Auerswald.
 
 \newpage
 \section{Konfiguration des FreeRADIUS Servers}\label{sec:RADIUS-Konfig}
@@ -622,7 +638,7 @@ To                         Action      From
 \begin{itemize}
 \item SSH (Port \texttt{22}) ist wie bei Servern bei fgn üblich von sämtlichen Quellrechnern erlaubt (IPv4 und IPv6)
 \item LDAPS (Port \texttt{636}) ist aus dem fgn-Subnetz (\texttt{131.246.197.0/25}) und dem privaten Infrastruktur-Netz von fgn (\texttt{10.122.0.0/16})
-\item RADIUS (Port \texttt{1812} ist der gerenelle Port des FreeRADIUS-Daemons und Port \texttt{1813} ist der Port für Accounting) sind zugelassen für Verbindungen aus dem fgn-Subnetz (\texttt{131.246.197.0/25}), dem privaten Infrastruktur-Netz von fgn (\texttt{10.122.0.0/16}), den TU E-Mail-Servern \texttt{131.246.120.208/28} und dem RADIUS-Server der TU \texttt{131.246.5.14}. Der RADIUS-Proxy Port \texttt{1814} wurde hier nicht gebraucht weswegen keine Verbindungen zu ihn friegeschaltet wurden.
+\item RADIUS (Port \texttt{1812} ist der gerenelle Port des FreeRADIUS-Daemons und Port \texttt{1813} ist der Port für Accounting) ist zugelassen für Verbindungen aus dem öffentlichen fgn"=Subnetz (\texttt{131.246.197.0/25}), dem privaten fgn"=Infrastruktur"=Netz (\texttt{10.122.0.0/16}), den TU E-Mail-Servern \texttt{131.246.120.208/28} und dem RADIUS-Server der TU \texttt{131.246.5.14}. Der RADIUS-Proxy Port \texttt{1814} wurde hier nicht gebraucht weswegen keine Verbindungen zu ihn friegeschaltet wurden.
 \end{itemize}
 Die Firewall-Regeln wurden nach Vorbild der Regeln für den CommuniGate Server erstellt.
 
@@ -673,10 +689,11 @@ OpenVPN muss neu gestartet werden, um die geänderte Konfigurationsdatei anzuwen
 
 \newpage
 \section{Ergebnis eines fgn internen NMAP Tests}\label{sec:NMAP-Test-int}
-\hilight{TODO: Testlog einfügen und erläutern}
+\lstinputlisting{nmap-id.txt}
+
 \newpage
 \section{Ergebnis eines externen NMAP Tests}\label{sec:NMAP-Test-ext}
-\hilight{TODO: Testlog einfügen und erläutern}
-\newpage
+\lstinputlisting{nmap-fettuccini.txt}
+
 
 \end{document}
