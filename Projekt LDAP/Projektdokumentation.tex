@@ -41,10 +41,10 @@
 \usepackage[colorlinks,linkcolor=blue,pdftex]{hyperref} % package for hyperlinks with \url
 % hyperlink color definitions
 %\hypersetup{citecolor=DeepPink4}
-%\hypersetup{linkcolor=DarkRed}
-%\hypersetup{urlcolor=DarkBlue} 
+\hypersetup{linkcolor=DarkBlue}
+\hypersetup{urlcolor=DarkRed} 
 
-%\usepackage[svgnames]{xcolor}
+\usepackage[svgnames]{xcolor}
 %\usepackage[anythingbreaks]{breakurl}
 \usepackage{listings}
 \lstset{ %
@@ -80,8 +80,10 @@ numbers=none,                    % where to put the line-numbers; possible value
 \usepackage[automark]{scrlayer-scrpage} %header and footer definitions
 \setkomafont{pageheadfoot}{\normalfont\normalcolor} %um kursiv abzuschalten in header/footer
 \ihead{}
+\ihead{\includegraphics[scale=0.1]{\logoti}}
 \chead{\headmark}
 \ohead{}
+\ohead{\includegraphics[scale=0.17]{fgn-logos/logo_fgn_head.png}}
 \ifoot{Sebastian Deußer}
 \cfoot{}
 \ofoot{Seite \pagemark}
@@ -407,13 +409,27 @@ Eine weitere für fgn attraktive Erweiterungsmöglichkeit ist das Anbinden der M
 fgn hat neben den diversen Linux-Rechnern auch noch 2 Windows-PCs in der Verwaltung, sowie einige an den Schulungslaboren angeschlossene virtuelle Windows-Rechner. Für diese könnte man mit Samba 4 eine kleine Active Directory-Domäne aufbauen die an den OpenLDAP Server angebunden wird. Allerdings benötigt Samba 4 inzwischen ein eigenes LDAP (dies wird für Replikationsfunktionen benötigt) und lässt sich somit nur umständlich an das nun bestehende LDAP anbinden. Dieser Erweiterungsmöglichkeit stellt -- von den bisher genannten -- für fgn die unattraktivste dar, da der Aufwand recht hoch wäre und es nur wenige Windowsrechner gibt die davon tatsächlich profitieren würden.
 
 \newpage
-\section*{Quellen}
-\addcontentsline{toc}{section}{Quellen}
+\addsec{Quellen}
+%\addcontentsline{toc}{section}{Quellen}
 \begin{itemize}
 \item Deckblattvorlage von \url{http://f.macke.it/LaTeXVorlageFIAE} unter Creative Commons
-\item 
+\item Informationen zur Entwicklung von LDAP aus \url{http://de.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol#Geschichte}
+\item Homepage des OpenLDAP-Projekts: \url{http://www.openldap.org/}
+\item Homepage des FreeRADIUS-Projekts: \url{http://freeradius.org/}
 \end{itemize}
 %\hilight{TODO: Quellen auflisten}
+
+%\nocite{*}
+%\begin{thebibliography}{9}
+%
+%\bibitem{lamport94}
+%Leslie Lamport,
+%\emph{\LaTeX: a document preparation system},
+%Addison Wesley, Massachusetts,
+%2nd edition,
+%1994.
+%
+%\end{thebibliography}
 
 \include{Erklaerung}
 
@@ -547,7 +563,7 @@ userPassword: password
 \end{lstlisting}
 
 \newpage
-\section{Skript zum Auslesen der Anwenderkonten aus der CommuniGate Dateien}\label{sec:SkriptA}
+\section{Skript zum Auslesen der Anwenderkonten aus den CommuniGate Dateien}\label{sec:SkriptA}
 \lstinputlisting[language=sh]{cg_accounts_to_ldap.sh}
 \hilight{TODO: Erklärung}
 
@@ -656,17 +672,5 @@ OpenVPN muss neu gestartet werden, um die geänderte Konfigurationsdatei anzuwen
 \section{Ergebnis eines externen NMAP Tests}\label{sec:NMAP-Test-ext}
 \hilight{TODO: Testlog einfügen und erläutern}
 \newpage
-
-%\nocite{*}
-%\begin{thebibliography}{9}
-%
-%\bibitem{lamport94}
-%  Leslie Lamport,
-% \emph{\LaTeX: a document preparation system},
-%  Addison Wesley, Massachusetts,
- % 2nd edition,
-%  1994.
-%
-%\end{thebibliography}
 
 \end{document}
