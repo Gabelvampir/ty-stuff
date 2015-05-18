@@ -585,7 +585,7 @@ userPassword: password
 \end{lstlisting}
 
 \newpage
-\section{Skript zum Auslesen der Anwenderkonten aus den CommuniGate-Dateien}\label{sec:SkriptA}
+\section{Skript zum Konvertieren der Anwenderkonten}\label{sec:SkriptA}
 \lstinputlisting[language=sh]{cg_accounts_to_ldap.sh}
 Dieses Skript liest die Klartext-Dateien von CommuniGate aus und wandelt diese in das passende Format für \texttt{ldapmodify} um. Dazu werden die entsprechende Daten in das am Ende von \autoref{sec:Erstelle-DB} Template eingetragen. Das Ganze wird in eine Datei geschrieben, jeder Datensatz getrennt durch eine Leerzeile.
 
@@ -641,7 +641,7 @@ To                         Action      From
 \end{lstlisting}
 \begin{itemize}
 \item SSH (Port \texttt{22}) ist wie bei Servern bei fgn üblich von sämtlichen Quellrechnern erlaubt (IPv4 und IPv6)
-\item LDAPS (Port \texttt{636}) ist aus dem fgn-Subnetz (\texttt{131.246.197.0/25}) und dem privaten Infrastruktur-Netz von fgn (\texttt{10.122.0.0/16})
+\item LDAPS (Port \texttt{636}) ist aus dem fgn-Subnetz (\texttt{131.246.197.0/25}) und dem privaten fgn"=Infrastruktur"=Netz (\texttt{10.122.0.0/16})
 \item RADIUS (Port \texttt{1812} ist der gerenelle Port des FreeRADIUS-Daemons und Port \texttt{1813} ist der Port für Accounting) ist zugelassen für Verbindungen aus dem öffentlichen fgn"=Subnetz (\texttt{131.246.197.0/25}), dem privaten fgn"=Infrastruktur"=Netz (\texttt{10.122.0.0/16}), den TU E-Mail-Servern \texttt{131.246.120.208/28} und dem RADIUS-Server der TU \texttt{131.246.5.14}. Der RADIUS-Proxy Port \texttt{1814} wurde hier nicht gebraucht weswegen keine Verbindungen zu ihn friegeschaltet wurden.
 \end{itemize}
 Die Firewall-Regeln wurden nach Vorbild der Regeln für den CommuniGate Server erstellt.
