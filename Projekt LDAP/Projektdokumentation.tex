@@ -106,10 +106,15 @@ showtabs=false,                  % show tabs within strings adding particular un
 \usepackage{helvet}
 \renewcommand{\familydefault}{\sfdefault}
 
+%\usepackage{xr}
+%\externaldocument[Kunde-]{Kundendokumentation} 
+
 %%% END Article customizations
 
 \newcommand{\titel}{OpenLDAP- und FreeRADIUS-Server}
 \newcommand{\untertitel}{Aufsetzen eines Identity Management-Servers als Ersatz eines veralteten CommuniGate Servers}
+
+\newcommand{\untertitelkun}{Kundendokumentation für Administratoren}
 
 \newcommand{\autor}{Sebastian Deußer}
 \newcommand{\kompletterTitel}{\titel{} -- \untertitel}
@@ -316,7 +321,7 @@ Auf dem Server wurden die Pakete \texttt{freeradius} und \texttt{freeradius-ldap
 \subsubsection{Absicherung des Rechners (Firewall etc.)}
 Wie in \nameref{sec:Sicherheitskonzept} erläutert, sind dem Netz, in dem sich der Server befindet, bereits zwei Firewalls vorgeschaltet. Die einzige Änderung, die an diesen vorgenommen werden musste, ist das Eintragen einer Ausnahmeregel mit der der Zugriff auf den RADIUS-Server aus dem Universitätsnetz erlaubt wird. Dafür wird die bereits bestehende Firewall-Regel für den in CommuniGate enthaltenen RADIUS auf die IP des neuen Servers angepasst.
 
-Zusätzlich zu den Firewalls, die bereits das Firmennetz der fgn GmbH schützen, wurde die simpel zu bedienende Uncomplicated Firewall (\texttt{ufw}) verwendet, um lediglich die für OpenLDAP, FreeRADIUS und SSH notwendigen Ports zuzulassen, und Netzwerkverbindungen auf den restlichen Ports nicht zuzulassen. Näheres zur Firewall Konfiguration siehe \autoref{sec:Firewall-Konfig}.
+Zusätzlich zu den Firewalls, die bereits das Firmennetz der fgn GmbH schützen, wurde die simpel zu bedienende Uncomplicated Firewall (\texttt{ufw}) verwendet, um lediglich die für OpenLDAP, FreeRADIUS und SSH notwendigen Ports zuzulassen, und Netzwerkverbindungen auf den restlichen Ports nicht zuzulassen. Näheres zur Firewall Konfiguration siehe \nameref{sec:Firewall-Konfig} in der Kundendokumentation.
 
 Der OpenLDAP-Server wurde so konfiguriert, dass er lediglich SSL verschlüsselte Verbindungen zulässt, somit ist ein Abhören der Kommunikation mit dem LDAP-Server stark erschwert. Modifikation der Daten im Verzeichnisdienst ist nur dem LDAP-Administrator-Benutzer gestattet, der mit einem -- den Passwortrichtlinien von fgn entsprechenden -- Passwort gesichert ist. Die Firewall auf dem Server lässt außerdem nur Verbindungen aus dem Firmennetz und nur auf dem entsprechenden Port (636) zu. Als anonymer Benutzer ist lediglich der Zugriff auf Attribute, die nur anderweitig öffentlich verfügbare Informationen wie Name des Anwenders enthalten, und das Testen eines Passworts gegen den gespeicherten Passwort Hash. Letzteres wäre ein ernstzunehmender Angriffspunkt, wenn Verbindungen zum LDAP-Server von außerhalb des Firmennetzes erlaubt wären, was aber durch die Firewalls verhindert wird.
 
@@ -442,8 +447,9 @@ fgn hat neben den diversen Linux-Rechnern auch noch 2 Windows-PCs in der Verwalt
 
 \appendix
 \newpage
-\addcontentsline{toc}{section}{Anhänge} %fügt Überschrift Anhänge in die TOC ein
-\section{Übernommene LDAP Attribute} \label{sec:LDAP-Attribute}
+\section{Anhänge}
+%\addcontentsline{toc}{section}{Anhänge} %fügt Überschrift Anhänge in die TOC ein
+\subsection{Übernommene LDAP Attribute} \label{sec:LDAP-Attribute}
 \begin{itemize}
 \item\texttt{uid}: User ID, Name des Anwenderkontos
 \item\texttt{sn}: SurName, Nachname des Anwenders
@@ -453,174 +459,23 @@ fgn hat neben den diversen Linux-Rechnern auch noch 2 Windows-PCs in der Verwalt
 \item\texttt{userPassword}: Passwort des Anwenders (wurde mit \texttt{slappasswd} gehashed)
 \end{itemize}
 
-\newpage
-\section{Erklärung der OpenLDAP Log-Level} \label{sec:LDAP-Loglevel}
-\begin{tabularx}{\textwidth}{|c|l|X|}
-\hline
-Level &	Keyword &	Description\\
-\hline
--1 &	any &	enable all debugging\\
-\hline
-0 &	  &	no debugging\\
-\hline
-1 &	(0x1 trace) &	trace function calls\\
-\hline
-2 &	(0x2 packets) &	debug packet handling\\
-\hline
-4 &	(0x4 args) &	heavy trace debugging\\
-\hline
-8 &	(0x8 conns)& 	connection management\\
-\hline
-16 &	(0x10 BER) & 	print out packets sent and received\\
-\hline
-32 &	(0x20 filter) &	search filter processing\\
-\hline
-64 &	(0x40 config) &	configuration processing\\
-\hline
-128 &	(0x80 ACL) &	access control list processing\\
-\hline
-256 &	(0x100 stats) &	stats log connections/operations/results\\
-\hline
-512 &	(0x200 stats2) &	stats log entries sent\\
-\hline
-1024 &	(0x400 shell) &	print communication with shell backends\\
-\hline
-2048 &	(0x800 parse) &	print entry parsing debugging\\
-\hline
-16384 &	(0x4000 sync) &	syncrepl consumer processing\\
-\hline
-32768 &	(0x8000 none) &	only messages that get logged whatever log level is set \\
-\hline
-\end{tabularx}
-
-\bigskip
-\noindent Um Log-Level einzustellen kann man entweder die entsprechende Zahl aus der ersten Spalte, den Hex-Wert oder das Schlüsselwort aus Spalte 2 verwenden. Werden die Zahlen aus Spalte 1 verwendet kann man mehrere Log-Level gleichzeitig auswählen indem man ihre Wert miteinander addiert.
-
-Zum debuggen der Probleme die bei der Durchführung des Projekts auftraten erwiesen sich die meisten der Zusatzausgaben als ungeeignet, lediglich die Traces der Level 1 (0x1 trace) und 4 (0x4 args) konnten weiterhelfen, enthielten aber auch keine weiterführenden Informationen bei Problemen mit dem Zugriff auf die Verzeichnis-Datenbank.
-
-Wenn wie in diesem Projekt ein OpenLDAP-Server mit einem \texttt{slapd.d}"=Konfigurationsverzeichnis statt einer \texttt{slapd.conf}"=Konfigurationsdatei verwendet wird, muss man, wie sämtliche anderen Einstellungen auch, den Log-Level über eine vorbereitete Datei und \texttt{ldapmodify} verändern. Eine entsprechende Datei sieht wie folgt aus:
-\begin{lstlisting}
-dn: cn=config
-changetype: modify
-replace: olcLogLevel
-olcLogLevel: 5
-\end{lstlisting}
-Diese Datei würde den Log-Level auf 5 setzen. Der entsprechende \texttt{ldapmodify}-Aufruf ist dann:
-\begin{lstlisting}
-ldapmodify -Y EXTERNAL -H ldapi:/// -f olcLogLevel.ldif
-\end{lstlisting}
-
 
 \newpage
-\section{Erläuterungen zu den verwendeten LDAP Schemas}\label{sec:LDAP-Schema}
-\begin{enumerate}
-\setcounter{enumi}{-1}
-\item \texttt{core} -- Enthält LDAP Core Attribute (X.501), wird immer benötigt
-\item \texttt{cosine} -- Enthält die LDAPv3 Attribute (Cosine and Internet X.500 (RFC1274))
-\item \texttt{nis} -- Schema zur Verwendung von NIS, bei uns vermutlich nicht benötigt aber Teil der Linux/Unix Standardinstallationen
-\item \texttt{inetorgperson} -- Schema für die gängigen Personenattribute und andere Attribute für organisationsorientierte Dienste
-\item \texttt{freeradius} -- Schema für RADIUS Atrribute, aus der FreeRADIUS Doku (\texttt{/usr/""share/""doc/""freeradius/""examples/""openldap"".schema})
-\item \texttt{postfix} -- Schema mit zusätzlichen Attributen für postfix address rewrite, von den Autoren des Galileo Press OpenLDAP 2.4 Praxisbuches (in der FGN Bibliothek)
-\end{enumerate}
-(0-3 sind Teil der Debian Standardkonfig)
-
-\newpage
-\section{Erstellung der Verzeichnisstruktur}\label{sec:Erstelle-DB}
-Die leere Datenbank wurde mit dem interaktiven Debian config script (aufgerufen mit \texttt{dpkg-reconfigure slapd}) erzeugt. Als Domain und Organization Name wurde \texttt{de} genommen. Die restlichen Fragen wurden mit den Standardantworten beantwortet. Für die drei Domains wurde dann folgende LDIF-Datei (\texttt{add\_DNs.ldif}) zum Erzeugen verwendet
-\begin{lstlisting}
-dn: dc=fg-networking,dc=de
-o: fg-networking.de
-objectClass: top
-objectClass: dcObject
-objectClass: organization
-
-dn: dc=schabler,dc=de
-o: schabler.de
-objectClass: top
-objectClass: dcObject
-objectClass: organization
-
-dn: dc=worden,dc=de
-o: worden.de
-objectClass: top
-objectClass: dcObject
-objectClass: organization
-
-\end{lstlisting}
-Diese wird (nachdem man den LDAP daemon slapd gestoppt hat) in die Datenbank eingefügt mit
-\begin{lstlisting}
-slapadd -n 1 -l add_DNs.ldif
-\end{lstlisting}
-Der Content wird hier mit \texttt{slapadd} eingefügt da dies der einfachste Weg ist um dcObjects in der LDAP Datenbank zu erstellen. Für die meisten anderen Datenmanipulationen ist ldapmodify die sicherere und sauberere Variante. Danach kann man (und muss für den nächsten Schritt auch) \texttt{slapd} wieder starten.
-
-Als nächstes wurden die \texttt{people} organizationalUnits erzeugt, in die alle User Einträge kommen sollen (da wir vor der Fertigstellung des neuen Mailservers nur echte Anwenderaccounts migrieren (keine Mailinglisten Accounts u.ä.) ist dies auch erstmal die einzige benötigte OU). Zum Erzeugen der OUs wurde wieder eine LDIF Datei (\texttt{add\_content.ldif}) erstellt.
-\begin{lstlisting}
-dn: ou=people,dc=fg-networking,dc=de
-objectClass: organizationalUnit
-ou: people
-
-dn: ou=people,dc=schabler,dc=de
-objectClass: organizationalUnit
-ou: people
-
-dn: ou=people,dc=worden,dc=de
-objectClass: organizationalUnit
-ou: people
-\end{lstlisting}
-Die wurde dann in die Datenbank eingefügt mit
-\begin{lstlisting}
-ldapmodify -a -H ldapi:/// -D cn=admin,dc=de -W -f add_content.ldif
-\end{lstlisting}
-Anschließend kann man die User einfügen. Wir haben dazu nach dem folgenden minimalem Template per Skript aus den Klartextdateien von CommuniGate das LDIF dafür generiert.
-\begin{lstlisting}
-dn: uid=username,ou=people,dc=fg-networking,dc=de
-objectClass: inetOrgPerson
-objectClass: person
-uid: username
-sn: Nachname
-givenName: Vorname
-cn: Vorname Nachname
-displayName: Vorname Nachname
-userPassword: password
-\end{lstlisting}
-
-\newpage
-\section{Skript zum Konvertieren der Anwenderkonten}\label{sec:SkriptA}
+\subsection{Skript zum Konvertieren der Anwenderkonten}\label{sec:SkriptA}
 \lstinputlisting[language=sh]{cg_accounts_to_ldap.sh}
 Dieses Skript liest die Klartext-Dateien von CommuniGate aus und wandelt diese in das passende Format für \texttt{ldapmodify} um. Dazu werden die entsprechende Daten in das am Ende von \autoref{sec:Erstelle-DB} Template eingetragen. Das Ganze wird in eine Datei geschrieben, jeder Datensatz getrennt durch eine Leerzeile.
 
 Abdruck des Skript mit freundlicher Genehmigung von fgn und dem Autor Erik Auerswald.
 
 \newpage
-\section{Skript zum Hashen der Anwenderpasswörter}\label{sec:SkriptB}
+\subsection{Skript zum Hashen der Anwenderpasswörter}\label{sec:SkriptB}
 \lstinputlisting[language=sh]{hash_passwords.sh}
 Dieses Skript wandelt die Klartext-Passwörter in der mit dem Skript aus \autoref{sec:SkriptA} mit Hilfe von \texttt{slappasswd} in von OpenLDAP importierbare Passwort-Hashes umgewandelt.
 
 Abdruck des Skript mit freundlicher Genehmigung von fgn und dem Autor Erik Auerswald.
 
 \newpage
-\section{Konfiguration des FreeRADIUS Servers}\label{sec:RADIUS-Konfig}
-Zuerst einmal zusätzlich das Paket \texttt{freeradius-ldap} installieren (bei Debian sind zwar schon Beispielkonfigs für LDAP mitgeliefert, aber die tatsächlichen Module sind erst in diesem Paket enthalten). In \texttt{/etc/freeradius/clients.conf} muss unter \texttt{secret} das zu den Uni Mailservern passende Shared Secret eingetragen werden (dies wurde aus der Konfiguration von CommuniGate ausgelesen). Wenn noch Clients an den RADIUS angebunden werden sollen muss unten für die passenden IPs ein Shared Secret vergeben werden das dann auch im Client eingetragen werden muss.
-
-Um LDAP als Authentifizierungsmethode für User zu aktivieren muss in \texttt{/etc/""free""radius/""users} folgende Zeile eingetragen werden:
-\begin{lstlisting}
-DEFAULT Auth-Type := LDAP
-\end{lstlisting}
-Hier ist zu beachten das \textbf{EAP nicht mehr funktioniert}. Soll EAP irgendwann benutzt werden sollen muss hier eine andere Möglichkeit gefunden werden (die Dokumentation schlägt eine ähnliche Eintragung für jeden Benutzer einzeln vor).
-
-In \texttt{/etc/freeradius/modules/ldap} muss unter \texttt{server} der richtige LDAP Server (\texttt{id.""fg-networking.""de}) und unter \texttt{basedn} die richtige Searchbase angegeben werden (hier \texttt{dc=fg-networking,""dc=de}, \textbf{muss evtl. noch angepasst werden})
-
-In \texttt{/etc/freeradius/sites-enabled/default} müssen alle Zeilen die \texttt{ldap} einkommentiert werden. Einzige Ausnahme bildet die Zeile bei der in den Kommentaren davor erwähnt das sie nur benötigt wird wenn \texttt{edir\_account\_policy\_check = yes} eingestellt wurde (Zeile 488 in der aktuellen Datei).
-
-Zum Testen des Ganzen wurde \texttt{radtest} aus dem Paket \texttt{freeradius-utils} verwendet. Der Aufruf war:
-\begin{lstlisting}
-radtest <username> <passwort> id.fg-networking.de:1812 10	<shared-secret>
-\end{lstlisting}
-Die Werte in spitzen Klammern müssen natürlich durch die entsprechenden Werte ersetzt werden (ohne die spitzen Klammern).
-
-
-\newpage
-\section{Konfiguration der Firewall}\label{sec:Firewall-Konfig}
+\subsection{Konfiguration der Firewall}
 Der folgende Block zeigt die Ausgabe der Uncomplicated Firewall (\texttt{ufw}) über ihre aktuellen Regeln (\texttt{ufw} verwendet als Standardregel, die als letzte angewendet wird wenn keine andere Regel zutrifft, ein implizites \texttt{* DENY ALL} das nicht angezeigt wird):
 \begin{lstlisting}
 root@id:~# ufw status
@@ -646,59 +501,26 @@ To                         Action      From
 \end{itemize}
 Die Firewall-Regeln wurden nach Vorbild der Regeln für den CommuniGate Server erstellt.
 
-\newpage
-\section{Änderungen an der Apache Konfiguration}\label{sec:Apache-Konfig}
-Zur Anbindung von LDAP an einen Apache Web-Server wird die \texttt{mod\_authnz\_ldap} verwendet. In der Konfig-Datei \texttt{/etc/apache2/mods-available/ldap.conf} muss auch wieder das CA Zertifikat eingetragen werden um LDAPS verwenden zu können. Dazu trägt man (außerhalb jeglichen \texttt{<Location>} Kontexts) ein:
-\begin{lstlisting}
-LDAPTrustedGlobalCert CA_BASE64 /etc/ssl/certs/fg-networking.de.pem
-\end{lstlisting}
-(In dieser Datei war bereits auch schon der ldap-status handler definiert, an dieser Einstellung muss nichts verändert werden). In der passenden Seitenkonfig (auf NMS: \texttt{/etc/apache2/sites-available/default-ssl}) muss man dann noch die URL vom LDAP Server anpassen. Auf NMS sieht die neue Konfig wie folgt aus:
-\begin{lstlisting}
- <Location />
-    AuthType  Basic
-    AuthName  "FGN NMS"
-    AuthzLDAPAuthoritative  off
-    AuthBasicProvider ldap
-    AuthLDAPURL ldaps://id.fg-networking.de:636/dc=fg-networking,dc=de?uid?sub?
-    require valid-user
-    Satisfy any
-  </Location>
-\end{lstlisting}
 
 \newpage
-\section{Änderungen an der OpenVPN Konfiguration}\label{sec:VPN-Konfig}
-Konfigurationsdateien \texttt{/etc/openvpn/tcp.config} und \texttt{/etc/openvpn/udp.config}
-\begin{lstlisting}
-plugin /usr/lib/openvpn/openvpn-auth-ldap.so /etc/openvpn/auth-ldap.config
-\end{lstlisting}
-Die Einträge sind notwendig damit das LDAP Plugin überhaupt verwendet wird.
-
-Konfigurationsdatei \texttt{/etc/openvpn/auth-ldap.config}
-\begin{lstlisting}
-<LDAP>
-        URL             ldaps://id.fg-networking.de:636
-        Timeout         15
-        TLSEnable       no
-        FollowReferrals yes
-        TLSCACertFile   /etc/ssl/certs/fg-networking.de_ca.pem
-</LDAP>
-
-<Authorization>
-        BaseDN          "dc=fg-networking,dc=de"
-        SearchFilter    "(&(uid=%u))"
-        RequireGroup    false
-</Authorization>
-\end{lstlisting}
-OpenVPN muss neu gestartet werden, um die geänderte Konfigurationsdatei anzuwenden.
+\subsection{Ergebnis eines fgn internen NMAP Tests}\label{sec:NMAP-Test-int}
+\lstinputlisting{nmap-id-udp.txt}
 
 \newpage
-\section{Ergebnis eines fgn internen NMAP Tests}\label{sec:NMAP-Test-int}
-\lstinputlisting{nmap-id.txt}
-
-
+\subsection{Ergebnis eines externen NMAP Tests}\label{sec:NMAP-Test-ext}
+\lstinputlisting{nmap-fettuccini-udp.txt}
 \newpage
-\section{Ergebnis eines externen NMAP Tests}\label{sec:NMAP-Test-ext}
-\lstinputlisting{nmap-fettuccini.txt}
 
+
+\clearpage
+%\setcounter{page}{26}  %Seitenzahlen erst nach TOC zählen
+
+\include{Deckblatt2}
+
+\include{Kundendokumentation}
+
+
+\addsection{1. Projektantrag (abgelehnt)}
+\includegraphics{1_Projektantrag_(abgelehnt).pdf}
 
 \end{document}

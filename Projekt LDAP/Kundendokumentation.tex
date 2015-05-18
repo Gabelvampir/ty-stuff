@@ -209,7 +209,7 @@ Level &	Keyword &	Description\\
 
 Zum debuggen der Probleme die bei der Durchführung des Projekts auftraten erwiesen sich die meisten der Zusatzausgaben als ungeeignet, lediglich die Traces der Level 1 (0x1 trace) und 4 (0x4 args) konnten weiterhelfen, enthielten aber auch keine weiterführenden Informationen bei Problemen mit dem Zugriff auf die Verzeichnis-Datenbank.
 
-Wenn wie in diesem Projekt ein OpenLDAP-Server mit einem \texttt{slapd.d}"=Konfigurationsverzeichnis statt einer \texttt{slapd.conf}"=Konfigurationsdatei verwendet wird, muss man, wie sämtliche anderen Einstellungen auch, den Log-Level über eine vorbereitete Datei und \texttt{ldapmodify} verändern. Eine entsprechende Datei sieht wie folgt aus:
+Wenn wie in diesem Projekt ein OpenLDAP-Server mit einem \texttt{slapd.d}"=Konfigurationsordner statt einer \texttt{slapd.conf}"=Konfigurationsdatei verwendet wird, muss man, wie sämtliche anderen Einstellungen auch, den Log-Level über eine vorbereitete Datei und \texttt{ldapmodify} verändern. Eine entsprechende Datei sieht wie folgt aus:
 \begin{lstlisting}
 dn: cn=config
 changetype: modify
@@ -222,7 +222,7 @@ ldapmodify -Y EXTERNAL -H ldapi:/// -f olcLogLevel.ldif
 \end{lstlisting}
 
 
-\subsection{Ausgeben des Inhalts der LDAP Datenbank}
+\subsection{Ausgeben des Inhalts der LDAP-Datenbank}
 Mit dem Kommandozeilenprogramm \texttt{ldapsearch} kann man nach Einträgen in der LDAP Datenbank suchen. Man kann sich damit auch den gesamten Inhalt der Datenbank anzeigen lassen. Dies geht am einfachsten mit
 \begin{lstlisting}
 ldapsearch -x -LLL -H ldaps://id.fg-networking.de -b dc=de
@@ -230,7 +230,7 @@ ldapsearch -x -LLL -H ldaps://id.fg-networking.de -b dc=de
 Erklärung der Parameter: -x stellt auf einfache Authentifizierung um (im Gegensatz zu SASL), -LLL gibt die Daten im LDIF Format aus, ohne Kommentare und ohne Anzeige der Versionsnummer, mit -H wird die URI des LDAP Servers übergeben und -b gibt den Startpunkt im Datenbankbaum für die Suche an.
 
 
-\subsection{Hinzufügen eigener Konfig und Schema zum LDAP Server}
+\subsection{Hinzufügen eigener Konfig und Schema zum OpenLDAP-Server}
 Neuer Versionen von OpenLDAP benutzen nicht mehr die slapd.conf, sondern ein Konfigurationsverzeichnis slapd.d mit eigener Datenstruktur.
 Um neue Konfig hinzuzufügen legt man ein ldif File mit der Konfig an und importiert diese mit
 \begin{lstlisting}
@@ -312,7 +312,7 @@ BASE dc=fg-networking,dc=de
 Hier sollte man unter \texttt{BASE} auch die LDAP Standard Searchbase angeben, die sinnvollsten Werte dürften hier \texttt{dc=fg-networking,dc=de} und \texttt{dc=de} sein.
 
 
-\subsection{Anbindung von Apache an den LDAPS Server}
+\subsection{Änderungen an der Apache Konfiguration}\label{sec:Apache-Konfig}
 Zur Anbindung von LDAP an einen Apache Web-Server wird die \texttt{mod\_authnz\_ldap} verwendet. In der Konfig-Datei \texttt{/etc/apache2/mods-available/ldap.conf} muss auch wieder das CA Zertifikat eingetragen werden um LDAPS verwenden zu können. Dazu trägt man (außerhalb jeglichen \texttt{<Location>} Kontexts) ein:
 \begin{lstlisting}
 LDAPTrustedGlobalCert CA_BASE64 /etc/ssl/certs/fg-networking.de.pem
@@ -331,7 +331,7 @@ LDAPTrustedGlobalCert CA_BASE64 /etc/ssl/certs/fg-networking.de.pem
 \end{lstlisting}
 
 
-\subsection{Anbindung von FreeRADIUS}
+\subsection{Konfiguration des FreeRADIUS-Servers}\label{sec:RADIUS-Konfig}
 Zuerst einmal zusätzlich das Paket \texttt{freeradius-ldap} installieren (bei Debian sind zwar schon Beispielkonfigs für LDAP mitgeliefert, aber die tatsächlichen Module sind erst in diesem Paket enthalten). In \texttt{/etc/freeradius/clients.conf} muss unter \texttt{secret} das zu den Uni Mailservern passende Shared Secret eingetragen werden (dies wurde aus der Konfiguration von CommuniGate ausgelesen). Wenn noch Clients an den RADIUS angebunden werden sollen muss unten für die passenden IPs ein Shared Secret vergeben werden das dann auch im Client eingetragen werden muss.
 
 Um LDAP als Authentifizierungsmethode für User zu aktivieren muss in \texttt{/etc/""free""radius/""users} folgende Zeile eingetragen werden:
@@ -351,7 +351,8 @@ radtest <username> <passwort> id.fg-networking.de:1812 10	<shared-secret>
 Die Werte in spitzen Klammern müssen natürlich durch die entsprechenden Werte ersetzt werden (ohne die spitzen Klammern).
 
 
-\subsection{Momentan verwendete Schema (in Reihenfolge)}
+
+\subsection{Erläuterungen zu den verwendeten LDAP Schemas}\label{sec:LDAP-Schema}
 \begin{enumerate}
 \setcounter{enumi}{-1}
 \item \texttt{core} -- Enthält LDAP Core Attribute (X.501), wird immer benötigt
@@ -359,13 +360,13 @@ Die Werte in spitzen Klammern müssen natürlich durch die entsprechenden Werte 
 \item \texttt{nis} -- Schema zur Verwendung von NIS, bei uns vermutlich nicht benötigt aber Teil der Linux/Unix Standardinstallationen
 \item \texttt{inetorgperson} -- Schema für die gängigen Personenattribute und andere Attribute für organisationsorientierte Dienste
 \item \texttt{freeradius} -- Schema für RADIUS Atrribute, aus der FreeRADIUS Doku (\texttt{/usr/""share/""doc/""freeradius/""examples/""openldap"".schema})
-\item \texttt{postfix} - Schema mit zusätzlichen Attributen für postfix address rewrite, von den Autoren des Galileo Press OpenLDAP 2.4 Praxisbuches (in der FGN Bibliothek)
+\item \texttt{postfix} -- Schema mit zusätzlichen Attributen für postfix address rewrite, von den Autoren des Galileo Press OpenLDAP 2.4 Praxisbuches (in der FGN Bibliothek)
 \end{enumerate}
 (0-3 sind Teil der Debian Standardkonfig)
 
 
-\subsection{Erzeugung der LDAP Verzeichnisstruktur}
-Die leere Datenbank wurde mit dem interaktiven Debian config script (aufgerufen mit \texttt{dpkg-reconfigure slapd}) erzeugt. Als Domain und Organization Name wurde \texttt{de} genommen. Die restlichen Fragen wurden mit den Standardantworten beantwortet, \textbf{somit löscht purge von slapd nicht die LDAP Datenbank}. Für die 3 Domains wurde dann folgende LDIF Datei (\texttt{add\_DNs.ldif}) zum erzeugen verwendet
+\subsection{Erstellung der LDAP-Verzeichnisstruktur}\label{sec:Erstelle-DB}
+Die leere Datenbank wurde mit dem interaktiven Debian config script (aufgerufen mit \texttt{dpkg-reconfigure slapd}) erzeugt. Als Domain und Organization Name wurde \texttt{de} genommen. Die restlichen Fragen wurden mit den Standardantworten beantwortet. Für die drei Domains wurde dann folgende LDIF-Datei (\texttt{add\_DNs.ldif}) zum Erzeugen verwendet
 \begin{lstlisting}
 dn: dc=fg-networking,dc=de
 o: fg-networking.de
@@ -390,7 +391,7 @@ Diese wird (nachdem man den LDAP daemon slapd gestoppt hat) in die Datenbank ein
 \begin{lstlisting}
 slapadd -n 1 -l add_DNs.ldif
 \end{lstlisting}
-(Der Content wird hier mit \texttt{slapadd} eingefügt da dies der einfachste Weg ist um dcObjects in der LDAP Datenbank zu erstellen. Für die meisten anderen Datenmanipulationen ist ldapmodify die sicherere und sauberere Variante). Danach kann (und muss man für den nächsten Schritt auch) man \texttt{slapd} wieder starten.
+Der Content wird hier mit \texttt{slapadd} eingefügt da dies der einfachste Weg ist um dcObjects in der LDAP Datenbank zu erstellen. Für die meisten anderen Datenmanipulationen ist ldapmodify die sicherere und sauberere Variante. Danach kann man (und muss für den nächsten Schritt auch) \texttt{slapd} wieder starten.
 
 Als nächstes wurden die \texttt{people} organizationalUnits erzeugt, in die alle User Einträge kommen sollen (da wir vor der Fertigstellung des neuen Mailservers nur echte Anwenderaccounts migrieren (keine Mailinglisten Accounts u.ä.) ist dies auch erstmal die einzige benötigte OU). Zum Erzeugen der OUs wurde wieder eine LDIF Datei (\texttt{add\_content.ldif}) erstellt.
 \begin{lstlisting}
@@ -424,7 +425,7 @@ userPassword: password
 \end{lstlisting}
 
 
-\subsection{OpenVPN}
+\subsection{Änderungen an der OpenVPN Konfiguration}\label{sec:VPN-Konfig}
 Konfigurationsdateien \texttt{/etc/openvpn/tcp.config} und \texttt{/etc/openvpn/udp.config}
 \begin{lstlisting}
 plugin /usr/lib/openvpn/openvpn-auth-ldap.so /etc/openvpn/auth-ldap.config
@@ -449,8 +450,8 @@ Konfigurationsdatei \texttt{/etc/openvpn/auth-ldap.config}
 \end{lstlisting}
 OpenVPN muss neu gestartet werden, um die geänderte Konfigurationsdatei anzuwenden.
 
-\subsection{Konfiguration der Firewall}\label{sec:Firewall-Konfig}
-Es wurde die Uncomplicated Firewall (\texttt{ufw}) verwendet mit folgenden Regeln (\texttt{ufw} verwendet als Standardregel, die als letzte angewendet wird wenn keine andere Regel zutrifft, ein implizites \texttt{* DENY ALL} das nicht angezeigt wird):
+\subsection{Konfiguration der Firewall}
+Der folgende Block zeigt die Ausgabe der Uncomplicated Firewall (\texttt{ufw}) über ihre aktuellen Regeln (\texttt{ufw} verwendet als Standardregel, die als letzte angewendet wird wenn keine andere Regel zutrifft, ein implizites \texttt{* DENY ALL} das nicht angezeigt wird):
 \begin{lstlisting}
 root@id:~# ufw status
 Status: active
@@ -469,11 +470,12 @@ To                         Action      From
 22                         ALLOW       Anywhere (v6)
 \end{lstlisting}
 \begin{itemize}
-\item SSH (Port \texttt{22}) von sämtlichen Rechnern aus erlaubt (IPv4 und IPv6)
-\item LDAPS (Port \texttt{636}) ist aus dem öffentlichen fgn"=Subnetz (\texttt{131.246.197.0/25}) und dem Infrastruktur-Netz (\texttt{10.122.0.0/16})
-\item RADIUS (Port \texttt{1812} gereneller Port des FreeRADIUS-Daemons, Port \texttt{1813} Port für Accounting) ist zugelassen für Verbindungen aus dem öffentlichen fgn"=Subnetz (\texttt{131.246.197.0/25}), dem privaten fgn"=Infrastruktur"=Netz (\texttt{10.122.0.0/16}), den TU E-Mail-Servern \texttt{131.246.120.208/28} und dem RADIUS-Server der TU \texttt{131.246.5.14}. Der RADIUS-Proxy Port \texttt{1814} wurde hier nicht gebraucht weswegen keine Verbindungen zu ihn friegeschaltet wurden.
+\item SSH (Port \texttt{22}) ist wie bei Servern bei fgn üblich von sämtlichen Quellrechnern erlaubt (IPv4 und IPv6)
+\item LDAPS (Port \texttt{636}) ist aus dem fgn-Subnetz (\texttt{131.246.197.0/25}) und dem privaten fgn"=Infrastruktur"=Netz (\texttt{10.122.0.0/16})
+\item RADIUS (Port \texttt{1812} ist der gerenelle Port des FreeRADIUS-Daemons und Port \texttt{1813} ist der Port für Accounting) ist zugelassen für Verbindungen aus dem öffentlichen fgn"=Subnetz (\texttt{131.246.197.0/25}), dem privaten fgn"=Infrastruktur"=Netz (\texttt{10.122.0.0/16}), den TU E-Mail-Servern \texttt{131.246.120.208/28} und dem RADIUS-Server der TU \texttt{131.246.5.14}. Der RADIUS-Proxy Port \texttt{1814} wurde hier nicht gebraucht weswegen keine Verbindungen zu ihn friegeschaltet wurden.
 \end{itemize}
 Die Firewall-Regeln wurden nach Vorbild der Regeln für den CommuniGate Server erstellt.
+
 
 \subsection{Auf den neuen LDAP Server umgestellte Systeme}
 \begin{itemize}
@@ -489,7 +491,7 @@ Die Firewall-Regeln wurden nach Vorbild der Regeln für den CommuniGate Server e
 \item Mailserver
 \end{itemize}
 
-\noindent Anmerkung: Eine Kundendokumentation für Anwender war nicht notwendig da sich auf Anwenderseite nach der Umstellun
+\noindent Anmerkung: Eine Kundendokumentation für Anwender war nicht notwendig da sich auf Anwenderseite nach der Umstellung keine sichtbaren Änderungen gibt.
 
 
 \end{document}
