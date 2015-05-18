@@ -1,0 +1,56 @@
+
+Starting Nmap 6.47 ( http://nmap.org ) at 2015-05-18 01:09 CEST
+Initiating Parallel DNS resolution of 1 host. at 01:09
+Completed Parallel DNS resolution of 1 host. at 01:09, 0.00s elapsed
+Initiating SYN Stealth Scan at 01:09
+Scanning gaf-nat-core1.fg-networking.de (131.246.197.6) [65535 ports]
+Discovered open port 22/tcp on 131.246.197.6
+Discovered open port 636/tcp on 131.246.197.6
+Completed SYN Stealth Scan at 01:09, 10.40s elapsed (65535 total ports)
+Initiating UDP Scan at 01:09
+Scanning gaf-nat-core1.fg-networking.de (131.246.197.6) [65535 ports]
+UDP Scan Timing: About 38.13% done; ETC: 01:10 (0:00:50 remaining)
+UDP Scan Timing: About 39.04% done; ETC: 01:11 (0:01:35 remaining)
+UDP Scan Timing: About 39.96% done; ETC: 01:13 (0:02:17 remaining)
+UDP Scan Timing: About 40.88% done; ETC: 01:14 (0:02:55 remaining)
+UDP Scan Timing: About 41.79% done; ETC: 01:15 (0:03:30 remaining)
+UDP Scan Timing: About 42.71% done; ETC: 01:16 (0:04:03 remaining)
+UDP Scan Timing: About 43.16% done; ETC: 01:17 (0:04:38 remaining)
+UDP Scan Timing: About 44.02% done; ETC: 01:18 (0:05:06 remaining)
+UDP Scan Timing: About 44.96% done; ETC: 01:19 (0:05:35 remaining)
+UDP Scan Timing: About 46.08% done; ETC: 01:20 (0:06:06 remaining)
+UDP Scan Timing: About 47.53% done; ETC: 01:22 (0:06:42 remaining)
+UDP Scan Timing: About 49.51% done; ETC: 01:23 (0:07:22 remaining)
+UDP Scan Timing: About 52.51% done; ETC: 01:26 (0:08:06 remaining)
+UDP Scan Timing: About 68.44% done; ETC: 01:34 (0:07:52 remaining)
+Increasing send delay for 131.246.197.6 from 0 to 50 due to 17887 out of 59622 dropped probes since last increase.
+Increasing send delay for 131.246.197.6 from 50 to 100 due to 11 out of 23 dropped probes since last increase.
+Increasing send delay for 131.246.197.6 from 100 to 200 due to 11 out of 23 dropped probes since last increase.
+UDP Scan Timing: About 73.69% done; ETC: 01:43 (0:08:55 remaining)
+UDP Scan Timing: About 77.78% done; ETC: 01:52 (0:09:41 remaining)
+UDP Scan Timing: About 82.21% done; ETC: 02:02 (0:09:26 remaining)
+UDP Scan Timing: About 86.52% done; ETC: 02:10 (0:08:16 remaining)
+UDP Scan Timing: About 90.31% done; ETC: 02:17 (0:06:35 remaining)
+UDP Scan Timing: About 93.32% done; ETC: 02:22 (0:04:52 remaining)
+UDP Scan Timing: About 95.55% done; ETC: 02:25 (0:03:23 remaining)
+UDP Scan Timing: About 97.11% done; ETC: 02:27 (0:02:16 remaining)
+UDP Scan Timing: About 98.16% done; ETC: 02:29 (0:01:28 remaining)
+UDP Scan Timing: About 98.84% done; ETC: 02:30 (0:00:56 remaining)
+UDP Scan Timing: About 99.28% done; ETC: 02:30 (0:00:35 remaining)
+Completed UDP Scan at 02:46, 5854.26s elapsed (65535 total ports)
+Nmap scan report for gaf-nat-core1.fg-networking.de (131.246.197.6)
+Host is up (0.00010s latency).
+Not shown: 131062 closed ports
+PORT      STATE         SERVICE
+22/tcp    open          ssh
+636/tcp   open          ldapssl
+68/udp    open|filtered dhcpc
+1812/udp  open|filtered radius
+1813/udp  open|filtered radacct
+1814/udp  open|filtered tdp-suite
+27070/udp open|filtered unknown
+37831/udp open|filtered unknown
+
+Read data files from: /usr/bin/../share/nmap
+Nmap done: 1 IP address (1 host up) scanned in 5865.05 seconds
+           Raw packets sent: 149026 (5.224MB) | Rcvd: 298030 (12.521MB)
