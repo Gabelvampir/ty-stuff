@@ -1,146 +1,146 @@
-% !TEX TS-program = pdflatex
-% !TEX encoding = UTF-8 Unicode
-
-% This is a simple template for a LaTeX document using the "article" class.
-% See "book", "report", "letter" for other types of document.
-
-\documentclass[11pt,a4paper,titlepage=firstiscover,headsepline,bibtotoc]{scrartcl} % use larger type; default would be 10pt
-
-\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
-\usepackage[T1]{fontenc} % maps glyphs to dictonary characters, needed for seperation
-
-%%% Examples of Article customizations
-% These packages are optional, depending whether you want the features they provide.
-% See the LaTeX Companion or other references for full information.
-
-%%% PAGE DIMENSIONS
-\usepackage{geometry} % to change the page dimensions
-%\geometry{a4paper} % or letterpaper (US) or a5paper or....
-\geometry{top=3.5cm,bottom=3.5cm} % for example, change the margins to 2 inches all round
-% \geometry{landscape} % set up the page for landscape
-%   read geometry.pdf for detailed page layout information
-
-% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
-
-%%% PACKAGES
-%\usepackage{booktabs} % for much better looking tables
-\usepackage{tabularx}  % for tables with variable width
-%\usepackage{array} % for better arrays (eg matrices) in maths
-
-%\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
-% These packages are all incorporated in the memoir class to one degree or another...
-\usepackage[ngerman]{babel}
-\usepackage{eurosym} %for euro symbol via \euro
-%\usepackage{blindtext}
-%\usepackage{pifont} %for symbols (i.e. arrows)
-%\usepackage{showframe} %shows the margins
-\usepackage{hhline} % more flexible hlines
-\usepackage{graphicx}
-
-
-\usepackage[colorlinks,linkcolor=blue,pdftex]{hyperref} % package for hyperlinks with \url
-% hyperlink color definitions
-%\hypersetup{citecolor=DeepPink4}
-\hypersetup{linkcolor=DarkBlue}
-\hypersetup{urlcolor=DarkRed} 
-
-\usepackage[svgnames]{xcolor}
-%\usepackage[anythingbreaks]{breakurl}
-\usepackage{listings}
-\lstset{ %
-%basicstyle=\sfdefault,        % the size of the fonts that are used for the code
-%breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
-breaklines=true,                 % sets automatic line breaking
-%commentstyle=\color{mygreen},    % comment style
-%deletekeywords={...},            % if you want to delete keywords from the given language
-%escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
-%extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
-frame=single,                    % adds a frame around the code
-keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
-%keywordstyle=\color{mygreen},       % keyword style
-%morekeywords={*,...},            % if you want to add more keywords to the set
-numbers=none,                    % where to put the line-numbers; possible values are (none, left, right)
-%numbersep=5pt,                   % how far the line-numbers are from the code
-%numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
-%rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
-showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
-showstringspaces=false,          % underline spaces within strings only
-showtabs=false,                  % show tabs within strings adding particular underscores
-%stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
-%stringstyle=\ttfamily\color{red},     % string literal style
-%tabsize=2,                       % sets default tabsize to 2 spaces
-%title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
-}
-
-\newcommand{\hilight}[1]{\colorbox{yellow}{#1}} %command for magic marker highlighting
-%   (from http://pleasemakeanote.blogspot.de/2009/08/how-to-highlight-text-in-latex.html)
-\newcommand{\mcc}[2]{\multicolumn{#1}{|c|}{#2}} %multirows over X rows in tabularx
-
-%%% HEADERS & FOOTERS
-\usepackage[automark]{scrlayer-scrpage} %header and footer definitions
-\setkomafont{pageheadfoot}{\normalfont\normalcolor} %um kursiv abzuschalten in header/footer
-\ihead{}
-\ihead{\includegraphics[scale=0.1]{\logoti}}
-\chead{\headmark}
-\ohead{}
-\ohead{\includegraphics[scale=0.17]{fgn-logos/logo_fgn_head.png}}
-\ifoot{Sebastian Deußer}
-\cfoot{}
-\ofoot{Seite \pagemark}
-
-%\setlength{\parindent}{0mm} %set paragraph begin indentation to 0
-
-
-%%% SECTION TITLE APPEARANCE
-%\usepackage{sectsty}
-%\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
-% (This matches ConTeXt defaults)
-
-%%% ToC (table of contents) APPEARANCE
-%\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
-%\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
-%\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
-%\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
-
-%\usepackage{uarial}
-\usepackage{helvet}
-\renewcommand{\familydefault}{\sfdefault}
-
-%%% END Article customizations
-
-\newcommand{\titel}{OpenLDAP- und FreeRADIUS-Server}
-\newcommand{\untertitel}{Kundendokumentation für Administratoren}
-
-\newcommand{\autor}{Sebastian Deußer}
-\newcommand{\kompletterTitel}{\titel{} -- \untertitel}
-\newcommand{\pruefungstermin}{Sommer 2015}
-\newcommand{\ort}{Kaiserslautern}
-\newcommand{\abgabetermin}{18. Mai 2015}
-\newcommand{\ausbildungsberuf}{Fachinformatiker -- Systemintegration}
-\newcommand{\betreff}{Dokumentation zur betrieblichen Projektarbeit}
-\newcommand{\logoti}{ti-Logos/url.png}
-\newcommand{\logofgn}{fgn-logos/logo_fgn}
-
-%%% The "real" document content comes below...
-
-\titlehead{taylorix institut für berufliche Bildung e.V.}
-\title{Kundendokumentation zum Projekt "Aufsetzen eines Authentifizierungsservers als Ersatz eines veralteten proprietären CommuniGate Servers"}
-\author{Sebastian Deußer}
-\date{18. Mai 2015} % Activate to display a given date or no date (if empty),
-         % otherwise the current date is printed 
-%\setcounter{section}{-1} % sets the section counter to start with 0
-
-\begin{document}
-\pagestyle{empty}
-\include{Deckblatt}
+%% !TEX TS-program = pdflatex
+%% !TEX encoding = UTF-8 Unicode
+%
+%% This is a simple template for a LaTeX document using the "article" class.
+%% See "book", "report", "letter" for other types of document.
+%
+%\documentclass[11pt,a4paper,titlepage=firstiscover,headsepline,bibtotoc]{scrartcl} % use larger type; default would be 10pt
+%
+%\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+%\usepackage[T1]{fontenc} % maps glyphs to dictonary characters, needed for seperation
+%
+%%%% Examples of Article customizations
+%% These packages are optional, depending whether you want the features they provide.
+%% See the LaTeX Companion or other references for full information.
+%
+%%%% PAGE DIMENSIONS
+%\usepackage{geometry} % to change the page dimensions
+%%\geometry{a4paper} % or letterpaper (US) or a5paper or....
+%\geometry{top=3.5cm,bottom=3.5cm} % for example, change the margins to 2 inches all round
+%% \geometry{landscape} % set up the page for landscape
+%%   read geometry.pdf for detailed page layout information
+%
+%% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+%
+%%%% PACKAGES
+%%\usepackage{booktabs} % for much better looking tables
+%\usepackage{tabularx}  % for tables with variable width
+%%\usepackage{array} % for better arrays (eg matrices) in maths
+%
+%%\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+%% These packages are all incorporated in the memoir class to one degree or another...
+%\usepackage[ngerman]{babel}
+%\usepackage{eurosym} %for euro symbol via \euro
+%%\usepackage{blindtext}
+%%\usepackage{pifont} %for symbols (i.e. arrows)
+%%\usepackage{showframe} %shows the margins
+%\usepackage{hhline} % more flexible hlines
+%\usepackage{graphicx}
+%
+%
+%\usepackage[colorlinks,linkcolor=blue,pdftex]{hyperref} % package for hyperlinks with \url
+%% hyperlink color definitions
+%%\hypersetup{citecolor=DeepPink4}
+%\hypersetup{linkcolor=DarkBlue}
+%\hypersetup{urlcolor=DarkRed} 
+%
+%\usepackage[svgnames]{xcolor}
+%%\usepackage[anythingbreaks]{breakurl}
+%\usepackage{listings}
+%\lstset{ %
+%%basicstyle=\sfdefault,        % the size of the fonts that are used for the code
+%%breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+%breaklines=true,                 % sets automatic line breaking
+%%commentstyle=\color{mygreen},    % comment style
+%%deletekeywords={...},            % if you want to delete keywords from the given language
+%%escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+%%extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+%frame=single,                    % adds a frame around the code
+%keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+%%keywordstyle=\color{mygreen},       % keyword style
+%%morekeywords={*,...},            % if you want to add more keywords to the set
+%numbers=none,                    % where to put the line-numbers; possible values are (none, left, right)
+%%numbersep=5pt,                   % how far the line-numbers are from the code
+%%numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+%%rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+%showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+%showstringspaces=false,          % underline spaces within strings only
+%showtabs=false,                  % show tabs within strings adding particular underscores
+%%stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+%%stringstyle=\ttfamily\color{red},     % string literal style
+%%tabsize=2,                       % sets default tabsize to 2 spaces
+%%title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+%}
+%
+%\newcommand{\hilight}[1]{\colorbox{yellow}{#1}} %command for magic marker highlighting
+%%   (from http://pleasemakeanote.blogspot.de/2009/08/how-to-highlight-text-in-latex.html)
+%\newcommand{\mcc}[2]{\multicolumn{#1}{|c|}{#2}} %multirows over X rows in tabularx
+%
+%%%% HEADERS & FOOTERS
+%\usepackage[automark]{scrlayer-scrpage} %header and footer definitions
+%\setkomafont{pageheadfoot}{\normalfont\normalcolor} %um kursiv abzuschalten in header/footer
+%\ihead{}
+%\ihead{\includegraphics[scale=0.1]{\logoti}}
+%\chead{\headmark}
+%\ohead{}
+%\ohead{\includegraphics[scale=0.17]{fgn-logos/logo_fgn_head.png}}
+%\ifoot{Sebastian Deußer}
+%\cfoot{}
+%\ofoot{Seite \pagemark}
+%
+%%\setlength{\parindent}{0mm} %set paragraph begin indentation to 0
+%
+%
+%%%% SECTION TITLE APPEARANCE
+%%\usepackage{sectsty}
+%%\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+%% (This matches ConTeXt defaults)
+%
+%%%% ToC (table of contents) APPEARANCE
+%%\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+%%\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+%%\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+%%\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+%
+%%\usepackage{uarial}
+%\usepackage{helvet}
+%\renewcommand{\familydefault}{\sfdefault}
+%
+%%%% END Article customizations
+%
+%\newcommand{\titel}{OpenLDAP- und FreeRADIUS-Server}
+%\newcommand{\untertitel}{Kundendokumentation für Administratoren}
+%
+%\newcommand{\autor}{Sebastian Deußer}
+%\newcommand{\kompletterTitel}{\titel{} -- \untertitel}
+%\newcommand{\pruefungstermin}{Sommer 2015}
+%\newcommand{\ort}{Kaiserslautern}
+%\newcommand{\abgabetermin}{18. Mai 2015}
+%\newcommand{\ausbildungsberuf}{Fachinformatiker -- Systemintegration}
+%\newcommand{\betreff}{Dokumentation zur betrieblichen Projektarbeit}
+%\newcommand{\logoti}{ti-Logos/url.png}
+%\newcommand{\logofgn}{fgn-logos/logo_fgn}
+%
+%%%% The "real" document content comes below...
+%
+%\titlehead{taylorix institut für berufliche Bildung e.V.}
+%\title{Kundendokumentation zum Projekt "Aufsetzen eines Authentifizierungsservers als Ersatz eines veralteten proprietären CommuniGate Servers"}
+%\author{Sebastian Deußer}
+%\date{18. Mai 2015} % Activate to display a given date or no date (if empty),
+%         % otherwise the current date is printed 
+%%\setcounter{section}{-1} % sets the section counter to start with 0
+%
+%\begin{document}
+%\pagestyle{empty}
+%\include{Deckblatt}
 %\maketitle %title (page)
 
 %\tableofcontents
-\newpage
+\clearpage
 \setcounter{page}{1}  %Seitenzahlen erst nach TOC zählen
 \pagestyle{scrheadings}
 
-\section{OpenLDAP}
+\section{Kundendokumentation für Administratoren}
 \subsection{Wichtige Details}
 \begin{itemize}
 \item Server \texttt{id.fg-networking.de}
@@ -153,9 +153,9 @@ showtabs=false,                  % show tabs within strings adding particular un
 \begin{itemize}
 \item \url{https://wiki.debian.org/LDAP/OpenLDAPSetup}
 \item \url{https://wiki.debian.org/FreeRadiusToLdap} (zu RADIUS+LDAP, etwas angestaubt sogar für Debian Verhältnisse)
-\item \url{http://www.postfix.org/LDAP_README.html} (Postfix+LDAP Doku)
+\item \url{http://www.postfix.org/LDAP\_README.html} (Postfix+LDAP Doku)
 \item \url{http://www.zytrax.com/books/ldap/ch11/multi-dit.html} (Beispiel für mehrere Domains in einem LDAP)
-\item \url{http://httpd.apache.org/docs/2.4/mod/mod_authnz_ldap.html} (Apache Doku zum LDAP Auth Modul)
+\item \url{http://httpd.apache.org/docs/2.4/mod/mod\_authnz\_ldap.html} (Apache Doku zum LDAP Auth Modul)
 \end{itemize}
 
 \subsection{Ändern des Passworts eines LDAP Users}
@@ -164,6 +164,63 @@ Um das Passwort eine Users im LDAP Verzeichnis zu ändern bietet sich für die K
 ldappasswd -S -W -D "cn=admin,dc=de" -x "uid=username,ou=people,dc=fg-networking,dc=de"
 \end{lstlisting}
 Dieser Befehl fragt auf der Kommandozeile das neue Passwort für den Account \texttt{username} ab (mit Wiederholung) und fragt wenn beide Passwörte übereinstimmen nach dem Passwort des LDAP-Administrators. Mit den Daten meldet es sich dann am LDAP Server an und speichert das Passwort dann gehashed in der LDAP Datenbank. Username muss natürlich durch den richtigen Namen ersetzt werden und eventuell die erste dc angepasst werden.
+
+\subsection{Erklärung der OpenLDAP Log-Level} \label{sec:LDAP-Loglevel}
+\begin{tabularx}{\textwidth}{|c|l|X|}
+\hline
+Level &	Keyword &	Description\\
+\hline
+-1 &	any &	enable all debugging\\
+\hline
+0 &	  &	no debugging\\
+\hline
+1 &	(0x1 trace) &	trace function calls\\
+\hline
+2 &	(0x2 packets) &	debug packet handling\\
+\hline
+4 &	(0x4 args) &	heavy trace debugging\\
+\hline
+8 &	(0x8 conns)& 	connection management\\
+\hline
+16 &	(0x10 BER) & 	print out packets sent and received\\
+\hline
+32 &	(0x20 filter) &	search filter processing\\
+\hline
+64 &	(0x40 config) &	configuration processing\\
+\hline
+128 &	(0x80 ACL) &	access control list processing\\
+\hline
+256 &	(0x100 stats) &	stats log connections/operations/results\\
+\hline
+512 &	(0x200 stats2) &	stats log entries sent\\
+\hline
+1024 &	(0x400 shell) &	print communication with shell backends\\
+\hline
+2048 &	(0x800 parse) &	print entry parsing debugging\\
+\hline
+16384 &	(0x4000 sync) &	syncrepl consumer processing\\
+\hline
+32768 &	(0x8000 none) &	only messages that get logged whatever log level is set \\
+\hline
+\end{tabularx}
+
+\bigskip
+\noindent Um Log-Level einzustellen kann man entweder die entsprechende Zahl aus der ersten Spalte, den Hex-Wert oder das Schlüsselwort aus Spalte 2 verwenden. Werden die Zahlen aus Spalte 1 verwendet kann man mehrere Log-Level gleichzeitig auswählen indem man ihre Wert miteinander addiert.
+
+Zum debuggen der Probleme die bei der Durchführung des Projekts auftraten erwiesen sich die meisten der Zusatzausgaben als ungeeignet, lediglich die Traces der Level 1 (0x1 trace) und 4 (0x4 args) konnten weiterhelfen, enthielten aber auch keine weiterführenden Informationen bei Problemen mit dem Zugriff auf die Verzeichnis-Datenbank.
+
+Wenn wie in diesem Projekt ein OpenLDAP-Server mit einem \texttt{slapd.d}"=Konfigurationsverzeichnis statt einer \texttt{slapd.conf}"=Konfigurationsdatei verwendet wird, muss man, wie sämtliche anderen Einstellungen auch, den Log-Level über eine vorbereitete Datei und \texttt{ldapmodify} verändern. Eine entsprechende Datei sieht wie folgt aus:
+\begin{lstlisting}
+dn: cn=config
+changetype: modify
+replace: olcLogLevel
+olcLogLevel: 5
+\end{lstlisting}
+Diese Datei würde den Log-Level auf 5 setzen. Der entsprechende \texttt{ldapmodify}-Aufruf ist dann:
+\begin{lstlisting}
+ldapmodify -Y EXTERNAL -H ldapi:/// -f olcLogLevel.ldif
+\end{lstlisting}
+
 
 \subsection{Ausgeben des Inhalts der LDAP Datenbank}
 Mit dem Kommandozeilenprogramm \texttt{ldapsearch} kann man nach Einträgen in der LDAP Datenbank suchen. Man kann sich damit auch den gesamten Inhalt der Datenbank anzeigen lassen. Dies geht am einfachsten mit
@@ -432,7 +489,7 @@ Die Firewall-Regeln wurden nach Vorbild der Regeln für den CommuniGate Server e
 \item Mailserver
 \end{itemize}
 
-
+\noindent Anmerkung: Eine Kundendokumentation für Anwender war nicht notwendig da sich auf Anwenderseite nach der Umstellun
 
 
 \end{document}
