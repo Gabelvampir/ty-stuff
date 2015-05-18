@@ -279,7 +279,7 @@ Bei erfolgreichen Import findet sich das Schema nun in \texttt{/etc/""ldap/""sla
 
 
 \subsection{Einrichten von LDAPS (LDAP"=over"=SSL)}
-Zuerst muss man Zertifikat und privaten Schlüssel für das LDAP erzeugen (siehe wiki:FGN-CA) und diese zusammen mit dem Zertifikat der CA auf den LDAP"=Server ablegen (vorzugsweise in \texttt{/etc/ssl/certs} bzw. \texttt{/etc/ssl/private}). Damit der LDAP"=Server die auch verwendet erstellt man eine entsprechende LDIF Datei (hier \texttt{olcSSL.ldif}).
+Zuerst muss man Zertifikat und privaten Schlüssel für das LDAP erzeugen (siehe FGN-CA im Wiki) und diese zusammen mit dem Zertifikat der CA auf den LDAP"=Server ablegen (vorzugsweise in \texttt{/etc/ssl/certs} bzw. \texttt{/etc/ssl/private}). Damit der LDAP"=Server die auch verwendet erstellt man eine entsprechende LDIF Datei (hier \texttt{olcSSL.ldif}).
 \begin{lstlisting}
 dn: cn=config
 add: olcTLSCACertificateFile
