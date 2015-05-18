@@ -38,6 +38,7 @@
 \usepackage{graphicx}
 
 
+
 \usepackage[colorlinks,linkcolor=blue,pdftex]{hyperref} % package for hyperlinks with \url
 % hyperlink color definitions
 %\hypersetup{citecolor=DeepPink4}
@@ -75,6 +76,8 @@ showtabs=false,                  % show tabs within strings adding particular un
 \newcommand{\hilight}[1]{\colorbox{yellow}{#1}} %command for magic marker highlighting
 %   (from http://pleasemakeanote.blogspot.de/2009/08/how-to-highlight-text-in-latex.html)
 \newcommand{\mcc}[2]{\multicolumn{#1}{|c|}{#2}} %multirows over X rows in tabularx
+
+\usepackage{pdfpages}
 
 %%% HEADERS & FOOTERS
 \usepackage[automark]{scrlayer-scrpage} %header and footer definitions
@@ -282,14 +285,14 @@ Somit ist bei der Konfiguration aller Webserver prinzipiell dasselbe zu ändern,
 
 Oberflächlich gibt es in der Konfiguration natürlich auch Unterschiede. So haben auf \texttt{aio} mehrere Tools eigene \texttt{<Location>}-Einträge in der Konfiguration in denen jeweils der LDAP Server eingestellt ist, während es auf \texttt{nms} lediglich einen Eintrag für alle Webtools gibt. Aber diese Detailunterschiede machen keinen wirklichen Unterschied bei den später vorzunehmenden Änderungen.
 
-Die Konfiguration von OpenVPN muss auch lediglich auf die neue Server-URL und BaseDN umgestellt werden, sowie das Stammzertifikat eingetragen werden. Dies geschieht in der Datei \texttt{/etc/openvpn/auth-ldap.config}, näheres dazu siehe \autoref{sec:VPN-Konfig}.
+Die Konfiguration von OpenVPN muss auch lediglich auf die neue Server-URL und BaseDN umgestellt werden, sowie das Stammzertifikat eingetragen werden. Dies geschieht in der Datei \texttt{/etc/openvpn/auth-ldap.config}, näheres dazu siehe \nameref{sec:VPN-Konfig} in der Kundendokumentation.
 
 Bei Begutachtung der Egroupware-Konfiguration im Administrationsmenü fiel auf, dass hier keine Einstellungen zu LDAP zu finden waren. Nach kurzer Recherche stellte sich heraus, dass in Egroupware -- wie bei vielen PHP-Webanwendungen -- manche Einstellungen nur im Installer vornehmbar sind, wie z.B. die LDAP-Einstellungen. Das Passwort für diesen Installer leider nicht -- wie sonst üblich -- im Firmenwiki hinterlegt, und der mit dem Installer vertraute Mitarbeiter befand sich zu Bearbeitungszeit des Projektes im Urlaub. Man hätte zwar relativ einfach das Passwort des Installers durch Editieren der entsprechenden PHP Datei ändern können, aber da keiner der Anwesenden mit dem Egroupware-Installer vertraut war und die Groupware sehr wichtig für die Arbeit der Firma ist, wurde entschieden, sie erst später vom zuständigen Mitarbeiter auf den neuen LDAP-Server umstellen zu lassen. 
 
 \subsubsection{Prüfung von Möglichkeiten zum Importieren der bestehenden Anwenderkonten in die neue Lösung} \label{sec:Importsuche}
 Leider bietet CommuniGate selbst keine Funktion zum Export seiner Benutzerdaten an. Über die OpenLDAP-Utils wäre ein Auslesen der Daten möglich, in einer Form, die man in das neue LDAP wieder importieren könnte. Da allerdings CommuniGate für die E-Mail betreffenden Attribute ein proprietäres LDAP-Schema benutzt, wäre der Nachbearbeitungsaufwand für diese Daten sehr hoch. 
 
-Aber es sollten erst einmal nur die notwendigsten Attribute (siehe \autoref{sec:LDAP-Attribute}) übernommen werden und CommuniGate speichert die Anwenderdaten in einer mit den Standard Unix/Linux Textverarbeitungswerkzeugen (\texttt{sed}, \texttt{awk}, \texttt{cut}) vergleichsweise einfach verarbeitbaren Form. Somit stellte das Erzeugen von durch LDAP importierbaren Datensätze aus den gespeicherten Dateien von CommuniGate mit Hilfe von Skripten in diesem Fall die sinnvollste Vorgehensweise dar. Da das Entwickeln der Skripte ohne Zugriff auf die Daten umständlich gewesen wäre, hatte Herr Auerswald sich bereit erklärt, diese zu schreiben, da ihm Zugriff auf die Anwenderpasswörter erlaubt ist. Als Unterstützung bei dieser Arbeit wurden Herrn Auerswald ein Template der zu generierenden LDAP Importdaten und der Befehlsaufruf von \texttt{slappasswd} zur Verfügung gestellt. Letzteres wird in einem zweiten Skript zum passenden hashen der Passwörter verwendet, damit in den Importdaten nur noch Passwort-Hashes stehen, und diese mit nur noch geringen Datenschutz- und Sicherheitsbedenken verwendet werden können.
+Aber es sollten erst einmal nur die notwendigsten Attribute (siehe \nameref{sec:LDAP-Attribute} im Anhang) übernommen werden und CommuniGate speichert die Anwenderdaten in einer mit den Standard Unix/Linux Textverarbeitungswerkzeugen (\texttt{sed}, \texttt{awk}, \texttt{cut}) vergleichsweise einfach verarbeitbaren Form. Somit stellte das Erzeugen von durch LDAP importierbaren Datensätze aus den gespeicherten Dateien von CommuniGate mit Hilfe von Skripten in diesem Fall die sinnvollste Vorgehensweise dar. Da das Entwickeln der Skripte ohne Zugriff auf die Daten umständlich gewesen wäre, hatte Herr Auerswald sich bereit erklärt, diese zu schreiben, da ihm Zugriff auf die Anwenderpasswörter erlaubt ist. Als Unterstützung bei dieser Arbeit wurden Herrn Auerswald ein Template der zu generierenden LDAP Importdaten und der Befehlsaufruf von \texttt{slappasswd} zur Verfügung gestellt. Letzteres wird in einem zweiten Skript zum passenden hashen der Passwörter verwendet, damit in den Importdaten nur noch Passwort-Hashes stehen, und diese mit nur noch geringen Datenschutz- und Sicherheitsbedenken verwendet werden können.
 
 \subsection{Installation und Einrichtung des neuen Servers}
 \subsubsection{Grundinstallation des Linux Systems des neuen Servers}
@@ -302,11 +305,11 @@ Nach der Grundinstallation wurden im neuen System dann die Pakete \texttt{slapd}
 
 \noindent Um in einem LDAP-Verzeichnis neue Attribute zu definieren, gibt es sogenannte Schema (eigener Ausdruck, nicht zu verwechseln mit Schema/Schemata). CommuniGate verwendet zum Verwalten der E-Mail-Anwenderdaten ein eigenes proprietäres LDAP-Schema, um die Daten in selbst definierten Attributen zu speichern. Diese Attribute können somit nicht ins neue LDAP übernommen werden, ohne verschiedene Implementierungsentscheidungen für den neuen E-Mailserver zu kennen. Da dieser zur Bearbeitungszeit dieses Projektes noch nicht weit genug fortgeschritten war, um eine Absprache zu ermöglichen, wurde entschieden, erst einmal nur die wichtigsten Attribute zu übernehmen und die E-Mail Attribute später anzupassen. Dies wird sehr wahrscheinlich auch wieder mittels per Skript generierten Datensätzen möglich sein und stellt somit einen vertretbar geringen Mehraufwand für die E-Mail Server-Einrichtung dar.
 
-Weiterhin musste die neue Verzeichnisstruktur berücksichtigen, dass mehrere voneinander unabhängige Namensräume (die drei in \nameref{sec:Konfig-Doku-Alt} erwähnten E-Mail Domains) zu verwalten sind. Das bedeutet, dass in den Domains Konten mit derselben \texttt{UID} vorhanden sein können, die aber voneinander unabhängig sind. Der erste Ansatz dazu war jeder der drei Domains eine eigene Datenbank (im Sinne von getrennten Dateien, die von einem LDAP-Server verwaltet werden) zu geben. Allerdings ließen sich in verschiedenen Versuchen die Datenbänke zwar anlegen, jedoch war ein Zugriff auf sie nicht möglich (getestet wurde dies mit entsprechenden \texttt{ldapsearch}-Aufrufen). Da sich u.a. wegen den eher unpraktischen Log-Leveln (siehe \autoref{sec:LDAP-Loglevel} von OpenLDAP das genaue Problem mit dieser Vorgehensweise nicht lokalisieren ließ, musste eine andere Struktur ersonnen werden.
+Weiterhin musste die neue Verzeichnisstruktur berücksichtigen, dass mehrere voneinander unabhängige Namensräume (die drei in \nameref{sec:Konfig-Doku-Alt} erwähnten E-Mail Domains) zu verwalten sind. Das bedeutet, dass in den Domains Konten mit derselben \texttt{UID} vorhanden sein können, die aber voneinander unabhängig sind. Der erste Ansatz dazu war jeder der drei Domains eine eigene Datenbank (im Sinne von getrennten Dateien, die von einem LDAP-Server verwaltet werden) zu geben. Allerdings ließen sich in verschiedenen Versuchen die Datenbänke zwar anlegen, jedoch war ein Zugriff auf sie nicht möglich (getestet wurde dies mit entsprechenden \texttt{ldapsearch}-Aufrufen). Da sich u.a. wegen den eher unpraktischen Log-Leveln (siehe \nameref{sec:LDAP-Loglevel} in der Kundendokumentation) von OpenLDAP das genaue Problem mit dieser Vorgehensweise nicht lokalisieren ließ, musste eine andere Struktur ersonnen werden.
 
 Der Ansatz für die alternative Verzeichnisstruktur basierte u.a. darauf, wie LDAP mit Domainnamen umgeht: sie werden an den Trennzeichen (hier: Punkte) in einzelne Domain Components (LDAP-Bezeichnung \texttt{dc}) zerlegt. Da alle drei Domainnamen mit \texttt{.de} enden, konnte \texttt{dc=de} als Wurzel des Baumes der hierarchischen LDAP Verzeichnisstruktur verwendet werden. In der ersten Ebene unter der Wurzel verzweigt dieser Baum dann in die drei Domain Components  \texttt{fg-networking.de}, \texttt{schabler.de} und \texttt{worden.de}. Da Objektnamen von ihrem vollen Kontext (quasi ihrem Pfad im Baum) abhängen, sind auch in diesem Modell drei unabhängige Namensräume gewährleistet. In den Domains \texttt{schabler.de} und \texttt{worden.de} sind nur relativ wenige Benutzerkonten hinterlegt (weniger als 10 Konten pro Domain) und beide Domains haben auch keinen eigenen Administrator (sie werden von fgn mit administriert). Daher gibt es auch keine Bedenken hinsichtlich Datenschutz und Performance wenn sich alle Domains in einer gemeinsamen Datenbank befindet. In der nächsten Ebene wurde dann jeweils eine Organizational Unit (\texttt{OU}) namens \texttt{people} angelegt in die dann die Benutzerkonten eingeordnet werden. Die \texttt{people}-\texttt{OU} wurde eingezogen um zukünftig auch andere Kontentypen wie z.B. Rechnerkonten in LDAP ablegen zu können, ohne dessen Verzeichnisstruktur grundlegend ändern zu müssen, um eine Unterscheidung der Konten zu erhalten.
 
-Die oberste Ebene der Verzeichnisstruktur (die \texttt{de}-Wurzel) wurde mit Hilfe des Debian Konfigurationsskripts erstellt. Dabei wurden neben den vier Schema der Debian Standardkonfiguration (\texttt{core}, \texttt{cosine}, \texttt{nis} und \texttt{inetorgperson}) zusätzlich das \texttt{freeradius}-Schema aus dem \texttt{freeradius}-Paket und ein \texttt{postfix}-Schema (aus den Galileo Press Praxisbuch zu OpenLDAP 2.4) verwendet (Erläuterungen zu den Schema siehe \autoref{sec:LDAP-Schema}). Die erste Ebene wurde dann mit \texttt{slapadd} angelegt und die Grundstruktur darunter mit \texttt{ldapadd} erstellt (genaue Beschreibung der verwendeten LDAP Data Interchange Format (LDIF)-Dateien siehe \autoref{sec:Erstelle-DB}).
+Die oberste Ebene der Verzeichnisstruktur (die \texttt{de}-Wurzel) wurde mit Hilfe des Debian Konfigurationsskripts erstellt. Dabei wurden neben den vier Schema der Debian Standardkonfiguration (\texttt{core}, \texttt{cosine}, \texttt{nis} und \texttt{inetorgperson}) zusätzlich das \texttt{freeradius}-Schema aus dem \texttt{freeradius}-Paket und ein \texttt{postfix}-Schema (aus den Galileo Press Praxisbuch zu OpenLDAP 2.4) verwendet (Erläuterungen zu den Schema siehe \nameref{sec:LDAP-Schema} in der Kundendokumentation). Die erste Ebene wurde dann mit \texttt{slapadd} angelegt und die Grundstruktur darunter mit \texttt{ldapadd} erstellt (genaue Beschreibung der verwendeten LDAP Data Interchange Format (LDIF)-Dateien siehe \nameref{sec:Erstelle-DB} in der Kundendokumentation).
 
 \begin{figure}[htbp] 
 \centering
@@ -316,7 +319,7 @@ Die oberste Ebene der Verzeichnisstruktur (die \texttt{de}-Wurzel) wurde mit Hil
 \end{figure}
 
 \subsubsection{Installation und Konfiguration des RADIUS-Servers}\label{sec:RADIUS-Konf}
-Auf dem Server wurden die Pakete \texttt{freeradius} und \texttt{freeradius-ldap} sowie -- zu Testzwecken -- das Paket \texttt{freeradius-utils} installiert. In den Konfigurationsdateien wurde dann LDAP als mögliche Quelle für Benutzerdaten eingetragen, die LDAP-Module aktiviert und der Zugriff durch die E-Mail-Server der TU Kaiserslautern erlaubt. Zusätzlich musste das zu dem TU E-Mail-Servern gehörende Shared Secret eingetragen werden, welches aus den Konfigurationsdateien von CommuniGate übernommen wurde, da es nicht in der firmeninternen Dokumentation festgehalten war. Näheres zur Konfiguration siehe \autoref{sec:RADIUS-Konfig}
+Auf dem Server wurden die Pakete \texttt{freeradius} und \texttt{freeradius-ldap} sowie -- zu Testzwecken -- das Paket \texttt{freeradius-utils} installiert. In den Konfigurationsdateien wurde dann LDAP als mögliche Quelle für Benutzerdaten eingetragen, die LDAP-Module aktiviert und der Zugriff durch die E-Mail-Server der TU Kaiserslautern erlaubt. Zusätzlich musste das zu dem TU E-Mail-Servern gehörende Shared Secret eingetragen werden, welches aus den Konfigurationsdateien von CommuniGate übernommen wurde, da es nicht in der firmeninternen Dokumentation festgehalten war. Näheres zur Konfiguration siehe \nameref{sec:RADIUS-Konfig} in der Kundendokumentation.
 
 \subsubsection{Absicherung des Rechners (Firewall etc.)}
 Wie in \nameref{sec:Sicherheitskonzept} erläutert, sind dem Netz, in dem sich der Server befindet, bereits zwei Firewalls vorgeschaltet. Die einzige Änderung, die an diesen vorgenommen werden musste, ist das Eintragen einer Ausnahmeregel mit der der Zugriff auf den RADIUS-Server aus dem Universitätsnetz erlaubt wird. Dafür wird die bereits bestehende Firewall-Regel für den in CommuniGate enthaltenen RADIUS auf die IP des neuen Servers angepasst.
@@ -333,12 +336,12 @@ Der OpenSSH-Server, der für Fernzugriffe zusätzlich zur eigentliche Serverfunk
 
 \subsection{Abschließende Arbeiten}
 \subsubsection{Umkonfiguration der Webservices}
-Da die umzustellenden Dienste (Webservices und OpenVPN) bereits den alten LDAP-Server verwenden, musste hier nicht viel eingerichtet werden. Die größte Änderung, die vorzunehmen war, ist daher das zusätzliche Eintragen des CA-Stammzertifikates in die Konfigurationsdatei \texttt{/etc/apache2/mods-available/ldap.conf} (bzw. bei OpenVPN in die entsprechende Konfigurationsdatei), da sonst keine LDAP- Verbindung über SSL aufgebaut werden kann. Ansonsten mussten nur noch in der Site-Konfiguration die URL des LDAP Servers und die BaseDN angepasst werden (OpenVPN ist analog anzupassen). Zu Details der anzupassenden Konfigurationen siehe \autoref{sec:Apache-Konfig} und \autoref{sec:VPN-Konfig}.
+Da die umzustellenden Dienste (Webservices und OpenVPN) bereits den alten LDAP-Server verwenden, musste hier nicht viel eingerichtet werden. Die größte Änderung, die vorzunehmen war, ist daher das zusätzliche Eintragen des CA-Stammzertifikates in die Konfigurationsdatei \texttt{/etc/apache2/mods-available/ldap.conf} (bzw. bei OpenVPN in die entsprechende Konfigurationsdatei), da sonst keine LDAP- Verbindung über SSL aufgebaut werden kann. Ansonsten mussten nur noch in der Site-Konfiguration die URL des LDAP Servers und die BaseDN angepasst werden (OpenVPN ist analog anzupassen). Zu Details der anzupassenden Konfigurationen siehe die Abschnitte \nameref{sec:Apache-Konfig} und \nameref{sec:VPN-Konfig} in der Kundendokumentation.
 
 Wie in \nameref{sec:Konfig-Doku-Alt} geschildert, konnte Egroupware zur Bearbeitungszeit dieses Projektes noch nicht umgestellt werden, dies muss dann noch vom zuständigen Mitarbeiter vorgenommen werden.
 
 \subsubsection{Import/Anlegen der Anwenderkonten}
-Wie in \nameref{sec:Importsuche} erwähnt, wurde entschieden, dass die praktikabelste Methode, um die Benutzerkonten im neuen Verzeichnisdienst zu erstellen, die Generierung einer von LDAP importierbaren Datei ist. Mit Hilfe der von Herrn Auerswald erstellten Skripte (Skripte siehe \autoref{sec:SkriptA} und \autoref{sec:SkriptB}) wurde dann aus den Daten von CommuniGate eine LDIF-Datei erzeugt, die dann mit \texttt{ldapadd} importiert wurde.
+Wie in „\nameref{sec:Importsuche}“ erwähnt, wurde entschieden, dass die praktikabelste Methode, um die Benutzerkonten im neuen Verzeichnisdienst zu erstellen, die Generierung einer von LDAP importierbaren Datei ist. Mit Hilfe der von Herrn Auerswald erstellten Skripte (Skripte siehe \nameref{sec:SkriptA} und \nameref{sec:SkriptB} im Anhang) wurde dann aus den Daten von CommuniGate eine LDIF-Datei erzeugt, die dann mit \texttt{ldapadd} importiert wurde.
 
 Anmerkung: CommuniGate speichert Mailinglisten und Ähnliches ebenfalls in LDAP-Objekten, es wurden hier nur die Konten von echten Anwendern und zur Verwaltung der Webservices etc. nötige Konten importiert.
 
@@ -354,7 +357,7 @@ Abschließend wurde noch versucht, einen Managed Switch an den RADIUS-Server anz
 
 \medskip \noindent
 Zum Testen der Sicherungsmaßnahmen wurde nach der Umstellung der Webservices erfolglos versucht, sich an diesen mit falschen Anmeldeinformationen (falscher Benutzername, richtiger Benutzername mit falschem Passwort) anzumelden. Dasselbe wurde mit \texttt{radtest} am RADIUS-Server getestet.
-Abschließend wurde noch per \texttt{nmap} von innerhalb der Firmennetze und von einem externen Rechner aus geprüft, ob ausschließlich die richtigen Ports geöffnet sind (näheres dazu in \autoref{sec:NMAP-Test-int} und \autoref{sec:NMAP-Test-ext}).
+Abschließend wurde noch per \texttt{nmap} von innerhalb der Firmennetze und von einem externen Rechner aus geprüft, ob ausschließlich die richtigen Ports geöffnet sind (näheres dazu in \nameref{sec:NMAP-Test-int} und \nameref{sec:NMAP-Test-ext} im Anhang).
 %\hilight{TODO: fgn Netzstruktur korrigieren}
 
 
@@ -463,64 +466,51 @@ fgn hat neben den diversen Linux-Rechnern auch noch 2 Windows-PCs in der Verwalt
 \newpage
 \subsection{Skript zum Konvertieren der Anwenderkonten}\label{sec:SkriptA}
 \lstinputlisting[language=sh]{cg_accounts_to_ldap.sh}
-Dieses Skript liest die Klartext-Dateien von CommuniGate aus und wandelt diese in das passende Format für \texttt{ldapmodify} um. Dazu werden die entsprechende Daten in das am Ende von \autoref{sec:Erstelle-DB} Template eingetragen. Das Ganze wird in eine Datei geschrieben, jeder Datensatz getrennt durch eine Leerzeile.
+Dieses Skript liest die Klartext-Dateien von CommuniGate aus und wandelt diese in das passende Format für \texttt{ldapmodify} um. Dazu werden die entsprechende Daten in das am Ende der \nameref{sec:Erstelle-DB} (Kundendokumentation) Template eingetragen. Das Ganze wird in eine Datei geschrieben, jeder Datensatz getrennt durch eine Leerzeile.
 
 Abdruck des Skript mit freundlicher Genehmigung von fgn und dem Autor Erik Auerswald.
 
 \newpage
 \subsection{Skript zum Hashen der Anwenderpasswörter}\label{sec:SkriptB}
 \lstinputlisting[language=sh]{hash_passwords.sh}
-Dieses Skript wandelt die Klartext-Passwörter in der mit dem Skript aus \autoref{sec:SkriptA} mit Hilfe von \texttt{slappasswd} in von OpenLDAP importierbare Passwort-Hashes umgewandelt.
+Dieses Skript wandelt die Klartext-Passwörter in der mit dem vorigen Skript erstellten Datei mit Hilfe von \texttt{slappasswd} in von OpenLDAP importierbare Passwort-Hashes um.
 
 Abdruck des Skript mit freundlicher Genehmigung von fgn und dem Autor Erik Auerswald.
-
-\newpage
-\subsection{Konfiguration der Firewall}
-Der folgende Block zeigt die Ausgabe der Uncomplicated Firewall (\texttt{ufw}) über ihre aktuellen Regeln (\texttt{ufw} verwendet als Standardregel, die als letzte angewendet wird wenn keine andere Regel zutrifft, ein implizites \texttt{* DENY ALL} das nicht angezeigt wird):
-\begin{lstlisting}
-root@id:~# ufw status
-Status: active
-
-To                         Action      From
---                         ------      ----
-22                         ALLOW       Anywhere
-636                        ALLOW       131.246.197.0/25
-636                        ALLOW       10.122.0.0/16
-1812                       ALLOW       131.246.197.0/25
-1813                       ALLOW       131.246.197.0/25
-1812                       ALLOW       10.122.0.0/16
-1813                       ALLOW       10.122.0.0/16
-1812                       ALLOW       131.246.120.208/28
-1812                       ALLOW       131.246.5.14
-22                         ALLOW       Anywhere (v6)
-\end{lstlisting}
-\begin{itemize}
-\item SSH (Port \texttt{22}) ist wie bei Servern bei fgn üblich von sämtlichen Quellrechnern erlaubt (IPv4 und IPv6)
-\item LDAPS (Port \texttt{636}) ist aus dem fgn-Subnetz (\texttt{131.246.197.0/25}) und dem privaten fgn"=Infrastruktur"=Netz (\texttt{10.122.0.0/16})
-\item RADIUS (Port \texttt{1812} ist der gerenelle Port des FreeRADIUS-Daemons und Port \texttt{1813} ist der Port für Accounting) ist zugelassen für Verbindungen aus dem öffentlichen fgn"=Subnetz (\texttt{131.246.197.0/25}), dem privaten fgn"=Infrastruktur"=Netz (\texttt{10.122.0.0/16}), den TU E-Mail-Servern \texttt{131.246.120.208/28} und dem RADIUS-Server der TU \texttt{131.246.5.14}. Der RADIUS-Proxy Port \texttt{1814} wurde hier nicht gebraucht weswegen keine Verbindungen zu ihn friegeschaltet wurden.
-\end{itemize}
-Die Firewall-Regeln wurden nach Vorbild der Regeln für den CommuniGate Server erstellt.
 
 
 \newpage
 \subsection{Ergebnis eines fgn internen NMAP Tests}\label{sec:NMAP-Test-int}
 \lstinputlisting{nmap-id-udp.txt}
+Wie man sieht sind für das fgn-Netz nur die Ports für SSH (\texttt{22}), LDAPS (\texttt{636}), und RADIUS (\texttt{1812} und \texttt{1813}) geöffnet.
+
+\noindent\texttt{gaf-nat-core1.fg-networking.de} ist der Hostname des ESXi-Servers auf dem die VM läuft.
 
 \newpage
 \subsection{Ergebnis eines externen NMAP Tests}\label{sec:NMAP-Test-ext}
 \lstinputlisting{nmap-fettuccini-udp.txt}
+Wie man sieht sind für das restliche Internet nur der Port für SSH (\texttt{22}) geöffnet.
+
+\noindent\texttt{gaf-nat-core1.fg-networking.de} ist der Hostname des ESXi-Servers auf dem die VM läuft.
 \newpage
 
 
-\clearpage
-%\setcounter{page}{26}  %Seitenzahlen erst nach TOC zählen
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{section}{B.  Kundendokumentation}
+%\section{Kundendokumentation für Administratoren}
+\input{Deckblatt2}
+\input{Kundendokumentation}
 
-\include{Deckblatt2}
 
-\include{Kundendokumentation}
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{section}{Projektantrag Nr. 1 (abgelehnt)}
+\includepdf[pages=-]{1_Projektantrag_(abgelehnt).pdf}
 
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{section}{Projektantrag Nr. 2 (genehmigt)}
+\includepdf[pages=-]{2_Projektantrag_(genehmigt).pdf}
 
-\addsection{1. Projektantrag (abgelehnt)}
-\includegraphics{1_Projektantrag_(abgelehnt).pdf}
 
 \end{document}

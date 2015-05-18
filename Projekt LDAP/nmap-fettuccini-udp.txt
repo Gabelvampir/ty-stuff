@@ -1,3 +1,4 @@
+# nmap -Pn -sS -sU -p1-65535 id.fg-networking.de 
 
 Starting Nmap 6.47 ( http://nmap.org ) at 2015-05-11 14:09 CEST
 Initiating Parallel DNS resolution of 1 host. at 14:09

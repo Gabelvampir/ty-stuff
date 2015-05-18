@@ -137,14 +137,16 @@
 
 %\tableofcontents
 \clearpage
-\setcounter{page}{1}  %Seitenzahlen erst nach TOC zählen
+%\setcounter{page}{1}  %Seitenzahlen erst nach TOC zählen
 \pagestyle{scrheadings}
 
-\section{Kundendokumentation für Administratoren}
+\section*{B.  Kundendokumentation für Administratoren}
+\setcounter{section}{2}
+\setcounter{subsection}{0}
 \subsection{Wichtige Details}
 \begin{itemize}
 \item Server \texttt{id.fg-networking.de}
-\item verwendet LDAP over SSL (Port 636), LDAP Standardport nur für Loopback aktiviert (zu ändern in /etc/default/slapd)
+\item verwendet LDAP"=over"=SSL (Port 636), LDAP Standardport nur für Loopback aktiviert (zu ändern in /etc/default/slapd)
 \item Purge des slapd Pakets löscht nicht die LDAP Datenbank (Konfiguration dieses Verhaltens über das Debian Paketkonfigurationsskript)
 \end{itemize}
 
@@ -159,11 +161,11 @@
 \end{itemize}
 
 \subsection{Ändern des Passworts eines LDAP Users}
-Um das Passwort eine Users im LDAP Verzeichnis zu ändern bietet sich für die Kommandozeile \texttt{ldappasswd} an. Dazu sollten die LDAP Utils auf dem jeweiligen Rechner richtig konfiguriert sein (siehe in Einrichten von LDAPS (LDAP over SSL) den unteren Teil zur \texttt{/etc/ldap/ldap.conf}).
+Um das Passwort eine Users im LDAP Verzeichnis zu ändern bietet sich für die Kommandozeile \texttt{ldappasswd} an. Dazu sollten die LDAP''=Utils auf dem jeweiligen Rechner richtig konfiguriert sein (siehe in Einrichten von LDAPS (LDAP"=over"=SSL) den unteren Teil zur \texttt{/etc/ldap/ldap.conf}).
 \begin{lstlisting}
 ldappasswd -S -W -D "cn=admin,dc=de" -x "uid=username,ou=people,dc=fg-networking,dc=de"
 \end{lstlisting}
-Dieser Befehl fragt auf der Kommandozeile das neue Passwort für den Account \texttt{username} ab (mit Wiederholung) und fragt wenn beide Passwörte übereinstimmen nach dem Passwort des LDAP-Administrators. Mit den Daten meldet es sich dann am LDAP Server an und speichert das Passwort dann gehashed in der LDAP Datenbank. Username muss natürlich durch den richtigen Namen ersetzt werden und eventuell die erste dc angepasst werden.
+Dieser Befehl fragt auf der Kommandozeile das neue Passwort für den Account \texttt{username} ab (mit Wiederholung) und fragt wenn beide Passwörte übereinstimmen nach dem Passwort des LDAP''=Administrators. Mit den Daten meldet es sich dann am LDAP''=Server an und speichert das Passwort dann gehashed in der LDAP Datenbank. Username muss natürlich durch den richtigen Namen ersetzt werden und eventuell die erste dc angepasst werden.
 
 \subsection{Erklärung der OpenLDAP Log-Level} \label{sec:LDAP-Loglevel}
 \begin{tabularx}{\textwidth}{|c|l|X|}
@@ -209,7 +211,7 @@ Level &	Keyword &	Description\\
 
 Zum debuggen der Probleme die bei der Durchführung des Projekts auftraten erwiesen sich die meisten der Zusatzausgaben als ungeeignet, lediglich die Traces der Level 1 (0x1 trace) und 4 (0x4 args) konnten weiterhelfen, enthielten aber auch keine weiterführenden Informationen bei Problemen mit dem Zugriff auf die Verzeichnis-Datenbank.
 
-Wenn wie in diesem Projekt ein OpenLDAP-Server mit einem \texttt{slapd.d}"=Konfigurationsordner statt einer \texttt{slapd.conf}"=Konfigurationsdatei verwendet wird, muss man, wie sämtliche anderen Einstellungen auch, den Log-Level über eine vorbereitete Datei und \texttt{ldapmodify} verändern. Eine entsprechende Datei sieht wie folgt aus:
+Wenn wie in diesem Projekt ein OpenLDAP''=Server mit einem \texttt{slapd.d}"=Konfigurationsordner statt einer \texttt{slapd.conf}"=Konfigurationsdatei verwendet wird, muss man, wie sämtliche anderen Einstellungen auch, den Log-Level über eine vorbereitete Datei und \texttt{ldapmodify} verändern. Eine entsprechende Datei sieht wie folgt aus:
 \begin{lstlisting}
 dn: cn=config
 changetype: modify
@@ -230,15 +232,15 @@ ldapsearch -x -LLL -H ldaps://id.fg-networking.de -b dc=de
 Erklärung der Parameter: -x stellt auf einfache Authentifizierung um (im Gegensatz zu SASL), -LLL gibt die Daten im LDIF Format aus, ohne Kommentare und ohne Anzeige der Versionsnummer, mit -H wird die URI des LDAP Servers übergeben und -b gibt den Startpunkt im Datenbankbaum für die Suche an.
 
 
-\subsection{Hinzufügen eigener Konfig und Schema zum OpenLDAP-Server}
+\subsection{Hinzufügen eigener Konfiguration und Schema zum OpenLDAP-Server}
 Neuer Versionen von OpenLDAP benutzen nicht mehr die slapd.conf, sondern ein Konfigurationsverzeichnis slapd.d mit eigener Datenstruktur.
-Um neue Konfig hinzuzufügen legt man ein ldif File mit der Konfig an und importiert diese mit
+Um neue Konfigurationen hinzuzufügen legt man eine LDIF''=Datei mit der Konfiguration an und importiert diese mit
 \begin{lstlisting}
 ldapmodify -Y EXTERNAL -H ldapi:/// -f <file.ldif> 
 \end{lstlisting}
 
 Um ein neues Schema einzufügen kopiert man das .schema File nach \texttt{/etc/ldap/""schema}.
-Dann erstellt man sich ein temporäres Konfigfile (hier als Beispiel \texttt{""/tmp""/""schema"".conf}) mit folgendem Inhalt
+Dann erstellt man sich eine temporäre Konfig''=Datei (hier als Beispiel \texttt{""/tmp""/""schema"".conf}) mit folgendem Inhalt
 \begin{lstlisting}
 include /etc/ldap/schema/core.schema
 include /etc/ldap/schema/cosine.schema
@@ -250,11 +252,11 @@ mypersonalschema.schema sei hier das neue Schema. Nun erstellt man sich ein temp
 \begin{lstlisting}
 slaptest -f /tmp/schema.conf -F /tmp/ldif_output
 \end{lstlisting}
-Nun editiert man das generierte File zB mit
+Nun editiert man das generierte File z.B. mit
 \begin{lstlisting}
 vim "/tmp/ldif_output/cn=config/cn=schema/cn={4}mypersonalschema.ldif"
 \end{lstlisting}
-Hier ändert man dann die ersten 3 Zeilen wie folgt
+Hier ändert man dann die ersten drei Zeilen wie folgt
 \begin{lstlisting}
 dn: cn=mypersonalschema,cn=schema,cn=config
 objectClass: olcSchemaConfig
@@ -270,15 +272,15 @@ entryCSN:
 modifiersName:
 modifyTimestamp:
 \end{lstlisting}
-Nun kann man das Ganze in die Systemkonfig importieren
+Nun kann man das Ganze in die Systemkonfiguration importieren
 \begin{lstlisting}
 ldapadd -Y EXTERNAL -H ldapi:/// -f "/tmp/ldif_output/cn=config/cn=schema/cn={4}mypersonalschema.ldif"
 \end{lstlisting}
 Bei erfolgreichen Import findet sich das Schema nun in \texttt{/etc/""ldap/""slapd.d/""cn=config/""cn=schema/""cn=\{4\}mypersonalschema.ldif}
 
 
-\subsection{Einrichten von LDAPS (LDAP over SSL)}
-Zuerst muss man Zertifikat und privaten Schlüssel für das LDAP erzeugen (siehe wiki:FGN-CA) und diese zusammen mit dem Zertifikat der CA auf den LDAP Server ablegen (vorzugsweise in \texttt{/etc/ssl/certs} bzw. \texttt{/etc/ssl/private}). Damit der LDAP Server die auch verwendet erstellt man eine entsprechende LDIF Datei (hier \texttt{olcSSL.ldif}).
+\subsection{Einrichten von LDAPS (LDAP"=over"=SSL)}
+Zuerst muss man Zertifikat und privaten Schlüssel für das LDAP erzeugen (siehe wiki:FGN-CA) und diese zusammen mit dem Zertifikat der CA auf den LDAP''=Server ablegen (vorzugsweise in \texttt{/etc/ssl/certs} bzw. \texttt{/etc/ssl/private}). Damit der LDAP''=Server die auch verwendet erstellt man eine entsprechende LDIF Datei (hier \texttt{olcSSL.ldif}).
 \begin{lstlisting}
 dn: cn=config
 add: olcTLSCACertificateFile
@@ -298,7 +300,7 @@ Nun muss man noch den \texttt{SLAPD\_SERVICES} Eintrag in \texttt{/etc/default/s
 \begin{lstlisting}
 SLAPD_SERVICES="ldap://127.0.0.1:389/ ldaps:/// ldapi:///"
 \end{lstlisting}
-(für localhost kann man weiterhin den Standard LDAP (ohne SLL) Port 389 verwenden, LDAPS lauscht standardmäßig auf Port 636). Nach einem Neustart von slapd ist LDAP over SSL nun verwendbar.
+(für localhost kann man weiterhin den Standard LDAP (ohne SLL) Port 389 verwenden, LDAPS lauscht standardmäßig auf Port 636). Nach einem Neustart von slapd ist LDAP"=over"=SSL nun verwendbar.
 
 Auf den Clients muss dann das FGN CA Zertifikat an passende Stelle gelegt werden und folgende Zeile in \texttt{/etc/ldap/ldap.conf} eingetragen werden.
 \begin{lstlisting}
@@ -450,7 +452,7 @@ Konfigurationsdatei \texttt{/etc/openvpn/auth-ldap.config}
 \end{lstlisting}
 OpenVPN muss neu gestartet werden, um die geänderte Konfigurationsdatei anzuwenden.
 
-\subsection{Konfiguration der Firewall}
+\subsection{Konfiguration der Firewall}\label{sec:Firewall-Konfig}
 Der folgende Block zeigt die Ausgabe der Uncomplicated Firewall (\texttt{ufw}) über ihre aktuellen Regeln (\texttt{ufw} verwendet als Standardregel, die als letzte angewendet wird wenn keine andere Regel zutrifft, ein implizites \texttt{* DENY ALL} das nicht angezeigt wird):
 \begin{lstlisting}
 root@id:~# ufw status
@@ -472,7 +474,7 @@ To                         Action      From
 \begin{itemize}
 \item SSH (Port \texttt{22}) ist wie bei Servern bei fgn üblich von sämtlichen Quellrechnern erlaubt (IPv4 und IPv6)
 \item LDAPS (Port \texttt{636}) ist aus dem fgn-Subnetz (\texttt{131.246.197.0/25}) und dem privaten fgn"=Infrastruktur"=Netz (\texttt{10.122.0.0/16})
-\item RADIUS (Port \texttt{1812} ist der gerenelle Port des FreeRADIUS-Daemons und Port \texttt{1813} ist der Port für Accounting) ist zugelassen für Verbindungen aus dem öffentlichen fgn"=Subnetz (\texttt{131.246.197.0/25}), dem privaten fgn"=Infrastruktur"=Netz (\texttt{10.122.0.0/16}), den TU E-Mail-Servern \texttt{131.246.120.208/28} und dem RADIUS-Server der TU \texttt{131.246.5.14}. Der RADIUS-Proxy Port \texttt{1814} wurde hier nicht gebraucht weswegen keine Verbindungen zu ihn friegeschaltet wurden.
+\item RADIUS (Port \texttt{1812} ist der generelle Port des FreeRADIUS-Daemons und Port \texttt{1813} ist der Port für Accounting) ist zugelassen für Verbindungen aus dem öffentlichen fgn"=Subnetz (\texttt{131.246.197.0/25}), dem privaten fgn"=Infrastruktur"=Netz (\texttt{10.122.0.0/16}), den TU E-Mail-Servern \texttt{131.246.120.208/28} und dem RADIUS-Server der TU \texttt{131.246.5.14}. Der RADIUS-Proxy Port \texttt{1814} wurde hier nicht gebraucht weswegen keine Verbindungen zu ihn freigeschaltet wurden.
 \end{itemize}
 Die Firewall-Regeln wurden nach Vorbild der Regeln für den CommuniGate Server erstellt.
 
@@ -494,4 +496,4 @@ Die Firewall-Regeln wurden nach Vorbild der Regeln für den CommuniGate Server e
 \noindent Anmerkung: Eine Kundendokumentation für Anwender war nicht notwendig da sich auf Anwenderseite nach der Umstellung keine sichtbaren Änderungen gibt.
 
 
-\end{document}
+%\end{document}
