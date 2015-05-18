@@ -4,7 +4,7 @@
 % This is a simple template for a LaTeX document using the "article" class.
 % See "book", "report", "letter" for other types of document.
 
-\documentclass[11pt,a4paper,titlepage=firstiscover]{scrartcl} % use larger type; default would be 10pt
+\documentclass[11pt,a4paper,titlepage=firstiscover,headsepline,bibtotoc]{scrartcl} % use larger type; default would be 10pt
 
 \usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
 \usepackage[T1]{fontenc} % maps glyphs to dictonary characters, needed for seperation
@@ -20,40 +20,37 @@
 % \geometry{landscape} % set up the page for landscape
 %   read geometry.pdf for detailed page layout information
 
-\usepackage{graphicx} % support the \begin{center}\includegraphics command and options
-\usepackage{float}
-\usepackage{tocstyle}
-
 % \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
 
 %%% PACKAGES
 %\usepackage{booktabs} % for much better looking tables
+\usepackage{tabularx}  % for tables with variable width
 %\usepackage{array} % for better arrays (eg matrices) in maths
-\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
-\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+
 %\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
 % These packages are all incorporated in the memoir class to one degree or another...
 \usepackage[ngerman]{babel}
-\usepackage{blindtext}
+\usepackage{eurosym} %for euro symbol via \euro
+%\usepackage{blindtext}
 %\usepackage{pifont} %for symbols (i.e. arrows)
 %\usepackage{showframe} %shows the margins
+\usepackage{hhline} % more flexible hlines
+\usepackage{graphicx}
 
-\usepackage[colorlinks,linkcolor=blue]{hyperref} % package for hyperlinks with \url
-%\usepackage[svgnames]{xcolor}
+
+\usepackage[colorlinks,linkcolor=blue,pdftex]{hyperref} % package for hyperlinks with \url
+% hyperlink color definitions
+%\hypersetup{citecolor=DeepPink4}
+\hypersetup{linkcolor=DarkBlue}
+\hypersetup{urlcolor=DarkRed} 
+
+\usepackage[svgnames]{xcolor}
 %\usepackage[anythingbreaks]{breakurl}
-
-%code listing stuff
 \usepackage{listings}
-%\usepackage{color}
-%\definecolor{mygreen}{rgb}{0,0.6,0}
-%\definecolor{mygray}{rgb}{0.5,0.5,0.5}
-%\definecolor{mymauve}{rgb}{0.58,0,0.82}
 \lstset{ %
-%backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
-%basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+%basicstyle=\sfdefault,        % the size of the fonts that are used for the code
 %breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
 breaklines=true,                 % sets automatic line breaking
-%  captionpos=b,                    % sets the caption-position to bottom
 %commentstyle=\color{mygreen},    % comment style
 %deletekeywords={...},            % if you want to delete keywords from the given language
 %escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
@@ -61,15 +58,14 @@ breaklines=true,                 % sets automatic line breaking
 frame=single,                    % adds a frame around the code
 keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
 %keywordstyle=\color{mygreen},       % keyword style
-%language=Cobol,                 % the language of the code
 %morekeywords={*,...},            % if you want to add more keywords to the set
 numbers=none,                    % where to put the line-numbers; possible values are (none, left, right)
 %numbersep=5pt,                   % how far the line-numbers are from the code
 %numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
 %rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
-%showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
-%showstringspaces=false,          % underline spaces within strings only
-%showtabs=false,                  % show tabs within strings adding particular underscores
+showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+showstringspaces=false,          % underline spaces within strings only
+showtabs=false,                  % show tabs within strings adding particular underscores
 %stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
 %stringstyle=\ttfamily\color{red},     % string literal style
 %tabsize=2,                       % sets default tabsize to 2 spaces
@@ -78,30 +74,22 @@ numbers=none,                    % where to put the line-numbers; possible value
 
 \newcommand{\hilight}[1]{\colorbox{yellow}{#1}} %command for magic marker highlighting
 %   (from http://pleasemakeanote.blogspot.de/2009/08/how-to-highlight-text-in-latex.html)
-
-%%redifine of emph, see http://tex.stackexchange.com/questions/6754/what-is-the-canonical-way-to-redefine-the-emph-command
-\makeatletter
-\DeclareRobustCommand{\em}{%
-  \@nomath\em \if b\expandafter\@car\f@series\@nil
-  \normalfont \else \bfseries \fi}
-\makeatother
+\newcommand{\mcc}[2]{\multicolumn{#1}{|c|}{#2}} %multirows over X rows in tabularx
 
 %%% HEADERS & FOOTERS
 \usepackage[automark]{scrlayer-scrpage} %header and footer definitions
 \setkomafont{pageheadfoot}{\normalfont\normalcolor} %um kursiv abzuschalten in header/footer
 \ihead{}
+\ihead{\includegraphics[scale=0.1]{\logoti}}
 \chead{\headmark}
 \ohead{}
+\ohead{\includegraphics[scale=0.17]{fgn-logos/logo_fgn_head.png}}
 \ifoot{Sebastian Deußer}
 \cfoot{}
 \ofoot{Seite \pagemark}
 
 %\setlength{\parindent}{0mm} %set paragraph begin indentation to 0
 
-% hyperlink color definitions
-%\hypersetup{citecolor=DeepPink4}
-%\hypersetup{linkcolor=DarkRed}
-\hypersetup{urlcolor=red} 
 
 %%% SECTION TITLE APPEARANCE
 %\usepackage{sectsty}
@@ -120,6 +108,19 @@ numbers=none,                    % where to put the line-numbers; possible value
 
 %%% END Article customizations
 
+\newcommand{\titel}{OpenLDAP- und FreeRADIUS-Server}
+\newcommand{\untertitel}{Kundendokumentation für Administratoren}
+
+\newcommand{\autor}{Sebastian Deußer}
+\newcommand{\kompletterTitel}{\titel{} -- \untertitel}
+\newcommand{\pruefungstermin}{Sommer 2015}
+\newcommand{\ort}{Kaiserslautern}
+\newcommand{\abgabetermin}{18. Mai 2015}
+\newcommand{\ausbildungsberuf}{Fachinformatiker -- Systemintegration}
+\newcommand{\betreff}{Dokumentation zur betrieblichen Projektarbeit}
+\newcommand{\logoti}{ti-Logos/url.png}
+\newcommand{\logofgn}{fgn-logos/logo_fgn}
+
 %%% The "real" document content comes below...
 
 \titlehead{taylorix institut für berufliche Bildung e.V.}
@@ -130,9 +131,14 @@ numbers=none,                    % where to put the line-numbers; possible value
 %\setcounter{section}{-1} % sets the section counter to start with 0
 
 \begin{document}
-\maketitle %title (page)
+\pagestyle{empty}
+\include{Deckblatt}
+%\maketitle %title (page)
 
-%\setcounter{page}{1}  %Seitenzahlen erst nach TOC zählen
+%\tableofcontents
+\newpage
+\setcounter{page}{1}  %Seitenzahlen erst nach TOC zählen
+\pagestyle{scrheadings}
 
 \section{OpenLDAP}
 \subsection{Wichtige Details}
@@ -386,6 +392,31 @@ Konfigurationsdatei \texttt{/etc/openvpn/auth-ldap.config}
 \end{lstlisting}
 OpenVPN muss neu gestartet werden, um die geänderte Konfigurationsdatei anzuwenden.
 
+\subsection{Konfiguration der Firewall}\label{sec:Firewall-Konfig}
+Es wurde die Uncomplicated Firewall (\texttt{ufw}) verwendet mit folgenden Regeln (\texttt{ufw} verwendet als Standardregel, die als letzte angewendet wird wenn keine andere Regel zutrifft, ein implizites \texttt{* DENY ALL} das nicht angezeigt wird):
+\begin{lstlisting}
+root@id:~# ufw status
+Status: active
+
+To                         Action      From
+--                         ------      ----
+22                         ALLOW       Anywhere
+636                        ALLOW       131.246.197.0/25
+636                        ALLOW       10.122.0.0/16
+1812                       ALLOW       131.246.197.0/25
+1813                       ALLOW       131.246.197.0/25
+1812                       ALLOW       10.122.0.0/16
+1813                       ALLOW       10.122.0.0/16
+1812                       ALLOW       131.246.120.208/28
+1812                       ALLOW       131.246.5.14
+22                         ALLOW       Anywhere (v6)
+\end{lstlisting}
+\begin{itemize}
+\item SSH (Port \texttt{22}) von sämtlichen Rechnern aus erlaubt (IPv4 und IPv6)
+\item LDAPS (Port \texttt{636}) ist aus dem öffentlichen fgn"=Subnetz (\texttt{131.246.197.0/25}) und dem Infrastruktur-Netz (\texttt{10.122.0.0/16})
+\item RADIUS (Port \texttt{1812} gereneller Port des FreeRADIUS-Daemons, Port \texttt{1813} Port für Accounting) ist zugelassen für Verbindungen aus dem öffentlichen fgn"=Subnetz (\texttt{131.246.197.0/25}), dem privaten fgn"=Infrastruktur"=Netz (\texttt{10.122.0.0/16}), den TU E-Mail-Servern \texttt{131.246.120.208/28} und dem RADIUS-Server der TU \texttt{131.246.5.14}. Der RADIUS-Proxy Port \texttt{1814} wurde hier nicht gebraucht weswegen keine Verbindungen zu ihn friegeschaltet wurden.
+\end{itemize}
+Die Firewall-Regeln wurden nach Vorbild der Regeln für den CommuniGate Server erstellt.
 
 \subsection{Auf den neuen LDAP Server umgestellte Systeme}
 \begin{itemize}
@@ -397,13 +428,11 @@ OpenVPN muss neu gestartet werden, um die geänderte Konfigurationsdatei anzuwen
 
 \subsection{Noch nicht umgestellte Systeme}
 \begin{itemize}
-\item Egroupware (mangels Passwort und Ahnung vom System)
+\item Egroupware (mangels Passwort und Fachwissen vom System)
 \item Mailserver
 \end{itemize}
 
-\subsection{TODO}
-Praxistest des RADIUS (evtl \texttt{basedn} in \texttt{/etc/freeradius/modules/ldap} anpassen)[[BR]]
-FreeRADIUS: checken ob \texttt{edir\_account\_policy\_check = yes} benötigt wird.
+
 
 
 \end{document}
