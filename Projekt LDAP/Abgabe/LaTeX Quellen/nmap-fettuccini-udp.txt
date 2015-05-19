@@ -1,0 +1,20 @@
+# nmap -Pn -sS -sU -p1-65535 id.fg-networking.de 
+
+Starting Nmap 6.47 ( http://nmap.org ) at 2015-05-11 14:09 CEST
+Initiating Parallel DNS resolution of 1 host. at 14:09
+Completed Parallel DNS resolution of 1 host. at 14:09, 0.00s elapsed
+Initiating SYN Stealth Scan at 14:09
+Scanning gaf-nat-core1.fg-networking.de (131.246.197.6) [65535 ports]
+Completed SYN Stealth Scan at 14:09, 10.40s elapsed (65535 total ports)
+Initiating UDP Scan at 14:09
+Scanning gaf-nat-core1.fg-networking.de (131.246.197.6) [65535 ports]
+Completed UDP Scan at 15:46, 5854.26s elapsed (65535 total ports)
+Nmap scan report for id.fg-networking.de (131.246.197.6)
+Host is up (0.00010s latency).
+Not shown: 1310629 closed ports
+PORT      STATE         SERVICE
+22/tcp    open          ssh
+
+Read data files from: /usr/bin/../share/nmap
+Nmap done: 1 IP address (1 host up) scanned in 5865.05 seconds
+           Raw packets sent: 149026 (5.224MB) | Rcvd: 298030 (12.521MB)
