@@ -1,7 +1,7 @@
 % !TEX TS-program = pdflatex
 % !TEX encoding = UTF-8 Unicode
 
-\documentclass[handout]{beamer}
+\documentclass[handout,svgnames]{beamer}
 %\documentclass{beamer}
 
 %\usepackage{pgfpages} %for {show notes on second screen option}
@@ -17,6 +17,7 @@
   %\usetheme{Copenhagen}
   %\usetheme{Berlin}
   %\usetheme{Warsaw}
+\setbeamercolor*{palette primary}{use=structure,fg=white,bg=DarkRed}
 \useinnertheme{circles} %bullet points look nice to me that way (especially numbered ones)
 
   %\setbeamercovered{transparent}
@@ -28,19 +29,15 @@
 
 \usepackage[ngerman]{babel}
 \usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
 
 \usepackage{graphicx}
 \usepackage{wrapfig}
 
-%\usepackage{times}
-\usepackage{lmodern}
-\usepackage[T1]{fontenc}
-% Or whatever. Note that the encoding and the font should match. If T1
-% does not look nice, try deleting the line with the fontenc.
 
 %code listing stuff
 \usepackage{listings}
-\usepackage{color}
+%\usepackage{color}
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
 \definecolor{mymauve}{rgb}{0.58,0,0.82}
