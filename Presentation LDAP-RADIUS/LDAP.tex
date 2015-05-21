@@ -30,6 +30,7 @@
 \usepackage[ngerman]{babel}
 \usepackage[utf8x]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{eurosym} %for euro symbol via \euro
 
 \usepackage{graphicx}
 \usepackage{wrapfig}
@@ -69,6 +70,13 @@ tabsize=2,                       % sets default tabsize to 2 spaces
 title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
 }
 
+%stuff used for the tables
+\usepackage{tabularx}
+\usepackage{hhline}
+\newcommand{\mcc}[2]{\multicolumn{#1}{|c|}{#2}} %multirows over X rows in tabularx
+
+\newcommand{\hilight}[1]{\colorbox{yellow}{#1}} %command for magic marker highlighting
+%   (from http://pleasemakeanote.blogspot.de/2009/08/how-to-highlight-text-in-latex.html)
 
 \title[OpenLDAP- und FreeRADIUS-Server]   % (optional, use only with long paper titles)
 {LDAP+RADIUS}
@@ -104,10 +112,106 @@ title=\lstname                   % show the filename of files included with \lst
 \end{frame}
 
 \section{Übersicht}
-\subsection{Entwicklung}
-\begin{frame}{Entwicklung}
+\subsection{Überblick}
+\begin{frame}{Gliederung}
+	\begin{enumerate}
+		\item Projektbeschreibung
+		\item Planung
+		\item Realisierung
+		\item Projektkosten
+		\item Abschluss
+	\end{enumerate}
 \end{frame}
 \note{}
+
+\section{Projektbeschreibung}
+\subsection{Ausgangssituation}
+\begin{frame}{Ausgangssituation}
+Nix
+\end{frame}
+
+\section{Planung}
+\subsection{Konzeptplanung}
+\begin{frame}{Konzeptplanung}
+Nix
+\end{frame}
+
+\begin{frame}{Konzeptplanung2}
+Nix
+\end{frame}
+
+
+\section{Realisierung}
+\subsection{Realisierung von LDAP}
+\begin{frame}{Realisierung von LDAP}
+Nix
+\end{frame}
+
+\subsection{Realisierung von RADIUS}
+\begin{frame}{Realisierung von RADIUS}
+Nix
+\end{frame}
+
+\section{Projektkosten}
+\subsection{Projektkosten - Anschaffung}
+\begin{frame}{Projektkosten - Anschaffung}
+	\begin{tabularx}{\textwidth}{|l|r|r|r|}
+%		\hline
+%		\mcc{4}{Kosten für die Einrichtung}\\
+		\hline
+		Kosten-	&	 &	\centering CommuniGate- &	\\
+		Kategorie	&	Projekt &	\centering Upgrade &	Status Quo\\
+		\hline
+		Hardware &	0,00\euro{} &	0,00\euro{} &	0,00\euro{}\\
+		\hline
+		Softwarelizenzen &	0,00\euro{} &	1.849,00\euro{} &	0,00\euro{}\\
+		\hline
+		Arbeitsaufwand &	2.485,00\euro{} &	2.485,00\euro{} &	0,00\euro{}\\
+		\hhline{|=|=|=|=|}
+		Gesamt &	2.485,00\euro{} &	4.334,00\euro{} &	0,00\euro{}\\
+		\hline
+	\end{tabularx}
+\end{frame}
+
+\subsection{Projektkosten - Wartung}
+\begin{frame}{Projektkosten - Wartung}
+	\begin{tabularx}{\textwidth}{|l|r|r|r|}
+%		\hline
+%		\mcc{4}{Jährliche Kosten}\\
+		\hline
+		Kosten-	&	 &	CommuniGate- &	\\
+		Kategorie	&	Projekt &	Upgrade &	Status Quo\\
+		\hline
+		Hardware &	0,00\euro{} &	0,00\euro{} &	0,00\euro{}\\
+		\hline
+		Softwarelizenzen &	0,00\euro{} &	332,82\euro{} &	0,00\euro{}\\
+		\hline
+		Arbeitsaufwand &	355,00\euro{} &	213,00\euro{} &	2.350,00\euro{}\\
+		\hhline{|=|=|=|=|}
+		Gesamt &	355,00\euro{} &	545,82\euro{} &	2.350,00\euro{}\\
+		\hline
+	\end{tabularx}
+\end{frame}
+
+
+\section{Projektabschluss}
+\subsection{Fazit}
+\begin{frame}{Fazit}
+Nix
+\end{frame}
+
+\subsection{Ausblick}
+\begin{frame}{Ausblick}
+Nix
+\end{frame}
+
+\section{}%section shall not be visible in navbar, hence empty name
+\begin{frame}{Quellen}
+	Vielen Dank für Ihre Aufmerksamkeit
+	
+	\medskip Diese Präsentation wurde mit \LaTeX{}-Beamer erstellt
+\end{frame}
+
 
 %\section{Übersicht}
 %\subsection{Namensbedeutung}
