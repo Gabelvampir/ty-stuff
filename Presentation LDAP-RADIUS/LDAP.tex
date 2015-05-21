@@ -116,10 +116,26 @@ title=\lstname                   % show the filename of files included with \lst
 \begin{frame}{Gliederung}
 	\begin{enumerate}
 		\item Projektbeschreibung
+		\begin{itemize}
+			\item Projektthema
+			\item Projektumfeld
+		\end{itemize}
 		\item Planung
+		\begin{itemize}
+			\item Planung Ersatzserver
+			\item Kommunikationskonzept
+		\end{itemize}
 		\item Realisierung
+		\begin{itemize}
+			\item OpenLDAP-Server
+			\item FreeRADIUS-Server
+		\end{itemize}
 		\item Projektkosten
 		\item Abschluss
+		\begin{itemize}
+			\item Fazit
+			\item Ausblick
+		\end{itemize}
 	\end{enumerate}
 \end{frame}
 \note{}
@@ -127,40 +143,40 @@ title=\lstname                   % show the filename of files included with \lst
 \section{Projektbeschreibung}
 \subsection{Ausgangssituation}
 \begin{frame}{Ausgangssituation}
-Nix
+
 \end{frame}
 
 \section{Planung}
 \subsection{Konzeptplanung}
-\begin{frame}{Konzeptplanung}
-Nix
+\begin{frame}{Konzept Ersatzserver}
+
 \end{frame}
 
-\begin{frame}{Konzeptplanung2}
-Nix
+\begin{frame}{Kommunikation der Server untereinander}
+
 \end{frame}
 
 
 \section{Realisierung}
 \subsection{Realisierung von LDAP}
 \begin{frame}{Realisierung von LDAP}
-Nix
+
 \end{frame}
 
 \subsection{Realisierung von RADIUS}
 \begin{frame}{Realisierung von RADIUS}
-Nix
+
 \end{frame}
 
 \section{Projektkosten}
 \subsection{Projektkosten - Anschaffung}
 \begin{frame}{Projektkosten - Anschaffung}
-	\begin{tabularx}{\textwidth}{|l|r|r|r|}
+	\begin{tabularx}{\textwidth}{|X|r|r|r|}
 %		\hline
 %		\mcc{4}{Kosten für die Einrichtung}\\
 		\hline
-		Kosten-	&	 &	\centering CommuniGate- &	\\
-		Kategorie	&	Projekt &	\centering Upgrade &	Status Quo\\
+		Kosten-	&	OpenLDAP \& &	\centering CommuniGate- &	\\
+		Kategorie	&	FreeRADIUS &	\centering Upgrade &	Status Quo\\
 		\hline
 		Hardware &	0,00\euro{} &	0,00\euro{} &	0,00\euro{}\\
 		\hline
@@ -175,12 +191,12 @@ Nix
 
 \subsection{Projektkosten - Wartung}
 \begin{frame}{Projektkosten - Wartung}
-	\begin{tabularx}{\textwidth}{|l|r|r|r|}
+	\begin{tabularx}{\textwidth}{|X|r|r|r|}
 %		\hline
 %		\mcc{4}{Jährliche Kosten}\\
 		\hline
-		Kosten-	&	 &	CommuniGate- &	\\
-		Kategorie	&	Projekt &	Upgrade &	Status Quo\\
+		Kosten-	&	OpenLDAP \& &	CommuniGate- &	\\
+		Kategorie	&	FreeRADIUS &	Upgrade &	Status Quo\\
 		\hline
 		Hardware &	0,00\euro{} &	0,00\euro{} &	0,00\euro{}\\
 		\hline
@@ -197,12 +213,18 @@ Nix
 \section{Projektabschluss}
 \subsection{Fazit}
 \begin{frame}{Fazit}
-Nix
+
 \end{frame}
 
 \subsection{Ausblick}
 \begin{frame}{Ausblick}
-Nix
+	Erweiterungsmöglichkeiten
+	\begin{enumerate}
+		\item Anbindung neue E-Mailserver (\texttt{postfix})
+		\item Ersatz lokale Accounts
+		\item Anbindung Managed Switches über RADIUS
+		\item Samba 4 Domäne für Windows Rechner
+	\end{enumerate}
 \end{frame}
 
 \section{}%section shall not be visible in navbar, hence empty name
