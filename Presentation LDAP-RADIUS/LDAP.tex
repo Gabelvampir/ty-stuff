@@ -8,15 +8,15 @@
 
 \mode<presentation>
 {
-  %\usetheme{Rochester}
-  %\usetheme{Marburg}
-  %\usetheme{Madrid}
-  %\usetheme{Luebeck}
-  \usetheme{Frankfurt}  %favorite for now
-  %\usetheme{Dresden}
-  %\usetheme{Copenhagen}
-  %\usetheme{Berlin}
-  %\usetheme{Warsaw}
+  %\usetheme{Rochester} %pretty plain, no footer and progress
+  %\usetheme{Marburg}   %sidebar with all (sub)sections
+  %\usetheme{Madrid}	%footer with author, title, date and frame number, 
+  %\usetheme{Luebeck}		%big header with all sections, footer with author and title
+  \usetheme{Frankfurt}  %favorite for now %header with progress
+  %\usetheme{Dresden}	%header with progress, 2 footers for author an title
+  %\usetheme{Copenhagen}	%big header with all sections, footer with author and title
+  %\usetheme{Berlin}		%header with progress, 2 footers for author an title
+  %\usetheme{Warsaw}		%big header with all sections, footer with author and title
 %\setbeamercolor*{palette primary}{use=structure,fg=white,bg=DarkGreen}
 \useinnertheme{circles} %bullet points look nice to me that way (especially numbered ones)
 
@@ -106,51 +106,86 @@ title=\lstname                   % show the filename of files included with \lst
 
 
 \begin{document}
+\setcounter{framenumber}{-1}
+\frame{\titlepage}
+\setbeamertemplate{footline}[frame number] %show page numbers in footer
+%\begin{frame}[noframenumbering]
+%  \titlepage
+%\end{frame}
 
-\begin{frame}
-  \titlepage
-\end{frame}
-
-\section{Übersicht}
-\subsection{Überblick}
-\begin{frame}{Gliederung}
-	\begin{enumerate}
-		\item Projektbeschreibung
-		\begin{itemize}
-			\item Projektthema
-			\item Projektumfeld
-		\end{itemize}
-		\item Planung
-		\begin{itemize}
-			\item Planung Ersatzserver
-			\item Kommunikationskonzept
-		\end{itemize}
-		\item Realisierung
-		\begin{itemize}
-			\item OpenLDAP-Server
-			\item FreeRADIUS-Server
-		\end{itemize}
-		\item Projektkosten
-		\item Abschluss
-		\begin{itemize}
-			\item Fazit
-			\item Ausblick
-		\end{itemize}
-	\end{enumerate}
+\section{}
+\begin{frame}{Übersicht}
+\tableofcontents
+%	\begin{enumerate}
+%		\item Projektbeschreibung
+%		\begin{itemize}
+%			\item Projektumfeld
+%			\item Projektthema
+%		\end{itemize}
+%		\item Planung
+%		\begin{itemize}
+%			\item Planung Ersatzserver
+%			\item Kommunikationskonzept
+%		\end{itemize}
+%		\item Realisierung
+%		\begin{itemize}
+%			\item OpenLDAP-Server
+%			\item FreeRADIUS-Server
+%		\end{itemize}
+%		\item Projektkosten
+%		\item Abschluss
+%		\begin{itemize}
+%			\item Fazit
+%			\item Ausblick
+%		\end{itemize}
+%	\end{enumerate}
 \end{frame}
 \note{}
 
 \section{Projektbeschreibung}
 \subsection{Ausgangssituation}
-\begin{frame}{Ausgangssituation}
-
+\begin{frame}{Projektumfeld: Firmenbeschreibung fgn GmbH}
+\begin{figure}[htbp] 
+	\centering
+	\includegraphics[scale=0.75]{Bilder/logo_fgn.png}
+%	\caption{Logo der fgn GmbH}
+	\label{fig:fgn-Logo}
+\end{figure}
+\begin{itemize}
+	\item Praktikumsbetrieb fgn GmbH gegründet 1996 SpinOff der TU Kaiserslautern
+	\item Kerngeschäft Netzwerkschulungen und -consulting (herstellerunabhängig)
+	\item circa ein Dutzend Mitarbeiter (ungefähr gleich verteilt auf Trainer, Consulting, Verwaltung/Administration)
+	\item eigene Schulungslabore (Remote Labs) mit Managed Switches und VMs auf ESXi-Servern
+	\item Büro- und Server-Räume in DFKI Neubau, deswegen Internetanbindung über TU Kaiserslautern
+%	\item öffentliche Webseite extern gehostet, restliche Server selbst verwaltet in Server-Räumen im DFKI
+%	\item meisten Server sind VMs auf ESXi-Servern
+%	\item Schulungslabore (Remote Labs) mit eigenen Managed Switches und ESXi-Servern in eigenem VPN, Zugang über OpenVPN (Telnet für Switches, Remote Desktop für Windows VMs)
+\end{itemize}
 \end{frame}
 
+
+\begin{frame}{Ausgangssituation}
+\begin{itemize}
+	\item CommuniGate-Server für E-Mail und Identity Management
+	\item Identity Management genutzt von:
+	\begin{itemize}
+		\item E-Mail
+		\item firmeninterne Webtools (z.B. Nagios, Trac)
+		\item OpenVPN-Server
+		\item Egroupware
+	\end{itemize}
+	\item CommuniGate stark veraltet, deswegen SSL-Probleme (und vermutlich etliche Sicherheitslücken)
+\end{itemize}
+\end{frame}
+
+
 \section{Planung}
-\subsection{Konzeptplanung}
+%\subsection{Konzeptplanung}
+\subsection{}
 \begin{frame}{Konzept Ersatzserver}
 
 \end{frame}
+
 
 \begin{frame}{Kommunikation der Server untereinander}
 
@@ -171,10 +206,23 @@ title=\lstname                   % show the filename of files included with \lst
 %	\end{figure}
 \end{frame}
 
+
 \subsection{Realisierung von RADIUS}
 \begin{frame}{Realisierung von RADIUS}
 
 \end{frame}
+
+
+\begin{frame}{Qualitätssicherung/-tests}
+
+\end{frame}
+
+
+\subsection{Probleme und Lösungen}
+\begin{frame}{Probleme und Lösungen}
+
+\end{frame}
+
 
 \section{Projektkosten}
 \subsection{Projektkosten - Anschaffung}
@@ -196,6 +244,7 @@ title=\lstname                   % show the filename of files included with \lst
 		\hline
 	\end{tabularx}
 \end{frame}
+
 
 \subsection{Projektkosten - Wartung}
 \begin{frame}{Projektkosten - Wartung}
@@ -223,6 +272,7 @@ title=\lstname                   % show the filename of files included with \lst
 \begin{frame}{Fazit}
 
 \end{frame}
+
 
 \subsection{Ausblick}
 \begin{frame}{Ausblick}
