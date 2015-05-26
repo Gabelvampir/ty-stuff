@@ -87,7 +87,7 @@ title=\lstname                   % show the filename of files included with \lst
 \author % (optional, use only with lots of authors)
 {Sebastian Deußer}
 %\date{13. Juli 2015}
-
+%\logo{\includegraphics[scale=0.05]{Bilder/logo_ti.png}}
 
 %\subject{COBOL \"Ubersicht}
 % This is only inserted into the PDF information catalog. Can be left
@@ -169,12 +169,12 @@ title=\lstname                   % show the filename of files included with \lst
 	\item CommuniGate-Server für E-Mail und Identity Management
 	\item Identity Management genutzt von:
 	\begin{itemize}
-		\item E-Mail
+		\item E-Mail (TU Server über RADIUS)
 		\item firmeninterne Webtools (z.B. Nagios, Trac)
 		\item OpenVPN-Server
 		\item Egroupware
 	\end{itemize}
-	\item CommuniGate stark veraltet, deswegen SSL-Probleme (und vermutlich etliche Sicherheitslücken)
+	\item CommuniGate stark veraltet, deswegen SSL-Probleme mit aktuellen Clients (und vermutlich etliche Sicherheitslücken)
 \end{itemize}
 \end{frame}
 
@@ -183,7 +183,12 @@ title=\lstname                   % show the filename of files included with \lst
 %\subsection{Konzeptplanung}
 \subsection{}
 \begin{frame}{Konzept Ersatzserver}
-
+\begin{itemize}
+	\item ESXi-VM mit Linux (Debian 8.0)
+	\item OpenLDAP-Server für LDAP-Schnitstelle und Verzeichnisdienst
+	\item FreeRADIUS-Server für RADIUS
+	\item FreeRADIUS-Server über Modul an OpenLDAP-Server angebunden (Kommunikation über LDAP)
+\end{itemize}
 \end{frame}
 
 
