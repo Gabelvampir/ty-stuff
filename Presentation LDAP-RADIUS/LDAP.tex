@@ -143,11 +143,11 @@ title=\lstname                   % show the filename of files included with \lst
 \note{}
 
 \section{Projektbeschreibung}
-\subsection{Ausgangssituation}
+\subsection{}
 \begin{frame}{Projektumfeld: Firmenbeschreibung fgn GmbH}
 \begin{figure}[htbp] 
 	\centering
-	\includegraphics[scale=0.75]{Bilder/logo_fgn.png}
+	\includegraphics[scale=0.7]{Bilder/logo_fgn.png}
 %	\caption{Logo der fgn GmbH}
 	\label{fig:fgn-Logo}
 \end{figure}
@@ -164,6 +164,9 @@ title=\lstname                   % show the filename of files included with \lst
 \end{frame}
 
 
+\section{Planung}
+%\subsection{Konzeptplanung}
+\subsection{}
 \begin{frame}{Ausgangssituation}
 \begin{itemize}
 	\item CommuniGate-Server für E-Mail und Identity Management
@@ -174,14 +177,11 @@ title=\lstname                   % show the filename of files included with \lst
 		\item OpenVPN-Server
 		\item Egroupware
 	\end{itemize}
-	\item CommuniGate stark veraltet, deswegen SSL-Probleme mit aktuellen Clients (und vermutlich etliche Sicherheitslücken)
+ 	\item CommuniGate stark veraltet, deswegen SSL-Probleme mit aktuellen Clients (und vermutlich etliche Sicherheitslücken)
 \end{itemize}
 \end{frame}
 
 
-\section{Planung}
-%\subsection{Konzeptplanung}
-\subsection{}
 \begin{frame}{Konzept Ersatzserver}
 \begin{itemize}
 	\item ESXi-VM mit Linux (Debian 8.0)
@@ -193,8 +193,62 @@ title=\lstname                   % show the filename of files included with \lst
 
 
 \section{Realisierung}
-\subsection{Realisierung von LDAP}
+\subsection{Realisierung des Ersatzservers}
 \begin{frame}{Realisierung von LDAP}
+
+\end{frame}
+
+
+\begin{frame}{Realisierung von RADIUS}
+
+\end{frame}
+
+
+\begin{frame}{Anbindung der Webservices etc}
+Es wurde bereits LDAP verwendet (ohne SSL), deswegen kein große Umstellung.
+
+Änderungen:
+\begin{itemize}
+	\item geänderte Server-URL und BaseDN in Konfiguration von Apache und OpenVPN eintragen
+	\item SSL-Zertifikat eintragen
+\end{itemize}
+Egroupware siehe Probleme
+\end{frame}
+
+
+\subsection{Qualitätssicherung}
+\begin{frame}{Qualitätssicherung}
+\begin{enumerate}
+	\item Funktionstests:
+	\begin{itemize}
+		\item Webservices und OpenVPN wurden nach Umstellung getestet ob Login weiterhin möglich
+		\item RADIUS Test mit \texttt{radtest} und Vergleich mit Antworten von CommuniGate-RADIUS (keine Praxistests möglich)
+	\end{itemize}
+	\item Sicherheitstests:
+	\begin{itemize}
+		\item Versuch von Anmelden mit falschen Anmeldeinformationen bei Webservices und OpenVPN
+		\item Überprüfung OpenSSH-Server Konfiguration
+		\item Port-Scan mit NMAP (aus fgn-Netz und extern)
+	\end{itemize}
+\end{enumerate}
+\end{frame}
+
+
+\subsection{Probleme und Lösungen}
+\begin{frame}{Probleme und Lösungen}
+\begin{enumerate}
+	\item Design der LDAP-Baumstruktur
+	\begin{itemize}
+		\item ursprüngliche Idee eine Datenbank pro Domain, so erstellte Datenbanken ließen sich in der Praxis aber nicht ansprechen
+		\item gelöst durch Umsetzung in einer Datenbank statt 3 getrennten
+	\end{itemize}
+	\item Egroupware
+	\begin{itemize}
+		\item fehlendes Passwort für Installer, Zuständiger in Urlaub
+		\item Umstellung verschoben, problemlos da alter Server weiterhin in Betrieb
+	\end{itemize}
+	\item neuer E-Mail-Server noch nicht fertig, deswegen man Praxistests nicht möglich
+\end{enumerate}
 \end{frame}
 
 \begin{frame}{Endgültiger LDAP-Verzeichnisbaum}
@@ -204,23 +258,6 @@ title=\lstname                   % show the filename of files included with \lst
 %		\caption{Der fertige LDAP-Verzeichnisbaum}
 %		\label{fig:LDAP-Baum}
 %	\end{figure}
-\end{frame}
-
-
-\subsection{Realisierung von RADIUS}
-\begin{frame}{Realisierung von RADIUS}
-
-\end{frame}
-
-
-\begin{frame}{Qualitätssicherung/-tests}
-
-\end{frame}
-
-
-\subsection{Probleme und Lösungen}
-\begin{frame}{Probleme und Lösungen}
-
 \end{frame}
 
 
