@@ -172,12 +172,23 @@ title=\lstname                   % show the filename of files included with \lst
 	\item CommuniGate-Server für E-Mail und Identity Management
 	\item Identity Management genutzt von:
 	\begin{itemize}
-		\item E-Mail (TU Server über RADIUS)
+		\item E-Mail-Server (TU-Server über RADIUS)
 		\item firmeninterne Webtools (z.B. Nagios, Trac)
 		\item OpenVPN-Server
 		\item Egroupware
 	\end{itemize}
+	\item E-Mail-Server verwaltet 3 E-Mail-Domains, \texttt{fg-networking.de}, \texttt{schabler.de} und \texttt{worden.de}
  	\item CommuniGate stark veraltet, deswegen SSL-Probleme mit aktuellen Clients (und vermutlich etliche Sicherheitslücken)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Soll-Zustand}
+benötigt wird als Ersatz:
+\begin{itemize}
+	\item LDAP-Server als Verzeichnisdienst für Webtools, VPN, Groupware, E-Mail
+	\item RADIUS-Server für TU E-Mail-Server
+	\item Vorbereitungen zur Anbindung des neuen E-Mail-Servers
+	\item Absichern des Rechners
 \end{itemize}
 \end{frame}
 
@@ -194,12 +205,15 @@ title=\lstname                   % show the filename of files included with \lst
 
 \section{Realisierung}
 \subsection{Realisierung des Ersatzservers}
-\begin{frame}{Realisierung von LDAP}
-
+\begin{frame}{Realisierung des Ersatzservers (1)}
+\begin{itemize}
+	\item LDAP-over-SSL (LDAPS) eingerichtet mit Zertifikaten aus Firmen CA, einzige externe Zugriffsmöglichkeit
+	\item 
+\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Realisierung von RADIUS}
+\begin{frame}{Realisierung des Ersatzservers (2)}
 
 \end{frame}
 
