@@ -1,27 +1,27 @@
 graph G {
   compbound=true;
   subgraph cluster_fgn{
-  fgn [label="dc=fg-networking,dc=de", style="filled", fillcolor="grey85", width=2.75];
-  people1 [label="ou=people", style="filled", fillcolor="grey70"];
+  fgn [label="dc=fg-networking,dc=de", style="filled", fillcolor="green", width=2.75];
+  people1 [label="ou=people", style="filled", fillcolor="forestgreen"];
   fgnpe [label=". . .", shape="plaintext"];
   label="Datenbank 1";
   labelloc=b;
 }
   subgraph cluster_schabler{
-  schabler [label="dc=schabler,dc=de", style="filled", fillcolor="grey85", width=2.75];
-  people2 [label="ou=people", style="filled", fillcolor="grey70"];
+  schabler [label="dc=schabler,dc=de", style="filled", fillcolor="green", width=2.75];
+  people2 [label="ou=people", style="filled", fillcolor="forestgreen"];
   schabpe [label=". . .", shape="plaintext"];
   label="Datenbank 2";
   labelloc=b;
 }
   subgraph cluster_worden{
-  worden [label="dc=worden,dc=de", style="filled", fillcolor="grey85", width=2.75];
-  people3 [label="ou=people", style="filled", fillcolor="grey70"];
+  worden [label="dc=worden,dc=de", style="filled", fillcolor="green", width=2.75];
+  people3 [label="ou=people", style="filled", fillcolor="forestgreen"];
   wordpe [label=". . .", shape="plaintext"];
   label="Datenbank 3";
   labelloc=b;
 }
-  root [label="LDAP"];
+  root [label="LDAP", shape=folder, style="filled", fillcolor="yellow"];
   root -- fgn;
   root -- schabler;
   root -- worden;
