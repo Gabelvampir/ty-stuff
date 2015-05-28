@@ -189,6 +189,7 @@ benötigt wird als Ersatz:
 	\item RADIUS-Server für TU E-Mail-Server
 	\item Vorbereitungen zur Anbindung des neuen E-Mail-Servers
 	\item Absichern des Rechners
+	\item Übernehmen der Anwenderkonten
 \end{itemize}
 \end{frame}
 
@@ -207,11 +208,20 @@ benötigt wird als Ersatz:
 \subsection{Realisierung des Ersatzservers}
 \begin{frame}{Realisierung des Ersatzservers (1)}
 \begin{itemize}
-	\item LDAP-over-SSL (LDAPS) eingerichtet mit Zertifikaten aus Firmen CA, einzige externe Zugriffsmöglichkeit
-	\item 
+	\item LDAP-over-SSL (LDAPS) eingerichtet mit Zertifikaten aus Firmen CA
+	\item LDAPS als einzige Zugriffsmöglichkeit auf LDAP von anderen Rechnern
+	\item Planung der Verzeichnisstruktur ursprünglich 3 getrennte Datenbanken
 \end{itemize}
 \end{frame}
 
+\begin{frame}{Geplanter LDAP-Verzeichnisbaum}
+%	\begin{figure}[htbp] 
+%		\centering
+		\includegraphics[width=\textwidth]{Bilder/LDAP-fgn-planned.pdf}
+%		\caption{Der fertige LDAP-Verzeichnisbaum}
+%		\label{fig:LDAP-Baum}
+%	\end{figure}
+\end{frame}
 
 \begin{frame}{Realisierung des Ersatzservers (2)}
 
@@ -261,7 +271,7 @@ Egroupware siehe Probleme
 		\item fehlendes Passwort für Installer, Zuständiger in Urlaub
 		\item Umstellung verschoben, problemlos da alter Server weiterhin in Betrieb
 	\end{itemize}
-	\item neuer E-Mail-Server noch nicht fertig, deswegen man Praxistests nicht möglich
+	\item neuer E-Mail-Server noch nicht fertig, deswegen Praxistests nicht möglich
 \end{enumerate}
 \end{frame}
 
