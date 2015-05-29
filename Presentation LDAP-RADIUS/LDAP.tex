@@ -24,16 +24,18 @@
 {
   \leavevmode%
   \hbox{%
-  \begin{beamercolorbox}[wd=.4\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+  \begin{beamercolorbox}[wd=.45\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
     \usebeamerfont{author in head/foot}\insertshortauthor
   \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.6\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+  \begin{beamercolorbox}[wd=.45\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
     \usebeamerfont{title in head/foot}\insertshorttitle\hspace*{3em}
-    \insertframenumber{} / \inserttotalframenumber\hspace*{1ex}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.1\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \insertframenumber{} / \inserttotalframenumber\hspace*{1ex}  
   \end{beamercolorbox}}%
+
   \vskip0pt%
 }
-
 
   %\setbeamercovered{transparent}
   % or whatever (possibly just delete it)
@@ -122,7 +124,10 @@ title=\lstname                   % show the filename of files included with \lst
 
 \begin{document}
 \setcounter{framenumber}{-1}
+{
+\setbeamertemplate{footline}{}
 \frame{\titlepage}
+}
 
 %\setbeamertemplate{footline}[frame number] %show page numbers in footer
 
