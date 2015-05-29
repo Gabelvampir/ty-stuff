@@ -20,6 +20,21 @@
 %\setbeamercolor*{palette primary}{use=structure,fg=white,bg=DarkGreen}
 \useinnertheme{circles} %bullet points look nice to me that way (especially numbered ones)
 
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.4\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.6\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle\hspace*{3em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{1ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+
   %\setbeamercovered{transparent}
   % or whatever (possibly just delete it)
 
@@ -108,10 +123,9 @@ title=\lstname                   % show the filename of files included with \lst
 \begin{document}
 \setcounter{framenumber}{-1}
 \frame{\titlepage}
-\setbeamertemplate{footline}[frame number] %show page numbers in footer
-%\begin{frame}[noframenumbering]
-%  \titlepage
-%\end{frame}
+
+%\setbeamertemplate{footline}[frame number] %show page numbers in footer
+
 
 \section{}
 \begin{frame}{Übersicht}
@@ -157,7 +171,7 @@ title=\lstname                   % show the filename of files included with \lst
 %	\label{fig:fgn-Logo}
 %\end{figure}
 \begin{itemize}
-	\item Praktikumsbetrieb fgn GmbH gegründet 1996 SpinOff der TU Kaiserslautern
+	\item Praktikumsbetrieb fgn GmbH gegründet 1996, SpinOff der TU Kaiserslautern
 	\item Kerngeschäft Netzwerkschulungen und -consulting (herstellerunabhängig)
 	\item circa ein Dutzend Mitarbeiter (ungefähr gleich verteilt auf Trainer, Consulting, Verwaltung/Administration)
 	\item eigene Schulungslabore (Remote Labs) mit Managed Switches und VMs auf ESXi-Servern
@@ -216,6 +230,7 @@ benötigt wird als Ersatz:
 	\item OpenLDAP-Server für LDAP-Schnitstelle und Verzeichnisdienst
 	\item FreeRADIUS-Server für RADIUS
 	\item FreeRADIUS-Server an OpenLDAP-Server angebunden (Kommunikation über LDAP)
+	\item Anwenderkonten per Skript importieren
 \end{itemize}
 \end{frame}
 
@@ -342,7 +357,10 @@ Egroupware siehe Probleme
 \begin{frame}{Quellen}
 	Vielen Dank für Ihre Aufmerksamkeit
 	
+	\medskip
 	\medskip Diese Präsentation wurde mit \LaTeX{}-Beamer erstellt
+	
+	LDAP-Verzeichnisbaum Graphen erstellt mit GraphViz
 \end{frame}
 
 
