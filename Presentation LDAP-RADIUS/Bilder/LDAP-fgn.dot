@@ -1,14 +1,20 @@
 graph G {
-  de [label="dc=de"];
-  fgn [label="dc=fg-networking", style="filled", fillcolor="grey85", width=2.15];
-  schabler [label="dc=schabler", style="filled", fillcolor="grey85", width=2.15];
-  worden [label="dc=worden", style="filled", fillcolor="grey85", width=2.15];
-  people1 [label="ou=people", style="filled", fillcolor="grey70"];
-  people2 [label="ou=people", style="filled", fillcolor="grey70"];
-  people3 [label="ou=people", style="filled", fillcolor="grey70"];
-  fgnpe [label=". . .", shape="plaintext"];
-  schabpe [label=". . .", shape="plaintext"];
-  wordpe [label=". . .", shape="plaintext"];
+  root [label="LDAP", shape="folder", style="filled", fillcolor="yellow"];
+  subgraph cluster_db{
+    de [label="dc=de", style="filled", fillcolor="greenyellow"];
+    fgn [label="dc=fg-networking", style="filled", fillcolor="green", width=2.15];
+    people1 [label="ou=people", style="filled", fillcolor="forestgreen"];
+    fgnpe [label=". . .", shape="plaintext"];
+    schabler [label="dc=schabler", style="filled", fillcolor="green", width=2.15];
+    people2 [label="ou=people", style="filled", fillcolor="forestgreen"];
+    schabpe [label=". . .", shape="plaintext"];
+    worden [label="dc=worden", style="filled", fillcolor="green", width=2.15];
+    people3 [label="ou=people", style="filled", fillcolor="forestgreen"];
+    wordpe [label=". . .", shape="plaintext"];
+    label="Datenbank";
+    labelloc=b
+  }
+  root -- de;
   de -- {fgn schabler worden};
   fgn -- people1 -- fgnpe;
   schabler -- people2 -- schabpe;
