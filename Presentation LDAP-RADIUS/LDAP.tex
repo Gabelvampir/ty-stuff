@@ -145,12 +145,17 @@ title=\lstname                   % show the filename of files included with \lst
 \section{Projektbeschreibung}
 \subsection{}
 \begin{frame}{Projektumfeld: Firmenbeschreibung fgn GmbH}
-\begin{figure}[htbp] 
-	\centering
-	\includegraphics[scale=0.7]{Bilder/logo_fgn.png}
-%	\caption{Logo der fgn GmbH}
-	\label{fig:fgn-Logo}
-\end{figure}
+\begin{columns}[c]
+	\begin{column}{2.5cm}
+		\includegraphics[scale=0.7]{Bilder/logo_fgn.png}
+	\end{column}
+\end{columns}
+%\begin{figure}[htbp] 
+%	\centering
+%	\includegraphics[scale=0.7]{Bilder/logo_fgn.png}
+%%	\caption{Logo der fgn GmbH}
+%	\label{fig:fgn-Logo}
+%\end{figure}
 \begin{itemize}
 	\item Praktikumsbetrieb fgn GmbH gegründet 1996 SpinOff der TU Kaiserslautern
 	\item Kerngeschäft Netzwerkschulungen und -consulting (herstellerunabhängig)
@@ -195,11 +200,22 @@ benötigt wird als Ersatz:
 
 
 \begin{frame}{Konzept Ersatzserver}
+\begin{columns}[c]
+	\begin{column}{0.5cm}
+		\includegraphics[scale=0.3]{Bilder/debian-openlogo-100.png}
+	\end{column}
+	\begin{column}{1.5cm}
+		\includegraphics[scale=0.25]{Bilder/OpenLDAP-logo.png}
+	\end{column}
+	\begin{column}{2.5cm}
+		\includegraphics[width=3.5cm]{Bilder/Freeradius_logo.png} 
+	\end{column}
+\end{columns}
 \begin{itemize}
 	\item ESXi-VM mit Linux (Debian 8.0)
 	\item OpenLDAP-Server für LDAP-Schnitstelle und Verzeichnisdienst
 	\item FreeRADIUS-Server für RADIUS
-	\item FreeRADIUS-Server über Modul an OpenLDAP-Server angebunden (Kommunikation über LDAP)
+	\item FreeRADIUS-Server an OpenLDAP-Server angebunden (Kommunikation über LDAP)
 \end{itemize}
 \end{frame}
 
@@ -217,7 +233,11 @@ benötigt wird als Ersatz:
 
 
 \begin{frame}{Realisierung des Ersatzservers (2)}
-
+\begin{itemize}
+	\item FreeRADIUS-Server mit Shared Secret für TU E-Mail-Server konfiguriert
+	\item Anbindung an LDAP über mitgeliefertes Modul (Kommunikation über Loopback ohne SSL)
+	\item Import von Anwenderkonten per generierter LDIF-Datei
+\end{itemize}
 \end{frame}
 
 
