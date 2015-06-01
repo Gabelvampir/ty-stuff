@@ -19,4 +19,5 @@ graph G {
   fgn -- people1 -- fgnpe;
   schabler -- people2 -- schabpe;
   worden -- people3 -- wordpe;
+  margin=0;
   }
