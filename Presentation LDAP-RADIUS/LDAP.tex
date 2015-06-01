@@ -95,10 +95,10 @@ title=\lstname                   % show the filename of files included with \lst
 %   (from http://pleasemakeanote.blogspot.de/2009/08/how-to-highlight-text-in-latex.html)
 
 \title[OpenLDAP- und FreeRADIUS-Server]   % (optional, use only with long paper titles)
-{LDAP+RADIUS}
+{Aufsetzen eines OpenLDAP- und FreeRADIUS-Server}
 
 \subtitle
-{Identity Management für Masochisten} % (optional)
+{Abschlusspräsentation des Projektes im Rahmen der Ausbildung zum Fachinformatiker - Systemintegration} % (optional)
 
 \author % (optional, use only with lots of authors)
 {Sebastian Deußer}
@@ -145,10 +145,10 @@ title=\lstname                   % show the filename of files included with \lst
 	\end{column}
 \end{columns}
 \begin{itemize}
-	\item Praktikumsbetrieb fgn GmbH gegründet 1996, SpinOff der TU Kaiserslautern
-	\item Kerngeschäft Netzwerkschulungen und -consulting (herstellerunabhängig)
-	\item circa ein Dutzend Mitarbeiter (ungefähr gleich verteilt auf Trainer, Consulting, Verwaltung/Administration)
-	\item eigene Schulungslabore (Remote Labs) mit Managed Switches und VMs auf ESXi-Servern
+	\item Praktikumsbetrieb fgn GmbH gegründet 1996, SpinOff der Technischen Universität Kaiserslautern
+	\item Kerngeschäft Netzwerkschulungen und -consulting
+	\item circa ein Dutzend Mitarbeiter
+	\item eigene Server und Schulungslabore (sgn. Remote Labs) mit Managed Switches und VMs auf ESXi-Servern
 	\item Büro- und Server-Räume in DFKI Neubau, deswegen Internetanbindung über TU Kaiserslautern
 %	\item öffentliche Webseite extern gehostet, restliche Server selbst verwaltet in Server-Räumen im DFKI
 %	\item meisten Server sind VMs auf ESXi-Servern
@@ -157,8 +157,6 @@ title=\lstname                   % show the filename of files included with \lst
 \end{frame}
 
 
-\section{Planung}
-\subsection{}
 \begin{frame}{Ausgangssituation}
 \begin{itemize}
 	\item CommuniGate-Server für E-Mail und Identity Management
@@ -170,10 +168,13 @@ title=\lstname                   % show the filename of files included with \lst
 		\item Egroupware
 	\end{itemize}
 	\item E-Mail-Server verwaltet 3 E-Mail-Domains, \texttt{fg-networking.de}, \texttt{schabler.de} und \texttt{worden.de}
- 	\item CommuniGate stark veraltet, deswegen SSL-Probleme mit aktuellen Clients (und vermutlich etliche Sicherheitslücken)
+ 	\item CommuniGate stark veraltet, deswegen SSL-Probleme mit aktuellen E-Mail-Clients (und vermutlich etliche Sicherheitslücken)
 \end{itemize}
 \end{frame}
 
+
+\section{Planung}
+\subsection{}
 \begin{frame}{Soll-Zustand}
 benötigt wird als Ersatz:
 \begin{itemize}
@@ -188,6 +189,7 @@ benötigt wird als Ersatz:
 
 \begin{frame}{Konzept Ersatzserver}
 \begin{columns}[c]
+\centering
 	\begin{column}{0.5cm}
 		\includegraphics[scale=0.3]{Bilder/debian-openlogo-100.png}
 	\end{column}
@@ -217,7 +219,7 @@ benötigt wird als Ersatz:
 	\item Planung der Verzeichnisstruktur (ursprünglich 3 getrennte Datenbanken)
 \end{itemize}
 \centering
-\includegraphics[width=0.99\textwidth]{Bilder/LDAP-fgn-planned.pdf}
+\includegraphics[width=0.95\textwidth]{Bilder/LDAP-fgn-planned.pdf}
 \end{frame}
 
 
@@ -226,14 +228,13 @@ benötigt wird als Ersatz:
 	\item FreeRADIUS-Server mit Shared Secret für TU E-Mail-Server konfiguriert
 	\item Anbindung an LDAP über mitgeliefertes Modul (Kommunikation über Loopback ohne SSL)
 	\item Import von Anwenderkonten per generierter LDIF-Datei
+	\item Einrichtung der Firewall
 \end{itemize}
 \end{frame}
 
 
 \begin{frame}{Anbindung der Webservices etc}
-LDAP wurde bereits verwendet (ohne SSL), deswegen kein große Umstellung.
-
-Änderungen:
+LDAP wurde bereits ohne SSL von Apache, OpenVPN verwendet, deswegen kein große Umstellung:
 \begin{itemize}
 	\item geänderte Server-URL und BaseDN in Konfiguration von Apache und OpenVPN eintragen
 	\item SSL-Zertifikat eintragen
@@ -322,8 +323,13 @@ Egroupware siehe Probleme
 \begin{frame}{Fazit}
 \begin{itemize}
 	\item alle Systeme außer Egroupware, E-Mail-Server umgestellt
+	\item E-Mail-Server wird setzen neuer Attribute benötigen
 	\item FreeRADIUS noch kein Praxistest
 	\item Zeitplanung nicht optimal
+	\begin{itemize}
+		\item zu wenig Zeit für Design der Verzeichnisstruktur veranschlagt
+		\item für die Vorbereitungen mehr Zeit eingeplant als benötigt
+	\end{itemize}
 \end{itemize}
 \end{frame}
 
@@ -333,8 +339,9 @@ Egroupware siehe Probleme
 	Erweiterungsmöglichkeiten
 	\begin{enumerate}
 		\item Anbindung neuer E-Mailserver (\texttt{postfix})
+		\item Beschränkung des Nutzerkreises von Webtools
 		\item Ersatz lokale Accounts
-		\item Anbindung Managed Switches über RADIUS
+		\item Anbindung Managed Switches an FreeRADIUS
 		\item Samba Domäne für Windows Rechner
 	\end{enumerate}
 \end{frame}
