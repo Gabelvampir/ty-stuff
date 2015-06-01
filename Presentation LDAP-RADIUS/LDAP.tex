@@ -132,29 +132,6 @@ title=\lstname                   % show the filename of files included with \lst
 \section{}
 \begin{frame}{Übersicht}
 \tableofcontents
-%	\begin{enumerate}
-%		\item Projektbeschreibung
-%		\begin{itemize}
-%			\item Projektumfeld
-%			\item Projektthema
-%		\end{itemize}
-%		\item Planung
-%		\begin{itemize}
-%			\item Planung Ersatzserver
-%			\item Kommunikationskonzept
-%		\end{itemize}
-%		\item Realisierung
-%		\begin{itemize}
-%			\item OpenLDAP-Server
-%			\item FreeRADIUS-Server
-%		\end{itemize}
-%		\item Projektkosten
-%		\item Abschluss
-%		\begin{itemize}
-%			\item Fazit
-%			\item Ausblick
-%		\end{itemize}
-%	\end{enumerate}
 \end{frame}
 \note{}
 
@@ -319,6 +296,8 @@ Egroupware siehe Probleme
 \section{Projektkosten}
 \subsection{}
 \begin{frame}{Projektkosten (mit Vergleich zu Alternative)}
+\begin{table}
+\centering
 	\begin{tabularx}{0.8\textwidth}{|X|r|r|}
 %		\hline
 %		\mcc{4}{Kosten für die Einrichtung}\\
@@ -335,13 +314,18 @@ Egroupware siehe Probleme
 		Gesamt &	2.485,00\euro{} &	4.334,00\euro{}\\
 		\hline
 	\end{tabularx}
+\end{table}
 \end{frame}
 
 
 \section{Projektabschluss}
 \subsection{Fazit}
 \begin{frame}{Fazit}
-
+\begin{itemize}
+	\item alle Systeme außer Egroupware, E-Mail-Server umgestellt
+	\item FreeRADIUS noch kein Praxistest
+	\item Zeitplanung nicht optimal
+\end{itemize}
 \end{frame}
 
 
@@ -407,291 +391,6 @@ Egroupware siehe Probleme
 %		Gesamt &	355,00\euro{} &	545,82\euro{} &	2.350,00\euro{}\\
 %		\hline
 %	\end{tabularx}
-%\end{frame}
-
-
-
-
-%\section{Übersicht}
-%\subsection{Namensbedeutung}
-%\begin{frame}{Namensbedeutung}
-%	\begin{columns}[c]%sort the graphics with columns
-%		\begin{column}{4cm}
-%			\includegraphics[width=4cm]{CobolCogLogo}\\ 
-%			\includegraphics[width=4cm]{GnuCOBOLLogoTransparent}
-%		\end{column}
-%		\begin{column}{6cm}
-%			\includegraphics[width=2.5cm]{DOSMSCOBOL45} \hspace{1.5pt}
-%			\includegraphics[width=2.5cm]{StandardCobol}
-%		\end{column}
-%	\end{columns}
-%	\pause
-%	\begin{itemize}[<+->]%auto-generate pause after each item
-%		\item
-%			COBOL steht für COmmon Business-Oriented Language.
-%		\item
-%			entwickelt für betriebswirtschaftliche Programme (im Gegensatz zum technisch-wissenschaftlichen Fokus anderer Sprachen)
-%	\end{itemize}
-%\end{frame}
-%\note{4 Grafiken plus 2}
-%
-%\subsection{Historische Entwicklung}
-%\begin{frame}{Anfänge}
-%	\begin{itemize}[<+->]
-%		\item
-%			entwickelt durch Arbeitsgruppe in der 2. H\"alfte von 1959
-%		\item%here comes some tricky stuff to position a picture next to text in an itemize environment
-%  \begin{minipage}[t]{0.7\textwidth}
-%%	\vspace{-5pt}
-%	federführend war Grace Hopper, Erfinderin des ersten Compilers (A-0) und Mitentwicklerin fr\"uher Computer (z.B. Harvard Mark I+II, UNIVAC I)
-%	\end{minipage}\hspace{2pt}
-%	\begin{minipage}[t]{0.15\textwidth}
-%	\vspace{-12pt}%\raggedright
-%    \includegraphics[width=1.5cm]{Grace_Hopper_small}
-%	\end{minipage}
-%		\item
-%			basierte auf Hoppers FLOW-MATIC, IBMs COMTRAN (``Business-Version'' von FORTRAN) und Honeywells FACT
-%		\item
-%		erster Standard (COBOL 60) festgelegt am 03. Januar 1960, danach individuelle (inkompatible) Erweiterungen von verschiedenen Firmen
-%	\end{itemize}
-%\end{frame}
-%\note{4}
-%
-%\begin{frame}{Versionen des Standards}
-%	\begin{itemize}[<+->]
-%		\item
-%			ANS COBOL 1968: ANSI Standard um die verschiedenen \"Anderungen nach 1959 zu einer neuen Basis zusammenzufassen
-%		\item
-%			COBOL 1974: 2. ANSI Standard, neue Features wie Datei-Organisation, Report Modul; Einführung der Möglichkeit ein Programm in Funktionen zu unterteilen; Abschaffung von Features, deshalb inkompatibel zu vorherigen Standards
-%		\item
-%			COBOL 1985: \"uberarbeiteter ANSI Standard, Einf\"uhrung G\"ultigkeitsbereich-Terminatoren (z.B. \texttt{END-IF}), neue Features geschachtelte Unterprogramme, neue Statements, die Operatoren >= und <=; ersetzen von selbstmodifizierenden Code (\texttt{ALTER}) durch Referenz Modifikation
-%	\end{itemize}
-%\end{frame}
-%\note{4}
-%
-%\begin{frame}{Entwicklung um und nach 2000}
-%	\begin{itemize}[<+->]
-%		\item
-%			viele Programm aus den 80ern und davor verwendeten in Records Datumsfelder mit fester 2-stelliger Jahreszahl
-%		\item
-%			=> um 1999/2000 Massensterben unter COBOL Anwendungen wegen Y2K-Bug; Programme mussten entweder grundlegend überarbeitet oder ganz ersetzt werden
-%		\item
-%			COBOL 2002: neue zeitgemäße Features wie Locale/Unicode-Unterstützung, Objektorientierung zur Einbindung in Java und .NET-Frameworks, Fließkommaunterstützung
-%		\item
-%			Ausblick: COBOL 20XX Standard in Entwicklung (erwartet 2014-6), baut primär Objektorientierung aus und passt Datentypen an neue Standards an
-%		\end{itemize}
-%\end{frame}
-%\note{4}
-%
-%\section{Einsatz}
-%\subsection{Einsatzgebiete}
-%\begin{frame}{Einsatzgebiete}
-%	\pause
-%	\begin{columns}[t]
-%		\begin{column}{4cm}
-%			\includegraphics[width=4cm]{Deutsche-boerse}
-%		\end{column}
-%	\pause
-%		\begin{column}{3cm}
-%			\includegraphics[width=3cm]{sparda_logo}
-%		\end{column}
-%	\pause
-%		\begin{column}{3.5cm}
-%			\includegraphics[width=3.5cm]{california-state-flag1} 
-%		\end{column}
-%	\end{columns}
-%	\pause
-%	\begin{itemize}[<+->]
-%		\item
-%			Haupteinsatzgebiet ist betriebswirtschaftliche Datenverarbeitung (z.B. Gehaltsabrechnungen, Touristik)
-%		\item
-%			bei klassischer Aufteilung nach Benutzerschnittstelle, Verabreitungsteil und Datenhaltungsteil stellt COBOL den Verarbeitungsteil eines EDV-Programms
-%	\end{itemize}
-%\end{frame}
-%\note{3 Grafiken plus 2}
-%
-%\subsection{heutiger Einsatz}
-%\begin{frame}{heutiger Einsatz}
-%	\begin{itemize}[<+->]
-%		\item
-%			COBOL hatte wenig Einfluss auf sp\"atere Programmiersprachen da Fokus auf relativ simple Algorithmen und hohes I/O-Volumen akademisch uninteressant (Ausnahme: SAPs Programmiersprache ABAP)
-%		\item
-%			geschätzte 70-80\% aller Geschäftstransaktion involvieren COBOL Programme, oft als Teil von jahrzehntelang gewachsenen Systemen
-%		\item
-%			komplette Neuentwicklungen nur noch selten in COBOL
-%		\item
-%			2010 geschätzt \"uber 40 Milliarden Zeilen COBOL Code in Industrieprogrammen verwendet, Wachstumsrate 4 Milliarden Zeilen Code pro Jahr
-%	\end{itemize}
-%\end{frame}
-%\note{4
-%		\begin{itemize}
-%			\item
-%			
-%			\item
-%				täglich 200 mal mehr COBOL-Transaktion als Google Suchanfragen
-%			\item
-%				primär Erweiterungen alter Systeme
-%			\item
-%				1997 schätze Gartner noch 200 Mrd Zeilen bei 5 Mrd Wachstum
-%		\end{itemize}}
-%
-%\section{Vor- und Nachteile}
-%\subsection{Vorteile}
-%\begin{frame}{Vorteile}
-%	\begin{itemize}[<+->]
-%		\item
-%			entworfen um Programme auf verschiedener Hardware laufen zu lassen ohne große Ver\"anderung des Codes
-%		\item
-%			durch mehrstufiges Design der einzelnen Programmsprachen-Module lassen sich COBOL-Programme auf sehr eingeschr\"ankter Hardware mit geringen Anpassungen ausf\"uhren
-%		\item
-%			der ANSI-Standard wird durchschnittlich alle 10-15 Jahre an neue Gegebenheiten angepasst, z.B. kam 2002 Unterstüzung für Objektorientierung dazu
-%		\item
-%			es gibt einen kostenlosen quelloffenen Compiler namens GNU COBOL (ehemals OpenCOBOL) für POSIX-kompatible Betriebssysteme
-%	\end{itemize}
-%\end{frame}
-%\note{4}
-%
-%\subsection{Nachteile}
-%\begin{frame}{Nachteile}
-%	\begin{itemize}[<+->]
-%		\item
-%		    bis COBOL 74 gab es keine M\"oglichkeit Programme zu strukturieren, z.B. waren alle Variablen global
-%		\item
-%			aufgrund vieler Eigenentwicklungen von Firmen und anderen Gruppen gibt es viele verschiedene Standards von COBOL die teilweise inkompatibel zueinander sind
-%		\item
-%			da die Syntax sich an geschriebenem Englisch orientiert werden COBOL Programme schnell recht langwierig zu schreiben
-%		\item
-%			COBOL Programmierer sterben langsam aus
-%	\end{itemize}
-%\end{frame}
-%\note{4}
-%
-%\section{Praxis}
-%\subsection{Entwicklungsumgebung}
-%\begin{frame}{Entwicklungsumgebung}
-%	\begin{itemize}[<+->]
-%		\item
-%			viele Computer/Betriebsystemhersteller (z.B. IBM, Siemens, Unisys, HP) entwickelten (und vertreiben teilweise immer noch) eigene Compiler, oft mit eigenen Erweiterungen des Standards
-%		\item
-%			es gibt verschiedene Codegeneratoren die COBOL-Programme oder Teile davon generieren um die Entwicklungsarbeit zu erleichtern
-%		\item
-%			Plugins für viele gängige IDEs, z.B. cobolclipse für Eclipse
-%	\end{itemize}
-%\end{frame}
-%\note{3}
-%
-%\begin{frame}{Entwicklungsumgebung (2)}
-%	\begin{itemize}
-%		\item
-%			verbreiteste (kommerzielle) COBOL IDE ist Visual COBOL von Micro Focus; besitzt moderne Features wie Generierung von Java Byte-Code, .NET Unterstützung und Webservices
-%		\includegraphics[width=9cm]{VisualCOBOL2}
-%	\end{itemize}
-%\end{frame}
-%
-%
-%\subsection{Sprachspezifikation}
-%\begin{frame}{Sprachspezifikation}
-%	\begin{itemize}[<+->]
-%		\item
-%			COBOL wurde so entworfen das der Code relativ lesbarem Englisch entspricht z.B. ``\texttt{ADD b TO c GIVING a}'' (a = b + c)
-%		\item
-%			importieren von Programmteilen als sgn. Copybooks mit \texttt{COPY} Befehl, vergleichbar mit \texttt{\#include} in C u.\"A.
-%		\item
-%			Kontrollstrukturen:
-%			\begin{itemize}[<+->]
-%				\item \texttt{IF...ELSE}: funktioniert wie erwartet
-%				\item \texttt{EVALUATE}: vergleichbar mit CASE/Switch (eingeführt mit COBOL 85)
-%				\item \texttt{PERFORM}: vergleichbar mit for-Schleifen
-%				\item \texttt{GO TO}: Standard GOTO, optional mit Bedingung
-%			\end{itemize}
-%	\end{itemize}
-%\end{frame}
-%\note{3+4}
-%
-%\begin{frame}{Datenstrukturen}
-%	\begin{itemize}[<+->]
-%		\item
-%			Grunddatenstruktur ist ein sogenannter Record, ein multidimensionales heterogenes Array
-%		\item
-%			Records k\"onnen mit homogenen Arrays gemischt verwendet werden, ein Array kann also Inhalt eines Records sein und umgekehrt
-%		\item
-%			über die \texttt{PICTURE} Klausel kann man den Inhalt (inklusive Feldgrößen) von Records exakt definieren
-%		\item
-%			Variablen müssen bei der Deklaration typisiert werden, allerdings hat man Dank Records und der \texttt{PICTURE} Klausel vergleichsweise viel Freiheit dabei
-%	\end{itemize}
-%\end{frame}
-%\note{4}
-%
-%\begin{frame}{Aufteilung eines Programms}
-%	\begin{itemize}[<+->]
-%		\item
-%			jedes Programm besteht aus 4 Teilen (\texttt{DIVISION}) zur Trennung von:
-%			\begin{itemize}[<+->]
-%			 	\item hardwareabh\"angigem und unabh\"angigem Code
-%				\item Algorithmen Beschreibungen und Daten Beschreibungen
-%			 \end{itemize}
-%		\item
-%			\texttt{IDENTIFICATION}: beginnt jedes Programm, benennt Programm und den Autor (Autor optional), sonstige Kommentare als Dokumentation
-%		\item
-%			\texttt{ENVIRONMENT}: beinhaltet maschinenabhängige Programmspezifikationen wie z.B. Verbindungen zwischen dem Programm und externen Daten
-%		\item
-%			\texttt{PROCEDURE}: beinhaltet die Algorithmen
-%		\item
-%			\texttt{DATA}: beinhaltet die Daten Beschreibungen
-%	\end{itemize}
-%\end{frame}
-%\note{1+2,4}
-%
-%\setbeamercovered{transparent}
-%\def\beamertemplatetransparentcoveredmedium{\setbeamercovered{transparent=20}}
-%\beamertemplatetransparentcoveredmedium %covered stuff is now only semi-transparent
-%\begin{frame}[fragile]{Code-Beispiele}
-%	\onslide<1-1>%Listing 1 only fully visible on slide 1
-%	\noindent\begin{minipage}{.44\textwidth}
-%		\begin{lstlisting}{Hello World}
-%			IDENTIFICATION DIVISION.
-%			PROGRAM-ID. HELLO-WORLD.
-%			PROCEDURE DIVISION.
-%			 DISPLAY "Hello, world."
-%			 STOP RUN.
-%		\end{lstlisting}
-%	\end{minipage}\hfill\pause
-%	\onslide<2-2>
-%	\noindent\begin{minipage}{.53\textwidth}
-%		\begin{lstlisting}{Schleifen}
-%			PERFORM VARYING i FROM 0 BY 1
-%			 UNTIL i >= 10
-%			 DISPLAY i
-%			END-PERFORM
-%		\end{lstlisting}
-%	\end{minipage}\pause
-%	\onslide<3-3>
-%	\lstset{numbers=left,firstnumber=1}
-%	\begin{lstlisting}{EVALUATE}
-%		EVALUATE True
-%		 WHEN Nenner > 0
-%		  COMPUTE Zahl = Zaehler / Nenner
-%		 WHEN Nenner < 0
-%		  COMPUTE Zahl = Zaehler / Nenner * -1
-%		 WHEN OTHER
-%		  DISPLAY "Fehler"
-%		  MOVE 0 TO Zaehler
-%		END-EVALUATE
-%	\end{lstlisting}
-%\end{frame}
-%\note{3 Listings}
-%
-%\section{}%section shall not be visible in navbar, hence empty name
-%\begin{frame}{Quellen}
-%	\begin{enumerate}
-%		\item COBOL Artikel englische Wikipedia
-%			\url{http://en.wikipedia.org/wiki/COBOL}
-%		\item COBOL Artikel deutsche Wikipedia
-%			\url{http://de.wikipedia.org/wiki/COBOL}
-%		\item
-%			Terrence W. Pratt - Programming Languages: Design and Implementation (Prentice Hill 1975)
-%		\item OpenCOBOL Programmers Guide \url{http://opencobol.add1tocobol.com/OpenCOBOL\%20Programmers\%20Guide.pdf}
-%	\end{enumerate}
 %\end{frame}
 
 \end{document}
