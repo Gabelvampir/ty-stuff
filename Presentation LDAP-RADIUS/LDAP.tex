@@ -144,12 +144,6 @@ title=\lstname                   % show the filename of files included with \lst
 		\includegraphics[scale=0.7]{Bilder/logo_fgn.png}
 	\end{column}
 \end{columns}
-%\begin{figure}[htbp] 
-%	\centering
-%	\includegraphics[scale=0.7]{Bilder/logo_fgn.png}
-%%	\caption{Logo der fgn GmbH}
-%	\label{fig:fgn-Logo}
-%\end{figure}
 \begin{itemize}
 	\item Praktikumsbetrieb fgn GmbH gegründet 1996, SpinOff der TU Kaiserslautern
 	\item Kerngeschäft Netzwerkschulungen und -consulting (herstellerunabhängig)
@@ -164,7 +158,6 @@ title=\lstname                   % show the filename of files included with \lst
 
 
 \section{Planung}
-%\subsection{Konzeptplanung}
 \subsection{}
 \begin{frame}{Ausgangssituation}
 \begin{itemize}
@@ -221,9 +214,10 @@ benötigt wird als Ersatz:
 \begin{itemize}
 	\item LDAP-over-SSL (LDAPS) eingerichtet mit Zertifikaten aus Firmen CA
 	\item LDAPS als einzige Zugriffsmöglichkeit auf LDAP von anderen Rechnern
-	\item Planung der Verzeichnisstruktur ursprünglich 3 getrennte Datenbanken
+	\item Planung der Verzeichnisstruktur (ursprünglich 3 getrennte Datenbanken)
 \end{itemize}
-\includegraphics[width=\textwidth]{Bilder/LDAP-fgn-planned.pdf}
+\centering
+\includegraphics[width=0.99\textwidth]{Bilder/LDAP-fgn-planned.pdf}
 \end{frame}
 
 
@@ -237,7 +231,7 @@ benötigt wird als Ersatz:
 
 
 \begin{frame}{Anbindung der Webservices etc}
-Es wurde bereits LDAP verwendet (ohne SSL), deswegen kein große Umstellung.
+LDAP wurde bereits verwendet (ohne SSL), deswegen kein große Umstellung.
 
 Änderungen:
 \begin{itemize}
@@ -272,24 +266,29 @@ Egroupware siehe Probleme
 	\item Design der LDAP-Baumstruktur
 	\begin{itemize}
 		\item ursprüngliche Idee eine Datenbank pro Domain, so erstellte Datenbanken ließen sich in der Praxis aber nicht ansprechen
-		\item gelöst durch Umsetzung in einer Datenbank statt 3 getrennten
+		\item gelöst durch Umsetzung in einer Datenbank
 	\end{itemize}
+\end{enumerate}
+\centering
+\includegraphics[width=0.8\textwidth]{Bilder/LDAP-fgn.pdf}
+\end{frame}
+
+\begin{frame}{Probleme und Lösungen (2)}
+\begin{enumerate}
+	\setcounter{enumi}{1}
 	\item Egroupware
 	\begin{itemize}
 		\item fehlendes Passwort für Installer, Zuständiger in Urlaub
+		\item Groupware sehr wichtig für Betrieb
 		\item Umstellung verschoben, problemlos da alter Server weiterhin in Betrieb
 	\end{itemize}
-	\item neuer E-Mail-Server noch nicht fertig, deswegen Praxistests nicht möglich
+	\item neuer E-Mail-Server noch nicht fertig, deswegen manche Praxistests nicht möglich
+	\begin{itemize}
+		\item FreeRADIUS mit \texttt{radtest} getestet und Antwort mit CommuniGate verglichen
+		\item Managed Switch probeweise an RADIUS angebunden
+		\item Attribute für E-Mail-Integration nicht eingepflegt, entsprechend nicht getestet
+	\end{itemize}
 \end{enumerate}
-\end{frame}
-
-\begin{frame}{Endgültiger LDAP-Verzeichnisbaum}
-%	\begin{figure}[htbp] 
-%		\centering
-		\includegraphics[width=\textwidth]{Bilder/LDAP-fgn.pdf}
-%		\caption{Der fertige LDAP-Verzeichnisbaum}
-%		\label{fig:LDAP-Baum}
-%	\end{figure}
 \end{frame}
 
 
@@ -340,7 +339,8 @@ Egroupware siehe Probleme
 	\end{enumerate}
 \end{frame}
 
-\section{}%section shall not be visible in navbar, hence empty name
+
+\section{} %section shall not be visible in navbar, hence empty name
 \begin{frame}{Quellen}
 	Vielen Dank für Ihre Aufmerksamkeit
 	
