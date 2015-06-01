@@ -3,14 +3,14 @@ graph G {
   subgraph cluster_db{
     de [label="dc=de", style="filled", fillcolor="greenyellow"];
     fgn [label="dc=fg-networking", style="filled", fillcolor="green", width=2.15];
-    people1 [label="ou=people", style="filled", fillcolor="forestgreen"];
-    fgnpe [label=". . .", shape="plaintext"];
+    people1 [label="ou=people", style="filled", fillcolor="mediumseagreen"];
+    fgnpe [label=". . .", labelloc="t", shape="plaintext"];
     schabler [label="dc=schabler", style="filled", fillcolor="green", width=2.15];
-    people2 [label="ou=people", style="filled", fillcolor="forestgreen"];
-    schabpe [label=". . .", shape="plaintext"];
+    people2 [label="ou=people", style="filled", fillcolor="mediumseagreen"];
+    schabpe [label=". . .", labelloc="t", shape="plaintext"];
     worden [label="dc=worden", style="filled", fillcolor="green", width=2.15];
-    people3 [label="ou=people", style="filled", fillcolor="forestgreen"];
-    wordpe [label=". . .", shape="plaintext"];
+    people3 [label="ou=people", style="filled", fillcolor="mediumseagreen"];
+    wordpe [label=". . .", labelloc="t", shape="plaintext"];
     label="Datenbank";
     labelloc=b
   }
