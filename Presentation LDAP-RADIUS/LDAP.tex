@@ -134,10 +134,10 @@ title=\lstname                   % show the filename of files included with \lst
 \note{}
 
 \let\olditemize\itemize %bullets should have more space between them
-\renewcommand\itemize{\olditemize\addtolength{\itemsep}{10pt}}
+\renewcommand\itemize{\olditemize\addtolength{\itemsep}{12pt}}
 
 \let\oldenumerate\enumerate %enums too
-\renewcommand\enumerate{\oldenumerate\addtolength{\itemsep}{10pt}}
+\renewcommand\enumerate{\oldenumerate\addtolength{\itemsep}{12pt}}
 
 
 \section{Projektbeschreibung}
@@ -148,6 +148,7 @@ title=\lstname                   % show the filename of files included with \lst
 		\includegraphics[scale=0.7]{Bilder/logo_fgn.png}
 	\end{column}
 \end{columns}
+\vspace{6pt}
 \begin{itemize}
 	\item Praktikumsbetrieb fgn GmbH gegründet 1996
 	\item Kerngeschäft Netzwerkschulungen und -consulting
@@ -164,7 +165,7 @@ title=\lstname                   % show the filename of files included with \lst
 \begin{frame}{Ausgangssituation}
 \begin{itemize}
 	\item CommuniGate-Server für E-Mail und Identity Management
-	\item Identity Management genutzt 
+	\item Identity Management genutzt für Logins
 %	\item Identity Management genutzt von:
 %	\begin{itemize}
 %		\item E-Mail-Server (TU-Server über RADIUS)
@@ -172,7 +173,7 @@ title=\lstname                   % show the filename of files included with \lst
 %		\item OpenVPN-Server
 %		\item Egroupware
 %	\end{itemize}
-	\item E-Mail-Server verwaltet 3 E-Mail-Domains%, \texttt{fg-networking.de}, \texttt{schabler.de} und \texttt{worden.de}
+	\item E-Mail-Server verwaltet drei E-Mail-Domains%, \texttt{fg-networking.de}, \texttt{schabler.de} und \texttt{worden.de}
  	\item CommuniGate stark veraltet%, deswegen SSL-Probleme mit aktuellen E-Mail-Clients (und vermutlich etliche Sicherheitslücken)
 \end{itemize}
 \end{frame}
@@ -182,7 +183,7 @@ title=\lstname                   % show the filename of files included with \lst
 \subsection{}
 \begin{frame}{Soll-Zustand}
 benötigt wird als Ersatz:
-\vspace{4pt}
+\vspace{6pt}
 \begin{itemize}
 	\item LDAP-Server als Verzeichnisdienst% für Webtools, VPN, Groupware, E-Mail
 	\item RADIUS-Server für TU E-Mail-Server
@@ -209,9 +210,9 @@ benötigt wird als Ersatz:
 \begin{itemize}
 	\item ESXi-VM mit Linux (Debian 8.0)
 	\item OpenLDAP-Server% für LDAP-Schnitstelle und Verzeichnisdienst
-	\item FreeRADIUS-Server für RADIUS
+	\item FreeRADIUS-Server% für RADIUS
 	\item FreeRADIUS-Server an OpenLDAP-Server angebunden% (Kommunikation über LDAP)
-	\item Anwenderkonten per Skript importieren
+%	\item Anwenderkonten per Skript importieren
 \end{itemize}
 \end{frame}
 
@@ -221,9 +222,10 @@ benötigt wird als Ersatz:
 \begin{frame}{Realisierung des Ersatzservers (1)}
 \begin{itemize}
 	\item LDAP-over-SSL (LDAPS) eingerichtet %mit Zertifikaten aus Firmen CA
-	\item LDAPS als einzige Zugriffsmöglichkeit auf LDAP von anderen Rechnern
-	\item Planung der Verzeichnisstruktur %(ursprünglich 3 getrennte Datenbanken)
+	\item LDAPS als einzige externe Zugriffsmöglichkeit
+	\item Planung der Verzeichnisstruktur: %(ursprünglich 3 getrennte Datenbanken)
 \end{itemize}
+\vspace{2pt}
 \centering
 \includegraphics[width=0.95\textwidth]{Bilder/LDAP-fgn-planned.pdf}
 \end{frame}
@@ -232,16 +234,17 @@ benötigt wird als Ersatz:
 \begin{frame}{Realisierung des Ersatzservers (2)}
 \begin{itemize}
 	\item FreeRADIUS-Server mit Shared Secret für TU E-Mail-Server konfiguriert
-	\item Anbindung an LDAP über mitgeliefertes Modul (Kommunikation über Loopback ohne SSL)
+	\item Anbindung an LDAP über mitgeliefertes Modul% (Kommunikation über Loopback ohne SSL)
 	\item Import von Anwenderkonten per generierter LDIF-Datei
 	\item Einrichtung der Firewall
 \end{itemize}
 \end{frame}
 
 
-\begin{frame}{Anbindung der Webservices etc}
-LDAP wurde bereits ohne SSL von Apache, OpenVPN verwendet, deswegen kein große Umstellung:
-\vspace{4pt}
+\subsection{Anbinden der Services}
+\begin{frame}{Anbindend von Webservices etc.}
+LDAP bereits ohne SSL von Apache \& OpenVPN verwendet, deswegen keine große Umstellung:
+\vspace{6pt}
 \begin{itemize}
 	\item geänderte Server-URL und BaseDN in Konfiguration von Apache und OpenVPN eintragen
 	\item SSL-Zertifikat eintragen
@@ -250,31 +253,31 @@ LDAP wurde bereits ohne SSL von Apache, OpenVPN verwendet, deswegen kein große 
 \end{frame}
 
 
+\section{Qualitätssicherung}
 \subsection{Qualitätssicherung}
 \begin{frame}{Qualitätssicherung}
 \begin{enumerate}
 	\item Funktionstests:
-	\vspace{4pt}
+	\vspace{6pt}
 	\begin{itemize}
-		\item Webservices und OpenVPN wurden nach Umstellung getestet ob Login weiterhin möglich
-		\item RADIUS Test mit \texttt{radtest} und Vergleich mit Antworten von CommuniGate-RADIUS (keine Praxistests möglich)
+		\item Login bei Webservices und OpenVPN nach Umstellung getestet
+		\item RADIUS Test mit \texttt{radtest} und Vergleich mit Antworten von CommuniGate-RADIUS% (keine Praxistests möglich)
 	\end{itemize}
 	\item Sicherheitstests:
-	\vspace{4pt}
+	\vspace{6pt}
 	\begin{itemize}
-		\item Versuch von Anmelden mit falschen Anmeldeinformationen% bei Webservices und OpenVPN
+		\item Anmelden mit falschen Anmeldeinformationen% bei Webservices und OpenVPN
 		\item Überprüfung OpenSSH-Server Konfiguration
 		\item Port-Scan mit NMAP (aus fgn-Netz und extern)
 	\end{itemize}
 \end{enumerate}
 \end{frame}
 
-
 \subsection{Probleme und Lösungen}
 \begin{frame}{Probleme und Lösungen}
 \begin{enumerate}
 	\item Design der LDAP-Baumstruktur
-	\vspace{4pt}
+	\vspace{6pt}
 	\begin{itemize}
 		\item ursprüngliche Idee eine Datenbank pro Domain%, so erstellte Datenbanken ließen sich in der Praxis aber nicht ansprechen
 %		\item gelöst durch Umsetzung in einer Datenbank
@@ -289,16 +292,17 @@ LDAP wurde bereits ohne SSL von Apache, OpenVPN verwendet, deswegen kein große 
 \begin{enumerate}
 	\setcounter{enumi}{1}
 	\item Egroupware
-	\vspace{4pt}
+	\vspace{6pt}
 	\begin{itemize}
 		\item fehlendes Passwort für Installer
 		\item Zuständiger in Urlaub
 %		\item Groupware sehr wichtig für Betrieb
 %		\item Umstellung verschoben, problemlos da alter Server weiterhin in Betrieb
 	\end{itemize}
+	\medskip
 	\item RADIUS Praxistests nicht möglich
 %	\item neuer E-Mail-Server noch nicht fertig, deswegen manche Praxistests nicht möglich
-	\vspace{4pt}
+	\vspace{6pt}
 	\begin{itemize}
 		\item FreeRADIUS mit \texttt{radtest} getestet% und Antwort mit CommuniGate verglichen
 		\item Managed Switch probeweise an RADIUS angebunden
@@ -307,18 +311,17 @@ LDAP wurde bereits ohne SSL von Apache, OpenVPN verwendet, deswegen kein große 
 \end{enumerate}
 \end{frame}
 
-
-\section{Projektkosten}
-\subsection{}
+\section{Projektabschluss}
+\subsection{Projektkosten}
 \begin{frame}{Projektkosten (mit Vergleich zu Alternative)}
 \begin{table}
 \centering
-	\begin{tabularx}{0.8\textwidth}{|X|r|r|}
+	\begin{tabularx}{0.9\textwidth}{|X|r|r|}
 %		\hline
 %		\mcc{4}{Kosten für die Einrichtung}\\
 		\hline
-		Kosten-	&	OpenLDAP \& &	CommuniGate-\\
-		Kategorie	&	FreeRADIUS &	Upgrade\\
+		 	&	OpenLDAP \& &	CommuniGate-\\
+		Kosten-Kategorie	&	FreeRADIUS &	Upgrade\\
 		\hline
 		Hardware &	0,00\euro{} &	0,00\euro{}\\
 		\hline
@@ -333,7 +336,6 @@ LDAP wurde bereits ohne SSL von Apache, OpenVPN verwendet, deswegen kein große 
 \end{frame}
 
 
-\section{Projektabschluss}
 \subsection{Fazit}
 \begin{frame}{Fazit}
 \begin{itemize}
@@ -341,10 +343,10 @@ LDAP wurde bereits ohne SSL von Apache, OpenVPN verwendet, deswegen kein große 
 	\item E-Mail-Server wird setzen neuer Attribute benötigen
 	\item FreeRADIUS noch kein Praxistest
 	\item Zeitplanung nicht optimal
-	\vspace{4pt}
+	\vspace{6pt}
 	\begin{itemize}
 		\item zu wenig Zeit für Design der Verzeichnisstruktur veranschlagt
-		\item für die Vorbereitungen mehr Zeit eingeplant als benötigt
+		\item für Vorbereitungen mehr Zeit eingeplant als benötigt
 	\end{itemize}
 \end{itemize}
 \end{frame}
@@ -353,10 +355,10 @@ LDAP wurde bereits ohne SSL von Apache, OpenVPN verwendet, deswegen kein große 
 \subsection{Ausblick}
 \begin{frame}{Ausblick}
 Erweiterungsmöglichkeiten:
-\vspace{4pt}
+\vspace{6pt}
 	\begin{itemize}
-		\item Anbindung neuer E-Mailserver (\texttt{postfix})
-		\item Beschränkung des Nutzerkreises von Webtools
+		\item Anbindung neuer E-Mail-Server (\texttt{postfix})
+		\item Beschränkung von Nutzerkreisen
 		\item Ersatz lokale Accounts
 		\item Anbindung Managed Switches an FreeRADIUS
 		\item Samba Domäne für Windows Rechner
