@@ -120,7 +120,6 @@ title=\lstname                   % show the filename of files included with \lst
 % the following command: 
 %\beamerdefaultoverlayspecification{<+->}
 
-
 \begin{document}
 \setcounter{framenumber}{-1}
 {
@@ -128,12 +127,17 @@ title=\lstname                   % show the filename of files included with \lst
 \frame{\titlepage}
 }
 
-
 \section{}
 \begin{frame}{Übersicht}
 \tableofcontents
 \end{frame}
 \note{}
+
+\let\olditemize\itemize %bullets should have more space between them
+\renewcommand\itemize{\olditemize\addtolength{\itemsep}{10pt}}
+
+\let\oldenumerate\enumerate %enums too
+\renewcommand\enumerate{\oldenumerate\addtolength{\itemsep}{10pt}}
 
 
 \section{Projektbeschreibung}
@@ -145,11 +149,11 @@ title=\lstname                   % show the filename of files included with \lst
 	\end{column}
 \end{columns}
 \begin{itemize}
-	\item Praktikumsbetrieb fgn GmbH gegründet 1996, SpinOff der Technischen Universität Kaiserslautern
+	\item Praktikumsbetrieb fgn GmbH gegründet 1996
 	\item Kerngeschäft Netzwerkschulungen und -consulting
 	\item circa ein Dutzend Mitarbeiter
-	\item eigene Server und Schulungslabore (sgn. Remote Labs) mit Managed Switches und VMs auf ESXi-Servern
-	\item Büro- und Server-Räume in DFKI Neubau, deswegen Internetanbindung über TU Kaiserslautern
+	\item eigene Server und Schulungslabore (sgn. Remote Labs)
+	\item Büro- und Server-Räume in DFKI Neubau
 %	\item öffentliche Webseite extern gehostet, restliche Server selbst verwaltet in Server-Räumen im DFKI
 %	\item meisten Server sind VMs auf ESXi-Servern
 %	\item Schulungslabore (Remote Labs) mit eigenen Managed Switches und ESXi-Servern in eigenem VPN, Zugang über OpenVPN (Telnet für Switches, Remote Desktop für Windows VMs)
@@ -160,15 +164,16 @@ title=\lstname                   % show the filename of files included with \lst
 \begin{frame}{Ausgangssituation}
 \begin{itemize}
 	\item CommuniGate-Server für E-Mail und Identity Management
-	\item Identity Management genutzt von:
-	\begin{itemize}
-		\item E-Mail-Server (TU-Server über RADIUS)
-		\item firmeninterne Webtools (z.B. Nagios, Trac)
-		\item OpenVPN-Server
-		\item Egroupware
-	\end{itemize}
-	\item E-Mail-Server verwaltet 3 E-Mail-Domains, \texttt{fg-networking.de}, \texttt{schabler.de} und \texttt{worden.de}
- 	\item CommuniGate stark veraltet, deswegen SSL-Probleme mit aktuellen E-Mail-Clients (und vermutlich etliche Sicherheitslücken)
+	\item Identity Management genutzt 
+%	\item Identity Management genutzt von:
+%	\begin{itemize}
+%		\item E-Mail-Server (TU-Server über RADIUS)
+%		\item firmeninterne Webtools (z.B. Nagios, Trac)
+%		\item OpenVPN-Server
+%		\item Egroupware
+%	\end{itemize}
+	\item E-Mail-Server verwaltet 3 E-Mail-Domains%, \texttt{fg-networking.de}, \texttt{schabler.de} und \texttt{worden.de}
+ 	\item CommuniGate stark veraltet%, deswegen SSL-Probleme mit aktuellen E-Mail-Clients (und vermutlich etliche Sicherheitslücken)
 \end{itemize}
 \end{frame}
 
@@ -177,34 +182,35 @@ title=\lstname                   % show the filename of files included with \lst
 \subsection{}
 \begin{frame}{Soll-Zustand}
 benötigt wird als Ersatz:
+\vspace{4pt}
 \begin{itemize}
-	\item LDAP-Server als Verzeichnisdienst für Webtools, VPN, Groupware, E-Mail
+	\item LDAP-Server als Verzeichnisdienst% für Webtools, VPN, Groupware, E-Mail
 	\item RADIUS-Server für TU E-Mail-Server
-	\item Vorbereitungen zur Anbindung des neuen E-Mail-Servers (Server zur Bearbeitungszeit des Projektes nicht fertig gestellt)
-	\item Absichern des Rechners
+%	\item Vorbereitungen zur Anbindung des neuen E-Mail-Servers (Server zur Bearbeitungszeit des Projektes nicht fertig gestellt)
+%	\item Absichern des Rechners
 	\item Übernehmen der Anwenderkonten
 \end{itemize}
 \end{frame}
 
 
 \begin{frame}{Konzept Ersatzserver}
-\begin{columns}[c]
-\centering
-	\begin{column}{0.5cm}
-		\includegraphics[scale=0.3]{Bilder/debian-openlogo-100.png}
-	\end{column}
-	\begin{column}{1.5cm}
-		\includegraphics[scale=0.25]{Bilder/OpenLDAP-logo.png}
-	\end{column}
-	\begin{column}{2.5cm}
-		\includegraphics[width=3.5cm]{Bilder/Freeradius_logo.png} 
-	\end{column}
-\end{columns}
+%\begin{columns}[c]
+%\centering
+%	\begin{column}{0.5cm}
+%		\includegraphics[scale=0.3]{Bilder/debian-openlogo-100.png}
+%	\end{column}
+%	\begin{column}{1.5cm}
+%		\includegraphics[scale=0.25]{Bilder/OpenLDAP-logo.png}
+%	\end{column}
+%	\begin{column}{2.5cm}
+%		\includegraphics[width=3.5cm]{Bilder/Freeradius_logo.png} 
+%	\end{column}
+%\end{columns}
 \begin{itemize}
 	\item ESXi-VM mit Linux (Debian 8.0)
-	\item OpenLDAP-Server für LDAP-Schnitstelle und Verzeichnisdienst
+	\item OpenLDAP-Server% für LDAP-Schnitstelle und Verzeichnisdienst
 	\item FreeRADIUS-Server für RADIUS
-	\item FreeRADIUS-Server an OpenLDAP-Server angebunden (Kommunikation über LDAP)
+	\item FreeRADIUS-Server an OpenLDAP-Server angebunden% (Kommunikation über LDAP)
 	\item Anwenderkonten per Skript importieren
 \end{itemize}
 \end{frame}
@@ -214,9 +220,9 @@ benötigt wird als Ersatz:
 \subsection{Realisierung des Ersatzservers}
 \begin{frame}{Realisierung des Ersatzservers (1)}
 \begin{itemize}
-	\item LDAP-over-SSL (LDAPS) eingerichtet mit Zertifikaten aus Firmen CA
+	\item LDAP-over-SSL (LDAPS) eingerichtet %mit Zertifikaten aus Firmen CA
 	\item LDAPS als einzige Zugriffsmöglichkeit auf LDAP von anderen Rechnern
-	\item Planung der Verzeichnisstruktur (ursprünglich 3 getrennte Datenbanken)
+	\item Planung der Verzeichnisstruktur %(ursprünglich 3 getrennte Datenbanken)
 \end{itemize}
 \centering
 \includegraphics[width=0.95\textwidth]{Bilder/LDAP-fgn-planned.pdf}
@@ -235,11 +241,12 @@ benötigt wird als Ersatz:
 
 \begin{frame}{Anbindung der Webservices etc}
 LDAP wurde bereits ohne SSL von Apache, OpenVPN verwendet, deswegen kein große Umstellung:
+\vspace{4pt}
 \begin{itemize}
 	\item geänderte Server-URL und BaseDN in Konfiguration von Apache und OpenVPN eintragen
 	\item SSL-Zertifikat eintragen
 \end{itemize}
-Egroupware siehe Probleme
+\medskip Egroupware siehe Probleme
 \end{frame}
 
 
@@ -247,13 +254,15 @@ Egroupware siehe Probleme
 \begin{frame}{Qualitätssicherung}
 \begin{enumerate}
 	\item Funktionstests:
+	\vspace{4pt}
 	\begin{itemize}
 		\item Webservices und OpenVPN wurden nach Umstellung getestet ob Login weiterhin möglich
 		\item RADIUS Test mit \texttt{radtest} und Vergleich mit Antworten von CommuniGate-RADIUS (keine Praxistests möglich)
 	\end{itemize}
 	\item Sicherheitstests:
+	\vspace{4pt}
 	\begin{itemize}
-		\item Versuch von Anmelden mit falschen Anmeldeinformationen bei Webservices und OpenVPN
+		\item Versuch von Anmelden mit falschen Anmeldeinformationen% bei Webservices und OpenVPN
 		\item Überprüfung OpenSSH-Server Konfiguration
 		\item Port-Scan mit NMAP (aus fgn-Netz und extern)
 	\end{itemize}
@@ -265,11 +274,13 @@ Egroupware siehe Probleme
 \begin{frame}{Probleme und Lösungen}
 \begin{enumerate}
 	\item Design der LDAP-Baumstruktur
+	\vspace{4pt}
 	\begin{itemize}
-		\item ursprüngliche Idee eine Datenbank pro Domain, so erstellte Datenbanken ließen sich in der Praxis aber nicht ansprechen
-		\item gelöst durch Umsetzung in einer Datenbank
+		\item ursprüngliche Idee eine Datenbank pro Domain%, so erstellte Datenbanken ließen sich in der Praxis aber nicht ansprechen
+%		\item gelöst durch Umsetzung in einer Datenbank
 	\end{itemize}
 \end{enumerate}
+\vspace{2pt}
 \centering
 \includegraphics[width=0.79\textwidth]{Bilder/LDAP-fgn.pdf}
 \end{frame}
@@ -278,16 +289,20 @@ Egroupware siehe Probleme
 \begin{enumerate}
 	\setcounter{enumi}{1}
 	\item Egroupware
+	\vspace{4pt}
 	\begin{itemize}
-		\item fehlendes Passwort für Installer, Zuständiger in Urlaub
-		\item Groupware sehr wichtig für Betrieb
-		\item Umstellung verschoben, problemlos da alter Server weiterhin in Betrieb
+		\item fehlendes Passwort für Installer
+		\item Zuständiger in Urlaub
+%		\item Groupware sehr wichtig für Betrieb
+%		\item Umstellung verschoben, problemlos da alter Server weiterhin in Betrieb
 	\end{itemize}
-	\item neuer E-Mail-Server noch nicht fertig, deswegen manche Praxistests nicht möglich
+	\item RADIUS Praxistests nicht möglich
+%	\item neuer E-Mail-Server noch nicht fertig, deswegen manche Praxistests nicht möglich
+	\vspace{4pt}
 	\begin{itemize}
-		\item FreeRADIUS mit \texttt{radtest} getestet und Antwort mit CommuniGate verglichen
+		\item FreeRADIUS mit \texttt{radtest} getestet% und Antwort mit CommuniGate verglichen
 		\item Managed Switch probeweise an RADIUS angebunden
-		\item Attribute für E-Mail-Integration nicht eingepflegt, entsprechend nicht getestet
+%		\item Attribute für E-Mail-Integration nicht eingepflegt, entsprechend nicht getestet
 	\end{itemize}
 \end{enumerate}
 \end{frame}
@@ -326,6 +341,7 @@ Egroupware siehe Probleme
 	\item E-Mail-Server wird setzen neuer Attribute benötigen
 	\item FreeRADIUS noch kein Praxistest
 	\item Zeitplanung nicht optimal
+	\vspace{4pt}
 	\begin{itemize}
 		\item zu wenig Zeit für Design der Verzeichnisstruktur veranschlagt
 		\item für die Vorbereitungen mehr Zeit eingeplant als benötigt
@@ -336,14 +352,15 @@ Egroupware siehe Probleme
 
 \subsection{Ausblick}
 \begin{frame}{Ausblick}
-	Erweiterungsmöglichkeiten
-	\begin{enumerate}
+Erweiterungsmöglichkeiten:
+\vspace{4pt}
+	\begin{itemize}
 		\item Anbindung neuer E-Mailserver (\texttt{postfix})
 		\item Beschränkung des Nutzerkreises von Webtools
 		\item Ersatz lokale Accounts
 		\item Anbindung Managed Switches an FreeRADIUS
 		\item Samba Domäne für Windows Rechner
-	\end{enumerate}
+	\end{itemize}
 \end{frame}
 
 
