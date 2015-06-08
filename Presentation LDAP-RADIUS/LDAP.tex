@@ -225,7 +225,7 @@ LDAP bereits ohne SSL von Apache \& OpenVPN verwendet, deswegen keine große Ums
 	\vspace{6pt}
 	\begin{itemize}
 		\item Login bei Webservices und OpenVPN nach Umstellung getestet
-		\item RADIUS Test mit \texttt{radtest} und Vergleich mit Antworten von CommuniGate-RADIUS% (keine Praxistests möglich)
+		\item RADIUS Test mit \texttt{radtest}% und Vergleich mit Antworten von CommuniGate-RADIUS% (keine Praxistests möglich)
 	\end{itemize}
 	\item Sicherheitstests:
 	\vspace{6pt}
@@ -299,18 +299,17 @@ LDAP bereits ohne SSL von Apache \& OpenVPN verwendet, deswegen keine große Ums
 \end{table}
 \end{frame}
 
-
 \subsection{Fazit}
 \begin{frame}{Fazit}
 \begin{itemize}
 	\item alle Systeme außer Egroupware, E-Mail-Server umgestellt
-	\item E-Mail-Server wird setzen neuer Attribute benötigen
+%	\item E-Mail-Server wird setzen neuer Attribute benötigen
 	\item FreeRADIUS noch kein Praxistest
 	\item Zeitplanung nicht optimal
 	\vspace{6pt}
 	\begin{itemize}
-		\item zu wenig Zeit für Design der Verzeichnisstruktur veranschlagt
-		\item für Vorbereitungen mehr Zeit eingeplant als benötigt
+		\item[--] zu wenig Zeit für Design der Verzeichnisstruktur veranschlagt
+		\item[--] für Vorbereitungen mehr Zeit eingeplant als benötigt
 	\end{itemize}
 \end{itemize}
 \end{frame}
@@ -320,13 +319,13 @@ LDAP bereits ohne SSL von Apache \& OpenVPN verwendet, deswegen keine große Ums
 \begin{frame}{Ausblick}
 Erweiterungsmöglichkeiten:
 \vspace{6pt}
-	\begin{itemize}
+	\begin{enumerate}
 		\item Anbindung neuer E-Mail-Server (\texttt{postfix})
-		\item Beschränkung von Nutzerkreisen
+%		\item Beschränkung von Nutzerkreisen
 		\item Ersatz lokale Accounts
 		\item Anbindung Managed Switches an FreeRADIUS
 		\item Samba Domäne für Windows Rechner
-	\end{itemize}
+	\end{enumerate}
 \end{frame}
 
 
