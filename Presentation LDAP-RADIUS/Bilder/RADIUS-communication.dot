@@ -1,0 +1,28 @@
+digraph G {
+node [
+    shape=box, 
+    fontname="arial",
+    fontsize=8,
+    style=filled,
+    color="#d3edea"
+  ];
+  splines="compound"
+
+  compound=true;
+  rankdir=LR;
+  subgraph cluster_id{
+  radius [label="FreeRADIUS", style="filled", fillcolor="green"];
+  radius2 [label="FreeRADIUS", style="filled", fillcolor="green"];
+  ldap [label="OpenLDAP", style="filled", fillcolor="mediumseagreen"];
+  label="id.fg-networking.de";
+  labelloc=b;
+}
+  mail [label="TU Mailserver", style="filled", fillcolor="yellow"];
+  mail2 [label="TU Mailserver", style="filled", fillcolor="yellow"];
+  mail -> radius [label="Anfrage von Mailserver"];
+  radius -> ldap [label="Anfrage an LDAP"];
+  ldap -> radius2 [label="Antwort von LDAP"];
+  radius2 -> mail2 [label="Antwort von RADIUS"];
+  margin=0; //margins around graphic and subgraphs
+  nodesep=0.3; //minimal distance between nodes and subgraphs
+  }
