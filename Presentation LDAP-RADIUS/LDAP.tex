@@ -129,7 +129,7 @@
 \begin{frame}{Ausgangssituation}
 \begin{itemize}
 	\item CommuniGate-Server für E-Mail und Identity Management
-	\item Identity Management genutzt für Logins
+	\item Identity Management genutzt für die meisten Logins
 %	\item Identity Management genutzt von:
 %	\begin{itemize}
 %		\item E-Mail-Server (TU-Server über RADIUS)
@@ -187,11 +187,11 @@ benötigt wird als Ersatz:
 \begin{itemize}
 	\item LDAP-over-SSL (LDAPS) eingerichtet %mit Zertifikaten aus Firmen CA
 	\item LDAPS als einzige externe Zugriffsmöglichkeit
-	\item Planung der Verzeichnisstruktur: %(ursprünglich 3 getrennte Datenbanken)
+	\item endgültige Verzeichnisstruktur: %(ursprünglich 3 getrennte Datenbanken)
 \end{itemize}
-\vspace{2pt}
+%\vspace{2pt}
 \centering
-\includegraphics[width=0.95\textwidth]{Bilder/LDAP-fgn-planned.pdf}
+\includegraphics[width=0.69\textwidth]{Bilder/LDAP-fgn.pdf}
 \end{frame}
 
 
@@ -249,7 +249,7 @@ LDAP bereits ohne SSL von Apache \& OpenVPN verwendet, deswegen keine große Ums
 \end{enumerate}
 \vspace{2pt}
 \centering
-\includegraphics[width=0.79\textwidth]{Bilder/LDAP-fgn.pdf}
+\includegraphics[width=\textwidth]{Bilder/LDAP-fgn-planned.pdf}
 \end{frame}
 
 \begin{frame}{Probleme und Lösungen (2)}
