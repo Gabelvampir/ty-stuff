@@ -11,12 +11,12 @@ node [
   compound=true;
   rankdir=LR;
   subgraph cluster_id{
-  radius [label="FreeRADIUS", style="filled", fillcolor="green"];
+  radius [label="FreeRADIUS", style="filled", fillcolor="indigo", fontcolor="white"];
   ldap [label="OpenLDAP", style="filled", fillcolor="mediumseagreen"];
   label="id.fg-networking.de";
   labelloc=b;
 }
-  mail [label="TU Mailserver", style="filled", fillcolor="yellow"];
+  mail [label="TU Mailserver", style="filled", fillcolor="blue3", fontcolor="white"];
   mail -> radius [label="Anfrage von Mailserver"];
   radius -> ldap [label="Anfrage an LDAP"];
   margin=0; //margins around graphic and subgraphs
