@@ -114,7 +114,7 @@
 \end{columns}
 \vspace{6pt}
 \begin{itemize}
-	\item Praktikumsbetrieb fgn GmbH gegründet 1996
+	\item fgn GmbH gegründet 1996 als TU Ausgründung
 	\item Kerngeschäft Netzwerkschulungen und -consulting
 	\item circa ein Dutzend Mitarbeiter
 	\item eigene Server und Schulungslabore (sgn. Remote Labs) im DFKI Neubau
@@ -138,24 +138,24 @@
 %		\item Egroupware
 %	\end{itemize}
 	\item E-Mail-Server verwaltet drei E-Mail-Domains%, \texttt{fg-networking.de}, \texttt{schabler.de} und \texttt{worden.de}
- 	\item CommuniGate stark veraltet%, deswegen SSL-Probleme mit aktuellen E-Mail-Clients (und vermutlich etliche Sicherheitslücken)
+% 	\item CommuniGate stark veraltet%, deswegen SSL-Probleme mit aktuellen E-Mail-Clients (und vermutlich etliche Sicherheitslücken)
 \end{itemize}
 \end{frame}
 
 
 \section{Planung}
 \subsection{}
-\begin{frame}{Soll-Zustand}
-benötigt wird als Ersatz:
-\vspace{6pt}
-\begin{itemize}
-	\item LDAP-Server als Verzeichnisdienst% für Webtools, VPN, Groupware, E-Mail
-	\item RADIUS-Server für TU E-Mail-Server
-%	\item Vorbereitungen zur Anbindung des neuen E-Mail-Servers (Server zur Bearbeitungszeit des Projektes nicht fertig gestellt)
-%	\item Absichern des Rechners
-	\item Übernehmen der Anwenderkonten
-\end{itemize}
-\end{frame}
+%\begin{frame}{Soll-Zustand}
+%benötigt wird als Ersatz:
+%\vspace{6pt}
+%\begin{itemize}
+%	\item LDAP-Server als Verzeichnisdienst% für Webtools, VPN, Groupware, E-Mail
+%	\item RADIUS-Server für TU E-Mail-Server
+%%	\item Vorbereitungen zur Anbindung des neuen E-Mail-Servers (Server zur Bearbeitungszeit des Projektes nicht fertig gestellt)
+%%	\item Absichern des Rechners
+%	\item Übernehmen der Anwenderkonten
+%\end{itemize}
+%\end{frame}
 
 
 \begin{frame}{Konzept Ersatzserver}
@@ -176,7 +176,7 @@ benötigt wird als Ersatz:
 	\item OpenLDAP-Server% für LDAP-Schnitstelle und Verzeichnisdienst
 	\item FreeRADIUS-Server% für RADIUS
 	\item FreeRADIUS-Server an OpenLDAP-Server angebunden% (Kommunikation über LDAP)
-%	\item Anwenderkonten per Skript importieren
+	\item Anwenderkonten per Skript importieren
 \end{itemize}
 \end{frame}
 
@@ -185,36 +185,37 @@ benötigt wird als Ersatz:
 \subsection{Realisierung des Ersatzservers}
 \begin{frame}{Realisierung des Ersatzservers (1)}
 \begin{itemize}
-	\item LDAP-over-SSL (LDAPS) eingerichtet %mit Zertifikaten aus Firmen CA
-	\item LDAPS als einzige externe Zugriffsmöglichkeit
+%	\item LDAP-over-SSL (LDAPS) eingerichtet %mit Zertifikaten aus Firmen CA
+	\item LDAP-over-SSL als einzige externe Zugriffsmöglichkeit
 	\item endgültige Verzeichnisstruktur: %(ursprünglich 3 getrennte Datenbanken)
 \end{itemize}
 %\vspace{2pt}
 \centering
-\includegraphics[width=0.69\textwidth]{Bilder/LDAP-fgn.pdf}
+\includegraphics[width=\textwidth]{Bilder/LDAP-fgn.pdf}
 \end{frame}
 
 
 \begin{frame}{Realisierung des Ersatzservers (2)}
 \begin{itemize}
-	\item FreeRADIUS-Server mit Shared Secret für TU E-Mail-Server konfiguriert
+	\item Shared Secret für TU E-Mail-Server konfiguriert
 	\item Anbindung an LDAP über mitgeliefertes Modul% (Kommunikation über Loopback ohne SSL)
+	\item Anbindung der Webservices und OpenVPN
 	\item Import von Anwenderkonten per generierter LDIF-Datei
 	\item Einrichtung der Firewall
 \end{itemize}
 \end{frame}
 
 
-\subsection{Anbinden der Services}
-\begin{frame}{Anbinden von Webservices etc.}
-LDAP bereits ohne SSL von Apache \& OpenVPN verwendet, deswegen keine große Umstellung:
-\vspace{6pt}
-\begin{itemize}
-	\item geänderte Server-URL und BaseDN in Konfiguration von Apache und OpenVPN eintragen
-	\item SSL-Zertifikat eintragen
-\end{itemize}
-\medskip Egroupware siehe Probleme
-\end{frame}
+%\subsection{Anbinden der Services}
+%\begin{frame}{Anbinden von Webservices etc.}
+%LDAP bereits ohne SSL von Apache \& OpenVPN verwendet, deswegen keine große Umstellung:
+%\vspace{6pt}
+%\begin{itemize}
+%	\item geänderte Server-URL und BaseDN in Konfiguration von Apache und OpenVPN eintragen
+%	\item SSL-Zertifikat eintragen
+%\end{itemize}
+%\medskip Egroupware siehe Probleme
+%\end{frame}
 
 
 \section{Qualitätssicherung}
@@ -269,7 +270,7 @@ LDAP bereits ohne SSL von Apache \& OpenVPN verwendet, deswegen keine große Ums
 	\vspace{6pt}
 	\begin{itemize}
 		\item FreeRADIUS mit \texttt{radtest} getestet% und Antwort mit CommuniGate verglichen
-		\item Managed Switch probeweise an RADIUS angebunden
+%		\item Managed Switch probeweise an RADIUS angebunden
 %		\item Attribute für E-Mail-Integration nicht eingepflegt, entsprechend nicht getestet
 	\end{itemize}
 \end{enumerate}
@@ -319,41 +320,46 @@ LDAP bereits ohne SSL von Apache \& OpenVPN verwendet, deswegen keine große Ums
 \begin{frame}{Ausblick}
 Erweiterungsmöglichkeiten:
 \vspace{6pt}
-	\begin{enumerate}
+	\begin{itemize}
 		\item Anbindung neuer E-Mail-Server (\texttt{postfix})
 %		\item Beschränkung von Nutzerkreisen
 		\item Ersatz lokale Accounts
 		\item Anbindung Managed Switches an FreeRADIUS
 		\item Samba Domäne für Windows Rechner
-	\end{enumerate}
+	\end{itemize}
 \end{frame}
 
 
 \section{} %section shall not be visible in navbar, hence empty name
 \begin{frame}{Fin}
+	\bigskip\bigskip\bigskip\bigskip\bigskip\bigskip
 	Vielen Dank für Ihre Aufmerksamkeit
 	
-	\medskip
-	\medskip Diese Präsentation wurde mit \LaTeX{}-Beamer erstellt
+	Für Fragen stehen ich ihnen selbstverständlich zur Verfügung
+	
+	\bigskip\bigskip\bigskip
+	\bigskip
+	\bigskip
+	\bigskip Diese Präsentation wurde mit \LaTeX{}-Beamer erstellt
 	
 	Grafiken erstellt mit GraphViz
 \end{frame}
 
 
-\section{}
-%\subsection{}
-\setcounter{framenumber}{14}
-\begin{frame}{Anfrage an RADIUS-Server}
-\centering
-\includegraphics[width=\textwidth]{Bilder/RADIUS-communication1.pdf}
-\end{frame}
-
-
-\setcounter{framenumber}{14}
-\begin{frame}{Antwort von RADIUS-Server}
-\centering
-\includegraphics[width=\textwidth]{Bilder/RADIUS-communication2.pdf}
-\end{frame}
+%\section{}
+%%\subsection{}
+%\setcounter{framenumber}{14}
+%\begin{frame}{Anfrage an RADIUS-Server}
+%\centering
+%\includegraphics[width=\textwidth]{Bilder/RADIUS-communication1.pdf}
+%\end{frame}
+%
+%
+%\setcounter{framenumber}{14}
+%\begin{frame}{Antwort von RADIUS-Server}
+%\centering
+%\includegraphics[width=\textwidth]{Bilder/RADIUS-communication2.pdf}
+%\end{frame}
 
 %\section{Projektkosten}
 %\subsection{Projektkosten - Anschaffung}
