@@ -118,10 +118,6 @@
 	\item Kerngeschäft Netzwerkschulungen und -consulting
 	\item circa ein Dutzend Mitarbeiter
 	\item eigene Server und Schulungslabore (sgn. Remote Labs) im DFKI Neubau
-%	\item Büro- und Server-Räume in DFKI Neubau
-%	\item öffentliche Webseite extern gehostet, restliche Server selbst verwaltet in Server-Räumen im DFKI
-%	\item meisten Server sind VMs auf ESXi-Servern
-%	\item Schulungslabore (Remote Labs) mit eigenen Managed Switches und ESXi-Servern in eigenem VPN, Zugang über OpenVPN (Telnet für Switches, Remote Desktop für Windows VMs)
 \end{itemize}
 \end{frame}
 
@@ -130,52 +126,19 @@
 \begin{itemize}
 	\item CommuniGate-Server für E-Mail und Identity Management
 	\item Identity Management genutzt für die meisten Logins
-%	\item Identity Management genutzt von:
-%	\begin{itemize}
-%		\item E-Mail-Server (TU-Server über RADIUS)
-%		\item firmeninterne Webtools (z.B. Nagios, Trac)
-%		\item OpenVPN-Server
-%		\item Egroupware
-%	\end{itemize}
-	\item E-Mail-Server verwaltet drei E-Mail-Domains%, \texttt{fg-networking.de}, \texttt{schabler.de} und \texttt{worden.de}
-% 	\item CommuniGate stark veraltet%, deswegen SSL-Probleme mit aktuellen E-Mail-Clients (und vermutlich etliche Sicherheitslücken)
+	\item E-Mail-Server verwaltet drei E-Mail-Domains
 \end{itemize}
 \end{frame}
 
 
 \section{Planung}
 \subsection{}
-%\begin{frame}{Soll-Zustand}
-%benötigt wird als Ersatz:
-%\vspace{6pt}
-%\begin{itemize}
-%	\item LDAP-Server als Verzeichnisdienst% für Webtools, VPN, Groupware, E-Mail
-%	\item RADIUS-Server für TU E-Mail-Server
-%%	\item Vorbereitungen zur Anbindung des neuen E-Mail-Servers (Server zur Bearbeitungszeit des Projektes nicht fertig gestellt)
-%%	\item Absichern des Rechners
-%	\item Übernehmen der Anwenderkonten
-%\end{itemize}
-%\end{frame}
-
-
 \begin{frame}{Konzept Ersatzserver}
-%\begin{columns}[c]
-%\centering
-%	\begin{column}{0.5cm}
-%		\includegraphics[scale=0.3]{Bilder/debian-openlogo-100.png}
-%	\end{column}
-%	\begin{column}{1.5cm}
-%		\includegraphics[scale=0.25]{Bilder/OpenLDAP-logo.png}
-%	\end{column}
-%	\begin{column}{2.5cm}
-%		\includegraphics[width=3.5cm]{Bilder/Freeradius_logo.png} 
-%	\end{column}
-%\end{columns}
 \begin{itemize}
 	\item ESXi-VM mit Linux (Debian 8.0)
-	\item OpenLDAP-Server% für LDAP-Schnitstelle und Verzeichnisdienst
-	\item FreeRADIUS-Server% für RADIUS
-	\item FreeRADIUS-Server an OpenLDAP-Server angebunden% (Kommunikation über LDAP)
+	\item OpenLDAP-Server
+	\item FreeRADIUS-Server
+	\item FreeRADIUS-Server an OpenLDAP-Server angebunden
 	\item Anwenderkonten per Skript importieren
 \end{itemize}
 \end{frame}
@@ -185,11 +148,9 @@
 \subsection{Realisierung des Ersatzservers}
 \begin{frame}{Realisierung des Ersatzservers (1)}
 \begin{itemize}
-%	\item LDAP-over-SSL (LDAPS) eingerichtet %mit Zertifikaten aus Firmen CA
 	\item LDAP-over-SSL als einzige externe Zugriffsmöglichkeit
-	\item endgültige Verzeichnisstruktur: %(ursprünglich 3 getrennte Datenbanken)
+	\item endgültige Verzeichnisstruktur:
 \end{itemize}
-%\vspace{2pt}
 \centering
 \includegraphics[width=\textwidth]{Bilder/LDAP-fgn.pdf}
 \end{frame}
@@ -198,24 +159,11 @@
 \begin{frame}{Realisierung des Ersatzservers (2)}
 \begin{itemize}
 	\item Shared Secret für TU E-Mail-Server konfiguriert
-	\item Anbindung an LDAP über mitgeliefertes Modul% (Kommunikation über Loopback ohne SSL)
+	\item Anbindung an LDAP über mitgeliefertes Modul
 	\item Anbindung der Webservices und OpenVPN
 	\item Import von Anwenderkonten per generierter LDIF-Datei
-%	\item Einrichtung der Firewall
 \end{itemize}
 \end{frame}
-
-
-%\subsection{Anbinden der Services}
-%\begin{frame}{Anbinden von Webservices etc.}
-%LDAP bereits ohne SSL von Apache \& OpenVPN verwendet, deswegen keine große Umstellung:
-%\vspace{6pt}
-%\begin{itemize}
-%	\item geänderte Server-URL und BaseDN in Konfiguration von Apache und OpenVPN eintragen
-%	\item SSL-Zertifikat eintragen
-%\end{itemize}
-%\medskip Egroupware siehe Probleme
-%\end{frame}
 
 
 \section{Qualitätssicherung}
@@ -226,12 +174,12 @@
 	\vspace{6pt}
 	\begin{itemize}
 		\item Login bei Webservices und OpenVPN nach Umstellung getestet
-		\item RADIUS Test mit \texttt{radtest}% und Vergleich mit Antworten von CommuniGate-RADIUS% (keine Praxistests möglich)
+		\item RADIUS Test mit \texttt{radtest}
 	\end{itemize}
 	\item Sicherheitstests:
 	\vspace{6pt}
 	\begin{itemize}
-		\item Anmelden mit falschen Anmeldeinformationen% bei Webservices und OpenVPN
+		\item Anmelden mit falschen Anmeldeinformationen
 		\item Überprüfung OpenSSH-Server Konfiguration
 		\item Port-Scan mit \texttt{nmap} (aus fgn-Netz und extern)
 	\end{itemize}
@@ -244,8 +192,7 @@
 	\item Design der LDAP-Baumstruktur
 	\vspace{6pt}
 	\begin{itemize}
-		\item ursprüngliche Idee eine Datenbank pro Domain%, so erstellte Datenbanken ließen sich in der Praxis aber nicht ansprechen
-%		\item gelöst durch Umsetzung in einer Datenbank
+		\item ursprüngliche Idee eine Datenbank pro Domain
 	\end{itemize}
 \end{enumerate}
 \vspace{2pt}
@@ -261,17 +208,12 @@
 	\begin{itemize}
 		\item fehlendes Passwort für Installer
 		\item Zuständiger in Urlaub
-%		\item Groupware sehr wichtig für Betrieb
-%		\item Umstellung verschoben, problemlos da alter Server weiterhin in Betrieb
 	\end{itemize}
 	\medskip
 	\item RADIUS Praxistests nicht möglich
-%	\item neuer E-Mail-Server noch nicht fertig, deswegen manche Praxistests nicht möglich
 	\vspace{6pt}
 	\begin{itemize}
-		\item FreeRADIUS mit \texttt{radtest} getestet% und Antwort mit CommuniGate verglichen
-%		\item Managed Switch probeweise an RADIUS angebunden
-%		\item Attribute für E-Mail-Integration nicht eingepflegt, entsprechend nicht getestet
+		\item FreeRADIUS mit \texttt{radtest} getestet
 	\end{itemize}
 \end{enumerate}
 \end{frame}
@@ -282,8 +224,6 @@
 \begin{table}
 \centering
 	\begin{tabularx}{0.9\textwidth}{|X|r|r|}
-%		\hline
-%		\mcc{4}{Kosten für die Einrichtung}\\
 		\hline
 		 	&	OpenLDAP \& &	CommuniGate-\\
 		Kosten-Kategorie	&	FreeRADIUS &	Upgrade\\
@@ -299,14 +239,13 @@
 	\end{tabularx}
 \end{table}
 \bigskip
-Amortisation nach ungefähr 15 Monaten gegenüber weitere Nutzung alten CommuniGate-Servers
+Amortisation nach ungefähr 15 Monaten gegenüber weiterer Nutzung des alten CommuniGate-Servers
 \end{frame}
 
 \subsection{Fazit}
 \begin{frame}{Fazit}
 \begin{itemize}
 	\item alle Systeme außer Egroupware, E-Mail-Server umgestellt
-%	\item E-Mail-Server wird setzen neuer Attribute benötigen
 	\item FreeRADIUS noch kein Praxistest
 	\item Zeitplanung nicht optimal
 	\vspace{6pt}
@@ -323,8 +262,7 @@ Amortisation nach ungefähr 15 Monaten gegenüber weitere Nutzung alten CommuniG
 Erweiterungsmöglichkeiten:
 \vspace{6pt}
 	\begin{itemize}
-		\item Anbindung neuer E-Mail-Server% (\texttt{postfix})
-%		\item Beschränkung von Nutzerkreisen
+		\item Anbindung neuer E-Mail-Serve
 		\item Ersatz lokale Accounts
 		\item Anbindung Managed Switches an FreeRADIUS
 		\item Samba Domäne für Windows Rechner
@@ -346,43 +284,6 @@ Erweiterungsmöglichkeiten:
 	
 	Grafiken erstellt mit GraphViz
 \end{frame}
-
-
-%\section{}
-%%\subsection{}
-%\setcounter{framenumber}{14}
-%\begin{frame}{Anfrage an RADIUS-Server}
-%\centering
-%\includegraphics[width=\textwidth]{Bilder/RADIUS-communication1.pdf}
-%\end{frame}
-%
-%
-%\setcounter{framenumber}{14}
-%\begin{frame}{Antwort von RADIUS-Server}
-%\centering
-%\includegraphics[width=\textwidth]{Bilder/RADIUS-communication2.pdf}
-%\end{frame}
-
-%\section{Projektkosten}
-%\subsection{Projektkosten - Anschaffung}
-%\begin{frame}{Projektkosten - Anschaffung}
-%	\begin{tabularx}{\textwidth}{|X|r|r|r|}
-%%		\hline
-%%		\mcc{4}{Kosten für die Einrichtung}\\
-%		\hline
-%		Kosten-	&	OpenLDAP \& &	\centering CommuniGate- &	\\
-%		Kategorie	&	FreeRADIUS &	\centering Upgrade &	Status Quo\\
-%		\hline
-%		Hardware &	0,00\euro{} &	0,00\euro{} &	0,00\euro{}\\
-%		\hline
-%		Softwarelizenzen &	0,00\euro{} &	1.849,00\euro{} &	0,00\euro{}\\
-%		\hline
-%		Arbeitsaufwand &	2.485,00\euro{} &	2.485,00\euro{} &	0,00\euro{}\\
-%		\hhline{|=|=|=|=|}
-%		Gesamt &	2.485,00\euro{} &	4.334,00\euro{} &	0,00\euro{}\\
-%		\hline
-%	\end{tabularx}
-%\end{frame}
 
 
 %\subsection{Projektkosten - Wartung}
