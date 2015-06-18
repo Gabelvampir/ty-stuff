@@ -1,0 +1,32 @@
+digraph G {
+node [
+  style="filled",
+  shape=rectangle,
+  fillcolor="skyblue"
+];
+
+  initial [label="Initial"]
+  attLoop [label="attenuationLOOP"]
+  relaxLoop [label="relaxationLOOP"]
+  check [label="checkForYield"]
+  addAtt [label="addAtt"]
+  end [label="ENDE"]
+
+  initial -> attLoop
+  relaxLoop -> end [weight=5]
+  attLoop -> check [label="alle 1000 Steps"]
+  relaxLoop -> check [label="alle 1000 Steps"]
+  addAtt -> check [label="alle 1000 Steps"]
+  check -> attLoop [label="kein Yield\nUND keine Hotspots\nUND Ausgangspunkt dort"]
+  check -> addAtt [label="Yield ODER Hotspots"]
+  check -> relaxLoop [label="kein Yield\nUND keine Hotspots\nUND Ausgangspunkt dort"]
+  attLoop -> relaxLoop [label="T < T_min", weight=6]
+  relaxLoop -> attLoop [label="T > T_max", weight=6]
+  
+  root=initial
+  splines=line
+  compound=true;
+  {rank=same; check, addAtt}
+  margin=0;
+  charset=latin1
+  }
