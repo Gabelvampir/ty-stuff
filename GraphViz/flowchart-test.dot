@@ -1,0 +1,28 @@
+digraph G {
+node [
+  style="filled",
+  shape=rectangle
+];
+
+  start [label="Start", shape=circle, fillcolor="red"]
+  ent1 [label="Kaffee oder Tee?"]
+  entK1 [label="Zucker?"]
+  entK2 [label="Milch?"]
+  entT1 [label="Zucker?"]
+  entT2 [label="Milch oder Zitrone?"]
+  ent2 [label="Kondensmilch oder normale?"]
+  ende [label="Ihr Getränk ist fertig", fillcolor="seagreen"]
+
+  start -> ent1
+  ent1 -> entK1 [label="Kaffee"]
+  entK1 -> entK2
+  entK2 -> ent2 [label="ja bitte"]
+  entK2 -> ende [label="nein danke"]
+  ent1 -> entT1 [label="Tee"]
+  entT1 -> entT2
+  entT2 -> ent2 [label="Milch"]
+  entT2 -> ende [label="Zitrone"]
+  ent2 -> ende
+  margin=0;
+  charset=latin1
+  }
