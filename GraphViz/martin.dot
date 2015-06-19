@@ -1,6 +1,6 @@
 digraph G {
 node [
-  style="filled",
+  style="striped",
   shape=rectangle,
   fillcolor="skyblue"
 ];
@@ -11,6 +11,10 @@ node [
   check [label="checkForYield"]
   addAtt [label="addAtt"]
   end [label="ENDE"]
+  
+  help1 [label="", shape="none", style=""]
+  help2 [label="", shape="none", style=""]
+  help3 [label="", shape="none", style=""]
 
   initial -> attLoop
   relaxLoop -> end [weight=5]
@@ -20,13 +24,24 @@ node [
   check -> attLoop [label="kein Yield\nUND keine Hotspots\nUND Ausgangspunkt dort"]
   check -> addAtt [label="Yield ODER Hotspots"]
   check -> relaxLoop [label="kein Yield\nUND keine Hotspots\nUND Ausgangspunkt dort"]
-  attLoop -> relaxLoop [label="T < T_min", weight=6]
-  relaxLoop -> attLoop [label="T > T_max", weight=6]
+//  attLoop -> relaxLoop [label="T < T_min", weight=6]
+//  relaxLoop -> attLoop [label="T > T_max", weight=6]
+
+  attLoop -> help1 [style="invis"]
+  help1 -> check [style="invis"]
+  relaxLoop -> help1 [style="invis"]
+//  help2 -> check [style="invis"]
+//  end -> help3 [style="invis"]
+//  help3 -> check [style="invis"]
   
   root=initial
   splines=line
   compound=true;
-  {rank=same; check, addAtt}
+  {rank=same help1 check addAtt}
+//  {rank=same attLoop help1}
+//  {rank=same relaxLoop help2}
+//  {rank=same end help3}
   margin=0;
   charset=latin1
+  rankdir=TB
   }
