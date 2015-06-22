@@ -4,7 +4,7 @@ node [
   fontsize=20
 ];
 
-  root [label="LDAP", shape="folder", fillcolor="yellow"];
+  root [label="LDAP", shape="folder", fillcolor="khaki"];
   subgraph cluster_db{
     de [label="dc=de", fillcolor="greenyellow"];
     fgn [label="dc=fg-networking", fillcolor="green", width=3];

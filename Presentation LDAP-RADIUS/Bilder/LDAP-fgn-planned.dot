@@ -21,7 +21,7 @@ graph G {
   label="Datenbank 3";
   labelloc=b;
 }
-  root [label="LDAP", shape=folder, style="filled", fillcolor="yellow"];
+  root [label="LDAP", shape=folder, style="filled", fillcolor="khaki"];
   root -- fgn;
   root -- schabler;
   root -- worden;
