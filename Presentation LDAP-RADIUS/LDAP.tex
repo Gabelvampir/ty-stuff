@@ -55,6 +55,9 @@
 \usepackage{tabularx}
 \usepackage{hhline}
 
+\definecolor{XBoneGreen}{RGB}{16, 124, 16}
+\definecolor{XBoneLightGreen}{RGB}{93, 194, 30}
+
 \title[OpenLDAP- und FreeRADIUS-Server]   % (optional, use only with long paper titles)
 {Aufsetzen eines OpenLDAP- und FreeRADIUS-Server}
 
@@ -131,6 +134,15 @@
 
 \section{Planung}
 \subsection{}
+\begin{frame}{Anforderungen Ersatzserver}
+\begin{itemize}
+	\item LDAP-Server
+	\item RADIUS-Server
+	\item RADIUS-Server an LDAP-Server anbinden
+	\item Anwenderkonten übernehmen
+\end{itemize}
+\end{frame}
+
 \begin{frame}{Konzept Ersatzserver}
 \begin{itemize}
 	\item ESXi-VM mit Linux (Debian 8.0)
@@ -172,7 +184,7 @@
 	\vspace{6pt}
 	\begin{itemize}
 		\item Login bei Webservices und OpenVPN nach Umstellung getestet
-		\item RADIUS Test mit \texttt{radtest}
+%		\item RADIUS Test mit \texttt{radtest}
 	\end{itemize}
 	\item Sicherheitstests:
 	\vspace{6pt}
