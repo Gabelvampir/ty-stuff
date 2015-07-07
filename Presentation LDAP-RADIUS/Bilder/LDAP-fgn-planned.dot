@@ -4,21 +4,21 @@ graph G {
   fgn [label="dc=fg-networking,dc=de", style="filled", fillcolor="green", width=2.75];
   people1 [label="ou=people", style="filled", fillcolor="mediumseagreen"];
   fgnpe [label=". . .", labelloc="t", shape="plaintext"];
-  label="Datenbank 1";
+  label="DIT 1";
   labelloc=b;
 }
   subgraph cluster_schabler{
   schabler [label="dc=schabler,dc=de", style="filled", fillcolor="green", width=2.75];
   people2 [label="ou=people", style="filled", fillcolor="mediumseagreen"];
   schabpe [label=". . .", labelloc="t", shape="plaintext"];
-  label="Datenbank 2";
+  label="DIT 2";
   labelloc=b;
 }
   subgraph cluster_worden{
   worden [label="dc=worden,dc=de", style="filled", fillcolor="green", width=2.75];
   people3 [label="ou=people", style="filled", fillcolor="mediumseagreen"];
   wordpe [label=". . .", labelloc="t", shape="plaintext"];
-  label="Datenbank 3";
+  label="DIT 3";
   labelloc=b;
 }
   root [label="LDAP", shape=folder, style="filled", fillcolor="khaki"];
