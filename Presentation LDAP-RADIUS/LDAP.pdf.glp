@@ -1,0 +1,50 @@
+slide 1
+comment {
+}
+
+slide 2 
+comment {
+}
+
+slide 3 
+comment {
+-
+-
+1:1:1 Training:Consulting:Administration
+Büro
+}
+
+slide 4
+comment {
+Server sehr veraltet, Probleme mit SSL, EMail nicht Teil des Projekts
+keine lokalen Accounts, Egroupware,EMail,Webtools,OpenVPN
+wichtig für Verzeichnisstruktur
+deswegen RADIUS
+}
+
+slide 5
+comment {
+-
+-
+-
+weniger wichtig weil bereits 2 andere
+}
+
+slide 6
+comment {
+bestehender Server
+-
+-
+durch bei FreeRADIUS mitgelieferten Modul
+möglich da CommuniGate Userdaten in Klartext speichert
+}
+
+slide 7
+comment {
+bisher keinerlei Verschlüsselung
+}
+
+slide 8
+comment {
+
+}
