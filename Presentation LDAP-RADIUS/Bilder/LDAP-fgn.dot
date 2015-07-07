@@ -16,7 +16,7 @@ node [
     worden [label="dc=worden", fillcolor="green", width=3];
     people3 [label="ou=people", fillcolor="mediumseagreen"];
     wordpe [label=". . .", labelloc="t", style="", shape="plaintext"];
-    label="DIT";
+    label="Directory Information Tree";
     fontsize=17;
     labelloc=b
   }
