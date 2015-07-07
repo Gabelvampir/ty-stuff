@@ -16,10 +16,10 @@ Büro
 
 slide 4
 comment {
-Server sehr veraltet, Probleme mit SSL, EMail nicht Teil des Projekts
+Server sehr veraltet->SSL Probleme, Probleme mit SSL, EMail nicht Teil des Projekts
 keine lokalen Accounts, Egroupware,EMail,Webtools,OpenVPN
 wichtig für Verzeichnisstruktur
-deswegen RADIUS
+deswegen RADIUS, öffentlich Webseiten extern gehostet
 }
 
 slide 5
@@ -32,9 +32,9 @@ weniger wichtig weil bereits 2 andere
 
 slide 6
 comment {
-bestehender Server
--
--
+bestehender VMWare ESXi Server
+verbreiteste freie Implementierung, sehr performant
+Vebreiteste freie Implementierung, Referenzimplementierung
 durch bei FreeRADIUS mitgelieferten Modul
 möglich da CommuniGate Userdaten in Klartext speichert
 }
