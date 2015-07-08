@@ -35,7 +35,7 @@ comment {
 bestehender VMWare ESXi Server
 verbreiteste freie Implementierung, sehr performant
 Vebreiteste freie Implementierung, Referenzimplementierung
-durch bei FreeRADIUS mitgelieferten Modul
+-
 möglich da CommuniGate Userdaten in Klartext speichert
 }
 
@@ -46,5 +46,44 @@ bisher keinerlei Verschlüsselung
 
 slide 8
 comment {
+Shared Secret erläutern
+-
+-
+-
+Firewall: SSH Welt, RADIUS Uni Mail, RADIUS+LDAPS (1812-1814, 636) fgn
+}
 
+slide 9
+comment {
+beim Einrichten schon Teiltests
+radtest Ausgaben mit CommuniGate verglichen
+
+-
+SSH weltoffen (Firmenpolicy), rate limiter
+nur Ports
+}
+
+slide 10
+comment {
+nicht anzusprechen, Fehlersuche
+}
+
+slide 11
+comment {
+Groupware zu wichtig, Umstellung verschoben, unproblematisch da Server
+}
+
+slide 12
+comment {
+}
+
+slide 13
+comment {
+}
+
+slide 14
+comment {
+entsprechende PAM Erweiterung installieren
+Berechtigungsattribute, VPN Anbindung
+bisher keine Windowsdomäne da nur 2 Bürorechner + VMs
 }
