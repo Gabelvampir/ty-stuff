@@ -16,7 +16,7 @@ Büro
 
 slide 4
 comment {
-Server sehr veraltet->SSL Probleme, Probleme mit SSL, EMail nicht Teil des Projekts
+Server sehr veraltet->SSL Probleme, EMail nicht Teil des Projekts
 keine lokalen Accounts, Egroupware,EMail,Webtools,OpenVPN
 wichtig für Verzeichnisstruktur
 deswegen RADIUS, öffentlich Webseiten extern gehostet
@@ -75,10 +75,19 @@ Groupware zu wichtig, Umstellung verschoben, unproblematisch da Server
 
 slide 12
 comment {
+VMs auf bestehenden Servern
+Projekt nur freie Software
+Arbeitsaufwand gleich weil veraltet
+
+jährliche Kosten bei Status Quo ca 2350€
+Wartung LDAP 355€
+Wartung CommuniGate neu 213€+332,82€ Lizenz = 545,82€
 }
 
 slide 13
 comment {
+Zeitplanung: nur 3h Vorbereitung statt 6h
+Zeit in LDAP Design gesteckt
 }
 
 slide 14
