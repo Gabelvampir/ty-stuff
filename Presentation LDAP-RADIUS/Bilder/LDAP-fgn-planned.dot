@@ -1,24 +1,31 @@
 graph G {
+node [
+  fontsize=20
+];
+
   compbound=true;
   subgraph cluster_fgn{
-  fgn [label="dc=fg-networking,dc=de", style="filled", fillcolor="green", width=2.75];
+  fgn [label="dc=fg-networking,dc=de", style="filled", fillcolor="green", width=3];
   people1 [label="ou=people", style="filled", fillcolor="mediumseagreen"];
   fgnpe [label=". . .", labelloc="t", shape="plaintext"];
   label="DIT 1";
+  fontsize=17;
   labelloc=b;
 }
   subgraph cluster_schabler{
-  schabler [label="dc=schabler,dc=de", style="filled", fillcolor="green", width=2.75];
+  schabler [label="dc=schabler,dc=de", style="filled", fillcolor="green", width=3];
   people2 [label="ou=people", style="filled", fillcolor="mediumseagreen"];
   schabpe [label=". . .", labelloc="t", shape="plaintext"];
   label="DIT 2";
+  fontsize=17;
   labelloc=b;
 }
   subgraph cluster_worden{
-  worden [label="dc=worden,dc=de", style="filled", fillcolor="green", width=2.75];
+  worden [label="dc=worden,dc=de", style="filled", fillcolor="green", width=3];
   people3 [label="ou=people", style="filled", fillcolor="mediumseagreen"];
   wordpe [label=". . .", labelloc="t", shape="plaintext"];
   label="DIT 3";
+  fontsize=17;
   labelloc=b;
 }
   root [label="LDAP", shape=folder, style="filled", fillcolor="khaki"];
@@ -30,4 +37,5 @@ graph G {
   worden -- people3 -- wordpe;
   margin=0; //margins around graphic and subgraphs
   nodesep=0.3; //minimal distance between nodes and subgraphs
+  ratio="0.5";
   }
