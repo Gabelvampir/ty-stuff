@@ -1,0 +1,30 @@
+graph G {
+node [
+  style="filled",
+  fontsize=20
+];
+
+  root [label="LDAP", shape="folder", fillcolor="khaki"];
+  subgraph cluster_db{
+    de [label="dc=de", fillcolor="greenyellow"];
+    fgn [label="dc=fg-networking", fillcolor="green", width=3];
+    people1 [label="ou=people", fillcolor="mediumseagreen"];
+    fgnpe [label=". . .", labelloc="t", style="", shape="plaintext"];
+    schabler [label="dc=schabler", fillcolor="green", width=3];
+    people2 [label="ou=people", fillcolor="mediumseagreen"];
+    schabpe [label=". . .", labelloc="t", style="", shape="plaintext"];
+    worden [label="dc=worden", fillcolor="green", width=3];
+    people3 [label="ou=people", fillcolor="mediumseagreen"];
+    wordpe [label=". . .", labelloc="t", style="", shape="plaintext"];
+    label="Directory Information Tree";
+    fontsize=17;
+    labelloc=b
+  }
+  root -- de;
+  de -- {fgn schabler worden};
+  fgn -- people1 -- fgnpe;
+  schabler -- people2 -- schabpe;
+  worden -- people3 -- wordpe;
+  margin=0;
+  ratio="0.55";
+  }

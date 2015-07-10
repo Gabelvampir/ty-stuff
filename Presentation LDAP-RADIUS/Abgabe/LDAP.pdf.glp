@@ -1,0 +1,98 @@
+slide 1
+comment {
+}
+
+slide 2 
+comment {
+}
+
+slide 3 
+comment {
+-
+-
+1:1:1 Training:Consulting:Administration
+Büro
+}
+
+slide 4
+comment {
+Server sehr veraltet->SSL Probleme, EMail nicht Teil des Projekts
+keine lokalen Accounts, Egroupware,EMail,Webtools,OpenVPN
+wichtig für Verzeichnisstruktur
+deswegen RADIUS, öffentlich Webseiten extern gehostet
+}
+
+slide 5
+comment {
+-
+-
+-
+weniger wichtig weil bereits 2 andere
+}
+
+slide 6
+comment {
+bestehender VMWare ESXi Server
+verbreiteste freie Implementierung, sehr performant
+Vebreiteste freie Implementierung, Referenzimplementierung
+-
+möglich da CommuniGate Userdaten in Klartext speichert
+}
+
+slide 7
+comment {
+bisher keinerlei Verschlüsselung
+}
+
+slide 8
+comment {
+Shared Secret erläutern
+-
+-
+-
+Firewall: SSH Welt, RADIUS Uni Mail, RADIUS+LDAPS (1812-1814, 636) fgn
+}
+
+slide 9
+comment {
+beim Einrichten schon Teiltests
+radtest Ausgaben mit CommuniGate verglichen
+
+-
+SSH weltoffen (Firmenpolicy), rate limiter
+nur Ports
+}
+
+slide 10
+comment {
+nicht anzusprechen, Fehlersuche
+}
+
+slide 11
+comment {
+Groupware zu wichtig, Umstellung verschoben, unproblematisch da Server
+}
+
+slide 12
+comment {
+VMs auf bestehenden Servern
+Projekt nur freie Software
+Arbeitsaufwand gleich weil veraltet
+
+jährliche Kosten bei Status Quo ca 2350€
+Wartung LDAP 355€
+Wartung CommuniGate neu 213€+332,82€ Lizenz = 545,82€
+}
+
+slide 13
+comment {
+Zeitplanung: nur 3h Vorbereitung statt 6h
+Zeit in LDAP Design gesteckt
+}
+
+slide 14
+comment {
+entsprechende PAM Erweiterung (libpam-ldap) installieren, evtl libnss-ldap
+Berechtigungsattribute, VPN Anbindung
+bisher keine Windowsdomäne da nur 2 Bürorechner + VMs
+}
