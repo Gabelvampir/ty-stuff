@@ -92,7 +92,7 @@ Zeit in LDAP Design gesteckt
 
 slide 14
 comment {
-entsprechende PAM Erweiterung installieren
+entsprechende PAM Erweiterung (libpam-ldap) installieren, evtl libnss-ldap
 Berechtigungsattribute, VPN Anbindung
 bisher keine Windowsdomäne da nur 2 Bürorechner + VMs
 }
