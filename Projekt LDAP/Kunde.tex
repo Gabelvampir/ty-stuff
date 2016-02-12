@@ -177,7 +177,7 @@ Zur Anbindung von LDAP an einen Apache Web-Server wird die \texttt{mod\_authnz\_
 \begin{lstlisting}
 LDAPTrustedGlobalCert CA_BASE64 /etc/ssl/certs/fg-networking.de.pem
 \end{lstlisting}
-(In dieser Datei war bereits auch schon der ldap-status handler definiert, an dieser Einstellung muss nichts verändert werden). In der passenden Seitenkonfig (auf NMS: \texttt{/etc/apache2/sites-available/default-ssl}) muss man dann noch die URL vom LDAP Server anpassen. Auf NMS sieht die neue Konfig wie folgt aus:
+(In dieser Datei war bereits auch schon der ldap-status handler definiert, an dieser Einstellung muss nichts verändert werden). In der passenden Seitenkonfig (auf NMS: \texttt{/etc/""apache2/""sites-""available/""default-""ssl}) muss man dann noch die URL vom LDAP Server anpassen. Auf NMS sieht die neue Konfig wie folgt aus:
 \begin{lstlisting}
  <Location />
     AuthType  Basic
