@@ -1,0 +1,41 @@
+\section{Anhänge}
+%\addcontentsline{toc}{section}{Anhänge} %fügt Überschrift Anhänge in die TOC ein
+\subsection{Übernommene LDAP Attribute} \label{sec:LDAP-Attribute}
+\begin{itemize}
+\item\texttt{uid}: User ID, Name des Anwenderkontos
+\item\texttt{sn}: SurName, Nachname des Anwenders
+\item\texttt{givenName}: Vorname des Anwenders
+\item\texttt{cn}: CommonName, voller Name des Anwenders
+\item\texttt{displayName}: anzuzeigender Name des Anwenders
+\item\texttt{userPassword}: Passwort des Anwenders (wurde mit \texttt{slappasswd} gehashed)
+\end{itemize}
+
+
+\newpage
+\subsection{Skript zum Konvertieren der Anwenderkonten}\label{sec:SkriptA}
+\lstinputlisting[language=sh]{cg_accounts_to_ldap.sh}
+Dieses Skript liest die Klartext-Dateien von CommuniGate aus und wandelt diese in das passende Format für \texttt{ldapmodify} um. Dazu werden die entsprechende Daten in das am Ende der \nameref{sec:Erstelle-DB} (Kundendokumentation) Template eingetragen. Das Ganze wird in eine Datei geschrieben, jeder Datensatz getrennt durch eine Leerzeile.
+
+Abdruck des Skript mit freundlicher Genehmigung von fgn und dem Autor Erik Auerswald.
+
+\newpage
+\subsection{Skript zum Hashen der Anwenderpasswörter}\label{sec:SkriptB}
+\lstinputlisting[language=sh]{hash_passwords.sh}
+Dieses Skript wandelt die Klartext-Passwörter in der mit dem vorigen Skript erstellten Datei mit Hilfe von \texttt{slappasswd} in von OpenLDAP importierbare Passwort-Hashes um.
+
+Abdruck des Skript mit freundlicher Genehmigung von fgn und dem Autor Erik Auerswald.
+
+
+\newpage
+\subsection{Ergebnis eines fgn internen NMAP Tests}\label{sec:NMAP-Test-int}
+\lstinputlisting{nmap-id-udp.txt}
+Wie man sieht sind für das fgn-Netz nur die Ports für SSH (\texttt{22}), LDAPS (\texttt{636}), und RADIUS (\texttt{1812} und \texttt{1813}) geöffnet.
+
+\noindent\texttt{gaf-nat-core1.fg-networking.de} ist der Hostname des ESXi-Servers auf dem die VM läuft.
+
+\newpage
+\subsection{Ergebnis eines externen NMAP Tests}\label{sec:NMAP-Test-ext}
+\lstinputlisting{nmap-fettuccini-udp.txt}
+Wie man sieht sind für das restliche Internet nur der Port für SSH (\texttt{22}) geöffnet.
+
+\noindent\texttt{gaf-nat-core1.fg-networking.de} ist der Hostname des ESXi-Servers auf dem die VM läuft.
