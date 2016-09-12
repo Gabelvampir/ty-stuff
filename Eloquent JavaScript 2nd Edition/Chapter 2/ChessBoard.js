@@ -1,5 +1,21 @@
-var size = 8;
+var size = 0;
 var board = "";
+var prompt = require('prompt');
+
+prompt.start();
+
+prompt.get(['size'], function (err, result) {
+	if (err) {
+		return onErr(err);
+	}
+	size = Number(result.size);
+});
+
+function onErr(err) {
+	console.log(err);
+	return 1;
+}
+
 for (var outercount = 1; outercount <= size; outercount++) {
 	for (var innercount = 1; innercount <= size; innercount++) {
 		//odd fields in odd rows are #s, in even rows " "s
