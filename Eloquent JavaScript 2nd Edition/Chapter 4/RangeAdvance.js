@@ -1,7 +1,11 @@
 function range(start, end, step) {
 	var rangeArray = [];
-	for (var count = start; count <= end; count = count + step) {
-		rangeArray.push(count);
+	// calculate number of steps needed to reach end with step width
+	var maxStep = (end - start) / step;
+	var current = start;
+	for (var count = 0; count <= maxStep; count++) {
+		rangeArray.push(current);
+		current = current + step;
 	}
 	return rangeArray;
 }
