@@ -1,5 +1,5 @@
 function deepEqual(value1, value2) {
-	if (typeof value1 != object && typeof value2 != object) {
+	if (typeof value1 != "object" && typeof value2 != "object") {
 		if (value1 === value2) return true;
 		else return false;
 	}
