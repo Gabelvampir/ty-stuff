@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html class="page-printpage" id="html-tag" lang="de-DE">
+<head>
+<title id="title">GMX - [PyNet] Learning Python: Week1 (Preliminaries and Strings)</title>
+<script type="text/javascript" id="id1ca2">var ClientProperties = { browser : {"os":"windows","engine":"gecko","classes":"windows gecko ff ff52","family":"ff","version":"52.0"}};</script>
+
+
+<meta name="application.version" content="2.23.10"/>
+<meta name="application.host" content="bs72a"/>
+<link rel="shortcut icon" href="https://images.gmx.net/images/gmx/favicon.ico" type="image/x-icon"/>
+<meta name="viewport" content="user-scalable=0, width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="robots" content="noindex, nofollow"/>
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css" ><!--
+.page-printpage *{margin:0;outline:0;padding:0;vertical-align:top;} .page-printpage{width:100%;height:100%;} .page-printpage body{color:#000000;font-size:8pt;font-family:Verdana,Sans-Serif;} .page-printpage h1{font-size:14pt;font-weight:bold;margin-bottom:5mm;} .page-printpage h1.accessibility{display:none;} .page-printpage h2,
+.page-printpage h3,
+.page-printpage h4,
+.page-printpage h5,
+.page-printpage h6{font-weight:bold;font-size:8pt;margin-bottom:5mm;} .page-printpage p{margin-bottom:5mm;} .page-printpage dl{margin-bottom:5mm;} .page-printpage dl dt{font-weight:bold;float:left;margin-bottom:2mm;width:20mm;} .page-printpage dl dd{margin-bottom:2mm;} .page-printpage .wrapper{padding:0 0 0 7mm;width:178mm;} .page-printpage .header{border-bottom:1px solid #7F7F7F;height:42px;padding-bottom:5mm;margin-bottom:5mm;} .page-printpage .body .mail-header{border-bottom:1px solid #7F7F7F;margin-bottom:7mm;} .page-printpage .body .mail-content{padding-bottom:5mm;} .page-printpage .footer{border-top:1px solid #7F7F7F;} .page-printpage .footer ul{margin:0 7mm 7mm;} .page-printpage .footer h2{margin-top:5mm;}
+/*# sourceMappingURL=printpage.css.map */
+--></style>
+</head>
+<body class="app">
+<h1 class="accessibility" role="contentinfo">
+Wenn Sie ein Bildschirmleseprogramm verwenden, dann empfehlen wir Ihnen, folgende Seite zu verwenden: <a role="link" href="https://mm.gmx.net">https://mm.gmx.net</a>
+</h1>
+<div id="js-colorpicker">
+<div class="maillist">
+<div class="mailrow-hover"></div>
+<div class="iba-hover"></div>
+</div>
+<div class="menu-sub">
+<div class="menu-item"></div>
+</div>
+<div class="navigation">
+<div class="folder-hover"></div>
+</div>
+</div>
+<div class="page js-component" id="id1ca3" data-component="BasePage" data-component-callback-url="./save;jsessionid=8AEA557111373292E2C216170E45050E-n4.bs72a?23-1.IBehaviorListener.0-page&amp;mailId=tmai14b507dcd1f4cef7&amp;showExternalContent=false">
+
+<div id="blocker"></div>
+
+<div class="wrapper">
+<div class="header">
+<img alt="" src="https://cdn.gmxpro.net/cdn/mail/client/wicket/resource/static-res/---/mc/img/printlogo_gmxnet_topmail-vEr-3930393436666332.png"/>
+</div>
+<div class="body">
+<div class="mail-header">
+<h1 id="id1ca4">[PyNet] Learning Python: Week1 (Preliminaries and Strings)</h1>
+<dl>
+<dt>
+Von:
+</dt>
+<dd id="id1ca5">&quot;Kirk Byers&quot; &lt;ktbyers@twb-tech.com&gt;</dd>
+<dt>
+An:
+</dt>
+<dd id="id1ca6">scotty_d@gmx.net</dd>
+
+
+<dt>
+Datum:
+</dt>
+<dd>13.04.2017 20:18:13</dd>
+</dl>
+</div>
+<div class="mail-content" id="id1ca7"><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<div style="background: rgb(255,255,255);box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;height: 100.0%;line-height: 1.6;width: 100.0%;background-color: rgb(255,255,255);">
+<style type="text/css"><!--img {
+	max-width: 100.0%;
+	margin-bottom: 14.0px;
+}
+body {
+	background-color: rgb(255,255,255);
+	width: 100.0%;
+	height: 100.0%;
+	line-height: 1.6;
+}
+*.ExternalClass {
+	width: 100.0%;
+}
+*.ExternalClass {
+	line-height: 100.0%;
+}
+img {
+}
+a:visited {
+	color: purple;
+}
+a:hover {
+	color: rgb(226,145,26);
+}
+a:active {
+	color: rgb(13,61,98);
+}
+--></style>
+<table bgcolor="#ffffff" class="body-wrap" style="background: rgb(255,255,255);box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;width: 100.0%;">
+  <tbody><tr style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;">
+    <td class="container" style="box-sizing: border-box;clear: both;display: block;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;margin: 0;max-width: 600.0px;overflow: visible;vertical-align: top;" valign="top">
+      <div class="content" style="box-sizing: border-box;display: block;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;margin: 0;max-width: 600.0px;overflow: visible;">
+        <table cellpadding="0" cellspacing="0" class="main" style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;" width="100%">
+          <tbody><tr style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;">
+            <td class="main-content" style="box-sizing: border-box;color: rgb(34,34,34);font-family: &quot;Helvetica Neue&quot; , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;padding: 25.0px;vertical-align: top;" valign="top">
+              <p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;"></p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;">&#65279;In this email of Learning Python we are going to cover the following:</p>
+
+<ol style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;list-style: decimal;margin-bottom: 14.0px;margin-left: 20.0px;margin-right: 0;padding-left: 0;padding-right: 0;">
+	<li style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;list-style: decimal;margin-left: 0;margin-right: 0;padding-left: 0;padding-right: 0;">
+<strong style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: bold;line-height: 1.5;">Introduction and Some Questions</strong><br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+	video&nbsp;<strong style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: bold;line-height: 1.5;"><a href="" style="box-sizing: border-box;color: rgb(68,119,189);font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;text-decoration: underline;">https://vimeo.com/119478712</a></strong><br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+	Length is 11 minutes<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+	The &#39;Some Questions&#39; section continues into the first 1:12 of the next video<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+	&nbsp;</li>
+	<li style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;list-style: decimal;margin-left: 0;margin-right: 0;padding-left: 0;padding-right: 0;">
+<strong style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: bold;line-height: 1.5;">Characteristics of Python</strong><br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+	video&nbsp;<strong style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: bold;line-height: 1.5;"><a href="" style="box-sizing: border-box;color: rgb(68,119,189);font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;text-decoration: underline;">https://vimeo.com/119480935</a></strong><br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+	Length is 7 minutes<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+	&nbsp;</li>
+	<li style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;list-style: decimal;margin-left: 0;margin-right: 0;padding-left: 0;padding-right: 0;">
+<strong style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: bold;line-height: 1.5;">Interpreter Shell, Variables, and Assignment</strong><br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+	video&nbsp;<strong style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: bold;line-height: 1.5;"><u style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"><a href="" style="box-sizing: border-box;color: rgb(68,119,189);font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;text-decoration: underline;">http://youtu.be/6ja4KlejT-g</a></u></strong>&nbsp;<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+	Length is 8 minutes<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+	&nbsp;</li>
+	<li style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;list-style: decimal;margin-left: 0;margin-right: 0;padding-left: 0;padding-right: 0;">
+<strong style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: bold;line-height: 1.5;">Strings</strong><br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+	video<strong style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: bold;line-height: 1.5;">&nbsp;</strong><strong style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: bold;line-height: 1.5;"><a href="" style="box-sizing: border-box;color: rgb(68,119,189);font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;text-decoration: underline;">http://youtu.be/ItIE8hItji8</a></strong><br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+	Length is 19 minutes</li>
+</ol>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;"><br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<em style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;">Note, you might need to install Flash Player to get the videos to work.</em></p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;"><em style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;">Make&nbsp;sure&nbsp;that&nbsp;you&nbsp;set&nbsp;your&nbsp;video&nbsp;resolution&nbsp;in&nbsp;YouTube&nbsp;to&nbsp;at&nbsp;least&nbsp;360p&nbsp;(480p or&nbsp;720p&nbsp;are&nbsp;better&nbsp;assuming&nbsp;your&nbsp;Internet&nbsp;connection&nbsp;has&nbsp;sufficient&nbsp;bandwidth). The&nbsp;settings&nbsp;button is&nbsp;at&nbsp;the&nbsp;bottom&nbsp;of&nbsp;the&nbsp;video&nbsp;and looks&nbsp;like&nbsp;a&nbsp;little&nbsp;gear.</em><br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp;</p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;"><strong style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: bold;line-height: 1.5;"><u style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;">Additional content that might be helpful:</u></strong></p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;">Jeremy Stretch had a good article on &#39;Learn Python&#39; on packetlife.net:<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; &nbsp;<a href="" style="box-sizing: border-box;color: rgb(68,119,189);font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;text-decoration: underline;">http://packetlife.net/blog/2014/mar/27/learn-python/</a><br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+Chris&nbsp;Young&nbsp;has&nbsp;a&nbsp;page&nbsp;listing&nbsp;various&nbsp;Python&nbsp;resources&nbsp;for&nbsp;network&nbsp;engineers:<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp;&nbsp; &nbsp;&nbsp;<a href="" style="box-sizing: border-box;color: rgb(68,119,189);font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;text-decoration: underline;">http://kontrolissues.net/python-for-network-engineers-resources/</a><br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+The book, &#39;Learn Python the Hard Way&#39; is a good resource for individuals that are completely new to programming:<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; &nbsp;<a href="" style="box-sizing: border-box;color: rgb(68,119,189);font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;text-decoration: underline;">http://learnpythonthehardway.org/book/</a><br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+The book &#39;Treading on Python, Vol 1: Foundations&quot; by Matt Harrison&nbsp;is a very good resource&nbsp;for individuals learning Python:<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&#8203;&nbsp; &nbsp; &nbsp;<a href="" style="box-sizing: border-box;color: rgb(68,119,189);font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;text-decoration: underline;">http://www.amazon.com/Treading-Python-1-Foundations/dp/1475266413/</a></p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;">&nbsp;</p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;">&nbsp;</p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;"><strong style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: bold;line-height: 1.5;"><u style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;">Additional content related to the videos:</u></strong></p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;"><strong style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: bold;line-height: 1.5;">1. Python naming conventions:</strong><br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; a. For variable names, function names, object names, and module names use lower case separated by underscore, for example:<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; &nbsp;my_router&nbsp;<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; &nbsp;find_set_of_devices<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; &nbsp;convert_id_string_to_list<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; b. For class names, capitalize the first letter of each word. &nbsp;Do not use any underscores. &nbsp;For example:<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&#65279;&#65279;&#65279;&nbsp; &nbsp; &nbsp;ManyToManyField<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; &nbsp;ClientHistory<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; &nbsp;UserProfile&#65279;&#65279;&#65279;<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; c. For constants, use all upper case; use underscores for word separation.<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; &nbsp;PI = 3.14<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; &nbsp;EMAIL_MODE<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; &nbsp;EMAIL_FROM_ADDRESS</p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;"><br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<strong style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: bold;line-height: 1.5;">2. Indentation:&nbsp;</strong></p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;">I stated on the video that indentation matters in Python, but I did not provide any examples. &nbsp;Here is some example code showing you indentation. &nbsp;We haven&#39;t talked about &#39;if conditionals&#39; so this code is just to show you an example of indentation.<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&gt;&gt;&gt;&gt;&gt; CODE &lt;&lt;&lt;&lt;&lt;<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+a = 10<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+b = 20</p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;">if a == 10:<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; print &#39;First level of indentation&#39;<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; if b == 20:<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; &nbsp; &nbsp; print &#39;Second level of indentation&#39;<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; &nbsp; &nbsp; print &#39;Be consistent in your indentation&#39;<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; &nbsp; &nbsp; print &#39;Use four spaces for each level&#39;<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; print &#39;I am now out of the second if statement&#39;<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+print &#39;I am now out of the first if statement&#39;</p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;">&gt;&gt;&gt;&gt;&gt; END &lt;&lt;&lt;&lt;&lt;&#65279;</p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;">Note, the first if statement is terminated by a colon; after the colon you see some indented Python statements. &nbsp;Everything at this first indentation level is part of the first block (i.e. it will be executed if the first &#39;if&#39; statement is True). &nbsp;</p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;">The second if statement starts a new block of code (and a new indentation level). &nbsp;Once again the if statement is terminated by a colon. &nbsp;</p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;">You indicate the end of each section (block of code) by ending the indentation.<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<strong style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: bold;line-height: 1.5;">3. Comments</strong></p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;">I also didn&#39;t mention in the videos that you can indicate a comment by using the # character (all the characters after the pound sign are ignored).</p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;"># This is a comment<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+a = 10 &nbsp; &nbsp; &nbsp; &nbsp;# and so is this&nbsp;<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<strong style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: bold;line-height: 1.5;">4. How to pipe &lt;stdin&gt; into a Python script (Linux and MacOS)</strong></p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;">Python supports a way that you can pipe data into it (on Linux and MacOS). &nbsp;You can then process the data you sent into it line-by-line (see below).</p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;">Note, some of these statements we haven&#39;t talked about yet (import and for loops). Consequently, if this doesn&#39;t make any sense, just skip this section.</p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;">&gt;&gt;&gt;&gt;&gt; CODE (file test3.py) &lt;&lt;&lt;&lt;&lt;</p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;">#!/usr/bin/env python<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+import fileinput<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+for line in fileinput.input():<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; print line.split(&quot;.&quot;)</p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;">&gt;&gt;&gt;&gt;&gt; END &lt;&lt;&lt;&lt;&lt;<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+Here is an example using this script where I echo an IP address into it and then the IP address is split into its octets.</p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;">&#36; echo &#39;192.168.1.1&#39; &nbsp;&#124; ./test3.py&nbsp;<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+[&#39;192&#39;, &#39;168&#39;, &#39;1&#39;, &#39;1&#92;n&#39;]</p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;">&nbsp;</p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;">&nbsp;</p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;"><strong style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: bold;line-height: 1.5;"><u style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;">Some Exercises</u></strong></p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;">Reference code for these exercises is posted on GitHub at:</p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;"><a href="" style="box-sizing: border-box;color: rgb(68,119,189);font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;text-decoration: underline;">https://github.com/ktbyers/pynet/tree/master/learnpy_ecourse/class1</a><br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+1. Use the split method to divide the following IPv6 address into groups of 4 hex digits (i.e. split on the &quot;:&quot;)</p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;">FE80:0000:0000:0000:0101:A3EF:EE1E:1719<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+2. Use the join method to reunite your split IPv6 address back to its original value.<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+3. In the test3.py script above, how would you modify this to remove the trailing newline on the end of 192.168.1.1?&nbsp;</p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;">&nbsp;</p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;">&nbsp;</p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;"><strong style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: bold;line-height: 1.5;"><u style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;">CLASS OUTLINE</u></strong></p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;">I. Introduction<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; A. About Me<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; B. Purpose of the course<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; C. Logistics<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; D. Feedback<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; E. Balance for various levels of existing skills<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+II. Some Questions<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; A. Why learn programming at all?<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; B. Why Python?<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; C. Python2 vs Python3<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+III. What is the nature of Python?<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; &nbsp;A. The Zen of Python (try &quot;import this&quot; at the Python interpreter shell)<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+IV. Interpreter Shell, Variables, and Assignment<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; &nbsp;A. Enough with all of the preliminaries, let&#39;s get to some code<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; &nbsp;B. Lauching the Interpreter Shell<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1. History<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2. Cntl-a, Cntl-e (home/end on Windows)<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;3. Cntl-d or exit()<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; &nbsp;C. What is the Interpreter Shell / what is it useful for?<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; &nbsp;D. Variables and assignment<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1. Variable names can include&nbsp;alphanumeric characters&nbsp;and&nbsp;underscore<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; 2. Variable names&nbsp;can&#39;t begin with a number<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2. Variable names are case-sensitive<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;3. Variables beginning with _some, __some, or __some__ are special<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+V. Strings.<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; A. Dynamically Typed Language<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; B. String assignment - single quotes, double quotes, triple quotes<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; C. Characteristics of strings<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; &nbsp; &nbsp; 1. Accessing individual letters<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; &nbsp; &nbsp; 2. Strings are immutable<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; D. Raw strings<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; E. Unicode strings<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; F. String methods<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; &nbsp; &nbsp; 1. strip()<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; &nbsp; &nbsp; 2. split()<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp; &nbsp; &nbsp; 3. join()<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp;G. Using help() and dir()<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp; &nbsp;H. Substring in String</p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;">&nbsp;</p>
+
+<p style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;font-weight: normal;line-height: 1.5;margin-bottom: 14.0px;"><br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<em style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;">Kirk Byers</em><br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+<em style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"><a href="" style="box-sizing: border-box;color: rgb(68,119,189);font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;text-decoration: underline;">https://pynet.twb-tech.com</a></em><br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+&nbsp;</p>
+
+            </td>
+          </tr>
+        </tbody></table>
+      </div>
+      
+      <div class="content" style="box-sizing: border-box;display: block;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;margin: 0;max-width: 600.0px;overflow: visible;">
+        <table cellpadding="0" cellspacing="0" style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;" width="100%">
+          <tbody><tr style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;">
+            <td class="footer-content" style="border-top-color: rgb(208,208,208);border-top-style: solid;border-top-width: 1.0px;box-sizing: border-box;clear: both;color: rgb(119,119,119);font-family: &quot;Helvetica Neue&quot; , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;padding: 25.0px;vertical-align: top;width: 100.0%;" valign="top">
+              To make sure you keep getting these emails, please add ktbyers@twb-tech.com to your address book or whitelist us. Want out of the loop? <a href="">Unsubscribe</a>.
+<br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/><br style="box-sizing: border-box;font-family: &quot;Helvetica Neue&quot; , Helvetica , Helvetica , Arial , sans-serif;font-size: 14.0px;line-height: 1.5;"/>
+Our postal address: Twin Bridges Technology, 88 King Street #1217, San Francisco, CA 94107
+
+            </td>
+          </tr>
+        </tbody></table>
+      </div>
+      
+    </td>
+  </tr>
+</tbody></table>
+
+<img alt="" border="0" height="1" src="http://o.dripemail2.com/wf/open?upn=EWo96AiZxrOKqixj2hi5kTbQG1v0GUufHamLbAKMuJHOJz27GeQzUUSAC8zS-2F6F8Woe-2FlCMOIXfzERqI64-2FDEy6fha8yJufwjzjTXmGNBdfF68T-2BklrEsw9j5oz4KwlrvSRJQ0IIBt35sDjQRVB6Bzy9MYw5Sq-2BQQ6-2B9QwUEkFRobjlRl-2BZK2SEiY4geq9mlpSZNKyYwdcxCLWj7PvDXM45qFRnSqmFUPiJRLf4eI7eyO7KY-2FZ4z0ebz1KrVyXMkSZ8-2Bn49yRTufZnNkwfMl8qMEQejD0MUgLbyPFinJHgY-3D" style="height: 1.0px;width: 1.0px;border-width: 0;margin-top: 0;margin-bottom: 0;margin-right: 0;margin-left: 0;padding-top: 0;padding-bottom: 0;padding-right: 0;padding-left: 0;" width="1"/>
+
+
+
+</div></div>
+</div>
+
+</div>
+
+</div>
+
+<div id="uploadContainer"></div>
+
+<script type="text/javascript" src="//js.ui-portal.de/apps/shared/jquery/1.8.3/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="https://cdn.gmxpro.net/cdn/mail/client/wicket/resource/static-res/---/js/core-vEr-3634363135383339.js"></script>
+<script type="text/javascript" id="wicket-ajax-base-url">
+/*<![CDATA[*/
+Wicket.Ajax.baseUrl="mail/save?mailId=tmai14b507dcd1f4cef7&amp;showExternalContent=false";
+/*]]>*/
+</script>
+<script type="text/javascript" src="https://cdn.gmxpro.net/cdn/mail/client/wicket/resource/static-res/---/js/jqueryui-vEr-6630336635343631.js"></script>
+<script type="text/javascript" src="https://cdn.gmxpro.net/cdn/mail/client/wicket/resource/static-res/---/js/behavior-vEr-6530613336643761.js"></script>
+
+
+
+
+</body>
+</html>
